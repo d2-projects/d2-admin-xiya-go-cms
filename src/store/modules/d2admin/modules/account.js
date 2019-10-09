@@ -36,6 +36,11 @@ export default {
         }, { root: true })
         // 用户登录后从持久化数据加载一系列的设置
         await dispatch('load')
+        // 显示提示信息
+        Message({
+          message: '登录成功',
+          type: 'success'
+        })
         // 结束
         return Promise.resolve()
       } catch (error) {
