@@ -44,12 +44,15 @@
             <a v-for="language in $languages" :key="language.value" @click="onChangeLocale(language.value)">{{ language.label }}</a>
           </p>
           <p class="page-login--content-footer-copyright">
-            Copyright
-            <d2-icon name="copyright"/>
-            2018 D2 Projects 开源组织出品
-            <a href="https://github.com/FairyEver">
+            <a href="https://github.com/d2-projects/d2-admin-cms-go/blob/master/LICENSE" target="_blank">
+              Copyright
+              <d2-icon name="copyright"/>
+              2018
+            </a>
+            <a href="https://github.com/FairyEver" target="_blank">
               @FairyEver
             </a>
+            出品
           </p>
           <p class="page-login--content-footer-options">
             <a href="#">帮助</a>
