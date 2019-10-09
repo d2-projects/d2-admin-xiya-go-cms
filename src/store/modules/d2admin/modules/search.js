@@ -1,6 +1,6 @@
 import setting from '@/setting.js'
 
-export default {
+export default context => ({
   namespaced: true,
   state: {
     // 搜索面板激活状态
@@ -52,4 +52,4 @@ export default {
       state.pool = pool
     }
   }
-}
+})

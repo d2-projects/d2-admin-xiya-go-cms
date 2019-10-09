@@ -2,10 +2,10 @@
 import Vue from 'vue'
 import i18n from './i18n'
 import App from './App'
-// 核心插件
-import d2Admin from '@/plugin/d2admin'
-// store
+// store must be imported before d2Admin
 import store from '@/store/index'
+// core
+import d2Admin from '@/plugin/d2admin'
 
 // 菜单和路由设置
 import router from './router'

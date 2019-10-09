@@ -2,7 +2,7 @@ import dayjs from 'dayjs'
 import { get } from 'lodash'
 import util from '@/libs/util.js'
 
-export default {
+export default context => ({
   namespaced: true,
   state: {
     // 错误日志
@@ -75,4 +75,4 @@ export default {
       state.log = []
     }
   }
-}
+})

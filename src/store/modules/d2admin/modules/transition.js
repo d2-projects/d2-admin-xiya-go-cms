@@ -1,7 +1,7 @@
 // 设置文件
 import setting from '@/setting.js'
 
-export default {
+export default context => ({
   namespaced: true,
   state: {
     // 是否开启页面过度动画
@@ -46,4 +46,4 @@ export default {
       })
     }
   }
-}
+})

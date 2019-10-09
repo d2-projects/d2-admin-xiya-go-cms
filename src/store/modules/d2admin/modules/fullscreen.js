@@ -1,6 +1,6 @@
 import screenfull from 'screenfull'
 
-export default {
+export default context => ({
   namespaced: true,
   state: {
     // 全屏激活
@@ -53,4 +53,4 @@ export default {
       state.active = active
     }
   }
-}
+})

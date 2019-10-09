@@ -1,9 +1,8 @@
 import { Message, MessageBox } from 'element-ui'
 import util from '@/libs/util.js'
 import router from '@/router'
-import { LOGIN } from '@/api/sys.user.js'
 
-export default {
+export default context => ({
   namespaced: true,
   actions: {
     /**
@@ -19,7 +18,8 @@ export default {
     } = {}) {
       try {
         // 获取登录结果
-        const { token } = await LOGIN({
+        console.log(context)
+        const { token } = await context.api.login({
           username,
           password
         })
@@ -113,4 +113,4 @@ export default {
       })
     }
   }
-}
+})

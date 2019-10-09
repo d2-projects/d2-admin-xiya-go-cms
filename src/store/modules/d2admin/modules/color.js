@@ -1,7 +1,7 @@
 import client from 'webpack-theme-color-replacer/client'
 import forElementUI from 'webpack-theme-color-replacer/forElementUI'
 
-export default {
+export default context => ({
   namespaced: true,
   state: {
     // 颜色
@@ -75,4 +75,4 @@ export default {
       client.changer.changeColor(options)
     }
   }
-}
+})

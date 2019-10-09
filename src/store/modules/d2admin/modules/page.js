@@ -5,7 +5,7 @@ import setting from '@/setting.js'
 // 判定是否需要缓存
 const isKeepAlive = data => get(data, 'meta.cache', false)
 
-export default {
+export default context => ({
   namespaced: true,
   state: {
     // 可以在多页 tab 模式下显示的页面
@@ -416,4 +416,4 @@ export default {
       state.pool = pool
     }
   }
-}
+})

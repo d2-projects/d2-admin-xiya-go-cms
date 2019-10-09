@@ -1,6 +1,6 @@
 import util from '@/libs/util.js'
 
-export default {
+export default context => ({
   namespaced: true,
   mutations: {
     /**
@@ -15,4 +15,4 @@ export default {
       console.log('请不要吝啬您的 star，谢谢 ~')
     }
   }
-}
+})

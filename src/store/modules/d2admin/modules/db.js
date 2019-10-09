@@ -2,7 +2,7 @@ import router from '@/router'
 import { cloneDeep } from 'lodash'
 import { database as getDatabase, dbGet, dbSet } from '@/libs/util.db'
 
-export default {
+export default context => ({
   namespaced: true,
   actions: {
     /**
@@ -154,4 +154,4 @@ export default {
       })
     }
   }
-}
+})

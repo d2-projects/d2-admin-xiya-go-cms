@@ -1,4 +1,4 @@
-export default {
+export default context => ({
   namespaced: true,
   state: {
     // 用户信息
@@ -43,4 +43,4 @@ export default {
       })
     }
   }
-}
+})

@@ -1,7 +1,7 @@
 // 设置文件
 import setting from '@/setting.js'
 
-export default {
+export default context => ({
   namespaced: true,
   state: {
     // 主题
@@ -81,4 +81,4 @@ export default {
       document.body.className = `theme-${state.activeName}`
     }
   }
-}
+})

@@ -17,7 +17,7 @@ function supplementMenuPath (menu) {
   }))
 }
 
-export default {
+export default context => ({
   namespaced: true,
   state: {
     // 顶栏菜单
@@ -105,4 +105,4 @@ export default {
       state.aside = supplementMenuPath(menu)
     }
   }
-}
+})

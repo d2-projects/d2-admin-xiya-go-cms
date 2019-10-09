@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import router from '@/router'
 
-export default {
+export default context => ({
   namespaced: true,
   state: {
     // 尺寸
@@ -76,4 +76,4 @@ export default {
       })
     }
   }
-}
+})
