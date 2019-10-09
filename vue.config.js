@@ -94,13 +94,7 @@ module.exports = {
     // 重新设置 alias
     config.resolve.alias
       .set('@api', resolve('src/api'))
-    // 判断环境加入模拟数据
-    const entry = config.entry('app')
-    if (process.env.VUE_APP_BUILD_MODE !== 'NOMOCK') {
-      entry
-        .add('@/mock')
-        .end()
-    }
+      .end()
   },
   // i18n
   pluginOptions: {

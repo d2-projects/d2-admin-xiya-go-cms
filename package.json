@@ -6,7 +6,6 @@
     "start": "npm run serve",
     "dev": "npm run serve",
     "build": "vue-cli-service build",
-    "build:nomock": "vue-cli-service build --mode nomock",
     "build:travis": "vue-cli-service build --mode travis",
     "lint": "vue-cli-service lint --fix",
     "test:unit": "vue-cli-service test:unit"
@@ -23,7 +22,6 @@
     "js-cookie": "^2.2.0",
     "lodash": "^4.17.11",
     "lowdb": "^1.0.0",
-    "mockjs": "^1.0.1-beta3",
     "nprogress": "^0.2.0",
     "qs": "^6.7.0",
     "screenfull": "^4.2.0",
