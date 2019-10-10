@@ -19,6 +19,6 @@ before_install:
 
 after_success:
   - ./qshell listbucket d2-admin-cms-go -o files.txt
-  - ./qshell batchdelete --force d2-admin-cms-go -i files.txt
+  - ./qshell batchdelete -force d2-admin-cms-go -i files.txt
   - ./qshell qupload qiniu-config
   - ./qshell cdnrefresh -dirs cdnrefresh-dirs.txt
