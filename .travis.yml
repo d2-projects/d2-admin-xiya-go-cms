@@ -13,10 +13,12 @@ script:
   - npm run build:travis
 
 before_install:
-  - ./qshell account $AK $SK
+  - ./qshell account $AK $SK $NAME
   - curl -o- -L https://yarnpkg.com/install.sh | bash
   - export PATH=$HOME/.yarn/bin:$PATH
 
 after_success:
+  - ./qshell listbucket d2-admin-cms-go -o log/files.txt
+  - ./qshell batchdelete --force d2-admin-cms-go -i log/files.txt
   - ./qshell qupload qiniu-config
   - ./qshell cdnrefresh -dirs cdnrefresh-dirs.txt
