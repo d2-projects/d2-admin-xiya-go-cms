@@ -1,5 +1,5 @@
 import { Message, MessageBox } from 'element-ui'
-import util from '@/libs/util.js'
+import util from '@/utils'
 import router from '@/router'
 
 export default context => ({

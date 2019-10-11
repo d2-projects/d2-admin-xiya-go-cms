@@ -1,6 +1,6 @@
 import dayjs from 'dayjs'
 import { get } from 'lodash'
-import util from '@/libs/util.js'
+import util from '@/utils'
 
 export default context => ({
   namespaced: true,

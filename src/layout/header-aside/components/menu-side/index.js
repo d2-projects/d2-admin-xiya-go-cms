@@ -1,6 +1,6 @@
 import { mapState } from 'vuex'
 import menuMixin from '../mixin/menu'
-import { elMenuItem, elSubmenu } from '../libs/util.menu'
+import { elMenuItem, elSubmenu } from '../utils/menu'
 import BScroll from 'better-scroll'
 
 export default {

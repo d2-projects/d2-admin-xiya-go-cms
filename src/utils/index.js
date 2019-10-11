@@ -1,11 +1,12 @@
-import cookies from './util.cookies'
-import db from './util.db'
-import log from './util.log'
+import cookies from './modules/cookies'
+import db from './modules/db'
+import log from './modules/log'
 
 const util = {
   cookies,
   db,
-  log
+  log,
+  import: require('./modules/import.' + process.env.NODE_ENV)
 }
 
 /**

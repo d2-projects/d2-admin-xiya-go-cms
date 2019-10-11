@@ -2,7 +2,7 @@ import store from '@/store'
 import axios from 'axios'
 import qs from 'qs'
 import { Message } from 'element-ui'
-import util from '@/libs/util'
+import util from '@/utils'
 
 // 创建一个错误
 function errorCreate (msg) {

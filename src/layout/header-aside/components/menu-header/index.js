@@ -1,7 +1,7 @@
 import { throttle } from 'lodash'
 import { mapState } from 'vuex'
 import menuMixin from '../mixin/menu'
-import { elMenuItem, elSubmenu } from '../libs/util.menu'
+import { elMenuItem, elSubmenu } from '../utils/menu'
 
 export default {
   name: 'd2-layout-header-aside-menu-header',
