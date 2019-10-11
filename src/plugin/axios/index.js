@@ -2,7 +2,7 @@ import store from '@/store'
 import axios from 'axios'
 import qs from 'qs'
 import { Message } from 'element-ui'
-import util from '@/utils'
+import utils from '@/utils'
 
 // 创建一个错误
 function errorCreate (msg) {
@@ -23,7 +23,7 @@ function errorLog (error) {
   })
   // 打印到控制台
   if (process.env.NODE_ENV === 'development') {
-    util.log.danger('>>>>>> Error >>>>>>')
+    utils.log.danger('>>>>>> Error >>>>>>')
     console.log(error)
   }
   // 显示提示
@@ -43,7 +43,7 @@ const service = axios.create({
 // 请求拦截器
 service.interceptors.request.use(
   config => {
-    const token = util.cookies.get('token')
+    const token = utils.cookies.get('token')
     if (token) {
       config.headers['Authorization'] = `Bearer ${token}`
     }

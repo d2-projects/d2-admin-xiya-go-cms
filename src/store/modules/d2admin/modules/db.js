@@ -1,6 +1,6 @@
 import router from '@/router'
 import { cloneDeep } from 'lodash'
-import { database as getDatabase, dbGet, dbSet } from '@/utils/modules/db'
+import utils from '@/utils'
 
 export default context => ({
   namespaced: true,
@@ -20,7 +20,7 @@ export default context => ({
       value = '',
       user = false
     }) {
-      dbSet({ dbName, path, value, user })
+      utils.db.dbSet({ dbName, path, value, user })
     },
     /**
      * @description 获取数据
@@ -37,7 +37,7 @@ export default context => ({
       defaultValue = '',
       user = false
     }) {
-      return dbGet({ dbName, path, defaultValue, user })
+      return utils.db.dbGet({ dbName, path, defaultValue, user })
     },
     /**
      * @description 获取存储数据库对象
@@ -47,7 +47,7 @@ export default context => ({
     database (context, {
       user = false
     } = {}) {
-      return getDatabase({
+      return utils.db.getDatabase({
         user,
         defaultValue: {}
       })
@@ -60,7 +60,7 @@ export default context => ({
     databaseClear (context, {
       user = false
     } = {}) {
-      return getDatabase({
+      return utils.db.getDatabase({
         user,
         validator: () => false,
         defaultValue: {}
@@ -76,7 +76,7 @@ export default context => ({
       basis = 'fullPath',
       user = false
     } = {}) {
-      return getDatabase({
+      return utils.db.getDatabase({
         path: `$page.${router.app.$route[basis]}`,
         user,
         defaultValue: {}
@@ -92,7 +92,7 @@ export default context => ({
       basis = 'fullPath',
       user = false
     } = {}) {
-      return getDatabase({
+      return utils.db.getDatabase({
         path: `$page.${router.app.$route[basis]}`,
         user,
         validator: () => false,
@@ -111,7 +111,7 @@ export default context => ({
       basis = 'fullPath',
       user = false
     }) {
-      return getDatabase({
+      return utils.db.getDatabase({
         path: `$page.${router.app.$route[basis]}.$data`,
         user,
         validator: () => false,
@@ -130,7 +130,7 @@ export default context => ({
       basis = 'fullPath',
       user = false
     }) {
-      return dbGet({
+      return utils.db.dbGet({
         path: `$page.${router.app.$route[basis]}.$data`,
         user,
         defaultValue: cloneDeep(instance.$data)
@@ -146,7 +146,7 @@ export default context => ({
       basis = 'fullPath',
       user = false
     }) {
-      return getDatabase({
+      return utils.db.getDatabase({
         path: `$page.${router.app.$route[basis]}.$data`,
         user,
         validator: () => false,

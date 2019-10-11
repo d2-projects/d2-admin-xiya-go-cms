@@ -1,5 +1,5 @@
 import store from '@/store'
-import util from '@/utils'
+import utils from '@/utils'
 
 export default {
   install (Vue, options) {
@@ -16,12 +16,12 @@ export default {
         })
         // 只在开发模式下打印 log
         if (process.env.NODE_ENV === 'development') {
-          util.log.capsule('D2Admin', 'ErrorHandler', 'danger')
-          util.log.danger('>>>>>> 错误信息 >>>>>>')
+          utils.log.capsule('D2Admin', 'ErrorHandler', 'danger')
+          utils.log.danger('>>>>>> 错误信息 >>>>>>')
           console.log(info)
-          util.log.danger('>>>>>> Vue 实例 >>>>>>')
+          utils.log.danger('>>>>>> Vue 实例 >>>>>>')
           console.log(instance)
-          util.log.danger('>>>>>> Error >>>>>>')
+          utils.log.danger('>>>>>> Error >>>>>>')
           console.log(error)
         }
       })

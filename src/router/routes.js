@@ -1,6 +1,6 @@
 import layoutHeaderAside from '@/layout/header-aside'
 
-import util from '@/utils'
+import utils from '@/utils'
 
 /**
  * 在主框架内显示
@@ -18,7 +18,7 @@ const frameIn = [
         meta: {
           auth: true
         },
-        component: util.import('system/index')
+        component: utils.import('system/index')
       },
       // 演示页面
       {
@@ -28,7 +28,7 @@ const frameIn = [
           title: '页面 1',
           auth: true
         },
-        component: util.import('demo/page1')
+        component: utils.import('demo/page1')
       },
       {
         path: 'page2',
@@ -37,7 +37,7 @@ const frameIn = [
           title: '页面 2',
           auth: true
         },
-        component: util.import('demo/page2')
+        component: utils.import('demo/page2')
       },
       {
         path: 'page3',
@@ -46,7 +46,7 @@ const frameIn = [
           title: '页面 3',
           auth: true
         },
-        component: util.import('demo/page3')
+        component: utils.import('demo/page3')
       },
       // 系统 前端日志
       {
@@ -56,21 +56,21 @@ const frameIn = [
           title: '前端日志',
           auth: true
         },
-        component: util.import('system/log')
+        component: utils.import('system/log')
       },
       // 刷新页面 必须保留
       {
         path: 'refresh',
         name: 'refresh',
         hidden: true,
-        component: util.import('system/function/refresh')
+        component: utils.import('system/function/refresh')
       },
       // 页面重定向 必须保留
       {
         path: 'redirect/:route*',
         name: 'redirect',
         hidden: true,
-        component: util.import('system/function/redirect')
+        component: utils.import('system/function/redirect')
       }
     ]
   }
@@ -84,7 +84,7 @@ const frameOut = [
   {
     path: '/login',
     name: 'login',
-    component: util.import('system/login')
+    component: utils.import('system/login')
   }
 ]
 
@@ -95,7 +95,7 @@ const errorPage = [
   {
     path: '*',
     name: '404',
-    component: util.import('system/error/404')
+    component: utils.import('system/error/404')
   }
 ]
 

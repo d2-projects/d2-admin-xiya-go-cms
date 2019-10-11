@@ -13,8 +13,6 @@ db
   })
   .write()
 
-export default db
-
 /**
  * @description 检查路径是否存在 不存在的话初始化
  * @param {Object} payload dbName {String} 数据库名称
@@ -103,4 +101,12 @@ export function database ({
       dbName, path, user, validator, defaultValue
     })))
   })
+}
+
+
+
+export default {
+  database,
+  dbSet,
+  dbGet
 }

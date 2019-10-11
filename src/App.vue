@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import util from '@/utils'
+import utils from '@/utils'
 export default {
   name: 'app',
   watch: {
@@ -16,7 +16,7 @@ export default {
   },
   methods: {
     i18nHandle (val, oldVal) {
-      util.cookies.set('lang', val)
+      utils.cookies.set('lang', val)
       document.querySelector('html').setAttribute('lang', val)
     }
   }

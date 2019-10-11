@@ -1,4 +1,4 @@
-import util from '@/utils'
+import utils from '@/utils'
 
 export default context => ({
   namespaced: true,
@@ -8,7 +8,7 @@ export default context => ({
      * @param {Object} state state
      */
     versionShow () {
-      util.log.capsule('D2Admin', `v${process.env.VUE_APP_VERSION}`)
+      utils.log.capsule('D2Admin', `v${process.env.VUE_APP_VERSION}`)
       console.log('D2 Admin  https://github.com/d2-projects/d2-admin')
       console.log('D2 Crud   https://github.com/d2-projects/d2-crud')
       console.log('Document  https://fairyever.com/d2-admin/doc/zh/')

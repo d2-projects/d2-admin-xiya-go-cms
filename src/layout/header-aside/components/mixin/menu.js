@@ -1,4 +1,4 @@
-import util from '@/utils'
+import utils from '@/utils'
 
 export default {
   methods: {
@@ -6,7 +6,7 @@ export default {
       if (/^d2-menu-empty-\d+$/.test(index) || index === undefined) {
         this.$message.warning('临时菜单')
       } else if (/^https:\/\/|http:\/\//.test(index)) {
-        util.open(index)
+        utils.open(index)
       } else {
         this.$router.push({
           path: index
