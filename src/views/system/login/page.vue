@@ -107,6 +107,7 @@ export default {
     this.timeInterval = setInterval(() => {
       this.refreshTime()
     }, 1000)
+    console.log('build time' + process.env.VUE_APP_BUILD_TIME)
   },
   beforeDestroy () {
     clearInterval(this.timeInterval)
