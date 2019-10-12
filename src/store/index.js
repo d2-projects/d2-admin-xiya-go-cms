@@ -7,6 +7,6 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   modules: {
-    d2admin: generatorD2Admin(context)
+    d2admin: generatorD2Admin(context())
   }
 })
