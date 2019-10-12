@@ -30,7 +30,9 @@
                     <i slot="prepend" class="fa fa-keyboard-o"></i>
                   </el-input>
                 </el-form-item>
-                <el-button size="default" @click="submit" type="primary" class="button-login">登录</el-button>
+                <d2-tencent-captcha @success="submit">
+                  <el-button size="default" type="primary" class="button-login">登录</el-button>
+                </d2-tencent-captcha>
               </el-form>
             </el-card>
             <p class="page-login--options" flex="main:justify cross:center">
@@ -124,8 +126,6 @@ export default {
       this.$refs.loginForm.validate((valid) => {
         if (valid) {
           // 登录
-          // 注意 这里的演示没有传验证码
-          // 具体需要传递的数据请自行修改代码
           this.login({
             username: this.formLogin.username,
             password: this.formLogin.password

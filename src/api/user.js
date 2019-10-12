@@ -1,5 +1,5 @@
 export default ({ request }) => ({
-  SYS_USER_LOGIN ({
+  USER_LOGIN ({
     username = '',
     password = ''
   }) {

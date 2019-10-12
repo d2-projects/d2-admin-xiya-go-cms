@@ -18,7 +18,7 @@ export default context => ({
     } = {}) {
       try {
         // 获取登录结果
-        const { token } = await context.api.SYS_USER_LOGIN({
+        const { token } = await context.api.USER_LOGIN({
           username,
           password
         })
