@@ -54,7 +54,10 @@
             <a href="https://github.com/FairyEver" target="_blank">
               @FairyEver
             </a>
-            出品
+            出品 | 
+            <a href="https://www.travis-ci.org/d2-projects/d2-admin-cms-go" target="_blank">
+              构建于 {{$buildTime}}
+            </a>
           </p>
           <p class="page-login--content-footer-options">
             <a href="#">帮助</a>
@@ -107,7 +110,6 @@ export default {
     this.timeInterval = setInterval(() => {
       this.refreshTime()
     }, 1000)
-    console.log('build time' + process.env.VUE_APP_BUILD_TIME)
   },
   beforeDestroy () {
     clearInterval(this.timeInterval)

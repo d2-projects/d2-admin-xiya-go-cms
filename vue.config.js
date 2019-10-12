@@ -8,7 +8,10 @@ const resolve = dir => require('path').join(__dirname, dir)
 
 // 增加环境变量
 process.env.VUE_APP_VERSION = require('./package.json').version
-process.env.VUE_APP_BUILD_TIME = require('dayjs')().format('YYYY-M-D HH:mm:ss')
+// 构建时间 | https://www.travis-ci.org 服务器时间转为中国时间
+let time = require('dayjs')()
+time = time.subtract(time.utcOffset(), 'minute').add(480, 'minute')
+process.env.VUE_APP_BUILD_TIME = time.format('YYYY-M-D HH:mm:ss')
 
 // 基础路径 注意发布之前要先修改这里
 let publicPath = process.env.VUE_APP_PUBLIC_PATH || '/'
