@@ -80,6 +80,10 @@ export default context => ({
         title: '接口地址变更',
         message: value
       })
+      // 注销当前登录
+      dispatch('d2admin/account/logout', {
+        confirm: false
+      }, { root: true })
     },
     /**
      * @description 删除一个用户自己的地址配置
