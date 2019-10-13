@@ -100,7 +100,7 @@ export default {
   name: 'd2-api-base-url-controller',
   data () {
     return {
-      active: true,
+      active: false,
       custom: 'http://127.0.0.1:8080'
     }
   },
