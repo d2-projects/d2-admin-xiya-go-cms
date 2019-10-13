@@ -1,24 +1,27 @@
 <style lang="scss" scoped>
 .d2-api-base-url-controller {
   .el-dialog__body {
-    .item {
-      &:last-child {
+    .wrapper {
+      max-height: 200px;
+      .item {
+        &:last-child {
+          .el-button {
+            margin-bottom: 0px;
+          }
+        }
         .el-button {
-          margin-bottom: 0px;
-        }
-      }
-      .el-button {
-        margin-bottom: 10px;
-        .item-name {
-          font-size: 14px;
-          font-weight: bold;
-          margin-bottom: 4px;
-        }
-        .item-value {
-          font-size: 12px;
-        }
-        .item-icon {
-          font-size: 24px;
+          margin-bottom: 10px;
+          .item-name {
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 4px;
+          }
+          .item-value {
+            font-size: 12px;
+          }
+          .item-icon {
+            font-size: 24px;
+          }
         }
       }
     }
@@ -34,30 +37,54 @@
       width="300px"
       custom-class="d2-api-base-url-controller"
       append-to-body>
-      <div
-        v-for="option of optionsEnv"
-        :key="option.value"
-        class="item">
-        <el-button
-          :type="isItemActive(option.value) ? 'primary' : 'default'"
-          style="width: 100%;"
-          @click="onSelect(option.value)">
-          <div flex="main:justify cross:center">
-            <div flex="dir:top cross:top">
-              <div class="item-name">
-                {{option.name}}
+      <el-scrollbar>
+        <div class="wrapper">
+          <div
+            v-for="option of options"
+            :key="option.value"
+            class="item">
+            <el-button
+              :type="isItemActive(option.value) ? 'primary' : 'default'"
+              style="width: 100%;"
+              @click="onSelect(option.value)">
+              <div flex="main:justify cross:center">
+                <div flex="dir:top cross:top">
+                  <div class="item-name">
+                    {{option.name}}
+                  </div>
+                  <div class="item-value">
+                    {{option.value}}
+                  </div>
+                </div>
+                <span v-if="isItemActive(option.value)">
+                  <d2-icon class="item-icon" name="check-circle"/>
+                </span>
+                <span v-else @click.stop="onRemove(option.value)">
+                  <d2-icon class="item-icon" name="close"/>
+                </span>
               </div>
-              <div class="item-value">
-                {{option.value}}
-              </div>
-            </div>
-            <d2-icon
-              v-if="isItemActive(option.value)"
-              class="item-icon"
-              name="check-circle"/>
+            </el-button>
           </div>
+        </div>
+      </el-scrollbar>
+      <el-divider>或者</el-divider>
+      <div flex="main:justify cross:center">
+        <el-input
+          v-model="custom"
+          class="d2-mr-5"/>
+        <el-button
+          :disabled="custom.length === 0"
+          @click="onSelect(custom)">
+          好
         </el-button>
       </div>
+      <el-divider/>
+      <el-button
+        type="primary"
+        style="width:100%;"
+        @click="onClose">
+        确定
+      </el-button>
     </el-dialog>
     <span @click="onOpen">
       <slot/>
@@ -66,23 +93,27 @@
 </template>
 
 <script>
-import { mapState, mapMutations } from 'vuex';
+import { mapState, mapGetters, mapMutations } from 'vuex';
 export default {
   name: 'd2-api-base-url-controller',
   data () {
     return {
-      active: false
+      active: true,
+      custom: 'http://127.0.0.1:8080'
     }
   },
   computed: {
     ...mapState('d2admin/api', [
-      'base',
-      'optionsEnv'
+      'base'
+    ]),
+    ...mapGetters('d2admin/api', [
+      'options'
     ])
   },
   methods: {
     ...mapMutations('d2admin/api', {
-      baseUrlSet: 'set'
+      baseUrlSet: 'set',
+      baseUrlOptionRemove: 'remove'
     }),
     onOpen () {
       this.active = true
@@ -92,7 +123,9 @@ export default {
     },
     onSelect (value) {
       this.baseUrlSet(value)
-      setTimeout(this.onClose, 300)
+    },
+    onRemove (value) {
+      this.baseUrlOptionRemove(value)
     },
     isItemActive (value) {
       return this.base === value
