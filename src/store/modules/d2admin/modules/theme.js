@@ -41,7 +41,8 @@ export default context => ({
       })
     },
     /**
-     * @description 从持久化数据加载主题设置     * @param {Object} context
+     * @description 从持久化数据加载主题设置
+     * @param {Object} vuex context
      */
     load ({ state, commit, dispatch }) {
       return new Promise(async resolve => {

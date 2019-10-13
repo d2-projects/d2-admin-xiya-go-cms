@@ -32,7 +32,7 @@ export default context => ({
   actions: {
     /**
      * @description 添加一个日志
-     * @param {Object} context
+     * @param {Object} vuex context
      * @param {String} param message {String} 信息
      * @param {String} param type {String} 类型
      * @param {Object} payload meta {Object} 附带的信息

@@ -30,6 +30,8 @@ new Vue({
     this.$store.commit('d2admin/menu/asideSet', menuAside)
     // 初始化菜单搜索功能
     this.$store.commit('d2admin/search/init', menuHeader)
+    // 加载接口配置
+    this.$store.dispatch('d2admin/api/load')
   },
   mounted () {
     // 展示系统信息

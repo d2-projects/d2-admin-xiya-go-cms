@@ -7,7 +7,7 @@ export default context => ({
   actions: {
     /**
      * @description 登录
-     * @param {Object} context
+     * @param {Object} vuex context
      * @param {Object} payload username {String} 用户账号
      * @param {Object} payload password {String} 密码
      * @param {Object} payload route {Object} 登录成功后定向的路由对象 任何 vue-router 支持的格式
@@ -49,7 +49,7 @@ export default context => ({
     },
     /**
      * @description 注销用户并返回登录页面
-     * @param {Object} context
+     * @param {Object} vuex context
      * @param {Object} payload confirm {Boolean} 是否需要确认
      */
     logout ({ commit, dispatch }, { confirm = false } = {}) {
@@ -89,7 +89,7 @@ export default context => ({
     },
     /**
      * @description 用户登录后从持久化数据加载一系列的设置
-     * @param {Object} context
+     * @param {Object} vuex context
      */
     load ({ dispatch }) {
       return new Promise(async resolve => {

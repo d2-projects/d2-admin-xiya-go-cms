@@ -2,7 +2,7 @@
 .d2-api-base-url-controller {
   .el-dialog__body {
     .wrapper {
-      max-height: 200px;
+      max-height: 220px;
       .item {
         &:last-child {
           .el-button {
@@ -59,7 +59,9 @@
                 <span v-if="isItemActive(option.value)">
                   <d2-icon class="item-icon" name="check-circle"/>
                 </span>
-                <span v-else @click.stop="onRemove(option.value)">
+                <span
+                  v-else-if="option.type === 'custom'"
+                  @click.stop="onRemove(option.value)">
                   <d2-icon class="item-icon" name="close"/>
                 </span>
               </div>
@@ -93,7 +95,7 @@
 </template>
 
 <script>
-import { mapState, mapGetters, mapMutations } from 'vuex';
+import { mapState, mapGetters, mapActions } from 'vuex';
 export default {
   name: 'd2-api-base-url-controller',
   data () {
@@ -111,7 +113,7 @@ export default {
     ])
   },
   methods: {
-    ...mapMutations('d2admin/api', {
+    ...mapActions('d2admin/api', {
       baseUrlSet: 'set',
       baseUrlOptionRemove: 'remove'
     }),

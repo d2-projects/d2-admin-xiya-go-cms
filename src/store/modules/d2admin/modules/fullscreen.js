@@ -9,7 +9,7 @@ export default context => ({
   actions: {
     /**
      * @description 初始化监听
-     * @param {Object} context
+     * @param {Object} vuex context
      */
     listen ({ commit }) {
       return new Promise(resolve => {
@@ -27,7 +27,7 @@ export default context => ({
     },
     /**
      * @description 切换全屏
-     * @param {Object} context
+     * @param {Object} vuex context
      */
     toggle ({ commit }) {
       return new Promise(resolve => {

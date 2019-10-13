@@ -30,7 +30,7 @@ export default context => ({
   actions: {
     /**
      * 设置侧边栏展开或者收缩
-     * @param {Object} context
+     * @param {Object} vuex context
      * @param {Boolean} collapse is collapse
      */
     asideCollapseSet ({ state, dispatch }, collapse) {
@@ -50,7 +50,7 @@ export default context => ({
     },
     /**
      * 切换侧边栏展开和收缩
-     * @param {Object} context
+     * @param {Object} vuex context
      */
     asideCollapseToggle ({ state, dispatch }) {
       return new Promise(async resolve => {
@@ -69,7 +69,7 @@ export default context => ({
     },
     /**
      * 从持久化数据读取侧边栏展开或者收缩
-     * @param {Object} context
+     * @param {Object} vuex context
      */
     asideCollapseLoad ({ state, dispatch }) {
       return new Promise(async resolve => {
