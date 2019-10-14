@@ -7,6 +7,7 @@ import 'nprogress/nprogress.css'
 
 import store from '@/store/index'
 import utils from '@/utils'
+import api from '@/api'
 
 // 路由数据
 import routes from './routes'
@@ -43,14 +44,13 @@ router.beforeEach(async (to, from, next) => {
   store.commit('d2admin/search/set', false)
   // 验证当前路由所有的匹配中是否需要有登录验证的
   if (to.matched.some(r => r.meta.auth)) {
-    // 这里暂时将cookie里是否存有token作为验证是否登录的条件
-    // 请根据自身业务需要修改
-    const token = utils.cookies.get('token')
-    if (token && token !== 'undefined') {
+    try {
+      // 检验 token 合法性
+      await api.USER_CHECK_TOKEN()
+      // 通过
       next()
-    } else {
-      // 没有登录的时候跳转到登录界面
-      // 携带上登陆成功之后需要跳转的页面完整路径
+    } catch (error) {
+      // 检验 token 合法性失败
       next({
         name: 'login',
         query: {
