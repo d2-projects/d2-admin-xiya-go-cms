@@ -1,7 +1,7 @@
-import context from '@/context.js'
+import api from '@/api'
 
 export default {
   install (Vue, options) {
-    Vue.prototype.$api = context().api
+    Vue.prototype.$api = api
   }
 }
