@@ -1,6 +1,6 @@
 export default ({ request }) => ({
   /**
-   * 验证验证码
+   * @description 验证验证码
    * @param {Object} data {String} randstr 腾讯验证返回的 randstr
    * @param {Object} data {String} ticket 腾讯验证返回的 ticket
    */

@@ -70,7 +70,7 @@ service.interceptors.response.use(
 export function request (config) {
   let headers = {}
   const token = utils.cookies.get('token')
-  if (token) headers['Authorization'] = `Bearer ${token}`
+  if (token) headers['Authorization'] = token
   headers['Content-Type'] = 'application/x-www-form-urlencoded'
   return service({
     timeout: 5000,

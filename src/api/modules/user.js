@@ -1,6 +1,6 @@
 export default ({ request }) => ({
   /**
-   * 登录
+   * @description 登录
    * @param {Object} data {String} username 用户名
    * @param {Object} data {String} password 密码
    */
@@ -15,6 +15,15 @@ export default ({ request }) => ({
         user_name: username,
         password: password
       }
+    })
+  },
+  /**
+   * @description 登录 token 校验
+   */
+  USER_CHECK_TOKEN () {
+    return request({
+      url: '/api/user/check_token',
+      method: 'post'
     })
   }
 })
