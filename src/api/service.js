@@ -47,12 +47,7 @@ service.interceptors.response.use(
         store.dispatch('d2admin/account/logout', {
           focus: true,
           remote: false,
-          route: {
-            name: 'login',
-            query: {
-              redirect: router.app.$route.fullPath
-            }
-          }
+          back: true
         })
       } else {
         errorLog(error)

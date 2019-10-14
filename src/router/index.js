@@ -43,27 +43,18 @@ router.beforeEach(async (to, from, next) => {
   // 关闭搜索面板
   store.commit('d2admin/search/set', false)
   // 验证当前路由所有的匹配中是否需要有登录验证的
+  // 由于在网络请求的钩子里有对 token 异常的判断，所以在这里不处理异常重定向
+  // 如果网络请求中没有处理登录异常，请在 catch 中添加注销逻辑
+  // 例如在 catch 中：
+  // store.dispatch('d2admin/account/logout', {
+  //   focus: true,
+  //   remote: false,
+  //   back: true
+  // })
   if (to.matched.some(r => r.meta.auth)) {
-    try {
-      // 检验 token 合法性通过
-      await api.USER_CHECK_TOKEN()
-      next()
-    } catch (error) {
-      // 检验 token 合法性失败
-      store.dispatch('d2admin/account/logout', {
-        focus: true,
-        remote: false,
-        next,
-        route: {
-          name: 'login',
-          query: {
-            redirect: to.fullPath
-          }
-        }
-      })
-      // https://github.com/d2-projects/d2-admin/issues/138
-      NProgress.done()
-    }
+    try { await api.USER_CHECK_TOKEN() } catch (error) {}
+    next()
+    NProgress.done()
   } else {
     // 不需要身份校验 直接通过
     next()
