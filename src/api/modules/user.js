@@ -27,7 +27,7 @@ export default ({ request }) => ({
     })
   },
   /**
-   * @description 登录 token 校验
+   * @description Token 校验
    */
   USER_CHECK_TOKEN () {
     return request({
