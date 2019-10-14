@@ -10,10 +10,9 @@ apiGenerators.forEach(generator => {
   })
   for (const apiName in apiInstance) {
     if (apiInstance.hasOwnProperty(apiName)) {
-      api[apiName] = apiInstance[apiName];
+      api[apiName] = apiInstance[apiName]
     }
   }
 })
-
 
 export default api
