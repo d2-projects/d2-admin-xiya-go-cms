@@ -1,9 +1,11 @@
 import cookies from './modules/cookies'
+import dayjs from './modules/dayjs'
 import db from './modules/db'
 import log from './modules/log'
 
 const utils = {
   cookies,
+  dayjs,
   db,
   log,
   import: require('./modules/import.' + process.env.NODE_ENV)

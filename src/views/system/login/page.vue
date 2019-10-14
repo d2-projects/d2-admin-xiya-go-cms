@@ -42,10 +42,31 @@
           </div>
         </div>
         <div class="page-login--content-footer">
-          <p class="page-login--content-footer-locales">
-            <a v-for="language in $languages" :key="language.value" @click="onChangeLocale(language.value)">{{ language.label }}</a>
+          <p>
+            <template v-for="(language, index) in $languages">
+              <a
+                :key="language.value"
+                @click="onChangeLocale(language.value)">
+                {{ language.label }}
+              </a>
+              <el-divider
+                :key="language.value"
+                v-if="index !== $languages.length - 1"
+                direction="vertical"/>
+            </template>
           </p>
-          <p class="page-login--content-footer-copyright">
+          <p>
+            <a href="https://www.travis-ci.org/d2-projects/d2-admin-cms-go" target="_blank">
+              构建于 
+              {{ $buildTime | timeFormat('YYYY年M月D日 dddd Ah点mm分') }}
+              <d2-time-relative :value="$buildTime"/>
+            </a>
+            <el-divider direction="vertical"/> 
+            <d2-api-base-url-controller>
+              切换环境
+            </d2-api-base-url-controller>
+          </p>
+          <p>
             <a href="https://github.com/d2-projects/d2-admin-cms-go/blob/master/LICENSE" target="_blank">
               Copyright
               <d2-icon name="copyright"/>
@@ -55,18 +76,12 @@
               @FairyEver
             </a>
             出品
-            <el-divider direction="vertical"></el-divider>
-            <a href="https://www.travis-ci.org/d2-projects/d2-admin-cms-go" target="_blank">
-              构建于 {{$buildTime}}
-            </a>
-            <el-divider direction="vertical"></el-divider> 
-            <d2-api-base-url-controller>
-              切换环境
-            </d2-api-base-url-controller>
           </p>
-          <p class="page-login--content-footer-options">
+          <p>
             <a href="#">帮助</a>
+            <el-divider direction="vertical"/>
             <a href="#">隐私</a>
+            <el-divider direction="vertical"/>
             <a href="#">条款</a>
           </p>
         </div>
@@ -225,7 +240,7 @@ export default {
   // footer
   .page-login--content-footer {
     padding: 1em 0;
-    .page-login--content-footer-locales {
+    p {
       padding: 0px;
       margin: 0px;
       margin-bottom: 15px;
@@ -235,33 +250,9 @@ export default {
       color: $color-text-normal;
       a {
         color: $color-text-normal;
-        margin: 0 .5em;
         &:hover {
           color: $color-text-main;
         }
-      }
-    }
-    .page-login--content-footer-copyright {
-      padding: 0px;
-      margin: 0px;
-      margin-bottom: 10px;
-      font-size: 12px;
-      line-height: 12px;
-      text-align: center;
-      color: $color-text-normal;
-      a {
-        color: $color-text-normal;
-      }
-    }
-    .page-login--content-footer-options {
-      padding: 0px;
-      margin: 0px;
-      font-size: 12px;
-      line-height: 12px;
-      text-align: center;
-      a {
-        color: $color-text-normal;
-        margin: 0 1em;
       }
     }
   }

@@ -5,6 +5,8 @@ import 'element-ui/lib/theme-chalk/index.css'
 import 'flex.css'
 // 组件
 import '@/components'
+// 过滤器
+import '@/filters'
 // svg 图标
 import '@/assets/svg-icons'
 // 国际化
@@ -28,7 +30,7 @@ export default {
     // 当前版本
     Vue.prototype.$version = process.env.VUE_APP_VERSION
     // 构建时间
-    Vue.prototype.$buildTime = process.env.VUE_APP_BUILD_TIME
+    Vue.prototype.$buildTime = Number(process.env.VUE_APP_BUILD_TIME)
     // Element
     Vue.use(ElementUI, {
       i18n: (key, value) => i18n.t(key, value)
