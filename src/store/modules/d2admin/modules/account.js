@@ -50,21 +50,34 @@ export default context => ({
     /**
      * @description 注销用户并返回登录页面
      * @param {Object} vuex context
-     * @param {Object} payload focus {Boolean} 强制登出 没有提示
+     * @param {Object} payload focus {Boolean} 强制登出 没有任何提示
+     * @param {Object} payload remote {Boolean} 需要服务端登出
+     * @param {Object} payload local {Boolean} 需要本地登出
      */
-    logout ({ commit, dispatch }, { focus = false } = {}) {
+    logout ({
+      commit,
+      dispatch
+    }, {
+      focus = false,
+      remote = true,
+      local = true
+    } = {}) {
       /**
        * @description 注销
        */
       async function logout () {
         // 请求登出接口
         // 不管成功与否都要进行下一步，所以不用 await 了
-        context.api.USER_LOGOUT()
-        // 删除 cookie
-        utils.cookies.remove('token')
-        utils.cookies.remove('uuid')
-        // 清空 vuex 用户信息
-        await dispatch('d2admin/user/set', {}, { root: true })
+        if (remote) {
+          context.api.USER_LOGOUT()
+        }
+        if (local) {
+          // 删除 cookie
+          utils.cookies.remove('token')
+          utils.cookies.remove('uuid')
+          // 清空 vuex 用户信息
+          await dispatch('d2admin/user/set', {}, { root: true })
+        }
         // 跳转路由
         router.push({
           name: 'login'

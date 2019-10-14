@@ -68,7 +68,8 @@ export default context => ({
       }
       // 注销当前登录
       dispatch('d2admin/account/logout', {
-        focus: true
+        focus: true,
+        remote: false
       }, { root: true })
       // 应用变更
       state.base = value

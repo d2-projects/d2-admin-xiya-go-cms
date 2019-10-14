@@ -1,15 +1,8 @@
 import store from '@/store'
 import axios from 'axios'
 import qs from 'qs'
-import { Message } from 'element-ui'
+import { Message, MessageBox } from 'element-ui'
 import utils from '@/utils'
-
-// 创建一个错误
-function errorCreate (msg) {
-  const error = new Error(msg)
-  errorLog(error)
-  throw error
-}
 
 // 记录和显示错误
 function errorLog (error) {
@@ -34,15 +27,29 @@ function errorLog (error) {
 const service = axios.create()
 
 service.interceptors.response.use(
-  response => {
+  async response => {
     const dataAxios = response.data
-    const { code } = dataAxios
-    switch (code) {
-      case 0:
-        return dataAxios.data
-      default:
-        errorCreate(`code ${dataAxios.code} | ${dataAxios.msg} from ${response.config.url}`)
-        break
+    if (dataAxios.code === 0) {
+      // 正常返回数据
+      return dataAxios.data
+    } else {
+      // 需要重新登录
+      // 50008 - 无效的 token
+      // 50012 - 其它客户端登录
+      // 50014 - token 过期
+      if ([50008, 50012, 50014].indexOf(dataAxios.code) >= 0) {
+        await MessageBox.alert('请重新登录', '身份验证失败', {
+          showClose: false,
+          closeOnPressEscape: false
+        })
+        store.dispatch('d2admin/account/logout', {
+          focus: true,
+          remote: false
+        })
+      }
+      const error = new Error(`${dataAxios.msg} from ${response.config.url}`)
+      errorLog(error)
+      return Promise.reject(error)
     }
   },
   error => {
