@@ -53,6 +53,8 @@ export default context => ({
      * @param {Object} payload focus {Boolean} 强制登出 没有任何提示
      * @param {Object} payload remote {Boolean} 需要服务端登出
      * @param {Object} payload local {Boolean} 需要本地登出
+     * @param {Object} payload next {Function} 用来重定向的方法
+     * @param {Object} payload route {*} 重定向的路由
      */
     logout ({
       commit,
@@ -60,7 +62,11 @@ export default context => ({
     }, {
       focus = false,
       remote = true,
-      local = true
+      local = true,
+      next = router.push,
+      route = {
+        name: 'login'
+      }
     } = {}) {
       /**
        * @description 注销
@@ -79,9 +85,7 @@ export default context => ({
           await dispatch('d2admin/user/set', {}, { root: true })
         }
         // 跳转路由
-        router.push({
-          name: 'login'
-        })
+        next(route)
       }
       // 判断是否需要确认
       if (!focus) {

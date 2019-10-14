@@ -45,16 +45,20 @@ router.beforeEach(async (to, from, next) => {
   // 验证当前路由所有的匹配中是否需要有登录验证的
   if (to.matched.some(r => r.meta.auth)) {
     try {
-      // 检验 token 合法性
+      // 检验 token 合法性通过
       await api.USER_CHECK_TOKEN()
-      // 通过
       next()
     } catch (error) {
       // 检验 token 合法性失败
-      next({
-        name: 'login',
-        query: {
-          redirect: to.fullPath
+      store.dispatch('d2admin/account/logout', {
+        focus: true,
+        remote: false,
+        next,
+        route: {
+          name: 'login',
+          query: {
+            redirect: to.fullPath
+          }
         }
       })
       // https://github.com/d2-projects/d2-admin/issues/138

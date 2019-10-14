@@ -3,6 +3,7 @@ import axios from 'axios'
 import qs from 'qs'
 import { Message, MessageBox } from 'element-ui'
 import utils from '@/utils'
+import router from '@/router'
 
 // 记录和显示错误
 function errorLog (error) {
@@ -33,6 +34,7 @@ service.interceptors.response.use(
       // 正常返回数据
       return dataAxios.data
     } else {
+      const error = new Error(dataAxios.msg)
       // 需要重新登录
       // 50008 - 无效的 token
       // 50012 - 其它客户端登录
@@ -44,11 +46,17 @@ service.interceptors.response.use(
         })
         store.dispatch('d2admin/account/logout', {
           focus: true,
-          remote: false
+          remote: false,
+          route: {
+            name: 'login',
+            query: {
+              redirect: router.app.$route.fullPath
+            }
+          }
         })
+      } else {
+        errorLog(error)
       }
-      const error = new Error(`${dataAxios.msg} from ${response.config.url}`)
-      errorLog(error)
       return Promise.reject(error)
     }
   },
