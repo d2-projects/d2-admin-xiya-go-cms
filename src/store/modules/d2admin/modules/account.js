@@ -81,12 +81,18 @@ export default context => ({
           await dispatch('d2admin/user/set', {}, { root: true })
         }
         // 跳转路由
+        let redirect = ''
+        if (back) {
+          if (['login'].indexOf(router.app.$route.name) < 0) {
+            redirect = router.app.$route.fullPath
+          } else {
+            redirect = router.app.$route.query.redirect
+          }
+        }
         router.push({
           name: 'login',
           query: {
-            ...back ? {
-              redirect: router.app.$route.fullPath
-            } : {}
+            ... redirect ? { redirect } : {}
           }
         })
       }

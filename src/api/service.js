@@ -39,7 +39,11 @@ service.interceptors.response.use(
       // 50008 - 无效的 token
       // 50012 - 其它客户端登录
       // 50014 - token 过期
-      if ([50008, 50012, 50014].indexOf(dataAxios.code) >= 0) {
+      if ([
+        50008,
+        50012,
+        50014
+      ].indexOf(dataAxios.code) >= 0) {
         await MessageBox.alert('请重新登录', '身份验证失败', {
           showClose: false,
           closeOnPressEscape: false
