@@ -57,35 +57,18 @@ export default context => ({
        * @description 注销
        */
       async function logout () {
-        // 本地注销
-        async function logoutLocal () {
-          // 删除cookie
-          utils.cookies.remove('token')
-          utils.cookies.remove('uuid')
-          // 清空 vuex 用户信息
-          await dispatch('d2admin/user/set', {}, { root: true })
-          // 跳转路由
-          router.push({
-            name: 'login'
-          })
-        }
         // 请求登出接口
-        try {
-          await context.api.USER_LOGOUT()
-          logoutLocal()
-        } catch (error) {
-          if (focus) {
-            logoutLocal()
-          } else {
-            MessageBox.confirm('远程注销失败，是否强制本地注销?', {
-              confirmButtonText: '确定',
-              cancelButtonText: '取消',
-              type: 'error'
-            })
-              .then(logoutLocal)
-              .catch(() => {})
-          }
-        }
+        // 不管成功与否都要进行下一步，所以不用 await 了
+        context.api.USER_LOGOUT()
+        // 删除 cookie
+        utils.cookies.remove('token')
+        utils.cookies.remove('uuid')
+        // 清空 vuex 用户信息
+        await dispatch('d2admin/user/set', {}, { root: true })
+        // 跳转路由
+        router.push({
+          name: 'login'
+        })
       }
       // 判断是否需要确认
       if (!focus) {
