@@ -18,6 +18,15 @@ export default ({ request }) => ({
     })
   },
   /**
+   * @description 注销
+   */
+  USER_LOGOUT () {
+    return request({
+      url: '/api/user/logout',
+      method: 'post'
+    })
+  },
+  /**
    * @description 登录 token 校验
    */
   USER_CHECK_TOKEN () {

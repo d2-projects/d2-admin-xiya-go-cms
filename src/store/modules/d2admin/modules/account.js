@@ -50,25 +50,45 @@ export default context => ({
     /**
      * @description 注销用户并返回登录页面
      * @param {Object} vuex context
-     * @param {Object} payload confirm {Boolean} 是否需要确认
+     * @param {Object} payload focus {Boolean} 强制登出 没有提示
      */
-    logout ({ commit, dispatch }, { confirm = false } = {}) {
+    logout ({ commit, dispatch }, { focus = false } = {}) {
       /**
        * @description 注销
        */
       async function logout () {
-        // 删除cookie
-        utils.cookies.remove('token')
-        utils.cookies.remove('uuid')
-        // 清空 vuex 用户信息
-        await dispatch('d2admin/user/set', {}, { root: true })
-        // 跳转路由
-        router.push({
-          name: 'login'
-        })
+        // 本地注销
+        async function logoutLocal () {
+          // 删除cookie
+          utils.cookies.remove('token')
+          utils.cookies.remove('uuid')
+          // 清空 vuex 用户信息
+          await dispatch('d2admin/user/set', {}, { root: true })
+          // 跳转路由
+          router.push({
+            name: 'login'
+          })
+        }
+        // 请求登出接口
+        try {
+          await context.api.USER_LOGOUT()
+          logoutLocal()
+        } catch (error) {
+          if (focus) {
+            logoutLocal()
+          } else {
+            MessageBox.confirm('远程注销失败，是否强制本地注销?', {
+              confirmButtonText: '确定',
+              cancelButtonText: '取消',
+              type: 'error'
+            })
+              .then(logoutLocal)
+              .catch(() => {})
+          }
+        }
       }
       // 判断是否需要确认
-      if (confirm) {
+      if (!focus) {
         commit('d2admin/gray/set', true, { root: true })
         MessageBox.confirm('确定要注销当前用户吗', '注销用户', {
           type: 'warning'

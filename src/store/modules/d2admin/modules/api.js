@@ -66,6 +66,10 @@ export default context => ({
           user: false
         }, { root: true })
       }
+      // 注销当前登录
+      dispatch('d2admin/account/logout', {
+        focus: true
+      }, { root: true })
       // 应用变更
       state.base = value
       // 持久化接口地址设置
@@ -80,10 +84,6 @@ export default context => ({
         title: '接口地址变更',
         message: value
       })
-      // 注销当前登录
-      dispatch('d2admin/account/logout', {
-        confirm: false
-      }, { root: true })
     },
     /**
      * @description 删除一个用户自己的地址配置
