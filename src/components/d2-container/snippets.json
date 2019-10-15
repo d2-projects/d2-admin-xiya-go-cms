@@ -9,7 +9,7 @@
 			"  <template slot=\"footer\">Footer</template>",
 			"</d2-container>"
 		],
-		"description": "D2Admin 内置组件\n\n布局组件 <d2-container>"
+		"description": "D2Admin 内置组件\n\n布局组件 <d2-container>\n\n文档 https://fairyever.com/d2-admin/doc/zh/sys-components/container.html"
 	},
 	"d2-container card": {
 		"scope": "vue,vue-html",
@@ -21,7 +21,7 @@
 			"  <template slot=\"footer\">Footer</template>",
 			"</d2-container>"
 		],
-		"description": "D2Admin 内置组件\n\n布局组件 <d2-container> 卡片形"
+		"description": "D2Admin 内置组件\n\n布局组件 <d2-container> 卡片形\n\n文档 https://fairyever.com/d2-admin/doc/zh/sys-components/container.html"
 	},
 	"d2-container ghost": {
 		"scope": "vue,vue-html",
@@ -33,7 +33,7 @@
 			"  <template slot=\"footer\">Footer</template>",
 			"</d2-container>"
 		],
-		"description": "D2Admin 内置组件\n\n布局组件 <d2-container> 隐形模式"
+		"description": "D2Admin 内置组件\n\n布局组件 <d2-container> 隐形模式\n\n文档 https://fairyever.com/d2-admin/doc/zh/sys-components/container.html"
 	},
 	"d2-container bs": {
 		"scope": "vue,vue-html",
@@ -45,7 +45,7 @@
 			"  <template slot=\"footer\">Footer</template>",
 			"</d2-container>"
 		],
-		"description": "D2Admin 内置组件\n\n布局组件 <d2-container> 滚动优化"
+		"description": "D2Admin 内置组件\n\n布局组件 <d2-container> 滚动优化\n\n文档 https://fairyever.com/d2-admin/doc/zh/sys-components/container.html"
 	},
 	"d2-container card bs": {
 		"scope": "vue,vue-html",
@@ -57,7 +57,7 @@
 			"  <template slot=\"footer\">Footer</template>",
 			"</d2-container>"
 		],
-		"description": "D2Admin 内置组件\n\n布局组件 <d2-container> 卡片形 滚动优化"
+		"description": "D2Admin 内置组件\n\n布局组件 <d2-container> 卡片形 滚动优化\n\n文档 https://fairyever.com/d2-admin/doc/zh/sys-components/container.html"
 	},
 	"d2-container ghost bs": {
 		"scope": "vue,vue-html",

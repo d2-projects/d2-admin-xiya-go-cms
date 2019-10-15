@@ -74,9 +74,7 @@
         }
       }
     })
-    const dirExists = require('./dirExists')
-    console.log(dirExists);
-    
+    const dirExists = require('./dirExists')    
     await dirExists(resolve('../.vscode'))
     await fs.writeFileSync(path.join(resolve('../.vscode'), 'd2.code-snippets'), JSON.stringify(data, null, 2))
   }
