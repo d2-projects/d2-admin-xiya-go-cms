@@ -1,8 +1,18 @@
+import utils from '@/utils'
+
 export default context => ({
   namespaced: true,
   state: {
     // 用户信息
     info: {}
+  },
+  getters: {
+    name (state) {
+      return utils.fn.getFromMulti(state.info, [
+        'nickname',
+        'userName'
+      ], '')
+    },
   },
   actions: {
     /**
