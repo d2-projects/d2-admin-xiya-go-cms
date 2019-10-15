@@ -1,14 +1,12 @@
 import Cookies from 'js-cookie'
 
-const cookies = {}
-
 /**
  * @description 存储 cookie 值
  * @param {String} name cookie name
  * @param {String} value cookie value
  * @param {Object} setting cookie setting
  */
-cookies.set = function (name = 'default', value = '', cookieSetting = {}) {
+export function set (name = 'default', value = '', cookieSetting = {}) {
   let currentCookieSetting = {
     expires: 1
   }
@@ -20,14 +18,14 @@ cookies.set = function (name = 'default', value = '', cookieSetting = {}) {
  * @description 拿到 cookie 值
  * @param {String} name cookie name
  */
-cookies.get = function (name = 'default') {
+export function get (name = 'default') {
   return Cookies.get(`d2admin-${process.env.VUE_APP_VERSION}-${name}`)
 }
 
 /**
  * @description 拿到 cookie 全部的值
  */
-cookies.getAll = function () {
+export function getAll () {
   return Cookies.get()
 }
 
@@ -35,8 +33,6 @@ cookies.getAll = function () {
  * @description 删除 cookie
  * @param {String} name cookie name
  */
-cookies.remove = function (name = 'default') {
+export function remove (name = 'default') {
   return Cookies.remove(`d2admin-${process.env.VUE_APP_VERSION}-${name}`)
 }
-
-export default cookies

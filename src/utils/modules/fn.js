@@ -1,8 +1,6 @@
 import { get } from 'lodash'
 
-let fn = {}
-
-fn.getFromMulti = function (parent = {}, paths = [], defaultValue = '') {
+export function getFromMulti (parent = {}, paths = [], defaultValue = '') {
   let result = defaultValue
   for (let pathIndex = 0; pathIndex < paths.length; pathIndex++) {
     const path = paths[pathIndex]
@@ -14,5 +12,3 @@ fn.getFromMulti = function (parent = {}, paths = [], defaultValue = '') {
   }
   return result
 }
-
-export default fn

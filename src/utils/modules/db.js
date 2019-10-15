@@ -1,6 +1,6 @@
 import low from 'lowdb'
 import LocalStorage from 'lowdb/adapters/LocalStorage'
-import cookies from './cookies'
+import * as cookies from './cookies'
 import { cloneDeep } from 'lodash'
 
 const adapter = new LocalStorage(`d2admin-${process.env.VUE_APP_VERSION}`)
@@ -97,12 +97,4 @@ export function database ({
   return db.get(pathInit({
     dbName, path, user, validator, defaultValue
   }))
-}
-
-
-
-export default {
-  database,
-  dbSet,
-  dbGet
 }

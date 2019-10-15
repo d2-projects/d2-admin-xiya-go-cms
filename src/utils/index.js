@@ -1,8 +1,8 @@
-import cookies from './modules/cookies'
-import dayjs from './modules/dayjs'
-import db from './modules/db'
-import fn from './modules/fn'
-import log from './modules/log'
+import * as cookies from './modules/cookies'
+import * as dayjs from './modules/dayjs'
+import * as db from './modules/db'
+import * as fn from './modules/fn'
+import * as log from './modules/log'
 
 const utils = {
   cookies,
