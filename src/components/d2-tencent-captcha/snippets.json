@@ -1,0 +1,12 @@
+{
+  "d2-tencent-captcha": {
+		"scope": "vue,vue-html",
+		"prefix": "component d2-tencent-captcha",
+		"body": [
+			"<d2-tencent-captcha>",
+			"  ${1:content}",
+			"</d2-tencent-captcha>"
+		],
+		"description": "D2Admin 内置组件\n\n腾讯防水墙验证码触发器 <d2-tencent-captcha>\n\n参考 https://007.qq.com"
+	}
+}

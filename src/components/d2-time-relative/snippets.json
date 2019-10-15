@@ -1,0 +1,10 @@
+{
+  "d2-time-relative": {
+		"scope": "vue,vue-html",
+		"prefix": "component d2-time-relative",
+		"body": [
+			"<d2-time-relative :value=\"${1:date}\"/>"
+		],
+		"description": "D2Admin 内置组件\n\n时间差显示 <d2-time-relative>"
+	}
+}
