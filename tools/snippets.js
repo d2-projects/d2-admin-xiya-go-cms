@@ -12,7 +12,6 @@
 
   const resolve = dir => require('path').join(__dirname, dir)
   const scanFolder = resolve('../src')
-  const outputFilePath = path.join(resolve('../.vscode'), 'd2.code-snippets')
 
   const snippetJsonFileNameExp = /snippets\.json$/
   const snippetJsFileNameExp = /snippets\.js$/
@@ -75,7 +74,11 @@
         }
       }
     })
-    await fs.writeFileSync(outputFilePath, JSON.stringify(data, null, 2))
+    const dirExists = require('./dirExists')
+    console.log(dirExists);
+    
+    await dirExists(resolve('../.vscode'))
+    await fs.writeFileSync(path.join(resolve('../.vscode'), 'd2.code-snippets'), JSON.stringify(data, null, 2))
   }
 
   async function rebuild () {
