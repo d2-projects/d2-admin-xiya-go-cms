@@ -1,0 +1,10 @@
+{
+  "d2-fork-me-on-github": {
+		"scope": "vue,vue-html",
+		"prefix": "component d2-fork-me-on-github",
+		"body": [
+			"<d2-fork-me-on-github/>"
+		],
+		"description": "D2Admin 内置组件\n\nGithub 地址徽标 <d2-fork-me-on-github>"
+	}
+}
