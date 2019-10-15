@@ -1,0 +1,12 @@
+{
+  "d2-api-base-url-controller": {
+		"scope": "vue,vue-html",
+		"prefix": "component d2-api-base-url-controller",
+		"body": [
+			"<d2-api-base-url-controller>",
+			"  ${1:content}",
+			"</d2-api-base-url-controller>"
+		],
+		"description": "D2Admin 内置组件\n\n接口地址切换器 <d2-api-base-url-controller>"
+	}
+}
