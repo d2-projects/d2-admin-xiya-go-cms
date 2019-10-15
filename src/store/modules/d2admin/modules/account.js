@@ -18,7 +18,12 @@ export default context => ({
     } = {}) {
       try {
         // 获取登录结果
-        const { token } = await context.api.USER_LOGIN({
+        // data
+        // "nickname": "...",
+        // "token": "...",
+        // "userId": 1,
+        // "userName": "..."
+        const data = await context.api.USER_LOGIN({
           username,
           password
         })
@@ -27,12 +32,10 @@ export default context => ({
         // uuid 是用户身份唯一标识 用户注册的时候确定 并且不可改变 不可重复
         // token 代表用户当前登录状态 建议在网络请求中携带 token
         // 如有必要 token 需要定时更新，默认保存一天
-        utils.cookies.set('uuid', 'admin')
-        utils.cookies.set('token', token)
+        utils.cookies.set('uuid', data.userId)
+        utils.cookies.set('token', data.token)
         // 设置 vuex 用户信息
-        await dispatch('d2admin/user/set', {
-          name: 'FairyEver'
-        }, { root: true })
+        await dispatch('d2admin/user/set', data, { root: true })
         // 用户登录后从持久化数据加载一系列的设置
         await dispatch('load')
         // 显示提示信息
