@@ -45,7 +45,7 @@
         } catch (error) { console.log(error) }
       }
       if (isDirectory) {
-        scan(filePath)
+        await scan(filePath)
       }
     }
   }
