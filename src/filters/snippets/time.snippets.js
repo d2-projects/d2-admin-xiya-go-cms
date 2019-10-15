@@ -13,6 +13,8 @@ dayjs.extend(LocalizedFormat)
 dayjs.extend(relativeTime)
 const now = dayjs()
 
+// https://github.com/iamkun/dayjs/blob/dev/docs/zh-cn/API-reference.md#显示
+
 exports.default = function () {
 	const formatSettings = [
 		'HH:mm',
