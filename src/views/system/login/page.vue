@@ -61,7 +61,7 @@
               {{ $buildTime | timeFormat('YYYY年M月D日 dddd Ah点mm分') }}
               <d2-time-relative :value="$buildTime"/>
             </a>
-            <el-divider direction="vertical"/> 
+            <el-divider direction="vertical"/>
             <d2-api-base-url-controller>
               切换环境
             </d2-api-base-url-controller>

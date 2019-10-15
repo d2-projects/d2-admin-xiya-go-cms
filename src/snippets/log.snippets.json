@@ -1,0 +1,20 @@
+{
+  "log": {
+		"scope": "javascript,typescript,vue,vue-html",
+		"prefix": "log",
+		"body": [
+			"console.log(${1:true})"
+		],
+		"description": "D2Admin 内置代码片段\n\n控制台输出日志"
+	},
+	"log with title": {
+		"scope": "javascript,typescript,vue,vue-html",
+		"prefix": "log group",
+		"body": [
+			"console.group('${1:group name}')",
+			"console.log(${2:true})",
+			"console.groupEnd()"
+		],
+		"description": "D2Admin 内置代码片段\n\n控制台输出日志组"
+	}
+}
