@@ -1,0 +1,10 @@
+{
+  "utils": {
+		"scope": "javascript,typescript,vue,vue-html",
+		"prefix": "utils",
+		"body": [
+			"import utils from '@/utils'"
+		],
+		"description": "D2Admin 内置工具包\n\n导入工具包\n\n文档 https://fairyever.com/d2-admin/doc/zh/sys-util/"
+	}
+}
