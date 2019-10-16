@@ -1,0 +1,18 @@
+{
+  "d2-pagination": {
+		"scope": "vue,vue-html",
+		"prefix": "component d2-pagination",
+		"body": [
+			"<d2-pagination v-bind=\"${1:pagination}\" @change=\"${2:onPaginationChange}\"/>"
+		],
+		"description": "# D2Admin 内置组件\n# 分页封装 <d2-pagination>\n# 参考 https://element.eleme.cn/#/zh-CN/component/pagination"
+	},
+	"d2-pagination footer": {
+		"scope": "vue,vue-html",
+		"prefix": "component d2-pagination footer",
+		"body": [
+			"<d2-pagination slot=\"footer\" v-bind=\"${1:pagination}\" @change=\"${2:onPaginationChange}\"/>"
+		],
+		"description": "# D2Admin 内置组件\n# 分页封装 <d2-pagination> footer 位置\n# 参考 https://element.eleme.cn/#/zh-CN/component/pagination"
+	}
+}
