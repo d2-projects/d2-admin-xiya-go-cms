@@ -77,6 +77,8 @@
     const dirExists = require('./dirExists')    
     await dirExists(resolve('../.vscode'))
     await fs.writeFileSync(path.join(resolve('../.vscode'), 'd2.code-snippets'), JSON.stringify(data, null, 2))
+    let count = Object.keys(data).length
+    console.log(`[ snippets ] snippets x ${count}`)
   }
 
   async function rebuild () {
