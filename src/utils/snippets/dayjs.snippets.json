@@ -1,0 +1,10 @@
+{
+  "utils dayjs": {
+		"scope": "javascript,typescript,vue,vue-html",
+		"prefix": "utils dayjs",
+		"body": [
+			"utils.dayjs"
+		],
+		"description": "D2Admin 内置工具包\n\nutils.dayjs\n\n同 https://github.com/iamkun/dayjs\n\n文档 https://github.com/iamkun/dayjs/blob/dev/docs/zh-cn/API-reference.md"
+	}
+}
