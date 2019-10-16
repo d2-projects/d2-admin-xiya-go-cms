@@ -64,9 +64,7 @@ module.exports = {
       )
       // TRAVIS 构建 vue-loader 添加 filename
       .when(process.env.VUE_APP_SCOURCE_LINK === 'TRUE',
-        VueFilenameInjector(config, {
-          propName: process.env.VUE_APP_SOURCE_VIEWER_PROP_NAME
-        })
+        VueFilenameInjector(config)
       )
     // markdown
     config.module

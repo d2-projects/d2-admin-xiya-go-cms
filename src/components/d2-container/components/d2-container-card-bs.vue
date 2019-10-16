@@ -5,7 +5,11 @@
     </div>
     <div class="d2-container-card-bs__body" ref="wrapper">
       <div class="d2-container-card-bs__body-wrapper-inner">
-        <div class="d2-container-card-bs__body-card">
+        <div
+          class="d2-container-card-bs__body-card"
+          :class="{
+            'd2-container-card-bs__body-card__spacious': spacious
+          }">
           <slot/>
         </div>
       </div>

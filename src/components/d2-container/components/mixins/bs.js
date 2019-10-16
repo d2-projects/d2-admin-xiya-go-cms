@@ -6,6 +6,12 @@ export default {
       type: Object,
       required: false,
       default: () => ({})
+    },
+    // 更大的空间
+    spacious: {
+      type: Boolean,
+      required: false,
+      default: false
     }
   },
   data () {

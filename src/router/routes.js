@@ -1,6 +1,7 @@
 import layoutHeaderAside from '@/layout/header-aside'
-
 import utils from '@/utils'
+import demo from './modules/demo'
+import management from './modules/management'
 
 /**
  * 在主框架内显示
@@ -19,34 +20,6 @@ const frameIn = [
           auth: true
         },
         component: utils.import('system/index')
-      },
-      // 演示页面
-      {
-        path: 'page1',
-        name: 'page1',
-        meta: {
-          title: '页面 1',
-          auth: true
-        },
-        component: utils.import('demo/page1')
-      },
-      {
-        path: 'page2',
-        name: 'page2',
-        meta: {
-          title: '页面 2',
-          auth: true
-        },
-        component: utils.import('demo/page2')
-      },
-      {
-        path: 'page3',
-        name: 'page3',
-        meta: {
-          title: '页面 3',
-          auth: true
-        },
-        component: utils.import('demo/page3')
       },
       // 系统 前端日志
       {
@@ -71,7 +44,11 @@ const frameIn = [
         name: 'redirect',
         hidden: true,
         component: utils.import('system/function/redirect')
-      }
+      },
+      // 演示
+      ...demo,
+      // 系统管理
+      ...management
     ]
   }
 ]

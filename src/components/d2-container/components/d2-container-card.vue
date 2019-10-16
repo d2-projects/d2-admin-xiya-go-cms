@@ -4,7 +4,11 @@
       <slot name="header"/>
     </div>
     <div class="d2-container-card__body" ref="body">
-      <div class="d2-container-card__body-card">
+      <div
+        class="d2-container-card__body-card"
+        :class="{
+          'd2-container-card__body-card__spacious': spacious
+        }">
         <slot/>
       </div>
     </div>

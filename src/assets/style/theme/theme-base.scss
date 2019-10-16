@@ -293,6 +293,9 @@
                 padding: 20px 20px;
                 overflow: auto;
                 position: relative;
+                &.d2-container-full__body__spacious {
+                  padding: 0px;
+                }
               }
               .d2-container-full__footer {
                 padding: 20px;
@@ -318,6 +321,9 @@
                 .d2-container-full-bs__body-wrapper-inner {
                   padding: 20px;
                   position: relative;
+                  &.d2-container-full-bs__body-wrapper-inner__spacious {
+                    padding: 0px;
+                  }
                 }
               }
               .d2-container-full-bs__footer {
@@ -398,6 +404,9 @@
                   padding: 20px;
                   border-bottom-left-radius: 4px;
                   border-bottom-right-radius: 4px;
+                  &.d2-container-card__body-card__spacious {
+                    padding: 0px;
+                  }
                 }
               }
               .d2-container-card__footer {
@@ -431,6 +440,9 @@
                   padding: 20px;
                   border-bottom-left-radius: 4px;
                   border-bottom-right-radius: 4px;
+                  &.d2-container-card-bs__body-card__spacious {
+                    padding: 0px;
+                  }
                 }
               }
               .d2-container-card-bs__footer {

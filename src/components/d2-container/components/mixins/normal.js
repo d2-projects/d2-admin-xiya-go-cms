@@ -20,6 +20,12 @@ export default {
       type: Number,
       required: false,
       default: 10
+    },
+    // 更大的空间
+    spacious: {
+      type: Boolean,
+      required: false,
+      default: false
     }
   },
   data () {
