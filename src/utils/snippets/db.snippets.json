@@ -1,0 +1,42 @@
+{
+  "utils db dbSet": {
+		"scope": "javascript,typescript,vue,vue-html",
+		"prefix": "utils db dbSet",
+		"body": [
+			"utils.db.dbSet({",
+      "  dbName: '${1:sys or database}',",
+      "  path: '${2:path like module.key}',",
+      "  value: ${3:'any data'},",
+      "  user: ${4:true}",
+      "})"
+		],
+		"description": "# D2Admin 内置工具包 | utils.db\n# 持久化数据\n# 文档 https://fairyever.com/d2-admin/doc/zh/sys-db/"
+	},
+	"utils db dbGet": {
+		"scope": "javascript,typescript,vue,vue-html",
+		"prefix": "utils db dbGet",
+		"body": [
+			"utils.db.dbGet({",
+      "  dbName: '${1:sys or database}',",
+      "  path: '${2:path like module.key}',",
+      "  defaultValue: ${3:'any data'},",
+      "  user: ${4:true}",
+      "})"
+		],
+		"description": "# D2Admin 内置工具包 | utils.db\n# 获得持久化数据\n# 文档 https://fairyever.com/d2-admin/doc/zh/sys-db/"
+	},
+	"utils db database": {
+		"scope": "javascript,typescript,vue,vue-html",
+		"prefix": "utils db database",
+		"body": [
+			"utils.db.database({",
+      "  dbName: '${1:sys or database}',",
+			"  path: '${2:path like module.key}',",
+      "  user: ${3:true},",
+			"  validator: ${4:() => true},",
+      "  defaultValue: ${5:'any data'},",
+      "})"
+		],
+		"description": "# D2Admin 内置工具包 | utils.db\n# 获得指定位置的存储实例\n# 文档 https://fairyever.com/d2-admin/doc/zh/sys-db/"
+	}
+}

@@ -7,6 +7,6 @@
 			"  ${1:content}",
 			"</d2-tencent-captcha>"
 		],
-		"description": "D2Admin 内置组件\n\n腾讯防水墙验证码触发器 <d2-tencent-captcha>\n\n参考 https://007.qq.com"
+		"description": "# D2Admin 内置组件\n# 腾讯防水墙验证码触发器 <d2-tencent-captcha>\n# 参考 https://007.qq.com"
 	}
 }

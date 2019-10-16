@@ -5,6 +5,6 @@
 		"body": [
 			"import utils from '@/utils'"
 		],
-		"description": "D2Admin 内置工具包\n\n导入工具包\n\n文档 https://fairyever.com/d2-admin/doc/zh/sys-util/"
+		"description": "# D2Admin 内置工具包 | 导入工具包\n# 文档 https://fairyever.com/d2-admin/doc/zh/sys-util/"
 	}
 }

@@ -22,7 +22,7 @@ db
  * @param {Object} payload defaultValue {*} 初始化默认值
  * @returns {String} 可以直接使用的路径
  */
-export function pathInit ({
+function pathInit ({
   dbName = 'database',
   path = '',
   user = true,

@@ -5,7 +5,7 @@
 		"body": [
 			"utils.cookies.set('${1:name}', ${2:'value'})"
 		],
-		"description": "D2Admin 内置工具包\n\nutils.cookies\n\n设置 cookie\n\n文档 https://fairyever.com/d2-admin/doc/zh/sys-util/#util-cookies-set"
+		"description": "# D2Admin 内置工具包 | utils.cookies\n# 设置 cookie\n# 文档 https://fairyever.com/d2-admin/doc/zh/sys-util/#util-cookies-set"
 	},
 	"utils cookies get": {
 		"scope": "javascript,typescript,vue,vue-html",
@@ -13,7 +13,7 @@
 		"body": [
 			"utils.cookies.get('${1:name}')"
 		],
-		"description": "D2Admin 内置工具包\n\nutils.cookies\n\n获取 cookie\n\n文档 https://fairyever.com/d2-admin/doc/zh/sys-util/#util-cookies-get"
+		"description": "# D2Admin 内置工具包 | utils.cookies\n# 获取 cookie\n# 文档 https://fairyever.com/d2-admin/doc/zh/sys-util/#util-cookies-get"
 	},
 	"utils cookies getAll": {
 		"scope": "javascript,typescript,vue,vue-html",
@@ -21,7 +21,7 @@
 		"body": [
 			"utils.cookies.getAll()"
 		],
-		"description": "D2Admin 内置工具包\n\nutils.cookies\n\n获取全部 cookie\n\n文档 https://fairyever.com/d2-admin/doc/zh/sys-util/#util-cookies-getall"
+		"description": "# D2Admin 内置工具包 | utils.cookies\n# 获取全部 cookie\n# 文档 https://fairyever.com/d2-admin/doc/zh/sys-util/#util-cookies-getall"
 	},
 	"utils cookies remove": {
 		"scope": "javascript,typescript,vue,vue-html",
@@ -29,6 +29,6 @@
 		"body": [
 			"utils.cookies.remove('${1:name}')"
 		],
-		"description": "D2Admin 内置工具包\n\nutils.cookies\n\n删除 cookie\n\n文档 https://fairyever.com/d2-admin/doc/zh/sys-util/#util-cookies-remove"
+		"description": "# D2Admin 内置工具包 | utils.cookies\n# 删除 cookie\n# 文档 https://fairyever.com/d2-admin/doc/zh/sys-util/#util-cookies-remove"
 	}
 }

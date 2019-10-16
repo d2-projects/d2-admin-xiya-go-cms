@@ -43,7 +43,7 @@ export function colorful (textArr) {
 /**
  * @description 打印 default 样式的文字
  */
-export function defaultStyle (text) {
+export function print (text) {
   colorful([{ text }])
 }
 

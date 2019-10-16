@@ -5,6 +5,6 @@
 		"body": [
 			"utils.dayjs"
 		],
-		"description": "D2Admin 内置工具包\n\nutils.dayjs\n\n同 https://github.com/iamkun/dayjs\n\n文档 https://github.com/iamkun/dayjs/blob/dev/docs/zh-cn/API-reference.md"
+		"description": "# D2Admin 内置工具包 | utils.dayjs\n# 同 https://github.com/iamkun/dayjs\n# 文档 https://github.com/iamkun/dayjs/blob/dev/docs/zh-cn/API-reference.md"
 	}
 }

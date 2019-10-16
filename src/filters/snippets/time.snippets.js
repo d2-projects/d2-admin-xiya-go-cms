@@ -35,9 +35,9 @@ exports.default = function () {
 			prefix: `filter timeFormat ${setting}`,
 			body: [ body ],
 			description: [
-				'D2Admin 内置 Vue 过滤器',
+				'# D2Admin 内置 Vue 过滤器',
 				`渲染输出: ${now.format(setting)}`,
-			].join('\n\n')
+			].join('\n# ')
 		}
 	})
 	return result

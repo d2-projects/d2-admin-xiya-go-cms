@@ -1,0 +1,60 @@
+{
+  "utils log capsule": {
+		"scope": "javascript,typescript,vue,vue-html",
+		"prefix": "utils log capsule",
+		"body": [
+			"utils.log.capsule('${1:title}', '${2:info}', '${3:default|primary|success|warning|danger}')"
+		],
+		"description": "# D2Admin 内置工具包 | utils.log\n# 打印一个 [ title | text ] 样式的信息"
+	},
+	"utils log colorful": {
+		"scope": "javascript,typescript,vue,vue-html",
+		"prefix": "utils log colorful",
+		"body": [
+			"utils.log.colorful([",
+			"  { text: '${1:text}', type: '${2:default|primary|success|warning|danger}' }",
+			"])"
+		],
+		"description": "# D2Admin 内置工具包 | utils.log\n# 打印彩色文字"
+	},
+	"utils log print": {
+		"scope": "javascript,typescript,vue,vue-html",
+		"prefix": "utils log print",
+		"body": [
+			"utils.log.print('${1:text}')"
+		],
+		"description": "# D2Admin 内置工具包 | utils.log\n# 打印 default 样式的文字"
+	},
+	"utils log primary": {
+		"scope": "javascript,typescript,vue,vue-html",
+		"prefix": "utils log primary",
+		"body": [
+			"utils.log.primary('${1:text}')"
+		],
+		"description": "# D2Admin 内置工具包 | utils.log\n# 打印 primary 样式的文字"
+	},
+	"utils log success": {
+		"scope": "javascript,typescript,vue,vue-html",
+		"prefix": "utils log success",
+		"body": [
+			"utils.log.success('${1:text}')"
+		],
+		"description": "# D2Admin 内置工具包 | utils.log\n# 打印 success 样式的文字"
+	},
+	"utils log warning": {
+		"scope": "javascript,typescript,vue,vue-html",
+		"prefix": "utils log warning",
+		"body": [
+			"utils.log.warning('${1:text}')"
+		],
+		"description": "# D2Admin 内置工具包 | utils.log\n# 打印 warning 样式的文字"
+	},
+	"utils log danger": {
+		"scope": "javascript,typescript,vue,vue-html",
+		"prefix": "utils log danger",
+		"body": [
+			"utils.log.danger('${1:text}')"
+		],
+		"description": "# D2Admin 内置工具包 | utils.log\n# 打印 danger 样式的文字"
+	}
+}

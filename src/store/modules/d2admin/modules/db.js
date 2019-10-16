@@ -47,7 +47,7 @@ export default context => ({
     database (context, {
       user = false
     } = {}) {
-      return utils.db.getDatabase({
+      return utils.db.database({
         user,
         defaultValue: {}
       })
@@ -60,7 +60,7 @@ export default context => ({
     databaseClear (context, {
       user = false
     } = {}) {
-      return utils.db.getDatabase({
+      return utils.db.database({
         user,
         validator: () => false,
         defaultValue: {}
@@ -76,7 +76,7 @@ export default context => ({
       basis = 'fullPath',
       user = false
     } = {}) {
-      return utils.db.getDatabase({
+      return utils.db.database({
         path: `$page.${router.app.$route[basis]}`,
         user,
         defaultValue: {}
@@ -92,7 +92,7 @@ export default context => ({
       basis = 'fullPath',
       user = false
     } = {}) {
-      return utils.db.getDatabase({
+      return utils.db.database({
         path: `$page.${router.app.$route[basis]}`,
         user,
         validator: () => false,
@@ -111,7 +111,7 @@ export default context => ({
       basis = 'fullPath',
       user = false
     }) {
-      return utils.db.getDatabase({
+      return utils.db.database({
         path: `$page.${router.app.$route[basis]}.$data`,
         user,
         validator: () => false,
@@ -146,7 +146,7 @@ export default context => ({
       basis = 'fullPath',
       user = false
     }) {
-      return utils.db.getDatabase({
+      return utils.db.database({
         path: `$page.${router.app.$route[basis]}.$data`,
         user,
         validator: () => false,

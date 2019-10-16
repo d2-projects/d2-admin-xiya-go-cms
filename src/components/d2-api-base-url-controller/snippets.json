@@ -7,6 +7,6 @@
 			"  ${1:content}",
 			"</d2-api-base-url-controller>"
 		],
-		"description": "D2Admin 内置组件\n\n接口地址切换器 <d2-api-base-url-controller>"
+		"description": "# D2Admin 内置组件\n# 接口地址切换器 <d2-api-base-url-controller>"
 	}
 }
