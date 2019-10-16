@@ -57,8 +57,7 @@
           </p>
           <p>
             <a href="https://www.travis-ci.org/d2-projects/d2-admin-cms-go" target="_blank">
-              构建于 
-              {{ $buildTime | timeFormat('YYYY年M月D日 dddd Ah点mm分') }}
+              构建于 {{ $buildTime | timeFormat('YYYY年M月D日 dddd Ah点mm分') }}
               <d2-time-relative :value="$buildTime"/>
             </a>
             <el-divider direction="vertical"/>

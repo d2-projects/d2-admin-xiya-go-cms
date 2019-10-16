@@ -3,7 +3,6 @@ import axios from 'axios'
 import qs from 'qs'
 import { Message, MessageBox } from 'element-ui'
 import utils from '@/utils'
-import router from '@/router'
 
 // 记录和显示错误
 function errorLog (error) {

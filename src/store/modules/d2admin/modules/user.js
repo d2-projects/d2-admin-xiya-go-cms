@@ -12,7 +12,7 @@ export default context => ({
         'nickname',
         'userName'
       ], '')
-    },
+    }
   },
   actions: {
     /**

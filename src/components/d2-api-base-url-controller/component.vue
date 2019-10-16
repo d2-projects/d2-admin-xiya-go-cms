@@ -95,7 +95,7 @@
 </template>
 
 <script>
-import { mapState, mapGetters, mapActions } from 'vuex';
+import { mapState, mapGetters, mapActions } from 'vuex'
 export default {
   name: 'd2-api-base-url-controller',
   data () {

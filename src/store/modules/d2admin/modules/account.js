@@ -95,7 +95,7 @@ export default context => ({
         router.push({
           name: 'login',
           query: {
-            ... redirect ? { redirect } : {}
+            ...redirect ? { redirect } : {}
           }
         })
       }
