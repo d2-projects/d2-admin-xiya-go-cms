@@ -9,7 +9,6 @@ export default {
   render (createElement) {
     return createElement('div', {
       style: {
-        margin: '0 5px',
         maxWidth: this.width
       },
       // 普通的 HTML 特性

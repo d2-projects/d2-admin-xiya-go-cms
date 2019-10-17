@@ -18,6 +18,10 @@
   box-shadow: none !important;
 }
 
+.el-drawer__body {
+  padding: 20px;
+}
+
 .is-spacious {
   .el-table::before {
     background-color: #FFF;

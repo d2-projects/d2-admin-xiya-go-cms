@@ -1,0 +1,12 @@
+{
+  "d2-export-table": {
+		"scope": "vue,vue-html",
+		"prefix": "component d2-export-table",
+		"body": [
+			"<d2-export-table>",
+			"  ${1:content}",
+			"</d2-export-table>"
+		],
+		"description": "# D2Admin 内置组件\n# 表格数据导出 <d2-export-table>"
+	}
+}
