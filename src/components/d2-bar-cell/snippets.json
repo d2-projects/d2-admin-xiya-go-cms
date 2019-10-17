@@ -1,0 +1,12 @@
+{
+  "d2-bar-cell": {
+		"scope": "vue,vue-html",
+		"prefix": "component d2-bar-cell",
+		"body": [
+			"<d2-bar-cell>",
+			"  ${1:content}",
+			"</d2-bar-cell>"
+		],
+		"description": "# D2Admin 内置组件\n# 工具栏组件 容器块 <d2-bar-cell>"
+	}
+}

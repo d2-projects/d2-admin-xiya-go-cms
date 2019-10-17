@@ -1,0 +1,28 @@
+{
+  "d2-bar": {
+		"scope": "vue,vue-html",
+		"prefix": "component d2-bar",
+		"body": [
+			"<d2-bar>",
+			"  ${1:content}",
+			"</d2-bar>"
+		],
+		"description": "# D2Admin 内置组件\n# 工具栏组件 <d2-bar>"
+	},
+	"d2-bar + cell + space": {
+		"scope": "vue,vue-html",
+		"prefix": "component d2-bar + cell + space",
+		"body": [
+			"<d2-bar>",
+			"  <d2-bar-cell>",
+			"    content",
+			"  </d2-bar-cell>",
+			"  <d2-bar-space/>",
+			"  <d2-bar-cell>",
+			"    content",
+			"  </d2-bar-cell>",
+			"</d2-bar>"
+		],
+		"description": "# D2Admin 内置组件\n# 工具栏组件套 <d2-bar>"
+	}
+}

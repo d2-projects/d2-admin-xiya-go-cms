@@ -1,0 +1,10 @@
+{
+  "d2-bar-space": {
+		"scope": "vue,vue-html",
+		"prefix": "component d2-bar-space",
+		"body": [
+			"<d2-bar-space/>"
+		],
+		"description": "# D2Admin 内置组件\n# 工具栏组件 间距块 <d2-bar-space>"
+	}
+}
