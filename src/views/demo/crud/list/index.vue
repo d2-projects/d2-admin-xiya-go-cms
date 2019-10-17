@@ -30,11 +30,7 @@
         </d2-export-table>
       </d2-bar-cell>
     </d2-bar>
-    <el-table :data="table.data" height="100%" size="mini" stripe>
-      <el-table-column prop="uuid" label="uuid" width="60"></el-table-column>
-      <el-table-column prop="name" label="姓名" width="100"></el-table-column>
-      <el-table-column prop="address" label="地址"></el-table-column>
-    </el-table>
+    <d2-table v-bind="table"/>
     <d2-pagination slot="footer" v-bind="pagination" @change="onPaginationChange"/>
   </d2-container>
 </template>
@@ -62,7 +58,28 @@ export default {
         total: 10000
       },
       table: {
-        data: []
+        data: [],
+        columns: [
+          {
+            prop: 'uuid',
+            label: 'UUID'
+          },
+          {
+            prop: 'name',
+            label: '姓名'
+          },
+          {
+            prop: 'address',
+            label: '地址',
+            render: (h, { row, column, index }) => {
+              return h('span', {
+                style: {
+                  border: '1px solid red'
+                }
+              }, row.address)
+            }
+          }
+        ]
       }
     }
   },

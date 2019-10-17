@@ -12,8 +12,8 @@ export default ({ request }) => ({
       url: '/api/captcha/check',
       method: 'post',
       data: {
-        randstr: randstr,
-        ticket: ticket
+        randstr,
+        ticket
       }
     })
   }

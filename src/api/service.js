@@ -1,6 +1,5 @@
 import store from '@/store'
 import axios from 'axios'
-import qs from 'qs'
 import { Message, MessageBox } from 'element-ui'
 import utils from '@/utils'
 
@@ -81,15 +80,14 @@ service.interceptors.response.use(
 )
 
 export function request (config) {
-  let headers = {}
   const token = utils.cookies.get('token')
-  if (token) headers['Authorization'] = token
-  headers['Content-Type'] = 'application/x-www-form-urlencoded'
-  return service({
+  let configDefault = {
+    headers: {
+      'Authorization': token,
+      'Content-Type': 'application/json'
+    },
     timeout: 5000,
-    baseURL: store.state.d2admin.api.base,
-    headers,
-    ...config,
-    data: qs.stringify(config.data)
-  })
+    baseURL: store.state.d2admin.api.base
+  }
+  return service(Object.assign(configDefault, config))
 }
