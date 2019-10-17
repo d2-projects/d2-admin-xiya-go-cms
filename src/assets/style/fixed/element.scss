@@ -17,3 +17,12 @@
 .el-tabs__item:focus.is-active.is-focus:not(:active) {
   box-shadow: none !important;
 }
+
+.d2-container-full__body__spacious,
+.d2-container-full-bs__body-wrapper-inner__spacious,
+.d2-container-card__body-card__spacious,
+.d2-container-card-bs__body-card__spacious {
+  .el-table::before {
+    background-color: #FFF;
+  }
+}

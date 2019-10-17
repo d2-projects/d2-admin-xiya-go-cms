@@ -17,6 +17,10 @@
         </d2-bar-cell>
         <d2-bar-space/>
         <d2-bar-cell>
+          <el-button size="mini">Button</el-button>
+        </d2-bar-cell>
+        <d2-bar-space/>
+        <d2-bar-cell>
           <el-input size="mini" style="width: 300px;"></el-input>
         </d2-bar-cell>
       </d2-bar>
