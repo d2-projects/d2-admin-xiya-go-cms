@@ -7,7 +7,7 @@
       <div
         class="d2-container-full-bs__body-wrapper-inner"
         :class="{
-          'd2-container-full-bs__body-wrapper-inner__spacious': spacious
+          'is-spacious': spacious
         }">
         <slot/>
       </div>

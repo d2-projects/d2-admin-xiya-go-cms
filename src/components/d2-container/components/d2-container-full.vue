@@ -6,7 +6,7 @@
     <div
       class="d2-container-full__body"
       :class="{
-        'd2-container-full__body__spacious': spacious
+        'is-spacious': spacious
       }"
       ref="body">
       <slot/>

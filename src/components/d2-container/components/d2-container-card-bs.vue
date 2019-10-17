@@ -8,7 +8,7 @@
         <div
           class="d2-container-card-bs__body-card"
           :class="{
-            'd2-container-card-bs__body-card__spacious': spacious
+            'is-spacious': spacious
           }">
           <slot/>
         </div>
