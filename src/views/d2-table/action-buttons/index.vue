@@ -1,50 +1,27 @@
 <template>
-  <d2-container spacious>
+  <d2-container>
     <d2-table v-bind="table"/>
   </d2-container>
 </template>
 
 <script>
-import Mock from 'mockjs'
-
-// 模拟数据接口
-function GET_TABLE_DATA () {
-  return new Promise(resolve => {
-    setTimeout(() => {
-      const data = Mock.mock({
-          'list|100': [
-            {
-              'name': '@cname',
-              'email': '@email',
-              'ip': '@ip',
-              'county': '@county(true)'
-            }
-          ]
-      })
-      resolve(data.list)
-    }, 300)
-  })
-}
-
+import mixin from '../mixin'
 export default {
+  mixins: [
+    mixin
+  ],
   data () {
     return {
       table: {
-        height: '100%',
-        stripe: true,
-        border: true,
         data: [],
         columns: [
           {
             prop: 'name',
-            label: '姓名',
-            width: '80',
-            fixed: 'left'
+            label: '姓名'
           },
           {
             prop: 'email',
-            label: '邮箱',
-            width: '200'
+            label: '邮箱'
           },
           {
             prop: 'ip',

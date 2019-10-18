@@ -8,9 +8,20 @@ export default {
     }
   },
   render (createElement) {
+    const propsDefault = {
+      stripe: true,
+      height: '100%'
+    }
     return createElement('el-table', {
-      props: this.$attrs,
-      on: this.$listeners
+      props: Object.assign(propsDefault, this.$attrs),
+      on: this.$listeners,
+      directives: [
+        // v-loading
+        {
+          name: 'loading',
+          value: this.$attrs.loading || false
+        }
+      ]
     }, this.columns.map(column => {
       const scopedSlots = column.render ? {
         scopedSlots: {
