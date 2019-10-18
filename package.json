@@ -1,6 +1,6 @@
 {
   "name": "d2-admin-cms-go",
-  "version": "1.7.2",
+  "version": "0.0.1",
   "scripts": {
     "serve": "vue-cli-service serve --open",
     "start": "npm run serve",
@@ -23,6 +23,7 @@
     "js-cookie": "^2.2.0",
     "lodash": "^4.17.11",
     "lowdb": "^1.0.0",
+    "mockjs": "^1.0.1-beta3",
     "nprogress": "^0.2.0",
     "qs": "^6.9.0",
     "screenfull": "^4.2.0",

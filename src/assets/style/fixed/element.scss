@@ -26,4 +26,7 @@
   .el-table::before {
     background-color: #FFF;
   }
+  .el-table--border {
+    border: none;
+  }
 }
