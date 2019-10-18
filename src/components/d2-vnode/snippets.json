@@ -1,0 +1,10 @@
+{
+  "d2-vnode": {
+		"scope": "vue,vue-html",
+		"prefix": "component d2-vnode",
+		"body": [
+			"<d2-vnode :render=\"${1:h => h()}\"/>"
+		],
+		"description": "# D2Admin 内置组件\n# VNode 渲染 <d2-vnode>\n# 参考 https://cn.vuejs.org/v2/guide/render-function.html"
+	}
+}
