@@ -9,7 +9,6 @@ function GET_TABLE_DATA () {
           {
             'name': '@cname',
             'email': '@email',
-            'ip': '@ip',
             'county': '@county(true)'
           }
         ]

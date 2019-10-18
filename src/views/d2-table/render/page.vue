@@ -26,10 +26,6 @@ export default {
             label: '邮箱'
           },
           {
-            prop: 'ip',
-            label: '上次登录 IP'
-          },
-          {
             prop: 'county',
             label: '地区',
             render: (h, { row, column, index }) => h('el-tag', row[column.property])

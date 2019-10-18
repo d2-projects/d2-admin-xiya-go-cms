@@ -26,10 +26,6 @@ export default {
             label: '邮箱'
           },
           {
-            prop: 'ip',
-            label: 'IP 地址'
-          },
-          {
             prop: 'county',
             label: '地区'
           }
