@@ -67,7 +67,7 @@
           } = file[name]
           data[name] = {
             scope,
-            prefix: `d2 ${prefix}`,
+            prefix: `dd ${prefix}`,
             body,
             description: `${description}\n\n`
           }

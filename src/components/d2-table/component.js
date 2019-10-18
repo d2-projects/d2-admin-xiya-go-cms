@@ -9,24 +9,25 @@ export default {
   },
   render (createElement) {
     return createElement('el-table', {
-      props: {
-        ...this.$attrs
-      }
+      props: this.$attrs,
+      on: this.$listeners
     }, this.columns.map(column => {
+      const scopedSlots = column.render ? {
+        scopedSlots: {
+          default: scope => column.render(createElement, {
+            row: scope.row,
+            column: scope.column,
+            index: scope.$index
+          })
+        }
+      } : null
       return createElement('el-table-column', {
-        props: {
-          ...column
-        },
-        ...column.render ? {
-          scopedSlots: {
-            default: scope => column.render(createElement, {
-              row: scope.row,
-              column: scope.column,
-              index: scope.$index
-            })
-          }
-        } : {}
+        props: column,
+        ...scopedSlots || {}
       })
     }))
+  },
+  methods: {
+    // https://element.eleme.cn/#/zh-CN/component/table#table-methods
   }
 }

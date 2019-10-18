@@ -71,17 +71,7 @@ export default {
           {
             prop: 'address',
             label: '地址',
-            render: (h, { row, column, index }) => {
-              return h('el-tag', {
-                on: {
-                  click () {
-                    console.group('address')
-                    console.log(row)
-                    console.groupEnd()
-                  }
-                }
-              }, `${row[column.property]} | ${column.property} | ${index}`)
-            }
+            render: (h, { row, column, index }) => h('el-tag', `${row[column.property]} | ${column.property} | ${index}`)
           }
         ]
       }

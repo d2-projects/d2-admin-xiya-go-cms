@@ -1,0 +1,41 @@
+{
+  "d2-table": {
+		"scope": "vue,vue-html",
+		"prefix": "component d2-table",
+		"body": [
+			"<d2-table v-bind=\"table\"/>"
+		],
+		"description": "# D2Admin 内置组件\n# 配置式表格 <d2-table>"
+	},
+	"d2-table data": {
+		"scope": "javascript,typescript",
+		"prefix": "component d2-table data",
+		"body": [
+			"// table 属性基于 el-table 属性",
+			"// https://element.eleme.cn/#/zh-CN/component/table#table-attributes",
+			"table: {",
+			"  data: [],",
+			"  columns: [",
+			"    // columns 项目属性基于 el-table-column 属性",
+			"    // https://element.eleme.cn/#/zh-CN/component/table#table-column-attributes",
+			"    {",
+			"      prop: 'id',",
+			"      label: 'ID'",
+			"    },",
+			"    {",
+      "      prop: 'id',",
+      "      label: 'ID',",
+      "      render: (h, { row, column, index }) => h('span', {",
+      "        style: {",
+      "          color: 'red'",
+      "        }",
+      "      }, row[column.property])",
+      "    }",
+      "  ]",
+      "}"
+		],
+		"description": "# D2Admin 内置组件\n# 配置式表格 数据模板 <d2-table>"
+	}
+}
+
+
