@@ -18,5 +18,4 @@ files.keys().forEach(key => {
 })
 
 export const menus = menusData
-
 export default routes

@@ -1,19 +1,21 @@
-import utils from '@/utils'
+let menusData = []
+let routes = []
+const files = require.context('@/views/crud/', true, /page\.vue$/)
+files.keys().forEach(key => {
+  const component = files(key).default
+  menusData.push({
+    path: `/crud/${component.name}`,
+    title: component.title
+  })
+  routes.push({
+    path: `crud/${component.name}`,
+    name: `crud-${component.name}`,
+    meta: {
+      title: `crud ${component.title}`
+    },
+    component
+  })
+})
 
-const config = [
-  { name: 'list', title: '列表' }
-]
-
-export const menus = config.map(item => ({
-  path: `/crud/${item.name}`,
-  title: item.title
-}))
-
-export default config.map(item => ({
-  path: `crud/${item.name}`,
-  name: `crud-${item.name}`,
-  meta: {
-    title: `业务表格 ${item.title}`
-  },
-  component: utils.import(`crud/${item.name}`)
-}))
+export const menus = menusData
+export default routes
