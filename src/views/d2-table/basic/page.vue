@@ -7,6 +7,8 @@
 <script>
 import mixin from '../mixin'
 export default {
+  title: '基础',
+  name: 'basic',
   mixins: [
     mixin
   ],
@@ -25,12 +27,11 @@ export default {
           },
           {
             prop: 'ip',
-            label: '上次登录 IP'
+            label: 'IP 地址'
           },
           {
             prop: 'county',
-            label: '地区',
-            render: (h, { row, column, index }) => h('el-tag', row[column.property])
+            label: '地区'
           }
         ]
       }

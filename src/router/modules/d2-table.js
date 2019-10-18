@@ -1,20 +1,22 @@
-import utils from '@/utils'
+let menusData = []
+let routes = []
+const files = require.context('@/views/d2-table/', true, /page\.vue$/)
+files.keys().forEach(key => {
+  const component = files(key).default
+  menusData.push({
+    path: `/d2-table/${component.name}`,
+    title: component.title
+  })
+  routes.push({
+    path: `d2-table/${component.name}`,
+    name: `d2-table-${component.name}`,
+    meta: {
+      title: `d2-table ${component.title}`
+    },
+    component
+  })
+})
 
-const config = [
-  { name: 'base', title: '基础' },
-  { name: 'render', title: 'render 函数' }
-]
+export const menus = menusData
 
-export const menus = config.map(item => ({
-  path: `/d2-table/${item.name}`,
-  title: item.title
-}))
-
-export default config.map(item => ({
-  path: `d2-table/${item.name}`,
-  name: `d2-table-${item.name}`,
-  meta: {
-    title: `d2-table ${item.title}`
-  },
-  component: utils.import(`d2-table/${item.name}`)
-}))
+export default routes
