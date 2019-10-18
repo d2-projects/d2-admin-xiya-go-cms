@@ -1,3 +1,17 @@
+const columnRender = {
+  functional: true,
+  props: {
+    row: Object,
+    column: Object,
+    index: Number,
+    render: Function
+  },
+  render: (h, ctx) => {
+    const { row, column, index } = ctx.props
+    return ctx.props.render(h, { row, column, index })
+  }
+}
+
 export default {
   name: 'd2-table',
   props: {
@@ -19,7 +33,7 @@ export default {
         },
         ...column.render ? {
           scopedSlots: {
-            default: scope => createElement('d2-render', {
+            default: scope => createElement(columnRender, {
               props: {
                 row: scope.row,
                 column: scope.column,

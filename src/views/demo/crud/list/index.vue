@@ -72,11 +72,15 @@ export default {
             prop: 'address',
             label: '地址',
             render: (h, { row, column, index }) => {
-              return h('span', {
-                style: {
-                  border: '1px solid red'
+              return h('el-tag', {
+                on: {
+                  click () {
+                    console.group('address')
+                    console.log(row)
+                    console.groupEnd()
+                  }
                 }
-              }, row.address)
+              }, `${row[column.property]} | ${column.property} | ${index}`)
             }
           }
         ]
