@@ -170,6 +170,9 @@
           padding: 14px 12px;
           border-radius: 4px;
           margin: 0px !important;
+          &.btn-text__is-color-picker {
+            padding: 9px 8px;
+          }
         }
         .el-dropdown {
           @extend %unable-select;

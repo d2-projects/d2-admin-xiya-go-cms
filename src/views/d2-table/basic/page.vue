@@ -17,18 +17,9 @@ export default {
       table: {
         data: [],
         columns: [
-          {
-            prop: 'name',
-            label: '姓名'
-          },
-          {
-            prop: 'email',
-            label: '邮箱'
-          },
-          {
-            prop: 'county',
-            label: '地区'
-          }
+          { prop: 'name', label: '姓名' },
+          { prop: 'email', label: '邮箱' },
+          { prop: 'county', label: '地区' }
         ]
       }
     }

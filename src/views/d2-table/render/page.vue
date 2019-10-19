@@ -17,18 +17,16 @@ export default {
       table: {
         data: [],
         columns: [
-          {
-            prop: 'name',
-            label: '姓名'
-          },
-          {
-            prop: 'email',
-            label: '邮箱'
-          },
+          { prop: 'name', label: '姓名' },
+          { prop: 'email', label: '邮箱' },
           {
             prop: 'county',
             label: '地区',
-            render: (h, { row, column, index }) => h('el-tag', row[column.property])
+            render: (h, { row, column, index }) => h('el-tag', {
+              props: {
+                size: 'mini'
+              }
+            }, row[column.property])
           }
         ]
       }
