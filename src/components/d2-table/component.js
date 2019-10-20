@@ -16,7 +16,6 @@ export default {
       props: Object.assign(propsDefault, this.$attrs),
       on: this.$listeners,
       directives: [
-        // v-loading
         {
           name: 'loading',
           value: this.$attrs.loading || false
@@ -25,11 +24,7 @@ export default {
     }, this.columns.map(column => {
       const scopedSlots = column.render ? {
         scopedSlots: {
-          default: scope => column.render({
-            row: scope.row,
-            column: scope.column,
-            index: scope.$index
-          })
+          default: scope => column.render(scope)
         }
       } : null
       return createElement('el-table-column', {

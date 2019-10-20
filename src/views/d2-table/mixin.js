@@ -5,7 +5,7 @@ function GET_TABLE_DATA () {
   return new Promise(resolve => {
     setTimeout(() => {
       const data = Mock.mock({
-        'list|20': [
+        'list|50': [
           {
             'name': '@cname',
             'email': '@email',
