@@ -25,7 +25,7 @@ export default {
     }, this.columns.map(column => {
       const scopedSlots = column.render ? {
         scopedSlots: {
-          default: scope => column.render(createElement, {
+          default: scope => column.render({
             row: scope.row,
             column: scope.column,
             index: scope.$index
