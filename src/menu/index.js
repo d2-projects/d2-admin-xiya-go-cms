@@ -5,10 +5,10 @@ export default [
   { title: '表格封装', icon: 'folder-o', children: menusD2Table },
   { title: 'CRUD', icon: 'folder-o', children: menusCrud },
   {
-    title: '菜单管理',
+    title: '系统管理',
     icon: 'folder-o',
     children: [
-      { path: '/management/menu/list', title: 'file' }
+      { path: '/management/menu/list', title: '菜单管理' }
     ]
   }
 ]

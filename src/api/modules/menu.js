@@ -1,20 +1,17 @@
 export default ({ request }) => ({
   /**
    * @description 菜单管理列表
-   * @description http://yapi.xiya.vip/project/11/interface/api/115
-   * @param {Object} data {String} postCode 菜单名称
-   * @param {Object} data {String} visible 菜单状态（1显示 2隐藏）
+   * @description http://yapi.xiya.vip/project/11/interface/api/190
+   * @param {Object} data {Number} parent 父级菜单 id
    */
-  MENU_LIST ({
-    postCode = '',
-    visible = ''
+  MENU_FIND ({
+    parent
   } = {}) {
     return request({
-      url: '/api/menu/index',
+      url: '/api/menu/find_menus',
       method: 'post',
       data: {
-        post_code: postCode,
-        visible: visible
+        parent_id: parent
       }
     })
   }

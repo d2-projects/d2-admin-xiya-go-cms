@@ -1,6 +1,6 @@
 {
   "name": "d2-admin-cms-go",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "scripts": {
     "serve": "vue-cli-service serve --open",
     "start": "npm run serve",
