@@ -10,6 +10,7 @@ import d2Admin from '@/plugin/d2admin'
 // 菜单和路由设置
 import router from './router'
 import menu from '@/menu'
+import menuHeader from '@/menu/header'
 import { frameInRoutes } from '@/router/routes'
 
 // 核心插件
@@ -24,7 +25,7 @@ new Vue({
     // 处理路由 得到每一级的路由设置
     this.$store.commit('d2admin/page/init', frameInRoutes)
     // 设置顶栏菜单
-    this.$store.commit('d2admin/menu/headerSet', menu)
+    this.$store.commit('d2admin/menu/headerSet', menuHeader)
     // 设置侧边栏菜单
     this.$store.commit('d2admin/menu/asideSet', menu)
     // 初始化菜单搜索功能

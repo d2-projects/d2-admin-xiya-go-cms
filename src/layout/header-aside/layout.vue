@@ -15,7 +15,11 @@
         }"
         flex-box="0"
         flex>
-        <div class="logo-group" :style="{width: asideCollapse ? asideWidthCollapse : asideWidth}" flex-box="0">
+        <div
+          class="logo-group"
+          :style="{width: asideCollapse ? asideWidthCollapse : asideWidth}"
+          flex-box="0"
+          @click="$router.push('/')">
           <img v-if="asideCollapse" :src="`${$baseUrl}image/theme/${themeActiveSetting.name}/logo/icon-only.png`">
           <img v-else :src="`${$baseUrl}image/theme/${themeActiveSetting.name}/logo/all.png`">
         </div>

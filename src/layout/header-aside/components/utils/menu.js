@@ -4,9 +4,9 @@ export function elMenuItem (createElement, menu) {
     ...menu.icon ? [
       createElement('i', { attrs: { class: `fa fa-${menu.icon}` } })
     ] : [],
-    ...menu.icon === undefined & !menu.iconSvg ? [
-      createElement('i', { attrs: { class: 'fa fa-file-o' } })
-    ] : [],
+    // ...menu.icon === undefined & !menu.iconSvg ? [
+    //   createElement('i', { attrs: { class: 'fa fa-file-o' } })
+    // ] : [],
     ...menu.iconSvg ? [
       createElement('d2-icon-svg', { props: { name: menu.iconSvg } })
     ] : [],
@@ -20,9 +20,9 @@ export function elSubmenu (createElement, menu) {
     ...menu.icon ? [
       createElement('i', { slot: 'title', attrs: { class: `fa fa-${menu.icon}` } })
     ] : [],
-    ...menu.icon === undefined & !menu.iconSvg ? [
-      createElement('i', { slot: 'title', attrs: { class: 'fa fa-file-o' } })
-    ] : [],
+    // ...menu.icon === undefined & !menu.iconSvg ? [
+    //   createElement('i', { slot: 'title', attrs: { class: 'fa fa-file-o' } })
+    // ] : [],
     ...menu.iconSvg ? [
       createElement('d2-icon-svg', { slot: 'title', props: { name: menu.iconSvg } })
     ] : [],
