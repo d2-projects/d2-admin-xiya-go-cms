@@ -29,4 +29,7 @@
   .el-table--border {
     border: none;
   }
+  .el-table__fixed-right::before, .el-table__fixed-left::before, .el-table__fixed::before {
+    height: 0px;
+  }
 }

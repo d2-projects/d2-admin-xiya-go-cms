@@ -36,7 +36,8 @@ export default {
           {
             prop: 'menu_name',
             label: '名称',
-            width: '200px',
+            minWidth: '100px',
+            fixed: 'left',
             render: ({ row }) =>
               <el-button
                 type="text"
@@ -52,16 +53,44 @@ export default {
           {
             prop: 'url',
             label: '地址',
+            minWidth: '100px',
             render: ({ row }) => <el-tag>{ row.url }</el-tag>
           },
           {
             prop: 'menu_type',
-            label: '菜单类型'
+            label: '菜单类型',
+            minWidth: '100px'
+          },
+          {
+            prop: 'visible',
+            label: '可见',
+            minWidth: '100px'
           },
           {
             prop: 'created_at',
             label: '创建时间',
+            minWidth: '100px',
             formatter: row => utils.time.format(row.created_at)
+          },
+          {
+            prop: 'updated_at',
+            label: '更新时间',
+            minWidth: '100px',
+            formatter: row => utils.time.format(row.updated_at)
+          },
+          {
+            align: 'right',
+            minWidth: '200px',
+            fixed: 'right',
+            render: ({ row }) =>
+              <span>
+                <el-button size="mini" vOn:click={ () => this.onTableActionEdit(row) }>
+                  <d2-icon name="pencil"></d2-icon>
+                </el-button>
+                <el-button size="mini" type="danger" vOn:click={ () => this.onTableActionDelete(row) }>
+                  <d2-icon name="trash-o"></d2-icon>
+                </el-button>
+              </span>
           }
         ]
       },
@@ -98,6 +127,22 @@ export default {
       const breadcrumbIndex = this.breadcrumbs.findIndex(e => e.id === parent.id)
       this.breadcrumbs.splice(breadcrumbIndex + 1, this.breadcrumbs.length)
       this.getList(parent)
+    },
+    /**
+     * 表格操作 编辑
+     */
+    onTableActionEdit (row) {
+      console.group('onTableActionEdit')
+      console.log(row)
+      console.groupEnd()
+    },
+    /**
+     * 表格操作 删除
+     */
+    onTableActionDelete (row) {
+      console.group('onTableActionDelete')
+      console.log(row)
+      console.groupEnd()
     }
   }
 }
