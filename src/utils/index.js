@@ -2,11 +2,11 @@ import * as cookies from './modules/cookies'
 import * as db from './modules/db'
 import * as fn from './modules/fn'
 import * as log from './modules/log'
-import dayjs from './modules/dayjs'
+import * as time from './modules/time'
 
 const utils = {
   cookies,
-  dayjs,
+  time,
   db,
   fn,
   log,

@@ -54,7 +54,7 @@ const frameIn = [
         path: 'management/menu/list',
         name: 'management-menu-list',
         meta: { title: '菜单管理', auth: true },
-        component: utils.import('management/menu/list')
+        component: utils.import('management/menu')
       }
     ]
   }

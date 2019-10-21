@@ -16,15 +16,14 @@
       </d2-bar>
     </template>
     <d2-table v-bind="table"/>
-    <template slot="footer">Footer</template>
   </d2-container>
 </template>
 
 <script>
+import utils from '@/utils'
 const defaultParent = {
   id: 0,
-  name: '系统',
-  children: []
+  name: '系统'
 }
 export default {
   data () {
@@ -38,7 +37,6 @@ export default {
             prop: 'menu_name',
             label: '名称',
             width: '200px',
-            fixed: 'left',
             render: ({ row }) =>
               <el-button
                 type="text"
@@ -55,10 +53,19 @@ export default {
             prop: 'url',
             label: '地址',
             render: ({ row }) => <el-tag>{ row.url }</el-tag>
+          },
+          {
+            prop: 'menu_type',
+            label: '菜单类型'
+          },
+          {
+            prop: 'created_at',
+            label: '创建时间',
+            formatter: row => utils.time.format(row.created_at)
           }
         ]
       },
-      cache: [ defaultParent ]
+      cache: []
     }
   },
   created () {

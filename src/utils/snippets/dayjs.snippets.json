@@ -3,8 +3,8 @@
 		"scope": "javascript,typescript,vue,vue-html",
 		"prefix": "utils dayjs",
 		"body": [
-			"utils.dayjs"
+			"utils.time.dayjs"
 		],
-		"description": "# D2Admin 内置工具包 | utils.dayjs\n# 同 https://github.com/iamkun/dayjs\n# 文档 https://github.com/iamkun/dayjs/blob/dev/docs/zh-cn/API-reference.md"
+		"description": "# D2Admin 内置工具包 | utils.time.dayjs\n# 同 https://github.com/iamkun/dayjs\n# 文档 https://github.com/iamkun/dayjs/blob/dev/docs/zh-cn/API-reference.md"
 	}
 }

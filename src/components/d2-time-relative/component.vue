@@ -36,7 +36,7 @@ export default {
   },
   methods: {
     refresh () {
-      this.relativeTime = utils.dayjs(this.value).fromNow()
+      this.relativeTime = utils.time.dayjs(this.value).fromNow()
     }
   }
 }
