@@ -11,21 +11,27 @@
         </d2-bar-cell>
         <d2-bar-space/>
         <d2-bar-cell>
-          <el-button type="primary" size="mini">新建</el-button>
+          <el-button type="primary" size="mini" @click="onCreate">新建</el-button>
         </d2-bar-cell>
       </d2-bar>
     </template>
     <d2-table v-bind="table"/>
+    <form-component ref="formComponent"/>
   </d2-container>
 </template>
 
 <script>
 import utils from '@/utils'
+import formComponent from './form'
+
 const defaultParent = {
   id: 0,
   name: '系统'
 }
 export default {
+  components: {
+    formComponent
+  },
   data () {
     return {
       breadcrumbs: [],
@@ -39,14 +45,7 @@ export default {
             minWidth: '100px',
             fixed: 'left',
             render: ({ row }) =>
-              <el-button
-                type="text"
-                vOn:click={
-                  () => this.getList({
-                    id: row.id,
-                    name: row.menu_name
-                  })
-                }>
+              <el-button type="text" vOn:click={ () => this.getList({ id: row.id, name: row.menu_name }) }>
                 { row.menu_name }
               </el-button>
           },
@@ -84,10 +83,10 @@ export default {
             fixed: 'right',
             render: ({ row }) =>
               <span>
-                <el-button size="mini" vOn:click={ () => this.onTableActionEdit(row) }>
+                <el-button size="mini" vOn:click={ () => this.onEdit(row) }>
                   <d2-icon name="pencil"></d2-icon>
                 </el-button>
-                <el-button size="mini" type="danger" vOn:click={ () => this.onTableActionDelete(row) }>
+                <el-button size="mini" type="danger" vOn:click={ () => this.onDelete(row) }>
                   <d2-icon name="trash-o"></d2-icon>
                 </el-button>
               </span>
@@ -129,18 +128,31 @@ export default {
       this.getList(parent)
     },
     /**
+     * 新建
+     */
+    onCreate () {
+      this.$refs.formComponent.init({
+        data: {
+          // 设置默认的父节点为当前层
+          parent_id: this.breadcrumbs.length > 0 ? this.breadcrumbs[this.breadcrumbs.length - 1].id : 0
+        },
+        mode: 'create'
+      })
+    },
+    /**
      * 表格操作 编辑
      */
-    onTableActionEdit (row) {
-      console.group('onTableActionEdit')
-      console.log(row)
-      console.groupEnd()
+    onEdit (row) {
+      this.$refs.formComponent.init({
+        data: row,
+        mode: 'edit'
+      })
     },
     /**
      * 表格操作 删除
      */
-    onTableActionDelete (row) {
-      console.group('onTableActionDelete')
+    onDelete (row) {
+      console.group('onDelete')
       console.log(row)
       console.groupEnd()
     }
