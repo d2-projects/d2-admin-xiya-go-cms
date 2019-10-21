@@ -1,5 +1,5 @@
 <template>
-  <el-dialog v-bind="dialogComputed" @close="onDialogClose">
+  <el-drawer v-bind="drawerComputed" @close="onDialogClose">
     <el-form v-bind="form" ref="form">
       <el-form-item label="菜单名称" prop="menu_name">
         <el-input v-model="form.model.menu_name"/>
@@ -36,7 +36,7 @@
         <el-button>取消</el-button>
       </el-form-item>
     </el-form>
-  </el-dialog>
+  </el-drawer>
 </template>
 
 <script>
@@ -57,8 +57,8 @@ const formValueDefault = {
 export default {
   data () {
     return {
-      // dialog 设置 | 最后赋值的是 dialogComputed
-      dialog: {
+      // drawer 设置 | 最后赋值的是 drawerComputed
+      drawer: {
         visible: false
       },
       // 表单数据和设置
@@ -72,13 +72,13 @@ export default {
     }
   },
   computed: {
-    // dialog 设置项
-    dialogComputed () {
+    // drawer 设置项
+    drawerComputed () {
       let title = ''
       if (this.mode === 'edit') title = '菜单编辑'
       if (this.mode === 'create') title = '新建菜单'
       return {
-        visible: this.dialog.visible,
+        visible: this.drawer.visible,
         title,
         width: '400px',
         appendToBody: true,
@@ -112,13 +112,13 @@ export default {
      * 开启面板
      */
     open () {
-      this.dialog.visible = true
+      this.drawer.visible = true
     },
     /**
      * 关闭面板
      */
     close () {
-      this.dialog.visible = false
+      this.drawer.visible = false
     },
     /**
      * 触发关闭面板
