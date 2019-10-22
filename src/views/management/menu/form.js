@@ -13,6 +13,28 @@ const formValueDefault = {
 }
 
 export default {
+  data () {
+    return {
+      // dialog 设置
+      dialog: {
+        visible: false
+      },
+      // 表单数据
+      form: {},
+      // 校验规则
+      rules: {},
+      // 模式设置
+      mode: ''
+    }
+  },
+  computed: {
+    title () {
+      let title = ''
+      if (this.mode === 'edit') title = '编辑'
+      if (this.mode === 'create') title = '新建'
+      return title
+    }
+  },
   render () {
     return <el-dialog
       visible={ this.dialog.visible }
@@ -61,28 +83,6 @@ export default {
         </el-form-item>
       </el-form>
     </el-dialog>
-  },
-  data () {
-    return {
-      // dialog 设置
-      dialog: {
-        visible: false
-      },
-      // 表单数据
-      form: {},
-      // 校验规则
-      rules: {},
-      // 模式设置
-      mode: ''
-    }
-  },
-  computed: {
-    title () {
-      let title = ''
-      if (this.mode === 'edit') title = '菜单编辑'
-      if (this.mode === 'create') title = '新建菜单'
-      return title
-    }
   },
   methods: {
     /**
