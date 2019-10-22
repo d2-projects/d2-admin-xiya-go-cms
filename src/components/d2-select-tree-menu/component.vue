@@ -23,7 +23,7 @@
 
 <script>
 export default {
-  name: 'd2-tree-select-menu',
+  name: 'd2-select-tree-menu',
   props: {
     value: {
       type: Number,

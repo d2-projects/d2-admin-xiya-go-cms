@@ -1,21 +1,20 @@
 <template>
   <el-dialog
-    :visible="dialog.visible"
+    :visible.sync="dialog.visible"
     :title="title"
     :show-close="false"
     width="400px"
     destroy-on-close
-    append-to-body
-    @close="onDialogClose">
+    append-to-body>
     <el-form v-bind="form" ref="form">
       <el-form-item label="菜单名称" prop="menu_name">
         <el-input v-model="form.model.menu_name"/>
       </el-form-item>
       <el-form-item label="上级菜单" prop="parent_id">
-        <d2-tree-select-menu-dialog v-model="form.model.parent_id"/>
+        <d2-select-tree-menu-dialog v-model="form.model.parent_id"/>
       </el-form-item>
       <el-form-item label="显示排序" prop="order_num">
-        <el-input v-model="form.model.order_num"/>
+        <el-input-number :min="0" v-model="form.model.order_num"/>
       </el-form-item>
       <el-form-item label="请求地址" prop="url">
         <el-input v-model="form.model.url"/>
@@ -36,8 +35,8 @@
         <el-input v-model="form.model.remark"/>
       </el-form-item>
       <el-form-item>
-        <el-button>取消</el-button>
-        <el-button type="primary"><d2-icon name="check"/> 保存</el-button>
+        <el-button @click="onClickCancle">取消</el-button>
+        <el-button type="primary" @click="onClickOk"><d2-icon name="check"/> 保存</el-button>
       </el-form-item>
     </el-form>
   </el-dialog>
@@ -103,25 +102,19 @@ export default {
       // 设置模式
       this.mode = mode
       // 打开面板
-      this.open()
-    },
-    /**
-     * @description 开启面板
-     */
-    open () {
       this.dialog.visible = true
     },
     /**
-     * @description 关闭面板
+     * 点击取消
      */
-    close () {
+    onClickCancle () {
+      // 关闭面板
       this.dialog.visible = false
     },
     /**
-     * @description 触发关闭面板
+     * 点击确定
      */
-    onDialogClose () {
-      this.close()
+    onClickOk () {
     }
   }
 }

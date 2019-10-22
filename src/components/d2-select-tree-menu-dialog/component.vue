@@ -9,7 +9,7 @@
       destroy-on-close
       append-to-body
       @close="onDialogClose">
-      <d2-tree-select-menu
+      <d2-select-tree-menu
         v-if="dialog.visible"
         v-model="currentValue"
         ref="tree"/>
@@ -23,7 +23,7 @@
 
 <script>
 export default {
-  name: 'd2-tree-select-menu-dialog',
+  name: 'd2-select-tree-menu-dialog',
   props: {
     value: {
       type: Number,
