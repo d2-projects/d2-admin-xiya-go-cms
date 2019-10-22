@@ -78,8 +78,8 @@ export default {
             formatter: row => utils.time.format(row.updated_at)
           },
           {
-            align: 'right',
-            minWidth: '200px',
+            align: 'center',
+            minWidth: '120px',
             fixed: 'right',
             render: ({ row }) =>
               <span>
@@ -101,7 +101,7 @@ export default {
   },
   methods: {
     /**
-     * 请求列表数据
+     * @description 请求列表数据
      */
     async getList (parent = defaultParent) {
       // 设置加载状态
@@ -120,7 +120,7 @@ export default {
       this.table.loading = false
     },
     /**
-     * 面包屑项目被点击
+     * @description 面包屑项目被点击
      */
     onBreadcrumbClick (parent = defaultParent) {
       const breadcrumbIndex = this.breadcrumbs.findIndex(e => e.id === parent.id)
@@ -128,7 +128,7 @@ export default {
       this.getList(parent)
     },
     /**
-     * 新建
+     * @description 新建
      */
     onCreate () {
       this.$refs.formComponent.init({
@@ -140,7 +140,7 @@ export default {
       })
     },
     /**
-     * 表格操作 编辑
+     * @description 表格操作 编辑
      */
     onEdit (row) {
       this.$refs.formComponent.init({
@@ -149,7 +149,7 @@ export default {
       })
     },
     /**
-     * 表格操作 删除
+     * @description 表格操作 删除
      */
     onDelete (row) {
       console.group('onDelete')

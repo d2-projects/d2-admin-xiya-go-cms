@@ -87,7 +87,8 @@ export function request (config) {
       'Content-Type': 'application/json'
     },
     timeout: 5000,
-    baseURL: store.state.d2admin.api.base
+    baseURL: store.state.d2admin.api.base,
+    data: {}
   }
   return service(Object.assign(configDefault, config))
 }

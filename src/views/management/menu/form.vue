@@ -1,11 +1,18 @@
 <template>
-  <el-drawer v-bind="drawerComputed" @close="onDialogClose">
+  <el-dialog
+    :visible="dialog.visible"
+    :title="title"
+    :show-close="false"
+    width="400px"
+    destroy-on-close
+    append-to-body
+    @close="onDialogClose">
     <el-form v-bind="form" ref="form">
       <el-form-item label="菜单名称" prop="menu_name">
         <el-input v-model="form.model.menu_name"/>
       </el-form-item>
       <el-form-item label="上级菜单" prop="parent_id">
-        <d2-select-menu v-model="form.model.parent_id"/>
+        <d2-tree-select-menu-dialog v-model="form.model.parent_id"/>
       </el-form-item>
       <el-form-item label="显示排序" prop="order_num">
         <el-input v-model="form.model.order_num"/>
@@ -29,14 +36,14 @@
         <el-input v-model="form.model.remark"/>
       </el-form-item>
       <el-form-item>
+        <el-button>取消</el-button>
         <el-button type="primary">
           <d2-icon name="check"/>
           保存
         </el-button>
-        <el-button>取消</el-button>
       </el-form-item>
     </el-form>
-  </el-drawer>
+  </el-dialog>
 </template>
 
 <script>
@@ -57,8 +64,8 @@ const formValueDefault = {
 export default {
   data () {
     return {
-      // drawer 设置 | 最后赋值的是 drawerComputed
-      drawer: {
+      // dialog 设置
+      dialog: {
         visible: false
       },
       // 表单数据和设置
@@ -72,23 +79,16 @@ export default {
     }
   },
   computed: {
-    // drawer 设置项
-    drawerComputed () {
+    title () {
       let title = ''
       if (this.mode === 'edit') title = '菜单编辑'
       if (this.mode === 'create') title = '新建菜单'
-      return {
-        visible: this.drawer.visible,
-        title,
-        width: '400px',
-        appendToBody: true,
-        closeOnClickModal: false
-      }
+      return title
     }
   },
   methods: {
     /**
-     * 初始化
+     * @description 初始化
      */
     init ({
       // form data
@@ -109,19 +109,19 @@ export default {
       this.open()
     },
     /**
-     * 开启面板
+     * @description 开启面板
      */
     open () {
-      this.drawer.visible = true
+      this.dialog.visible = true
     },
     /**
-     * 关闭面板
+     * @description 关闭面板
      */
     close () {
-      this.drawer.visible = false
+      this.dialog.visible = false
     },
     /**
-     * 触发关闭面板
+     * @description 触发关闭面板
      */
     onDialogClose () {
       this.close()

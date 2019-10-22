@@ -14,5 +14,16 @@ export default ({ request }) => ({
         parent_id: parent
       }
     })
+  },
+  /**
+   * @description 菜单管理列表
+   * @description 获取所有菜单的层级关系
+   * @description http://yapi.xiya.vip/project/11/interface/api/170
+   */
+  MENU_ALL () {
+    return request({
+      url: '/api/menu/menus',
+      method: 'post'
+    })
   }
 })
