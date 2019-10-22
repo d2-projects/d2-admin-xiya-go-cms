@@ -24,6 +24,7 @@ exports.default = function () {
 		'search',
 		'ua',
 		'db',
+		'dict',
 		'menu',
 		'size',
 		'user'

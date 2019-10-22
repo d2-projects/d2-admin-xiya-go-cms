@@ -16,7 +16,7 @@
       </d2-bar>
     </template>
     <d2-table v-bind="table"/>
-    <form-component ref="formComponent"/>
+    <form-component ref="formComponent" @success="onFormSuccess"/>
   </d2-container>
 </template>
 
@@ -120,6 +120,12 @@ export default {
       this.table.loading = false
     },
     /**
+     * @description 刷新表格
+     */
+    refresh () {
+      this.getList(this.breadcrumbs[this.breadcrumbs.length - 1])
+    },
+    /**
      * @description 面包屑项目被点击
      */
     onBreadcrumbClick (parent = defaultParent) {
@@ -155,6 +161,12 @@ export default {
       console.group('onDelete')
       console.log(row)
       console.groupEnd()
+    },
+    /**
+     * @description 新增或编辑成功
+     */
+    onFormSuccess () {
+      this.refresh()
     }
   }
 }
