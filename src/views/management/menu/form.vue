@@ -30,7 +30,7 @@
         <el-input v-model="form.model.perms"/>
       </el-form-item>
       <el-form-item label="图标" prop="icon">
-        <el-input v-model="form.model.icon"/>
+        <d2-icon-select v-model="form.model.icon"/>
       </el-form-item>
       <el-form-item label="备注" prop="remark">
         <el-input v-model="form.model.remark"/>
