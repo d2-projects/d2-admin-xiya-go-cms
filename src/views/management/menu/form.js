@@ -15,10 +15,8 @@ const formValueDefault = {
 export default {
   data () {
     return {
-      // dialog 设置
-      dialog: {
-        visible: false
-      },
+      // 是否激活
+      visible: false,
       // 表单数据
       form: {},
       // 校验规则
@@ -37,13 +35,13 @@ export default {
   },
   render () {
     return <el-dialog
-      visible={ this.dialog.visible }
+      visible={ this.visible }
       title={ this.title }
       show-close={ false }
       width="400px"
       destroy-on-close
       append-to-body
-      on-close={ () => { this.dialog.visible = false } }>
+      on-close={ () => { this.visible = false } }>
       <el-form
         label-width="100px"
         model={ this.form }
@@ -78,7 +76,7 @@ export default {
           <el-input vModel={ this.form.remark }/>
         </el-form-item>
         <el-form-item>
-          <el-button on-click={ () => { this.dialog.visible = false } }>取消</el-button>
+          <el-button on-click={ () => { this.visible = false } }>取消</el-button>
           <el-button type="primary" on-click={ this.onClickOk }><d2-icon name="check"/> 保存</el-button>
         </el-form-item>
       </el-form>
@@ -89,13 +87,10 @@ export default {
      * @description 初始化
      */
     init ({ data = {}, mode = 'edit' } = {}) {
-      if (mode === 'edit') {
-        this.form = cloneDeep(data)
-      } else if (mode === 'create') {
-        this.form = Object.assign(cloneDeep(formValueDefault), data)
-      }
+      if (mode === 'edit') this.form = cloneDeep(data)
+      if (mode === 'create') this.form = Object.assign(cloneDeep(formValueDefault), data)
       this.mode = mode
-      this.dialog.visible = true
+      this.visible = true
     },
     /**
      * @description 点击确定
@@ -104,13 +99,13 @@ export default {
       if (this.mode === 'create') {
         await this.$api.MENU_CREATE(this.form)
         this.$message({ message: '创建成功', type: 'success' })
-        this.dialog.visible = false
+        this.visible = false
         this.$emit('success')
       }
       if (this.mode === 'edit') {
         await this.$api.MENU_UPDATE(this.form)
         this.$message({ message: '修改成功', type: 'success' })
-        this.dialog.visible = false
+        this.visible = false
         this.$emit('success')
       }
     }
