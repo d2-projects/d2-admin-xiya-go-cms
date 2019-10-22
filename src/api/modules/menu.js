@@ -4,14 +4,12 @@ export default ({ request }) => ({
    * @description http://yapi.xiya.vip/project/11/interface/api/190
    * @param {Object} data {Number} parent 父级菜单 id
    */
-  MENU_FIND ({
-    parent
-  } = {}) {
+  MENU_FIND (id = 0) {
     return request({
       url: '/api/menu/find_menus',
       method: 'post',
       data: {
-        parent_id: parent
+        parent_id: id
       }
     })
   },

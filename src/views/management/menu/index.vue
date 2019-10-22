@@ -104,19 +104,10 @@ export default {
      * @description 请求列表数据
      */
     async getList (parent = defaultParent) {
-      // 设置加载状态
       this.table.loading = true
-      // 请求接口
-      const result = await this.$api.MENU_FIND({
-        parent: parent.id
-      })
-      // 更新表格数据
+      const result = await this.$api.MENU_FIND(parent.id)
       this.table.data = result
-      // 更新面包屑
-      if ((this.breadcrumbs[this.breadcrumbs.length - 1] || {}).id !== parent.id) {
-        this.breadcrumbs.push(parent)
-      }
-      // 结束加载状态
+      if ((this.breadcrumbs[this.breadcrumbs.length - 1] || {}).id !== parent.id) this.breadcrumbs.push(parent)
       this.table.loading = false
     },
     /**
@@ -139,7 +130,6 @@ export default {
     onCreate () {
       this.$refs.formComponent.init({
         data: {
-          // 设置默认的父节点为当前层
           parent_id: (this.breadcrumbs[this.breadcrumbs.length - 1] || {}).id || 0
         },
         mode: 'create'
@@ -149,10 +139,7 @@ export default {
      * @description 表格操作 编辑
      */
     onEdit (row) {
-      this.$refs.formComponent.init({
-        data: row,
-        mode: 'edit'
-      })
+      this.$refs.formComponent.init({ data: row, mode: 'edit' })
     },
     /**
      * @description 表格操作 删除
