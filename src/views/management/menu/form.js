@@ -1,27 +1,105 @@
 import { cloneDeep } from 'lodash'
+import utils from '@/utils'
 
-const formValueDefault = {
-  menu_name: '', // 菜单名称
-  parent_id: 0, // 上级菜单
-  order_num: 0, // 显示排序
-  url: '/', // 请求地址
-  menu_type: 1, // 菜单类型
-  visible: 1, // 菜单状态
-  perms: '', // 权限标识
-  icon: 'file', // 图标
-  remark: '无' // 备注
+function setting (h = () => {}) {
+  return [
+    {
+      prop: 'menu_name',
+      default: '',
+      label: '菜单名称',
+      rule: { required: true, message: '请设置菜单名称', trigger: 'blur' },
+      render: <el-input vModel={ this.form.menu_name }/>
+    },
+    {
+      prop: 'parent_id',
+      default: 0,
+      label: '上级菜单',
+      rule: { required: true, message: '请设置上级菜单', trigger: 'change' },
+      render: <d2-select-tree-menu-dialog vModel={ this.form.parent_id }/>
+    },
+    {
+      prop: 'order_num',
+      default: 0,
+      label: '显示排序',
+      rule: { required: true, message: '请设置显示排序', trigger: 'blur' },
+      render: <el-input-number min={ 1 } vModel={ this.form.order_num }/>
+    },
+    {
+      prop: 'url',
+      default: '/',
+      label: '请求地址',
+      rule: { required: true, message: '请设置请求地址', trigger: 'blur' },
+      render: <el-input vModel={ this.form.url }/>
+    },
+    {
+      prop: 'menu_type',
+      default: 1,
+      label: '菜单类型',
+      rule: { required: true, message: '请设置请求地址', trigger: 'blur' },
+      render: <d2-select-dict name="menu_type" vModel={ this.form.menu_type }/>
+    },
+    {
+      prop: 'visible',
+      default: 1,
+      label: '菜单状态',
+      rule: { required: true, message: '请设置菜单状态', trigger: 'blur' },
+      render: <d2-select-dict name="visible" vModel={ this.form.visible }/>
+    },
+    {
+      prop: 'perms',
+      default: '',
+      label: '权限标识',
+      render: <el-input vModel={ this.form.perms }/>
+    },
+    {
+      prop: 'icon',
+      default: '',
+      label: '图标',
+      render: <d2-icon-select vModel={ this.form.icon }/>
+    },
+    {
+      prop: 'remark',
+      default: '',
+      label: '备注',
+      render: <el-input vModel={ this.form.remark }/>
+    }
+  ]
 }
 
+const form = utils.helper.getFormFromSetting(setting)
+const rules = utils.helper.getRulesFromSetting(setting)
+
 export default {
+  render () {
+    return <el-dialog
+      visible={ this.visible }
+      title={ this.title }
+      show-close={ false }
+      width="400px"
+      destroy-on-close
+      append-to-body
+      on-close={ () => { this.visible = false } }>
+      <el-form model={ this.form } rules={ this.rules } on-input={ () => {} } label-width="100px" ref="form">
+        {
+          setting.call(this, this.$createElement).map(
+            item =>
+              <el-form-item label={ item.label } prop={ item.prop }>
+                { item.render }
+              </el-form-item>
+          )
+        }
+        <el-form-item>
+          <el-button on-click={ () => { this.visible = false } }>取消</el-button>
+          <el-button type="primary" on-click={ this.onClickOk }><d2-icon name="check"/> 保存</el-button>
+        </el-form-item>
+      </el-form>
+    </el-dialog>
+  },
   data () {
     return {
-      // 是否激活
       visible: false,
-      // 表单数据
-      form: {},
-      // 校验规则
-      rules: {},
-      // 模式设置
+      form,
+      rules,
       mode: ''
     }
   },
@@ -33,81 +111,36 @@ export default {
       return title
     }
   },
-  render () {
-    return <el-dialog
-      visible={ this.visible }
-      title={ this.title }
-      show-close={ false }
-      width="400px"
-      destroy-on-close
-      append-to-body
-      on-close={ () => { this.visible = false } }>
-      <el-form
-        label-width="100px"
-        model={ this.form }
-        rules={ this.rules }
-        on-input={ () => {} }
-        ref="form">
-        <el-form-item label="菜单名称" prop="menu_name">
-          <el-input vModel={ this.form.menu_name }/>
-        </el-form-item>
-        <el-form-item label="上级菜单" prop="parent_id">
-          <d2-select-tree-menu-dialog vModel={ this.form.parent_id }/>
-        </el-form-item>
-        <el-form-item label="显示排序" prop="order_num">
-          <el-input-number min={ 1 } vModel={ this.form.order_num }/>
-        </el-form-item>
-        <el-form-item label="请求地址" prop="url">
-          <el-input vModel={ this.form.url }/>
-        </el-form-item>
-        <el-form-item label="菜单类型" prop="menu_type">
-          <d2-select-dict name="menu_type" vModel={ this.form.menu_type }/>
-        </el-form-item>
-        <el-form-item label="菜单状态" prop="visible">
-          <d2-select-dict name="visible" vModel={ this.form.visible }/>
-        </el-form-item>
-        <el-form-item label="权限标识" prop="perms">
-          <el-input vModel={ this.form.perms }/>
-        </el-form-item>
-        <el-form-item label="图标" prop="icon">
-          <d2-icon-select vModel={ this.form.icon }/>
-        </el-form-item>
-        <el-form-item label="备注" prop="remark">
-          <el-input vModel={ this.form.remark }/>
-        </el-form-item>
-        <el-form-item>
-          <el-button on-click={ () => { this.visible = false } }>取消</el-button>
-          <el-button type="primary" on-click={ this.onClickOk }><d2-icon name="check"/> 保存</el-button>
-        </el-form-item>
-      </el-form>
-    </el-dialog>
-  },
   methods: {
     /**
-     * @description 初始化
+     * @description 初始化表单
      */
     init ({ data = {}, mode = 'edit' } = {}) {
       if (mode === 'edit') this.form = cloneDeep(data)
-      if (mode === 'create') this.form = Object.assign(cloneDeep(formValueDefault), data)
+      if (mode === 'create') this.form = Object.assign(cloneDeep(form), data)
       this.mode = mode
       this.visible = true
     },
     /**
      * @description 点击确定
      */
-    async onClickOk () {
-      if (this.mode === 'create') {
-        await this.$api.MENU_CREATE(this.form)
-        this.$message({ message: '创建成功', type: 'success' })
-        this.visible = false
-        this.$emit('success')
-      }
-      if (this.mode === 'edit') {
-        await this.$api.MENU_UPDATE(this.form)
-        this.$message({ message: '修改成功', type: 'success' })
-        this.visible = false
-        this.$emit('success')
-      }
+    onClickOk () {
+      this.$refs.form.validate(async valid => {
+        if (valid) {
+          if (this.mode === 'create') {
+            await this.$api.MENU_CREATE(this.form)
+            this.$message({ message: '创建成功', type: 'success' })
+            this.visible = false
+            this.$emit('success')
+          }
+          if (this.mode === 'edit') {
+            await this.$api.MENU_UPDATE(this.form)
+            this.$message({ message: '修改成功', type: 'success' })
+            this.visible = false
+            this.$emit('success')
+          }
+        }
+      })
     }
   }
 }
