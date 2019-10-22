@@ -11,14 +11,11 @@
       @close="onDialogClose">
       <d2-tree-select-menu
         v-if="dialog.visible"
-        ref="tree"
-        v-model="currentValue"/>
+        v-model="currentValue"
+        ref="tree"/>
       <span slot="footer">
         <el-button @click="onClickCancle">取消</el-button>
-        <el-button type="primary" @click="onClickOk">
-          <d2-icon name="check"/>
-          确定
-        </el-button>
+        <el-button type="primary" @click="onClickOk"> <d2-icon name="check"/> 确定</el-button>
       </span>
     </el-dialog>
   </span>
