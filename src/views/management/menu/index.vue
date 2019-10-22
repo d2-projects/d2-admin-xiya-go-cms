@@ -45,7 +45,7 @@ export default {
             minWidth: '100px',
             fixed: 'left',
             render: ({ row }) =>
-              <el-button type="text" vOn:click={ () => this.getList({ id: row.id, name: row.menu_name }) }>
+              <el-button type="text" on-click={ () => this.getList({ id: row.id, name: row.menu_name }) }>
                 { row.menu_name }
               </el-button>
           },
@@ -83,10 +83,10 @@ export default {
             fixed: 'right',
             render: ({ row }) =>
               <span>
-                <el-button size="mini" vOn:click={ () => this.onEdit(row) }>
+                <el-button size="mini" on-click={ () => this.onEdit(row) }>
                   <d2-icon name="pencil"></d2-icon>
                 </el-button>
-                <el-button size="mini" type="danger" vOn:click={ () => this.onDelete(row) }>
+                <el-button size="mini" type="danger" on-click={ () => this.onDelete(row) }>
                   <d2-icon name="trash-o"></d2-icon>
                 </el-button>
               </span>
