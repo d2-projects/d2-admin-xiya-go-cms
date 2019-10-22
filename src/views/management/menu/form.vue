@@ -50,8 +50,8 @@ const formValueDefault = {
   parent_id: 0, // 上级菜单
   order_num: 0, // 显示排序
   url: '/', // 请求地址
-  menu_type: 1, // 菜单类型（1,目录 2,菜单 3,按钮）
-  visible: '1', // 菜单状态（1显示 2隐藏）
+  menu_type: 1, // 菜单类型
+  visible: 1, // 菜单状态
   perms: '', // 权限标识
   icon: 'file', // 图标
   remark: '无' // 备注

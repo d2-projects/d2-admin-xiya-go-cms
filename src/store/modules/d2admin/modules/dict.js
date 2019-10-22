@@ -13,8 +13,8 @@ export default context => ({
       {
         name: 'visible',
         value: [
-          { label: '显示', value: '1' },
-          { label: '隐藏', value: '2' }
+          { label: '显示', value: 1 },
+          { label: '隐藏', value: 2 }
         ]
       }
     ]
