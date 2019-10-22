@@ -16,7 +16,7 @@
       </d2-bar>
     </template>
     <d2-table v-bind="table"/>
-    <form-component ref="formComponent" @success="onFormSuccess"/>
+    <form-component ref="formComponent" @success="refresh"/>
   </d2-container>
 </template>
 
@@ -140,7 +140,7 @@ export default {
       this.$refs.formComponent.init({
         data: {
           // 设置默认的父节点为当前层
-          parent_id: this.breadcrumbs.length > 0 ? this.breadcrumbs[this.breadcrumbs.length - 1].id : 0
+          parent_id: (this.breadcrumbs[this.breadcrumbs.length - 1] || {}).id || 0
         },
         mode: 'create'
       })
@@ -157,15 +157,9 @@ export default {
     /**
      * @description 表格操作 删除
      */
-    onDelete (row) {
-      console.group('onDelete')
-      console.log(row)
-      console.groupEnd()
-    },
-    /**
-     * @description 新增或编辑成功
-     */
-    onFormSuccess () {
+    async onDelete (row) {
+      await this.$api.MENU_DELETE(row.id)
+      this.$message({ message: '删除成功', type: 'success' })
       this.refresh()
     }
   }

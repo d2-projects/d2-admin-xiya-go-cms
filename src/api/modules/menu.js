@@ -36,5 +36,29 @@ export default ({ request }) => ({
       method: 'post',
       data
     })
+  },
+  /**
+   * @description 菜单管理编辑
+   * @description http://yapi.xiya.vip/project/11/interface/api/165
+   */
+  MENU_UPDATE (data) {
+    return request({
+      url: '/api/menu/update',
+      method: 'put',
+      data
+    })
+  },
+  /**
+   * @description 菜单管理删除
+   * @description http://yapi.xiya.vip/project/11/interface/api/110
+   */
+  MENU_DELETE (id) {
+    return request({
+      url: '/api/menu/delete',
+      method: 'delete',
+      data: {
+        id
+      }
+    })
   }
 })

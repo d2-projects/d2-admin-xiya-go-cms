@@ -107,11 +107,16 @@ export default {
      */
     async onClickOk () {
       if (this.mode === 'create') {
-        try {
-          await this.$api.MENU_CREATE(this.form.model)
-          this.dialog.visible = false
-          this.$emit('success')
-        } catch (error) {}
+        await this.$api.MENU_CREATE(this.form.model)
+        this.$message({ message: '创建成功', type: 'success' })
+        this.dialog.visible = false
+        this.$emit('success')
+      }
+      if (this.mode === 'edit') {
+        await this.$api.MENU_UPDATE(this.form.model)
+        this.$message({ message: '修改成功', type: 'success' })
+        this.dialog.visible = false
+        this.$emit('success')
       }
     }
   }

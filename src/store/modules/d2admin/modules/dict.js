@@ -27,7 +27,7 @@ export default context => ({
      */
     get ({ state }, name) {
       const dict = state.dicts.find(e => e.name === name)
-      return dict && dict.value || []
+      return (dict && dict.value) || []
     }
   }
 })
