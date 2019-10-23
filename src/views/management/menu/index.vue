@@ -44,8 +44,7 @@ export default {
           {
             prop: 'url',
             label: '地址',
-            minWidth: '200px',
-            render: ({ row }) => <el-tag>{ row.url }</el-tag>
+            minWidth: '200px'
           },
           {
             prop: 'icon',

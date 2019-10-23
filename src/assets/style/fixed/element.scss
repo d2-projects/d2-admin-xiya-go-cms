@@ -26,11 +26,27 @@
   .el-table::before {
     background-color: #FFF;
   }
-  .el-table--border {
-    border: none;
-  }
   .el-table__fixed-right::before, .el-table__fixed-left::before, .el-table__fixed::before {
     height: 0px;
+  }
+  .el-table--border {
+    border: none;
+    th {
+      &:last-child {
+        border-right: none;
+      }
+    }
+    td {
+      &:last-child {
+        border-right: none;
+      }
+    }
+    &::after {
+      top: 0;
+      right: 0;
+      width: 0px;
+      height: 100%;
+    }
   }
 }
 
