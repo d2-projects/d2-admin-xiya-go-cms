@@ -1,8 +1,9 @@
 import { mapActions } from 'vuex'
+
 export default {
   name: 'd2-dict',
   render () {
-    return <span>{ this.currentValue }</span>
+    return <span class="d2-dict">{ this.currentValue }</span>
   },
   props: {
     value: {
