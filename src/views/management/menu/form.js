@@ -85,9 +85,11 @@ export default {
               </el-form-item>
           )
         }
+      </el-form>
+      <el-form label-width={ this.form.labelWidth }>
         <el-form-item>
-          <el-button on-click={ () => { this.dialog.visible = false } }>取消</el-button>
-          <el-button type="primary" on-click={ this.onClickOk }><d2-icon name="check"/> 保存</el-button>
+          <el-button {...{ attrs: this.buttons.cancle }} on-click={ this.cancle }>取消</el-button>
+          <el-button {...{ attrs: this.buttons.submit }} on-click={ this.submit }>保存</el-button>
         </el-form-item>
       </el-form>
     </el-dialog>
@@ -106,7 +108,18 @@ export default {
       form: {
         model: formData,
         rules: formRules,
+        disabled: false,
         labelWidth: '100px'
+      },
+      buttons: {
+        cancle: {
+          plain: true
+        },
+        submit: {
+          type: 'primary',
+          icon: 'el-icon-check',
+          loading: false
+        }
       },
       mode: ''
     }
@@ -130,25 +143,42 @@ export default {
       this.dialog.visible = true
     },
     /**
+     * @description 关闭面板
+     */
+    cancle () {
+      this.dialog.visible = false
+    },
+    /**
      * @description 点击确定
      */
-    onClickOk () {
+    submit () {
       this.$refs.form.validate(async valid => {
-        if (valid) {
+        if (!valid) return
+        this.submitting(true)
+        try {
           if (this.mode === 'create') {
             await this.$api.MENU_CREATE(this.form.model)
             this.$message({ message: '创建成功', type: 'success' })
-            this.dialog.visible = false
-            this.$emit('success')
           }
           if (this.mode === 'edit') {
             await this.$api.MENU_UPDATE(this.form.model)
             this.$message({ message: '修改成功', type: 'success' })
-            this.dialog.visible = false
-            this.$emit('success')
           }
-        }
+          this.submitting(false)
+          this.$emit('success')
+          this.cancle()
+        } catch (error) {}
+        this.submitting(false)
       })
+    },
+    /**
+     * @description 设置是否正在提交
+     * @description 禁用表单
+     * @description 设置提交按钮 loading 状态
+     */
+    submitting (status = true) {
+      this.form.disabled = status
+      this.buttons.submit.loading = status
     }
   }
 }

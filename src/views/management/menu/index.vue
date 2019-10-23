@@ -56,6 +56,11 @@ export default {
             render: ({ row }) => <el-tag>{ row.url }</el-tag>
           },
           {
+            prop: 'icon',
+            label: '图标',
+            minWidth: '100px'
+          },
+          {
             prop: 'menu_type',
             label: '菜单类型',
             minWidth: '100px'
@@ -83,12 +88,8 @@ export default {
             fixed: 'right',
             render: ({ row }) =>
               <span>
-                <el-button size="mini" on-click={ () => this.onEdit(row) }>
-                  <d2-icon name="pencil"></d2-icon>
-                </el-button>
-                <el-button size="mini" type="danger" on-click={ () => this.onDelete(row) }>
-                  <d2-icon name="trash-o"></d2-icon>
-                </el-button>
+                <el-button size="mini" icon="el-icon-edit-outline" on-click={ () => this.onEdit(row) }></el-button>
+                <el-button size="mini" icon="el-icon-delete" type="danger" on-click={ () => this.onDelete(row) }></el-button>
               </span>
           }
         ]
