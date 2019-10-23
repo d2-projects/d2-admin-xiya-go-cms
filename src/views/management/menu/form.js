@@ -73,10 +73,10 @@ const formRules = utils.helper.getRulesFromSetting(setting)
 export default {
   render () {
     return <el-dialog
-      {...{ attrs: this.dialog }}
+      { ...{ attrs: this.dialog } }
       title={ this.title }
       on-close={ () => { this.dialog.visible = false } }>
-      <el-form {...{ attrs: this.form }} ref="form">
+      <el-form { ...{ attrs: this.form } } ref="form">
         {
           setting.call(this, this.$createElement).map(
             item =>
@@ -88,8 +88,8 @@ export default {
       </el-form>
       <el-form label-width={ this.form.labelWidth }>
         <el-form-item>
-          <el-button {...{ attrs: this.buttons.cancle }} on-click={ this.cancle }>取消</el-button>
-          <el-button {...{ attrs: this.buttons.submit }} on-click={ this.submit }>保存</el-button>
+          <el-button { ...{ attrs: this.buttons.cancle } } on-click={ this.cancle }>取消</el-button>
+          <el-button { ...{ attrs: this.buttons.submit } } on-click={ this.submit }>保存</el-button>
         </el-form-item>
       </el-form>
     </el-dialog>

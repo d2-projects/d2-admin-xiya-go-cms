@@ -10,7 +10,11 @@ export default {
   render (createElement) {
     const propsDefault = {
       stripe: true,
-      height: '100%'
+      height: '100%',
+      rowKey: 'id',
+      treeProps: {
+        children: 'children_list'
+      }
     }
     return createElement('el-table', {
       props: Object.assign(propsDefault, this.$attrs),

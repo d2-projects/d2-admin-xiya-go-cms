@@ -2,21 +2,14 @@
   <d2-container spacious>
     <template slot="header">
       <d2-bar>
-        <d2-bar-cell>
-          <el-breadcrumb>
-            <el-breadcrumb-item v-for="breadcrumb of breadcrumbs" :key="breadcrumb.id">
-              <el-button type="text" @click="onBreadcrumbClick(breadcrumb)">{{ breadcrumb.name }}</el-button>
-            </el-breadcrumb-item>
-          </el-breadcrumb>
-        </d2-bar-cell>
         <d2-bar-space/>
         <d2-bar-cell>
-          <el-button type="primary" icon="el-icon-plus" @click="onCreate">新建</el-button>
+          <el-button type="primary" icon="el-icon-plus" @click="onCreate">新建菜单</el-button>
         </d2-bar-cell>
       </d2-bar>
     </template>
     <d2-table v-bind="table"/>
-    <form-component ref="formComponent" @success="refresh"/>
+    <form-component ref="formComponent" @success="loadTableData"/>
   </d2-container>
 </template>
 
@@ -34,7 +27,6 @@ export default {
   },
   data () {
     return {
-      breadcrumbs: [],
       table: {
         loading: false,
         data: [],
@@ -42,17 +34,17 @@ export default {
           {
             prop: 'menu_name',
             label: '名称',
-            width: '200px',
+            minWidth: '250px',
             fixed: 'left',
             render: ({ row }) =>
-              <el-button type="text" on-click={ () => this.getList({ id: row.id, name: row.menu_name }) }>
+              <el-button type="text" on-click={ () => this.loadTableData({ id: row.id, name: row.menu_name }) }>
                 { row.menu_name }
               </el-button>
           },
           {
             prop: 'url',
             label: '地址',
-            minWidth: '100px',
+            minWidth: '200px',
             render: ({ row }) => <el-tag>{ row.url }</el-tag>
           },
           {
@@ -76,13 +68,13 @@ export default {
           {
             prop: 'created_at',
             label: '创建时间',
-            width: '150px',
+            width: '140px',
             formatter: row => utils.time.format(row.created_at, 'YYYY/M/D HH:mm:ss')
           },
           {
             prop: 'updated_at',
             label: '更新时间',
-            width: '150px',
+            width: '140px',
             formatter: row => utils.time.format(row.updated_at, 'YYYY/M/D HH:mm:ss')
           },
           {
@@ -90,10 +82,25 @@ export default {
             width: '120px',
             fixed: 'right',
             render: ({ row }) =>
-              <span>
-                <el-button icon="el-icon-edit-outline" on-click={ () => this.onEdit(row) }></el-button>
-                <el-button icon="el-icon-delete" type="danger" on-click={ () => this.onDelete(row) }></el-button>
-              </span>
+              <d2-table-actions actions={
+                [
+                  {
+                    icon: 'el-icon-edit-outline',
+                    action: () => this.onEdit(row)
+                  },
+                  {
+                    icon: 'el-icon-plus',
+                    type: 'primary',
+                    action: () => this.onCreate({ pid: row.id })
+                  },
+                  {
+                    icon: 'el-icon-delete',
+                    type: 'danger',
+                    confirm: `确定删除 [ ${ row.menu_name } ] 吗`,
+                    action: () => this.onDelete(row)
+                  }
+                ]
+              }/>
           }
         ]
       },
@@ -101,40 +108,24 @@ export default {
     }
   },
   created () {
-    this.getList()
+    this.loadTableData()
   },
   methods: {
     /**
      * @description 请求列表数据
      */
-    async getList (parent = defaultParent) {
+    async loadTableData () {
       this.table.loading = true
-      const result = await this.$api.MENU_FIND(parent.id)
-      this.table.data = result
-      if ((this.breadcrumbs[this.breadcrumbs.length - 1] || {}).id !== parent.id) this.breadcrumbs.push(parent)
+      this.table.data = await this.$api.MENU_ALL()
       this.table.loading = false
-    },
-    /**
-     * @description 刷新表格
-     */
-    refresh () {
-      this.getList(this.breadcrumbs[this.breadcrumbs.length - 1])
-    },
-    /**
-     * @description 面包屑项目被点击
-     */
-    onBreadcrumbClick (parent = defaultParent) {
-      const breadcrumbIndex = this.breadcrumbs.findIndex(e => e.id === parent.id)
-      this.breadcrumbs.splice(breadcrumbIndex + 1, this.breadcrumbs.length)
-      this.getList(parent)
     },
     /**
      * @description 新建
      */
-    onCreate () {
+    onCreate ({ pid = 0 } = {}) {
       this.$refs.formComponent.init({
         data: {
-          parent_id: (this.breadcrumbs[this.breadcrumbs.length - 1] || {}).id || 0
+          parent_id: pid
         },
         mode: 'create'
       })
@@ -148,10 +139,13 @@ export default {
     /**
      * @description 表格操作 删除
      */
-    async onDelete (row) {
-      await this.$api.MENU_DELETE(row.id)
-      this.$message({ message: '删除成功', type: 'success' })
-      this.refresh()
+    onDelete (row) {
+      this.$api.MENU_DELETE(row.id)
+        .then(() => {
+          this.$message({ message: '删除成功', type: 'success' })
+          this.loadTableData()
+        })
+        .catch(() => {})
     }
   }
 }
