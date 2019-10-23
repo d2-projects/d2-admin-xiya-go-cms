@@ -58,17 +58,20 @@ export default {
           {
             prop: 'icon',
             label: '图标',
-            minWidth: '100px'
+            minWidth: '100px',
+            render: ({ row }) => <d2-icon name={ row.icon }></d2-icon>
           },
           {
             prop: 'menu_type',
             label: '菜单类型',
-            minWidth: '100px'
+            minWidth: '100px',
+            render: ({ row }) => <d2-dict name="menu_type" value={ row.menu_type }></d2-dict>
           },
           {
             prop: 'visible',
             label: '可见',
-            minWidth: '100px'
+            minWidth: '100px',
+            render: ({ row }) => <d2-dict name="visible" value={ row.visible }></d2-dict>
           },
           {
             prop: 'created_at',

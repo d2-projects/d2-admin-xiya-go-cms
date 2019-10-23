@@ -15,7 +15,7 @@
 <script>
 import { mapActions } from 'vuex'
 export default {
-  name: 'd2-select-dict',
+  name: 'd2-dict-select',
   props: {
     value: {
       default: undefined,

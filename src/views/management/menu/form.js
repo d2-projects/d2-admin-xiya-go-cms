@@ -37,14 +37,14 @@ function setting (h = () => {}) {
       default: 1,
       label: '菜单类型',
       rule: { required: true, message: '请设置请求地址', trigger: 'blur' },
-      render: <d2-select-dict name="menu_type" vModel={ form.menu_type }/>
+      render: <d2-dict-select name="menu_type" vModel={ form.menu_type }/>
     },
     {
       prop: 'visible',
       default: 1,
       label: '菜单状态',
       rule: { required: true, message: '请设置菜单状态', trigger: 'blur' },
-      render: <d2-select-dict name="visible" vModel={ form.visible }/>
+      render: <d2-dict-select name="visible" vModel={ form.visible }/>
     },
     {
       prop: 'perms',
