@@ -59,7 +59,11 @@ export default {
             prop: 'icon',
             label: '图标',
             width: '50px',
-            render: ({ row }) => <d2-icon name={ row.icon }></d2-icon>
+            render: ({ row }) => {
+              const icon = <d2-icon name={ row.icon }></d2-icon>
+              const placeholder = <span>无</span>
+              return row.icon ? icon : placeholder
+            }
           },
           {
             prop: 'menu_type',
