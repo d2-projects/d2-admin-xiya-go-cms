@@ -1,5 +1,5 @@
 <template>
-  <el-dropdown size="small" class="d2-mr">
+  <el-dropdown size="default" class="d2-mr">
     <span class="btn-text">{{name ? `你好 ${name}` : '用户中心'}}</span>
     <el-dropdown-menu slot="dropdown">
       <el-dropdown-item @click.native="logOff">

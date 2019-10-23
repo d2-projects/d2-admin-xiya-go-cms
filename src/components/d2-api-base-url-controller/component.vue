@@ -44,6 +44,7 @@
             :key="option.value"
             class="item">
             <el-button
+              size="default"
               :type="isItemActive(option.value) ? 'primary' : 'default'"
               style="width: 100%;"
               @click="onSelect(option.value)">
@@ -72,9 +73,11 @@
       <el-divider>或者</el-divider>
       <div flex="main:justify cross:center">
         <el-input
+          size="default"
           v-model="custom"
           class="d2-mr-5"/>
         <el-button
+          size="default"
           :disabled="custom.length === 0"
           @click="onSelect(custom)">
           好
@@ -82,6 +85,7 @@
       </div>
       <el-divider/>
       <el-button
+        size="default"
         type="primary"
         style="width:100%;"
         @click="onClose">
