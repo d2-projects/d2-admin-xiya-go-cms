@@ -2,66 +2,67 @@ import { cloneDeep } from 'lodash'
 import utils from '@/utils'
 
 function setting (h = () => {}) {
+  let form = this.form.model
   return [
     {
       prop: 'menu_name',
       default: '',
       label: '菜单名称',
       rule: { required: true, message: '请设置菜单名称', trigger: 'blur' },
-      render: <el-input vModel={ this.form.model.menu_name }/>
+      render: <el-input vModel={ form.menu_name }/>
     },
     {
       prop: 'parent_id',
       default: 0,
       label: '上级菜单',
       rule: { required: true, message: '请设置上级菜单', trigger: 'change' },
-      render: <d2-select-tree-menu-dialog vModel={ this.form.model.parent_id }/>
+      render: <d2-select-tree-menu-dialog vModel={ form.parent_id }/>
     },
     {
       prop: 'order_num',
       default: 0,
       label: '显示排序',
       rule: { required: true, message: '请设置显示排序', trigger: 'blur' },
-      render: <el-input-number min={ 1 } vModel={ this.form.model.order_num }/>
+      render: <el-input-number min={ 1 } vModel={ form.order_num }/>
     },
     {
       prop: 'url',
       default: '/',
       label: '请求地址',
       rule: { required: true, message: '请设置请求地址', trigger: 'blur' },
-      render: <el-input vModel={ this.form.model.url }/>
+      render: <el-input vModel={ form.url }/>
     },
     {
       prop: 'menu_type',
       default: 1,
       label: '菜单类型',
       rule: { required: true, message: '请设置请求地址', trigger: 'blur' },
-      render: <d2-select-dict name="menu_type" vModel={ this.form.model.menu_type }/>
+      render: <d2-select-dict name="menu_type" vModel={ form.menu_type }/>
     },
     {
       prop: 'visible',
       default: 1,
       label: '菜单状态',
       rule: { required: true, message: '请设置菜单状态', trigger: 'blur' },
-      render: <d2-select-dict name="visible" vModel={ this.form.model.visible }/>
+      render: <d2-select-dict name="visible" vModel={ form.visible }/>
     },
     {
       prop: 'perms',
       default: '',
       label: '权限标识',
-      render: <el-input vModel={ this.form.model.perms }/>
+      render: <el-input vModel={ form.perms }/>
     },
     {
       prop: 'icon',
       default: '',
       label: '图标',
-      render: <d2-icon-select vModel={ this.form.model.icon }/>
+      render: <d2-icon-select vModel={ form.icon }/>
     },
     {
       prop: 'remark',
       default: '',
       label: '备注',
-      render: <el-input vModel={ this.form.model.remark }/>
+      render: <el-input vModel={ form.remark }/>
     }
   ]
 }
@@ -71,9 +72,19 @@ const formRules = utils.helper.getRulesFromSetting(setting)
 
 export default {
   render () {
-    return <el-dialog {...{ attrs: this.dialog }} title={ this.title } on-close={ () => { this.dialog.visible = false } }>
+    return <el-dialog
+      {...{ attrs: this.dialog }}
+      title={ this.title }
+      on-close={ () => { this.dialog.visible = false } }>
       <el-form {...{ attrs: this.form }} ref="form">
-        { setting.call(this, this.$createElement).map(item => <el-form-item label={ item.label } prop={ item.prop }>{ item.render }</el-form-item>) }
+        {
+          setting.call(this, this.$createElement).map(
+            item =>
+              <el-form-item label={ item.label } prop={ item.prop }>
+                { item.render }
+              </el-form-item>
+          )
+        }
         <el-form-item>
           <el-button on-click={ () => { this.dialog.visible = false } }>取消</el-button>
           <el-button type="primary" on-click={ this.onClickOk }><d2-icon name="check"/> 保存</el-button>
