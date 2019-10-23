@@ -14,8 +14,8 @@
         v-model="currentValue"
         ref="tree"/>
       <span slot="footer">
-        <el-button @click="onClickCancle">取消</el-button>
-        <el-button type="primary" @click="onClickOk"> <d2-icon name="check"/> 确定</el-button>
+        <el-button @click="onClickCancle" plain>取消</el-button>
+        <el-button type="primary" icon="el-icon-check" @click="onClickOk">确定</el-button>
       </span>
     </el-dialog>
   </span>
