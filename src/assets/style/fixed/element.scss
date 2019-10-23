@@ -33,3 +33,10 @@
     height: 0px;
   }
 }
+
+.el-dialog {
+  &.el-dialog__no-top-border {
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+  }
+}

@@ -97,7 +97,9 @@ export default {
       dialog: {
         visible: false,
         showClose: false,
+        top: '0px',
         width: '400px',
+        customClass: 'el-dialog__no-top-border',
         destroyOnClose: true,
         appendToBody: true
       },
