@@ -11,7 +11,7 @@
         </d2-bar-cell>
         <d2-bar-space/>
         <d2-bar-cell>
-          <el-button type="primary" size="mini" @click="onCreate">新建</el-button>
+          <el-button type="primary" icon="el-icon-plus" @click="onCreate">新建</el-button>
         </d2-bar-cell>
       </d2-bar>
     </template>
@@ -42,7 +42,7 @@ export default {
           {
             prop: 'menu_name',
             label: '名称',
-            minWidth: '100px',
+            width: '200px',
             fixed: 'left',
             render: ({ row }) =>
               <el-button type="text" on-click={ () => this.getList({ id: row.id, name: row.menu_name }) }>
@@ -58,41 +58,41 @@ export default {
           {
             prop: 'icon',
             label: '图标',
-            minWidth: '100px',
+            width: '50px',
             render: ({ row }) => <d2-icon name={ row.icon }></d2-icon>
           },
           {
             prop: 'menu_type',
-            label: '菜单类型',
-            minWidth: '100px',
+            label: '类型',
+            width: '50px',
             render: ({ row }) => <d2-dict name="menu_type" value={ row.menu_type }></d2-dict>
           },
           {
             prop: 'visible',
             label: '可见',
-            minWidth: '100px',
+            width: '50px',
             render: ({ row }) => <d2-dict name="visible" value={ row.visible }></d2-dict>
           },
           {
             prop: 'created_at',
             label: '创建时间',
-            minWidth: '100px',
-            formatter: row => utils.time.format(row.created_at)
+            width: '150px',
+            formatter: row => utils.time.format(row.created_at, 'YYYY/M/D HH:mm:ss')
           },
           {
             prop: 'updated_at',
             label: '更新时间',
-            minWidth: '100px',
-            formatter: row => utils.time.format(row.updated_at)
+            width: '150px',
+            formatter: row => utils.time.format(row.updated_at, 'YYYY/M/D HH:mm:ss')
           },
           {
             align: 'center',
-            minWidth: '120px',
+            width: '120px',
             fixed: 'right',
             render: ({ row }) =>
               <span>
-                <el-button size="mini" icon="el-icon-edit-outline" on-click={ () => this.onEdit(row) }></el-button>
-                <el-button size="mini" icon="el-icon-delete" type="danger" on-click={ () => this.onDelete(row) }></el-button>
+                <el-button icon="el-icon-edit-outline" on-click={ () => this.onEdit(row) }></el-button>
+                <el-button icon="el-icon-delete" type="danger" on-click={ () => this.onDelete(row) }></el-button>
               </span>
           }
         ]

@@ -2,29 +2,29 @@
   <d2-container spacious>
     <d2-bar slot="header">
       <d2-bar-cell>
-        <el-button size="mini">Button</el-button>
-        <el-button size="mini">Button</el-button>
+        <el-button>Button</el-button>
+        <el-button>Button</el-button>
       </d2-bar-cell>
       <d2-bar-space/>
       <d2-bar-cell>
         <el-button-group>
-          <el-button size="mini">Button</el-button>
-          <el-button size="mini">Button</el-button>
-          <el-button size="mini">Button</el-button>
-          <el-button size="mini">Button</el-button>
+          <el-button>Button</el-button>
+          <el-button>Button</el-button>
+          <el-button>Button</el-button>
+          <el-button>Button</el-button>
         </el-button-group>
       </d2-bar-cell>
       <d2-bar-space/>
       <d2-bar-cell>
-        <el-button size="mini">Button</el-button>
+        <el-button>Button</el-button>
       </d2-bar-cell>
       <d2-bar-space/>
       <d2-bar-cell>
-        <el-input size="mini" style="width: 200px;"></el-input>
+        <el-input style="width: 200px;"></el-input>
       </d2-bar-cell>
       <d2-bar-cell>
         <d2-export-table>
-          <el-button size="mini">
+          <el-button>
             <d2-icon name="download"/>
           </el-button>
         </d2-export-table>

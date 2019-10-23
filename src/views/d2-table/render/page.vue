@@ -23,9 +23,7 @@ export default {
             prop: 'county',
             label: '地区',
             render: ({ row, column, $index }) =>
-              <el-tag size="mini">
-                { row[column.property] }
-              </el-tag>
+              <el-tag>{ row[column.property] }</el-tag>
           }
         ]
       }

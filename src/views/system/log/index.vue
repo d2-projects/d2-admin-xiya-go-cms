@@ -2,7 +2,6 @@
   <d2-container>
     <el-table
       :data="log"
-      size="mini"
       style="width: 100%"
       empty-text="暂无日志信息"
       stripe>
@@ -34,8 +33,7 @@
         <template slot-scope="scope">
           <el-tag
             v-if="get(scope.row, 'meta.instance.$vnode.componentOptions.tag')"
-            type="info"
-            size="mini">
+            type="info">
             &#60;{{get(scope.row, 'meta.instance.$vnode.componentOptions.tag')}}&gt;
           </el-tag>
         </template>
@@ -49,7 +47,6 @@
         <template slot-scope="scope">
           <el-button
             type="primary"
-            size="mini"
             @click="handleShowMore(scope.row)">
             <d2-icon name="eye"/>
           </el-button>
@@ -59,7 +56,6 @@
     <template slot="footer">
       <el-button
         type="primary"
-        size="mini"
         :loading="uploading"
         @click="handleUpload">
         <d2-icon name="cloud-upload"/>
