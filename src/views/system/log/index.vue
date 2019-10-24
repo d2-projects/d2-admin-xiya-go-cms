@@ -1,49 +1,26 @@
 <template>
   <d2-container>
-    <el-table
-      :data="log"
-      style="width: 100%"
-      empty-label="暂无日志信息"
-      stripe>
+    <el-table :data="log" style="width: 100%" empty-label="暂无日志信息" stripe>
       <!-- 时间 -->
-      <el-table-column
-        prop="time"
-        label="Time"
-        width="140">
-      </el-table-column>
+      <el-table-column prop="time" label="Time" width="140"></el-table-column>
       <!-- 信息 -->
-      <el-table-column
-        prop="message"
-        label="Message">
-      </el-table-column>
+      <el-table-column prop="message" label="Message"></el-table-column>
       <!-- 触发页面 -->
-      <el-table-column
-        label="Url"
-        align="center"
-        min-width="200">
+      <el-table-column label="Url" align="center" min-width="200">
         <template slot-scope="scope">
-          {{get(scope.row, 'meta.url')}}
+          {{ get(scope.row, 'meta.url') }}
         </template>
       </el-table-column>
       <!-- 触发组件 -->
-      <el-table-column
-        label="Tag"
-        align="center"
-        min-width="120">
+      <el-table-column label="Tag" align="center" min-width="120">
         <template slot-scope="scope">
-          <el-tag
-            v-if="get(scope.row, 'meta.instance.$vnode.componentOptions.tag')"
-            type="info">
+          <el-tag v-if="get(scope.row, 'meta.instance.$vnode.componentOptions.tag')" type="info">
             &#60;{{get(scope.row, 'meta.instance.$vnode.componentOptions.tag')}}&gt;
           </el-tag>
         </template>
       </el-table-column>
       <!-- 查看详情 -->
-      <el-table-column
-        fixed="right"
-        align="center"
-        label="More"
-        width="100">
+      <el-table-column fixed="right" align="center" label="More" width="100">
         <template slot-scope="scope">
           <d2-button type="primary" fa="eye" @click="handleShowMore(scope.row)"/>
         </template>
