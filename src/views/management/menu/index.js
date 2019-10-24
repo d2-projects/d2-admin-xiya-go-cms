@@ -1,12 +1,12 @@
 import utils from '@/utils'
 import formComponent from './form'
 
-function columns (h = () => {}) {
+function settingColumns (h = () => {}) {
   return [
     {
       prop: 'menu_name',
       label: '名称',
-      minWidth: '250px',
+      minWidth: '200px',
       fixed: 'left'
     },
     {
@@ -62,7 +62,7 @@ function columns (h = () => {}) {
   ]
 }
 
-function actions (h = () => {}) {
+function settingActions (h = () => {}) {
   return [
     {
       align: 'center',
@@ -104,33 +104,30 @@ export default {
         <d2-bar slot="header">
           { cell(<d2-button icon="el-icon-refresh" label="刷新" on-click={ this.reload }/>) }
           { space() }
-          { cell(<d2-table-columns-controller/>) }
+          { cell(<d2-table-columns-filter { ...{ attrs: this.columnsFilter } }  vModel={ this.table.columns }/>) }
           { space() }
           { cell(<d2-button type="primary" icon="el-icon-plus" label="新建" on-click={ this.onCreate }/>) }
         </d2-bar>
-        <d2-table { ...{ attrs: this.table } } columns={ this.columns }/>
+        <d2-table { ...{ attrs: this.table } } ref="table"/>
         <form-component ref="formComponent" on-success={ this.reload }/>
       </d2-container>
     return page
   },
   data () {
+    const h = this.$createElement
+    const columns = utils.fn.arrayAddUniqueId([
+      ...settingColumns.call(this, h),
+      ...settingActions.call(this, h)
+    ])
     return {
       table: {
         loading: false,
-        data: []
+        data: [],
+        columns
       },
-      cache: {
-        columns: columns.call(this, this.$createElement),
-        actions: actions.call(this, this.$createElement)
+      columnsFilter: {
+        options: columns
       }
-    }
-  },
-  computed: {
-    columns () {
-      return [
-        ...this.cache.columns,
-        ...this.cache.actions
-      ]
     }
   },
   created () {

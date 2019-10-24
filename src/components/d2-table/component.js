@@ -17,6 +17,7 @@ export default {
       }
     }
     return createElement('el-table', {
+      ref: 'table',
       props: Object.assign(propsDefault, this.$attrs),
       on: this.$listeners,
       directives: [
@@ -32,12 +33,24 @@ export default {
         }
       } : null
       return createElement('el-table-column', {
+        ...column.id ? { key: column.id } : {},
         props: column,
         ...scopedSlots || {}
       })
     }))
   },
+  watch: {
+    columns () {
+      this.$nextTick(this.$refs.table.doLayout)
+    }
+  },
   methods: {
     // https://element.eleme.cn/#/zh-CN/component/table#table-methods
+    method (methodName, ...arg) {
+      const fn = this.$refs.table[methodName]
+      if (fn) {
+        fn(...arg)
+      }
+    }
   }
 }

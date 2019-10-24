@@ -51,6 +51,14 @@
 
 
 
+.el-divider {
+  &.el-divider--mini {
+    margin: 12px 0;
+  }
+}
+
+
+
 .is-spacious {
   .el-table::before {
     background-color: #FFF;
