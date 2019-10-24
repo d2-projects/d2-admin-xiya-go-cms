@@ -113,11 +113,11 @@ export default {
       },
       buttons: {
         cancle: {
-          text: '取消',
+          label: '取消',
           plain: true
         },
         submit: {
-          text: '保存',
+          label: '保存',
           type: 'primary',
           icon: 'el-icon-check',
           loading: false
