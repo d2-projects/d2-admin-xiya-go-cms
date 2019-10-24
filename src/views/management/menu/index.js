@@ -1,32 +1,26 @@
-<template>
-  <d2-container spacious>
-    <template slot="header">
-      <d2-bar>
-        <d2-bar-cell>
-          <d2-button icon="el-icon-refresh" label="刷新" @click="reload"/>
-        </d2-bar-cell>
-        <d2-bar-space/>
-        <d2-bar-cell>
-          <d2-table-columns-controller/>
-        </d2-bar-cell>
-        <d2-bar-space/>
-        <d2-bar-cell>
-          <d2-button type="primary" icon="el-icon-plus" label="新建" @click="onCreate"/>
-        </d2-bar-cell>
-      </d2-bar>
-    </template>
-    <d2-table v-bind="table"/>
-    <form-component ref="formComponent" @success="reload"/>
-  </d2-container>
-</template>
-
-<script>
 import utils from '@/utils'
 import formComponent from './form'
 
 export default {
   components: {
     formComponent
+  },
+  render () {
+    const cell = content => <d2-bar-cell>{ content }</d2-bar-cell>
+    const space = config => <d2-bar-space { ...{ attrs: config } }/>
+    const page =
+      <d2-container spacious>
+        <d2-bar slot="header">
+          { cell(<d2-button icon="el-icon-refresh" label="刷新" on-click={ this.reload }/>) }
+          { space() }
+          { cell(<d2-table-columns-controller/>) }
+          { space() }
+          { cell(<d2-button type="primary" icon="el-icon-plus" label="新建" on-click={ this.onCreate }/>) }
+        </d2-bar>
+        <d2-table { ...{ attrs: this.table } }/>
+        <form-component ref="formComponent" on-success={ this.reload }/>
+      </d2-container>
+    return page
   },
   data () {
     return {
@@ -175,4 +169,3 @@ export default {
     }
   }
 }
-</script>
