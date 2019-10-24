@@ -18,9 +18,8 @@ export default {
                 <d2-button
                   { ...{ attrs: Object.assign({}, attrsDefault, attrs) } }
                   class="is-thin"
-                  on-click={ () => this.onAction(action) }>
-                  { action.label }
-                </d2-button>
+                  on-click={ () => this.onAction(action) }
+                />
               return button
             }
           )

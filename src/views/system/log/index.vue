@@ -3,7 +3,7 @@
     <el-table
       :data="log"
       style="width: 100%"
-      empty-text="暂无日志信息"
+      empty-label="暂无日志信息"
       stripe>
       <!-- 时间 -->
       <el-table-column
@@ -45,21 +45,12 @@
         label="More"
         width="100">
         <template slot-scope="scope">
-          <d2-button
-            type="primary"
-            fa="eye"
-            @click="handleShowMore(scope.row)"/>
+          <d2-button type="primary" fa="eye" @click="handleShowMore(scope.row)"/>
         </template>
       </el-table-column>
     </el-table>
     <template slot="footer">
-      <d2-button
-        type="primary"
-        fa="cloud-upload"
-        :loading="uploading"
-        @click="handleUpload">
-        Upload {{log.length}} log data
-      </d2-button>
+      <d2-button type="primary" fa="cloud-upload" :loading="uploading" :label="`Upload ${log.length} log data`" @click="handleUpload"/>
     </template>
   </d2-container>
 </template>

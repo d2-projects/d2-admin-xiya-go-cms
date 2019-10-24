@@ -11,9 +11,8 @@
           type="danger"
           icon="el-icon-delete"
           class="d2-fr"
-          @click="selectIcon()">
-          清空
-        </d2-button>
+          label="清空"
+          @click="selectIcon()"/>
       </el-row>
       <el-input
         v-model="searchText"
@@ -53,9 +52,7 @@
       <d2-button v-popover:pop slot="append" fa="list"/>
     </el-input>
     <!-- 不允许用户输入 -->
-    <d2-button v-popover:pop v-if="!userInput" :fa="value || ''">
-      {{value ? value : placeholder}}
-    </d2-button>
+    <d2-button v-popover:pop v-if="!userInput" :fa="value || ''" :label="value ? value : placeholder"/>
   </span>
 </template>
 

@@ -1,6 +1,10 @@
 <template>
-  <el-button v-bind="$attrs" class="d2-button" @click="$emit('click')">
+  <el-button
+    v-bind="$attrs"
+    class="d2-button"
+    @click="$emit('click')">
     <d2-icon v-if="fa" :name="fa"/>
+    <span v-if="label">{{ label }}</span>
     <slot/>
   </el-button>
 </template>
@@ -10,6 +14,11 @@ export default {
   name: 'd2-button',
   props: {
     fa: {
+      type: String,
+      default: '',
+      required: false
+    },
+    label: {
       type: String,
       default: '',
       required: false

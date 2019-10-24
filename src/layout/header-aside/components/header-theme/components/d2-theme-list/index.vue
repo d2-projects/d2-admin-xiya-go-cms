@@ -25,15 +25,13 @@
           v-if="activeName === scope.row.name"
           type="success"
           icon="el-icon-check"
-          round>
-          已激活
-        </d2-button>
+          label="已激活"
+          round/>
         <d2-button
           v-else
           round
-          @click="handleSelectTheme(scope.row.name)">
-          使用
-        </d2-button>
+          label="使用"
+          @click="handleSelectTheme(scope.row.name)"/>
       </template>
     </el-table-column>
   </el-table>

@@ -3,7 +3,7 @@
     <template slot="header">
       <d2-bar>
         <d2-bar-cell>
-          <d2-button icon="el-icon-refresh" @click="loadTableData">刷新</d2-button>
+          <d2-button icon="el-icon-refresh" label="刷新" @click="loadTableData"/>
         </d2-bar-cell>
         <d2-bar-space/>
         <d2-bar-cell>
@@ -11,7 +11,7 @@
         </d2-bar-cell>
         <d2-bar-space/>
         <d2-bar-cell>
-          <d2-button type="primary" icon="el-icon-plus" @click="onCreate">新建</d2-button>
+          <d2-button type="primary" icon="el-icon-plus" label="新建" @click="onCreate"/>
         </d2-bar-cell>
       </d2-bar>
     </template>
@@ -42,11 +42,7 @@ export default {
             prop: 'menu_name',
             label: '名称',
             minWidth: '250px',
-            fixed: 'left',
-            render: ({ row }) =>
-              <d2-button type="text" on-click={ () => this.loadTableData({ id: row.id, name: row.menu_name }) }>
-                { row.menu_name }
-              </d2-button>
+            fixed: 'left'
           },
           {
             prop: 'url',

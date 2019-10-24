@@ -88,8 +88,8 @@ export default {
       </el-form>
       <el-form label-width={ this.form.labelWidth }>
         <el-form-item>
-          <d2-button { ...{ attrs: this.buttons.cancle } } on-click={ this.cancle }>取消</d2-button>
-          <d2-button { ...{ attrs: this.buttons.submit } } on-click={ this.submit }>保存</d2-button>
+          <d2-button { ...{ attrs: this.buttons.cancle } } on-click={ this.cancle }/>
+          <d2-button { ...{ attrs: this.buttons.submit } } on-click={ this.submit }/>
         </el-form-item>
       </el-form>
     </el-dialog>
@@ -113,9 +113,11 @@ export default {
       },
       buttons: {
         cancle: {
+          text: '取消',
           plain: true
         },
         submit: {
+          text: '保存',
           type: 'primary',
           icon: 'el-icon-check',
           loading: false

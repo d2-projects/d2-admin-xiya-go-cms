@@ -1,6 +1,6 @@
 <template>
   <el-tooltip effect="dark" content="列显示设置" placement="top">
-    <d2-button icon="el-icon-set-up"></d2-button>
+    <d2-button icon="el-icon-set-up"/>
   </el-tooltip>
 </template>
 

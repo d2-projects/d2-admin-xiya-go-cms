@@ -1,9 +1,7 @@
 <template>
   <div class="page">
     <p class="page_title">404 page not found</p>
-    <d2-button class="d2-mt" @click="$router.replace({ path: '/' })">
-      返回首页
-    </d2-button>
+    <d2-button class="d2-mt" label="返回首页" @click="$router.replace({ path: '/' })"/>
   </div>
 </template>
 

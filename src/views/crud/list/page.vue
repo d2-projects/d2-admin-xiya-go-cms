@@ -2,21 +2,21 @@
   <d2-container spacious>
     <d2-bar slot="header">
       <d2-bar-cell>
-        <d2-button>Button</d2-button>
-        <d2-button>Button</d2-button>
+        <d2-button label="Button"/>
+        <d2-button label="Button"/>
       </d2-bar-cell>
       <d2-bar-space/>
       <d2-bar-cell>
         <el-button-group>
-          <d2-button>Button</d2-button>
-          <d2-button>Button</d2-button>
-          <d2-button>Button</d2-button>
-          <d2-button>Button</d2-button>
+          <d2-button label="Button"/>
+          <d2-button label="Button"/>
+          <d2-button label="Button"/>
+          <d2-button label="Button"/>
         </el-button-group>
       </d2-bar-cell>
       <d2-bar-space/>
       <d2-bar-cell>
-        <d2-button>Button</d2-button>
+        <d2-button label="Button"/>
       </d2-bar-cell>
       <d2-bar-space/>
       <d2-bar-cell>

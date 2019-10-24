@@ -79,18 +79,16 @@
         <d2-button
           size="default"
           :disabled="custom.length === 0"
-          @click="onSelect(custom)">
-          好
-        </d2-button>
+          label="好"
+          @click="onSelect(custom)"/>
       </div>
       <el-divider/>
       <d2-button
         size="default"
         type="primary"
         style="width:100%;"
-        @click="onClose">
-        确定
-      </d2-button>
+        label="确定"
+        @click="onClose"/>
     </el-dialog>
     <span @click="onOpen">
       <slot/>

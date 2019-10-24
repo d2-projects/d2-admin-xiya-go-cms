@@ -1,6 +1,6 @@
 <template>
   <span>
-    <d2-button @click="onClickTrigger">选择</d2-button>
+    <d2-button label="选择" @click="onClickTrigger"/>
     <el-dialog
       title="菜单选择"
       :visible.sync="dialog.visible"
@@ -14,8 +14,8 @@
         v-model="currentValue"
         ref="tree"/>
       <span slot="footer">
-        <d2-button @click="onClickCancle" plain>取消</d2-button>
-        <d2-button type="primary" icon="el-icon-check" @click="onClickOk">确定</d2-button>
+        <d2-button @click="onClickCancle" label="取消" plain/>
+        <d2-button type="primary" icon="el-icon-check" label="确定" @click="onClickOk"/>
       </span>
     </el-dialog>
   </span>
