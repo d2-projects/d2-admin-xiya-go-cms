@@ -1,7 +1,5 @@
 import layoutHeaderAside from '@/layout/header-aside'
 import utils from '@/utils'
-import crud from './modules/crud'
-import d2Table from './modules/d2-table'
 
 /**
  * 在主框架内显示
@@ -45,10 +43,6 @@ const frameIn = [
         hidden: true,
         component: utils.import('system/function/redirect')
       },
-      // 表格组件演示
-      ...d2Table,
-      // 业务表格演示
-      ...crud,
       // 系统管理
       {
         path: 'management/menu/list',
