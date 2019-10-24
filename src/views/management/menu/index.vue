@@ -2,9 +2,16 @@
   <d2-container spacious>
     <template slot="header">
       <d2-bar>
+        <d2-bar-cell>
+          <d2-button icon="el-icon-refresh" @click="loadTableData">刷新</d2-button>
+        </d2-bar-cell>
         <d2-bar-space/>
         <d2-bar-cell>
-          <el-button type="primary" icon="el-icon-plus" @click="onCreate">新建菜单</el-button>
+          <d2-table-columns-controller/>
+        </d2-bar-cell>
+        <d2-bar-space/>
+        <d2-bar-cell>
+          <d2-button type="primary" icon="el-icon-plus" @click="onCreate">新建</d2-button>
         </d2-bar-cell>
       </d2-bar>
     </template>
@@ -37,14 +44,24 @@ export default {
             minWidth: '250px',
             fixed: 'left',
             render: ({ row }) =>
-              <el-button type="text" on-click={ () => this.loadTableData({ id: row.id, name: row.menu_name }) }>
+              <d2-button type="text" on-click={ () => this.loadTableData({ id: row.id, name: row.menu_name }) }>
                 { row.menu_name }
-              </el-button>
+              </d2-button>
           },
           {
             prop: 'url',
             label: '地址',
             minWidth: '200px'
+          },
+          {
+            prop: 'perms',
+            label: '权限标识',
+            width: '200px'
+          },
+          {
+            prop: 'id',
+            label: 'ID',
+            width: '50px'
           },
           {
             prop: 'icon',
@@ -75,6 +92,11 @@ export default {
             label: '更新时间',
             width: '140px',
             formatter: row => utils.time.format(row.updated_at, 'YYYY/M/D HH:mm:ss')
+          },
+          {
+            prop: 'remark',
+            label: '备注',
+            width: '200px'
           },
           {
             align: 'center',

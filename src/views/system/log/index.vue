@@ -45,22 +45,21 @@
         label="More"
         width="100">
         <template slot-scope="scope">
-          <el-button
+          <d2-button
             type="primary"
-            @click="handleShowMore(scope.row)">
-            <d2-icon name="eye"/>
-          </el-button>
+            fa="eye"
+            @click="handleShowMore(scope.row)"/>
         </template>
       </el-table-column>
     </el-table>
     <template slot="footer">
-      <el-button
+      <d2-button
         type="primary"
+        fa="cloud-upload"
         :loading="uploading"
         @click="handleUpload">
-        <d2-icon name="cloud-upload"/>
         Upload {{log.length}} log data
-      </el-button>
+      </d2-button>
     </template>
   </d2-container>
 </template>

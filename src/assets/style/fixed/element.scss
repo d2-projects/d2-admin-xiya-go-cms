@@ -22,6 +22,35 @@
   padding: 20px;
 }
 
+
+
+// 更窄的按钮
+.d2-button {
+  &.el-button--mini {
+    &.is-thin {
+      +.is-thin {
+        margin-left: 4px;
+      }
+      padding-left: 8px;
+      padding-right: 8px;
+    }
+  }
+}
+// 在 d2-bar 上默认使用更窄的按钮
+.d2-bar {
+  .d2-button {
+    &.el-button--mini {
+      +.el-button--mini {
+        margin-left: 4px;
+      }
+      padding-left: 8px;
+      padding-right: 8px;
+    }
+  }
+}
+
+
+
 .is-spacious {
   .el-table::before {
     background-color: #FFF;

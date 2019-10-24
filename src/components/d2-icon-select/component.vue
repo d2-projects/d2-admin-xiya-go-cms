@@ -7,13 +7,13 @@
       width="300"
       trigger="click">
       <el-row type="flex" justify="end" class="d2-mb-10" v-if="clearable">
-        <el-button
+        <d2-button
           type="danger"
           icon="el-icon-delete"
           class="d2-fr"
           @click="selectIcon()">
           清空
-        </el-button>
+        </d2-button>
       </el-row>
       <el-input
         v-model="searchText"
@@ -50,17 +50,12 @@
       <template v-if="value" slot="prepend">
         <i :class="'fa fa-' + value"></i>
       </template>
-      <el-button v-popover:pop slot="append">
-        <i class="fa fa-list"></i>
-      </el-button>
+      <d2-button v-popover:pop slot="append" fa="list"/>
     </el-input>
     <!-- 不允许用户输入 -->
-    <el-button v-popover:pop v-if="!userInput">
-      <template v-if="value">
-        <i :class="'fa fa-' + value"></i>
-      </template>
+    <d2-button v-popover:pop v-if="!userInput" :fa="value || ''">
       {{value ? value : placeholder}}
-    </el-button>
+    </d2-button>
   </span>
 </template>
 

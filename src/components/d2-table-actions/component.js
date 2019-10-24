@@ -1,45 +1,26 @@
-<style lang="scss">
-.d2-table-actions {
-  .el-button {
-    +.el-button {
-      margin-left: 4px;
-    }
-    // 注意 这里只适配了 mini 尺寸
-    &.el-button--mini {
-      &.is-only-icon {
-        padding-left: 8px;
-        padding-right: 8px;
-      }
-    }
-  }
-}
-</style>
-
-<script>
 import { omit } from 'lodash'
 
 export default {
   name: 'd2-table-actions',
   render () {
     const render =
-      <span class="d2-table-actions">
+      <span>
         {
           this.actions.map(
             action => {
               const attrsDefault = {
                 plain: true
               }
-              const isOnlyIcon = action.icon && !action.label
               const attrs = omit(action, [
                 'action'
               ])
               const button =
-                <el-button
-                  { ...{ attrs: Object.assign({}, attrsDefault, action) } }
-                  class={ isOnlyIcon ? 'is-only-icon' : '' }
+                <d2-button
+                  { ...{ attrs: Object.assign({}, attrsDefault, attrs) } }
+                  class="is-thin"
                   on-click={ () => this.onAction(action) }>
                   { action.label }
-                </el-button>
+                </d2-button>
               return button
             }
           )
@@ -70,4 +51,3 @@ export default {
     }
   }
 }
-</script>

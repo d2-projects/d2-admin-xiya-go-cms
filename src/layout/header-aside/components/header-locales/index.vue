@@ -3,9 +3,9 @@
     placement="bottom"
     size="default"
     @command="onChangeLocale">
-    <el-button class="d2-mr btn-text can-hover" type="text">
+    <d2-button class="d2-mr btn-text can-hover" type="text">
       <d2-icon name="language" style="font-size: 16px;"/>
-    </el-button>
+    </d2-button>
     <el-dropdown-menu slot="dropdown">
       <el-dropdown-item
         v-for="language in $languages"

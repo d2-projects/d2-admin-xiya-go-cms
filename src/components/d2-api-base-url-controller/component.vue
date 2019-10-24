@@ -43,7 +43,7 @@
             v-for="option of options"
             :key="option.value"
             class="item">
-            <el-button
+            <d2-button
               size="default"
               :type="isItemActive(option.value) ? 'primary' : 'default'"
               style="width: 100%;"
@@ -66,7 +66,7 @@
                   <d2-icon class="item-icon" name="close"/>
                 </span>
               </div>
-            </el-button>
+            </d2-button>
           </div>
         </div>
       </el-scrollbar>
@@ -76,21 +76,21 @@
           size="default"
           v-model="custom"
           class="d2-mr-5"/>
-        <el-button
+        <d2-button
           size="default"
           :disabled="custom.length === 0"
           @click="onSelect(custom)">
           好
-        </el-button>
+        </d2-button>
       </div>
       <el-divider/>
-      <el-button
+      <d2-button
         size="default"
         type="primary"
         style="width:100%;"
         @click="onClose">
         确定
-      </el-button>
+      </d2-button>
     </el-dialog>
     <span @click="onOpen">
       <slot/>
