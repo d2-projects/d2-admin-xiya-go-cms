@@ -7,6 +7,7 @@ export default {
         class="d2-button"
         on-click={ () => this.$emit('click') }>
         { this.fa ? <d2-icon name={ this.fa }/> : undefined }
+        { this.fa && (this.label || this.$slots.default) ? ' ' : undefined }
         { this.label ? this.label : undefined }
         { this.$slots.default }
       </el-button>
