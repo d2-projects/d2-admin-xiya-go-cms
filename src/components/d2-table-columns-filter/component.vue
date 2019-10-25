@@ -1,11 +1,12 @@
 <template>
-  <el-popover v-model="popover" placement="bottom" width="150">
+  <el-drawer
+    title="列设置"
+    :visible.sync="active"
+    size="300px"
+    append-to-body>
     <!-- 全选 反选 -->
     <div>
-      <el-checkbox
-        :indeterminate="isIndeterminate"
-        v-model="checkAll"
-        @change="onCheckAllChange">
+      <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="onCheckAllChange">
         {{ showLength }} / {{ options.length }}
       </el-checkbox>
     </div>
@@ -21,10 +22,8 @@
     <!-- 分割线 -->
     <el-divider class="el-divider--mini"/>
     <!-- 确定按钮 -->
-    <d2-button type="primary" icon="el-icon-check" label="确定" :disabled="currentValue.length === 0" block @click="submit"/>
-    <!-- 触发按钮 -->
-    <d2-button slot="reference" icon="el-icon-set-up"/>
-  </el-popover>
+    <d2-button size="default" type="primary" icon="el-icon-check" label="确定" :disabled="currentValue.length === 0" block @click="submit"/>
+  </el-drawer>
 </template>
 
 <script>
@@ -51,7 +50,7 @@ export default {
     return {
       currentValue: [],
       isShow: [],
-      popover: false,
+      active: false,
       checkAll: false
     }
   },
@@ -70,7 +69,7 @@ export default {
   watch: {
     options: 'refresh',
     value: 'refresh',
-    popover (value) {
+    active (value) {
       if (value === false) {
         this.refresh()
       }
@@ -106,6 +105,9 @@ export default {
       this.currentValue = currentValue
       this.checkAll = checkAll
     },
+    start () {
+      this.active = true
+    },
     submit () {
       const result = []
       this.isShow.forEach((show, index) => {
@@ -115,7 +117,7 @@ export default {
       })
       this.$emit('input', result)
       this.$emit('change', result)
-      this.popover = false
+      this.active = false
     }
   }
 }
