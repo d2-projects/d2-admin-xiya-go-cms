@@ -99,10 +99,7 @@
 
 
 
-// drawer 滚动
-.el-drawer {
-  .el-drawer__body {
-    overflow: scroll;
-    padding: 20px;
-  }
+// drawer 容器设置定位方式
+.el-drawer__body {
+  position: relative;
 }

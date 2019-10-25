@@ -4,25 +4,41 @@
     :visible.sync="active"
     size="300px"
     append-to-body>
-    <!-- 全选 反选 -->
-    <div>
-      <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="onCheckAllChange">
-        {{ showLength }} / {{ options.length }}
-      </el-checkbox>
-    </div>
-    <!-- 分割线 -->
-    <el-divider class="el-divider--mini"/>
-    <!-- 循环列 -->
-    <div v-for="(option, index) of options" :key="option.prop" flex="main:justify cross:center">
-      <el-checkbox v-model="isShow[index]">
-        {{ option.label || option.prop || '未命名' }}
-      </el-checkbox>
-      <span>{{ currentValue[index].fixed }}</span>
-    </div>
-    <!-- 分割线 -->
-    <el-divider class="el-divider--mini"/>
-    <!-- 确定按钮 -->
-    <d2-button size="default" type="primary" icon="el-icon-check" label="确定" :disabled="currentValue.length === 0" block @click="submit"/>
+    <d2-drawer-container>
+      <!-- 全选 反选 -->
+      <div>
+        <el-checkbox
+          :indeterminate="isIndeterminate"
+          v-model="checkAll"
+          @change="onCheckAllChange">
+          {{ showLength }} / {{ options.length }}
+        </el-checkbox>
+      </div>
+      <!-- 分割线 -->
+      <el-divider class="el-divider--mini"/>
+      <!-- 循环列 -->
+      <div
+        v-for="(option, index) of options"
+        :key="option.prop"
+        flex="main:justify cross:center">
+        <el-checkbox v-model="isShow[index]">
+          {{ option.label || option.prop || '未命名' }}
+        </el-checkbox>
+        <span class="d2-mr-20">
+          {{ currentValue[index].fixed }}
+        </span>
+      </div>
+      <!-- 确定按钮 -->
+      <d2-button
+        slot="footer"
+        size="default"
+        type="primary"
+        icon="el-icon-check"
+        label="确定"
+        :disabled="currentValue.length === 0"
+        block
+        @click="submit"/>
+    </d2-drawer-container>
   </el-drawer>
 </template>
 
