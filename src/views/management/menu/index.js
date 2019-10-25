@@ -87,7 +87,7 @@ function settingActions (h = () => {}) {
           {
             icon: 'el-icon-delete',
             type: 'danger',
-            confirm: `确定删除 [ ${ row.menu_name } ] 吗`,
+            confirm: `确定删除 [ ${row.menu_name} ] 吗`,
             action: () => this.onDelete(row.id)
           }
         ]
@@ -102,7 +102,7 @@ export default {
     formComponent
   },
   render () {
-    const filter = <d2-table-columns-filter { ...{ attrs: this.columnsFilter } }  vModel={ this.table.columns }/>
+    const filter = <d2-table-columns-filter { ...{ attrs: this.columnsFilter } } vModel={ this.table.columns }/>
     const page =
       <d2-container spacious>
         <d2-bar slot="header">
