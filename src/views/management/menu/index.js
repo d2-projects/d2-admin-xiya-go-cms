@@ -22,7 +22,8 @@ function settingColumns (h = () => {}) {
     {
       prop: 'id',
       label: 'ID',
-      width: '50px'
+      width: '50px',
+      show: false
     },
     {
       prop: 'icon',
@@ -46,18 +47,21 @@ function settingColumns (h = () => {}) {
       prop: 'created_at',
       label: '创建时间',
       width: '140px',
+      show: false,
       formatter: row => utils.time.format(row.created_at, 'YYYY/M/D HH:mm:ss')
     },
     {
       prop: 'updated_at',
       label: '更新时间',
       width: '140px',
+      show: false,
       formatter: row => utils.time.format(row.updated_at, 'YYYY/M/D HH:mm:ss')
     },
     {
       prop: 'remark',
       label: '备注',
-      width: '200px'
+      width: '200px',
+      show: false
     }
   ]
 }
@@ -65,6 +69,7 @@ function settingColumns (h = () => {}) {
 function settingActions (h = () => {}) {
   return [
     {
+      label: '操作',
       align: 'center',
       width: '120px',
       fixed: 'right',
@@ -123,7 +128,7 @@ export default {
       table: {
         loading: false,
         data: [],
-        columns
+        columns: columns.filter(e => e.show !== false)
       },
       columnsFilter: {
         options: columns

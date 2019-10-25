@@ -103,7 +103,7 @@ export default {
       time: dayjs().format('HH:mm:ss'),
       // 表单
       formLogin: {
-        username: 'yangcuiwang',
+        username: 'liyang',
         password: '123456'
       },
       // 表单校验
