@@ -102,17 +102,21 @@ export default {
     formComponent
   },
   render () {
-    const cell = content => <d2-bar-cell>{ content }</d2-bar-cell>
-    const space = config => <d2-bar-space { ...{ attrs: config } }/>
+    const bar = children =>
+      <d2-bar slot="header">
+        { children.map(item => !item.componentOptions || item.componentOptions.tag !== 'd2-bar-space' ? <d2-bar-cell>{ item }</d2-bar-cell> : item) }
+      </d2-bar>
     const page =
       <d2-container spacious>
-        <d2-bar slot="header">
-          { cell(<d2-button icon="el-icon-refresh" label="刷新" on-click={ this.reload }/>) }
-          { space() }
-          { cell(<d2-table-columns-filter { ...{ attrs: this.columnsFilter } }  vModel={ this.table.columns }/>) }
-          { space() }
-          { cell(<d2-button type="primary" icon="el-icon-plus" label="新建" on-click={ this.onCreate }/>) }
-        </d2-bar>
+        {
+          bar([
+            <d2-button icon="el-icon-refresh" label="刷新" on-click={ this.reload }/>,
+            <d2-bar-space/>,
+            <d2-table-columns-filter { ...{ attrs: this.columnsFilter } }  vModel={ this.table.columns }/>,
+            <d2-bar-space/>,
+            <d2-button type="primary" icon="el-icon-plus" label="新建" on-click={ this.onCreate }/>
+          ])
+        }
         <d2-table { ...{ attrs: this.table } } ref="table"/>
         <form-component ref="formComponent" on-success={ this.reload }/>
       </d2-container>
