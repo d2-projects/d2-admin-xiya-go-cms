@@ -158,6 +158,7 @@ export default {
      */
     async loadTableData () {
       this.table.loading = true
+      this.table.data = []
       this.table.data = await this.$api.MENU_ALL()
       this.table.loading = false
     },

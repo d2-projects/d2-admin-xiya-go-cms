@@ -1,4 +1,4 @@
-// element 样式补丁
+// 卡片阴影定制
 .el-card {
   &.is-always-shadow {
     box-shadow: 0 0 8px 0 rgba(232,237,250,.6), 0 2px 4px 0 rgba(232,237,250,.5);
@@ -10,16 +10,18 @@
   }
 }
 
+
+
+// 菜单
 .el-menu--horizontal {
   border-bottom: none !important;
 }
 
+
+
+// tab
 .el-tabs__item:focus.is-active.is-focus:not(:active) {
   box-shadow: none !important;
-}
-
-.el-drawer__body {
-  padding: 20px;
 }
 
 
@@ -47,6 +49,7 @@
 
 
 
+// 边距更小的分割线
 .el-divider {
   &.el-divider--mini {
     margin: 12px 0;
@@ -55,6 +58,7 @@
 
 
 
+// 表格在占满 spacious 模式的 d2-container 时特殊样式
 .is-spacious {
   .el-table::before {
     background-color: #FFF;
@@ -83,6 +87,9 @@
   }
 }
 
+
+
+// dialog 贴屏幕顶部
 .el-dialog {
   &.el-dialog__no-top-border {
     border-top-left-radius: 0px;
@@ -90,8 +97,12 @@
   }
 }
 
+
+
+// drawer 滚动
 .el-drawer {
   .el-drawer__body {
     overflow: scroll;
+    padding: 20px;
   }
 }
