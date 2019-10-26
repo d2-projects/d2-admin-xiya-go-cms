@@ -4,21 +4,18 @@
     padding: 2px;
     font-size: 10px;
   }
-  .d2-button+.d2-button {
-    margin-left: 1px;
-  }
 }
 </style>
 
 <template>
-  <div class="d2-table-columns-fixed-controller">
+  <el-button-group class="d2-table-columns-fixed-controller">
     <d2-button
       v-for="option of options"
       :key="option.icon"
       :type="value === option.value ? 'primary' : 'default'"
       :icon="option.icon"
       @click="$emit('input', option.value)"/>
-  </div>
+  </el-button-group>
 </template>
 
 <script>

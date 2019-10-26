@@ -1,10 +1,45 @@
+<style lang="scss" scoped>
+.d2-table-columns-filter {
+  .component--list {
+    margin: -20px;
+    background-color: $color-border-3;
+    .component--list-item {
+      padding: 10px;
+      background-color: #FFF;
+      margin-bottom: 1px;
+      transition: padding .3s;
+      &.ghost {
+        background-color: $color-border-3;
+        opacity: .5;
+        padding: 20px 10px;
+      }
+      &:last-child {
+        margin-bottom: 0px;
+      }
+      .component--list-item-handle {
+        margin: -10px;
+        padding: 10px;
+        color: $color-text-placehoder;
+        @extend %unable-select;
+        cursor: pointer;
+      }
+      &:hover {
+        .component--list-item-handle {
+          color: $color-text-normal;
+        }
+      }
+    }
+  }
+}
+</style>
+
 <template>
   <el-drawer
     title="列设置"
     :visible.sync="active"
-    size="250px"
+    size="300px"
     append-to-body>
-    <d2-drawer-container>
+    <d2-drawer-container class="d2-table-columns-filter">
       <!-- 全选 反选 -->
       <div flex="main:justify cross:center">
         <el-checkbox
@@ -17,18 +52,31 @@
       </div>
       <!-- 分割线 -->
       <el-divider class="el-divider--mini"/>
-      <!-- 循环列 -->
-      <div
-        v-for="(option, index) of options"
-        :key="option.prop"
-        flex="main:justify cross:center">
-        <el-checkbox v-model="isShow[index]">
-          {{ option.label || option.prop || '未命名' }}
-        </el-checkbox>
-        <d2-table-columns-fixed-controller
-          v-model="currentValue[index].fixed"
-          class="d2-mr-20"/>
-      </div>
+
+      <el-card shadow="never" class="d2-mr-20">
+        <draggable ghost-class="ghost" class="component--list" v-model="options">
+          <transition-group>
+            <!-- 循环列 -->
+            <div
+              v-for="(option, index) of options"
+              :key="option.id"
+              class="component--list-item"
+              flex="main:justify cross:center">
+              <el-checkbox flex-box="1" v-model="isShow[index]">
+                {{ option.label || option.prop || '未命名' }}
+              </el-checkbox>
+              <d2-table-columns-fixed-controller
+                flex-box="0"
+                class="d2-mr-10"
+                v-model="currentValue[index].fixed"/>
+              <div flex-box="0" class="component--list-item-handle">
+                <d2-icon name="bars"/>
+              </div>
+            </div>
+          </transition-group>
+        </draggable>
+      </el-card>
+
       <!-- 确定按钮 -->
       <d2-button
         slot="footer"
@@ -45,12 +93,16 @@
 
 <script>
 import { cloneDeep } from 'lodash'
+import draggable from 'vuedraggable'
 
 // 输入 全部分表格列设置
 // 输出 要显示的表格列 + 每列的设置
 
 export default {
   name: 'd2-table-columns-filter',
+  components: {
+    draggable
+  },
   props: {
     options: {
       type: Array,
@@ -67,7 +119,7 @@ export default {
     return {
       currentValue: [],
       isShow: [],
-      active: false,
+      active: true,
       checkAll: false
     }
   },
