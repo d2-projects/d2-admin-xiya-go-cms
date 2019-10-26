@@ -33,7 +33,6 @@ export default {
         }
       } : null
       return createElement('el-table-column', {
-        ...column.id ? { key: column.id } : {},
         props: column,
         ...scopedSlots || {}
       })
@@ -41,6 +40,7 @@ export default {
   },
   watch: {
     columns () {
+      console.log('columns changed')
       this.$nextTick(this.$refs.table.doLayout)
     }
   },

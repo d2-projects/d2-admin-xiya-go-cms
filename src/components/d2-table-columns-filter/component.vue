@@ -19,11 +19,17 @@
         padding: 10px;
         color: $color-text-placehoder;
         @extend %unable-select;
-        cursor: pointer;
+        cursor: move;
+        &.disabled {
+          opacity: .3;
+          cursor: pointer;
+        }
       }
       &:hover {
         .component--list-item-handle {
-          color: $color-text-normal;
+          &:not(.disabled) {
+            color: $color-text-normal;
+          }
         }
       }
     }
@@ -63,14 +69,20 @@
               :key="option.id"
               class="component--list-item"
               flex="main:justify cross:center">
-              <el-checkbox flex-box="1" v-model="isShow[index]">
+              <el-checkbox flex-box="1" v-model="currentValue[index].show">
                 {{ option.label || option.prop || '未命名' }}
               </el-checkbox>
               <d2-table-columns-fixed-controller
                 flex-box="0"
                 class="d2-mr-10"
                 v-model="currentValue[index].fixed"/>
-              <div flex-box="0" class="component--list-item-handle handle">
+              <div
+                flex-box="0"
+                class="component--list-item-handle"
+                :class="{
+                  handle: (!!currentValue[index].fixed) === false,
+                  disabled: !!currentValue[index].fixed
+                }">
                 <d2-icon name="bars"/>
               </div>
             </div>
@@ -78,16 +90,26 @@
         </draggable>
       </el-card>
 
-      <!-- 确定按钮 -->
-      <d2-button
-        slot="footer"
-        size="default"
-        type="primary"
-        icon="el-icon-check"
-        label="确定"
-        :disabled="currentValue.length === 0"
-        block
-        @click="submit"/>
+      <el-row slot="footer" :gutter="10">
+        <el-col :span="12">
+          <d2-button
+            size="default"
+            icon="el-icon-refresh"
+            label="还原"
+            block
+            @click="reset"/>
+        </el-col>
+        <el-col :span="12">
+          <d2-button
+            size="default"
+            type="primary"
+            icon="el-icon-check"
+            label="确定"
+            block
+            @click="submit"/>
+        </el-col>
+      </el-row>
+
     </d2-drawer-container>
   </el-drawer>
 </template>
@@ -119,7 +141,6 @@ export default {
   data () {
     return {
       currentValue: [],
-      isShow: [],
       active: true,
       checkAll: false
     }
@@ -127,7 +148,7 @@ export default {
   computed: {
     // 显示的数量
     showLength () {
-      return this.isShow.filter(e => e).length
+      return this.currentValue.filter(e => e.show).length
     },
     // 半选状态
     isIndeterminate () {
@@ -151,7 +172,10 @@ export default {
   methods: {
     // 全选和反选发生变化时触发
     onCheckAllChange (value) {
-      this.isShow = this.isShow.map(e => value)
+      this.currentValue = this.currentValue.map(e => {
+        e.show = value
+        return e
+      })
     },
     // 根据 value 和 options 计算 currentValue
     // 规则
@@ -160,19 +184,25 @@ export default {
     refresh () {
       const options = cloneDeep(this.options)
       const value = cloneDeep(this.value)
-      let isShow = []
+      const currentValueOld = cloneDeep(this.currentValue)
       let currentValue = []
       let checkAll = true
-      options.forEach(option => {
+      // 设置比较源
+      let compareSource = options
+      if (currentValueOld.length > 0 && currentValueOld.length === options.length) {
+        compareSource = currentValueOld
+      }
+      // 计算
+      compareSource.forEach(option => {
         // 在 value 尝试找到这个项目
         // 没有的话使用 option 中的默认值
-        const item = value.find(column => column.id === option.id)
+        let item = value.find(column => column.id === option.id)
         const show = !!item
+        item = item || option
+        item.show = show
         if (!show) checkAll = false
-        currentValue.push(item || option)
-        isShow.push(show)
+        currentValue.push(item)
       })
-      this.isShow = isShow
       this.currentValue = currentValue
       this.checkAll = checkAll
     },
@@ -180,12 +210,20 @@ export default {
     start () {
       this.active = true
     },
+    // 还原
+    reset () {
+      this.currentValue = cloneDeep(this.options).map(e => {
+        e.show = e.show === false ? false : true
+        return e
+      })
+      this.submit()
+    },
     // 确认
     submit () {
       const result = []
-      this.isShow.forEach((show, index) => {
-        if (show) {
-          result.push(this.currentValue[index])
+      this.currentValue.forEach((item, index) => {
+        if (item.show) {
+          result.push(item)
         }
       })
       this.$emit('input', result)

@@ -14,7 +14,7 @@
       :key="option.icon"
       :type="value === option.value ? 'primary' : 'default'"
       :icon="option.icon"
-      @click="$emit('input', option.value)"/>
+      @click="submit(option.value)"/>
   </el-button-group>
 </template>
 
@@ -42,6 +42,12 @@ export default {
           icon: 'el-icon-arrow-right'
         },
       ]
+    }
+  },
+  methods: {
+    submit (value) {
+      this.$emit('input', value)
+      this.$emit('change', value)
     }
   }
 }
