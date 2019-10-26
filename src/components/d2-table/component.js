@@ -40,7 +40,6 @@ export default {
   },
   watch: {
     columns () {
-      console.log('columns changed')
       this.$nextTick(this.$refs.table.doLayout)
     }
   },

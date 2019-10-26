@@ -41,7 +41,7 @@
   <el-drawer
     title="列设置"
     :visible.sync="active"
-    size="400px"
+    size="300px"
     append-to-body>
     <d2-drawer-container class="d2-table-columns-filter">
       <!-- 全选 反选 -->
@@ -54,9 +54,7 @@
         </el-checkbox>
         <el-tag class="d2-mr-20">Fixed</el-tag>
       </div>
-      <!-- 分割线 -->
       <el-divider class="el-divider--mini"/>
-
       <el-card shadow="never">
         <draggable
           ghost-class="ghost"
@@ -75,21 +73,17 @@
               <d2-table-columns-fixed-controller
                 flex-box="0"
                 class="d2-mr-10"
-                v-model="currentValue[index].fixed"/>
+                v-model="currentValue[index].fixed"
+                @change="value => fixedChange(index, value)"/>
               <div
                 flex-box="0"
-                class="component--list-item-handle"
-                :class="{
-                  handle: (!!currentValue[index].fixed) === false,
-                  disabled: !!currentValue[index].fixed
-                }">
+                class="component--list-item-handle handle">
                 <d2-icon name="bars"/>
               </div>
             </div>
           </transition-group>
         </draggable>
       </el-card>
-
       <el-row slot="footer" :gutter="10">
         <el-col :span="12">
           <d2-button
@@ -109,7 +103,6 @@
             @click="submit"/>
         </el-col>
       </el-row>
-
     </d2-drawer-container>
   </el-drawer>
 </template>
@@ -141,7 +134,7 @@ export default {
   data () {
     return {
       currentValue: [],
-      active: true,
+      active: false,
       checkAll: false
     }
   },
@@ -158,8 +151,12 @@ export default {
     }
   },
   watch: {
-    options: 'refresh',
-    value: 'refresh',
+    options () {
+      this.refresh()
+    },
+    value () {
+      this.refresh()
+    },
     active (value) {
       if (value === false) {
         this.refresh()
@@ -170,6 +167,12 @@ export default {
     this.refresh()
   },
   methods: {
+    // fixed 变化时触发
+    fixedChange (index, value) {
+      if (value) this.currentValue[index].show = true
+      if (value === 'left') this.currentValue.unshift(this.currentValue.splice(index, 1)[0])
+      if (value === 'right') this.currentValue.push(this.currentValue.splice(index, 1)[0])
+    },
     // 全选和反选发生变化时触发
     onCheckAllChange (value) {
       this.currentValue = this.currentValue.map(e => {
