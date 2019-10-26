@@ -7,11 +7,9 @@
       padding: 10px;
       background-color: #FFF;
       margin-bottom: 1px;
-      transition: padding .3s;
       &.ghost {
         background-color: $color-border-3;
         opacity: .5;
-        padding: 20px 10px;
       }
       &:last-child {
         margin-bottom: 0px;
@@ -58,11 +56,10 @@
           ghost-class="ghost"
           class="component--list"
           handle=".handle"
-          v-model="options">
+          v-model="currentValue">
           <transition-group>
-            <!-- 循环列 -->
             <div
-              v-for="(option, index) of options"
+              v-for="(option, index) of currentValue"
               :key="option.id"
               class="component--list-item"
               flex="main:justify cross:center">
