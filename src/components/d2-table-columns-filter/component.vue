@@ -6,13 +6,14 @@
     append-to-body>
     <d2-drawer-container>
       <!-- 全选 反选 -->
-      <div>
+      <div flex="main:justify cross:center">
         <el-checkbox
           :indeterminate="isIndeterminate"
           v-model="checkAll"
           @change="onCheckAllChange">
           {{ showLength }} / {{ options.length }}
         </el-checkbox>
+        <el-tag class="d2-mr-20">Fixed</el-tag>
       </div>
       <!-- 分割线 -->
       <el-divider class="el-divider--mini"/>
@@ -24,9 +25,9 @@
         <el-checkbox v-model="isShow[index]">
           {{ option.label || option.prop || '未命名' }}
         </el-checkbox>
-        <span class="d2-mr-20">
-          {{ currentValue[index].fixed }}
-        </span>
+        <d2-table-columns-fixed-controller
+          v-model="currentValue[index].fixed"
+          class="d2-mr-20"/>
       </div>
       <!-- 确定按钮 -->
       <d2-button
@@ -66,7 +67,7 @@ export default {
     return {
       currentValue: [],
       isShow: [],
-      active: false,
+      active: true,
       checkAll: false
     }
   },
