@@ -54,7 +54,11 @@
       <el-divider class="el-divider--mini"/>
 
       <el-card shadow="never" class="d2-mr-20">
-        <draggable ghost-class="ghost" class="component--list" v-model="options">
+        <draggable
+          ghost-class="ghost"
+          class="component--list"
+          handle=".handle"
+          v-model="options">
           <transition-group>
             <!-- 循环列 -->
             <div
@@ -69,7 +73,7 @@
                 flex-box="0"
                 class="d2-mr-10"
                 v-model="currentValue[index].fixed"/>
-              <div flex-box="0" class="component--list-item-handle">
+              <div flex-box="0" class="component--list-item-handle handle">
                 <d2-icon name="bars"/>
               </div>
             </div>
