@@ -67,7 +67,7 @@ export default {
     return {
       currentValue: [],
       isShow: [],
-      active: true,
+      active: false,
       checkAll: false
     }
   },
