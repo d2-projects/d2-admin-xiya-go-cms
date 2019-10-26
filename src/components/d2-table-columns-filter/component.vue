@@ -41,7 +41,7 @@
   <el-drawer
     title="列设置"
     :visible.sync="active"
-    size="300px"
+    size="400px"
     append-to-body>
     <d2-drawer-container class="d2-table-columns-filter">
       <!-- 全选 反选 -->
@@ -57,7 +57,7 @@
       <!-- 分割线 -->
       <el-divider class="el-divider--mini"/>
 
-      <el-card shadow="never" class="d2-mr-20">
+      <el-card shadow="never">
         <draggable
           ghost-class="ghost"
           class="component--list"
