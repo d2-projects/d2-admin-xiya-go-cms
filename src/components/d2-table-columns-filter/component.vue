@@ -2,7 +2,7 @@
   <el-drawer
     title="列设置"
     :visible.sync="active"
-    size="300px"
+    size="250px"
     append-to-body>
     <d2-drawer-container>
       <!-- 全选 反选 -->
@@ -95,6 +95,7 @@ export default {
     this.refresh()
   },
   methods: {
+    // 全选和反选发生变化时触发
     onCheckAllChange (value) {
       this.isShow = this.isShow.map(e => value)
     },
@@ -121,9 +122,11 @@ export default {
       this.currentValue = currentValue
       this.checkAll = checkAll
     },
+    // 开始选择
     start () {
       this.active = true
     },
+    // 确认
     submit () {
       const result = []
       this.isShow.forEach((show, index) => {
