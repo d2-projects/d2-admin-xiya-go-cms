@@ -10,6 +10,12 @@ function settingColumns (h = () => {}) {
       fixed: 'left'
     },
     {
+      prop: 'icon',
+      label: '图标',
+      width: '50px',
+      render: ({ row }) => row.icon ? <d2-icon name={ row.icon }></d2-icon> : <span>无</span>
+    },
+    {
       prop: 'url',
       label: '地址',
       minWidth: '200px'
@@ -24,12 +30,6 @@ function settingColumns (h = () => {}) {
       label: 'ID',
       width: '50px',
       show: false
-    },
-    {
-      prop: 'icon',
-      label: '图标',
-      width: '50px',
-      render: ({ row }) => row.icon ? <d2-icon name={ row.icon }></d2-icon> : <span>无</span>
     },
     {
       prop: 'menu_type',
