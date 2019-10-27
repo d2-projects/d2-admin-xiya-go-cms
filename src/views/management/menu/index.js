@@ -77,7 +77,7 @@ function settingActions (h = () => {}) {
         const actions = [
           {
             icon: 'el-icon-edit-outline',
-            action: () => this.onEdit(row)
+            action: () => this.onEdit(row.id)
           },
           {
             icon: 'el-icon-plus',
@@ -167,22 +167,14 @@ export default {
      * @param {number} pid 新建项目的父级 id
      */
     onCreate (pid = 0) {
-      this.$refs.formComponent.init({
-        data: {
-          parent_id: pid
-        },
-        mode: 'create'
-      })
+      this.$refs.formComponent.create(pid)
     },
     /**
      * @description 编辑
-     * @param {object} row 编辑的行数据
+     * @param {object} id 编辑的行 id
      */
-    onEdit (row) {
-      this.$refs.formComponent.init({
-        data: row,
-        mode: 'edit'
-      })
+    onEdit (id) {
+      this.$refs.formComponent.edit(id)
     },
     /**
      * @description 删除

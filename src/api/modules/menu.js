@@ -1,6 +1,6 @@
 export default ({ request }) => ({
   /**
-   * @description 菜单管理列表
+   * @description 菜单管理列表 只获取某级菜单下的数据
    * @description http://yapi.xiya.vip/project/11/interface/api/190
    * @param {Object} data {Number} parent 父级菜单 id
    */
@@ -33,6 +33,19 @@ export default ({ request }) => ({
       url: '/api/menu/create',
       method: 'post',
       data
+    })
+  },
+  /**
+   * @description 菜单详情
+   * @description http://yapi.xiya.vip/project/11/interface/api/165
+   */
+  MENU_DETAIL (id) {
+    return request({
+      url: '/api/menu/update',
+      method: 'post',
+      data: {
+        id
+      }
     })
   },
   /**
