@@ -76,11 +76,10 @@ export default {
      * @description 初始化表单为编辑模式
      */
     async edit (id) {
+      this.setMode('edit')
       this.open()
       try {
-        const data = await this.doLoadData(() => this.$api.MENU_DETAIL(id))
-        this.form.model = data
-        this.setMode('edit')
+        this.form.model = await this.doLoadData(() => this.$api.MENU_DETAIL(id))
       } catch (error) {
         this.cancle()
       }
