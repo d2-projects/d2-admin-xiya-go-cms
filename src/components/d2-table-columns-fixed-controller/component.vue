@@ -40,7 +40,7 @@ export default {
         {
           value: 'right',
           icon: 'el-icon-arrow-right'
-        },
+        }
       ]
     }
   },

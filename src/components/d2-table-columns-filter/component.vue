@@ -216,7 +216,7 @@ export default {
     // 还原
     reset () {
       this.currentValue = cloneDeep(this.options).map(e => {
-        e.show = e.show === false ? false : true
+        e.show = e.show === false ? e.show : true
         return e
       })
       this.submit()
