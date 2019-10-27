@@ -23,7 +23,6 @@ export default {
       value1: 81,
       tree1: {
         defaultExpandAll: true,
-        highlightCurrent: true,
         nodeKey: 'id',
         props: {
           label: 'menu_name',

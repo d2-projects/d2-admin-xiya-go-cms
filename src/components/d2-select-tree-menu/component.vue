@@ -1,24 +1,24 @@
 <template>
-  <el-tree
-    :props="props"
-    :data="data"
-    :current-node-key="currentNodeKey"
-    node-key="id"
-    ref="tree"
-    default-expand-all
-    @current-change="onCurrentChange">
-    <div
-      slot-scope="{ node }"
-      flex="main:justify cross:center"
-      :class="{
-        'el-link': node.isCurrent,
-        'el-link--primary': node.isCurrent
-      }"
-      style="flex:1">
-      <span>{{ node.label }}</span>
-      <d2-icon v-if="node.isCurrent" name="check-circle" class="d2-mr-10"/>
-    </div>
-  </el-tree>
+  <span>
+    <d2-button label="选择" @click="onClickTrigger"/>
+    <el-dialog
+      title="菜单选择"
+      :visible.sync="dialog.visible"
+      :show-close="false"
+      width="300px"
+      destroy-on-close
+      append-to-body
+      @close="onDialogClose">
+      <d2-tree
+        v-bind="treeSetting"
+        v-model="currentValue"
+        :source="$api.MENU_ALL"/>
+      <span slot="footer">
+        <d2-button @click="onClickCancle" label="取消" plain/>
+        <d2-button type="primary" icon="el-icon-check" label="确定" @click="onClickOk"/>
+      </span>
+    </el-dialog>
+  </span>
 </template>
 
 <script>
@@ -33,29 +33,54 @@ export default {
   },
   data () {
     return {
-      props: {
-        label: 'menu_name',
-        children: 'children_list'
+      dialog: {
+        visible: false
       },
-      data: [],
-      currentNodeKey: 0
+      treeSetting: {
+        defaultExpandAll: true,
+        nodeKey: 'id',
+        props: {
+          label: 'menu_name',
+          children: 'children_list'
+        }
+      },
+      currentValue: 0
     }
   },
   watch: {
-    value () {
-      this.$nextTick(() => this.$refs.tree && this.$refs.tree.setCurrentKey(this.value))
+    value: {
+      handler (value) {
+        this.currentValue = value
+      },
+      immediate: true
     }
   },
-  created () {
-    this.init()
-  },
   methods: {
-    async init () {
-      this.currentNodeKey = this.value
-      this.data = await this.$api.MENU_ALL()
+    /**
+     * 点击触发器
+     */
+    onClickTrigger () {
+      this.dialog.visible = true
     },
-    onCurrentChange (data, node) {
-      this.$emit('input', data.id)
+    /**
+     * 点击取消
+     */
+    onClickCancle () {
+      this.currentValue = this.value
+      this.dialog.visible = false
+    },
+    /**
+     * 点击确定
+     */
+    onClickOk () {
+      this.$emit('input', this.currentValue)
+      this.dialog.visible = false
+    },
+    /**
+     * 面板关闭回调
+     */
+    onDialogClose () {
+      this.currentValue = this.value
     }
   }
 }

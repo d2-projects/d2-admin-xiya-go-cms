@@ -55,6 +55,7 @@ export default {
           showCheckbox: true,
           defaultCheckedKeys: this.defaultCheckedKeys
         } : {
+          highlightCurrent: true,
           currentNodeKey: this.currentNodeKey
         }
       }
