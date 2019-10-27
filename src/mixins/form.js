@@ -29,8 +29,14 @@ export default function ({
         </el-form>
         <el-form label-width={ this.form.labelWidth }>
           <el-form-item>
-            <d2-button { ...{ attrs: this.buttons.cancle } } on-click={ this.cancle }/>
-            <d2-button { ...{ attrs: this.buttons.submit } } on-click={ this.submit }/>
+            <d2-button
+              { ...{ attrs: this.buttons.cancle } }
+              on-click={ this.cancle }/>
+            <d2-button
+              { ...{ attrs: this.buttons.submit } }
+              loading={ this.isSubmitButtonLoading }
+              disabled={ this.isSubmitButtonDisabled }
+              on-click={ this.submit }/>
           </el-form-item>
         </el-form>
       </el-dialog>
@@ -80,14 +86,25 @@ export default function ({
       title () {
         return this.switchByMode('新建', '编辑')
       },
-      isFormDisabled () {
-        return this.status.isLoadingData || this.status.isLoadingDict
-      },
+      // 表单 loading 状态
+      // 正在加载原始数据 || 正在加载字典
       isFormLoading () {
         return this.status.isLoadingData || this.status.isLoadingDict
       },
+      // 表单 禁用 状态
+      // 正在加载原始数据 || 正在加载字典 || 正在提交
+      isFormDisabled () {
+        return this.status.isLoadingData || this.status.isLoadingDict || this.status.isSubmitting
+      },
+      // 提交按钮 禁用 状态
+      // 正在加载原始数据 || 正在加载字典
+      isSubmitButtonDisabled () {
+        return this.status.isLoadingData || this.status.isLoadingDict
+      },
+      // 提交按钮 loading 状态
+      // 正在提交
       isSubmitButtonLoading () {
-        return false
+        return this.status.isSubmitting
       }
     },
     methods: {
