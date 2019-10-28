@@ -56,14 +56,14 @@ export default {
   },
   methods: {
     /**
-     * 取消
+     * @description 取消
      */
     cancle () {
       this.currentValue = cloneDeep(this.value)
       this.active = false
     },
     /**
-     * 确认
+     * @description 确认
      */
     submit () {
       this.$emit('input', this.currentValue)

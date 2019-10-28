@@ -15,8 +15,8 @@
     class="d2-tree"
     ref="tree"
     v-bind="config"
-    @current-change="onCurrentChange"
-    @check="onCheck">
+    @current-change="currentChange"
+    @check="check">
   </el-tree>
 </template>
 
@@ -70,6 +70,9 @@ export default {
     this.init()
   },
   methods: {
+    /**
+     * @description 初始化 根据 source 的数据类型设置数据
+     */
     async init () {
       if (isArray(this.source)) {
         this.currentData = this.source
@@ -82,6 +85,9 @@ export default {
       }
       this.updateDefaultValue()
     },
+    /**
+     * @description 将默认选择的值设置到树上
+     */
     updateDefaultValue () {
       if (this.multiple) this.defaultCheckedKeys = this.value
       else this.currentNodeKey = this.value
@@ -91,11 +97,23 @@ export default {
         else this.$refs.tree.setCurrentKey(this.currentNodeKey)
       })
     },
-    onCurrentChange (data, node) {
+    /**
+     * @description el-tree 事件 | current-change
+     * @description 其它事件的转发请自行按需追加
+     */
+    currentChange (data, node) {
+      this.$emit('current-change', data, node)
+      // 更新 value
       if (this.multiple) return
       this.$emit('input', data.id)
     },
-    onCheck (data, info) {
+    /**
+     * @description el-tree 事件 | check
+     * @description 其它事件的转发请自行按需追加
+     */
+    check (data, info) {
+      this.$emit('check', data, info)
+      // 更新 value
       if (!this.multiple) return
       this.$emit('input', info.checkedKeys)
     }
