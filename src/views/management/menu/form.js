@@ -14,7 +14,20 @@ function setting (h = () => {}) {
       default: 0,
       label: '上级菜单',
       rule: { required: true, message: '请设置上级菜单', trigger: 'change' },
-      render: <d2-select-tree-menu vModel={ this.form.model.parent_id }/>
+      render:
+        <d2-tree-popover
+          vModel={ this.form.model.parent_id }
+          tree={
+            {
+              source: 'MENU_ALL',
+              defaultExpandAll: true,
+              nodeKey: 'id',
+              props: {
+                label: 'menu_name',
+                children: 'children_list'
+              }
+            }
+          }/>
     },
     {
       prop: 'order_num',

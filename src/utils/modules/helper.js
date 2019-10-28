@@ -4,7 +4,13 @@
  */
 export function getFormFromSetting (settingFunction) {
   let form = {}
-  settingFunction.call({ form: { model: {} } }).forEach(item => {
+  const that = {
+    form: {
+      model: {},
+      $api: {}
+    }
+  }
+  settingFunction.call(that).forEach(item => {
     form[item.prop] = item.default
   })
   return form
@@ -16,7 +22,13 @@ export function getFormFromSetting (settingFunction) {
  */
 export function getRulesFromSetting (settingFunction) {
   let rules = {}
-  settingFunction.call({ form: { model: {} } })
+  const that = {
+    form: {
+      model: {},
+      $api: {}
+    }
+  }
+  settingFunction.call(that)
     .filter(item => item.rule)
     .forEach(item => rules[item.prop] = item.rule)
   return rules

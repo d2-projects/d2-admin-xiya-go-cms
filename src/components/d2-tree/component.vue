@@ -10,21 +10,21 @@
 }
 </style>
 
+<template>
+  <el-tree
+    class="d2-tree"
+    ref="tree"
+    v-bind="config"
+    @current-change="onCurrentChange"
+    @check="onCheck">
+  </el-tree>
+</template>
+
 <script>
-import { isArray, isFunction } from 'lodash'
+import { isArray, isString, isFunction } from 'lodash'
 
 export default {
   name: 'd2-tree',
-  render () {
-    const component =
-      <el-tree
-        class="d2-tree"
-        ref="tree" { ...{ attrs: this.config } }
-        on-current-change={ this.onCurrentChange }
-        on-check={ this.onCheck }>
-      </el-tree>
-    return component
-  },
   props: {
     // 选中或者勾选的值
     value: { type: [ Number, Array ], default: 0, required: false },
@@ -32,7 +32,7 @@ export default {
     // 可以直接传递数组为树的数据
     // 如果传递函数，该方法需要返回 promise<Array>
     source: {
-      type: [ Function, Array ],
+      type: [ Function, Array, String ],
       default: () => [],
       required: false
     },
@@ -73,12 +73,12 @@ export default {
     async init () {
       if (isArray(this.source)) {
         this.currentData = this.source
+      } else if (isString(this.source) && isFunction(this.$api[this.source])) {
+        try { this.currentData = await this.$api[this.source]() }
+        catch (error) { this.currentData = [] }
       } else if (isFunction(this.source)) {
-        try {
-          this.currentData = await this.source()
-        } catch (error) {
-          this.currentData = []
-        }
+        try { this.currentData = await this.source() }
+        catch (error) { this.currentData = [] }
       }
       this.updateDefaultValue()
     },
