@@ -17,9 +17,9 @@ function setting (h = () => {}) {
       render:
         <d2-tree-popover
           vModel={ this.form.model.parent_id }
+          source="MENU_ALL"
           tree={
             {
-              source: 'MENU_ALL',
               defaultExpandAll: true,
               nodeKey: 'id',
               props: {

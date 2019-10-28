@@ -21,24 +21,13 @@
 </template>
 
 <script>
-import { isArray, isString, isFunction } from 'lodash'
+import treeMixin from '../_mixins/tree'
 
 export default {
   name: 'd2-tree',
-  props: {
-    // 选中或者勾选的值
-    value: { type: [ Number, Array ], default: 0, required: false },
-    // 数据源方法
-    // 可以直接传递数组为树的数据
-    // 如果传递函数，该方法需要返回 promise<Array>
-    source: {
-      type: [ Function, Array, String ],
-      default: () => [],
-      required: false
-    },
-    // 是否多选
-    multiple: { type: Boolean, default: false, required: false }
-  },
+  mixins: [
+    treeMixin
+  ],
   data () {
     return {
       currentData: [],
@@ -74,15 +63,7 @@ export default {
      * @description 初始化 根据 source 的数据类型设置数据
      */
     async init () {
-      if (isArray(this.source)) {
-        this.currentData = this.source
-      } else if (isString(this.source) && isFunction(this.$api[this.source])) {
-        try { this.currentData = await this.$api[this.source]() }
-        catch (error) { this.currentData = [] }
-      } else if (isFunction(this.source)) {
-        try { this.currentData = await this.source() }
-        catch (error) { this.currentData = [] }
-      }
+      this.currentData = await this.getDataFromSource(this.source)
       this.updateDefaultValue()
     },
     /**

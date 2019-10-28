@@ -57,7 +57,6 @@ export default function ({
           top: '0px',
           width: '400px',
           customClass: 'el-dialog__no-top-border',
-          destroyOnClose: true,
           appendToBody: true
         },
         buttons: {
