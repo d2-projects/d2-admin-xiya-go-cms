@@ -63,7 +63,9 @@ export default {
      * @description 初始化 根据 source 的数据类型设置数据
      */
     async init () {
-      this.currentData = await this.getDataFromSource(this.source)
+      const data = await this.getDataFromSource(this.source)
+      this.currentData = data
+      this.getSourceFlat(data)
       this.updateDefaultValue()
     },
     /**
@@ -74,8 +76,12 @@ export default {
       else this.currentNodeKey = this.value
       if (!this.$refs.tree) return
       this.$nextTick(() => {
-        if (this.multiple) this.$refs.tree.setCheckedKeys(this.defaultCheckedKeys)
-        else this.$refs.tree.setCurrentKey(this.currentNodeKey)
+        if (this.multiple) {
+          this.$refs.tree.setCheckedKeys(this.defaultCheckedKeys)
+        } else {
+          const isKeyInData = this.sourceFlat.find(item => item[this.keyId] === this.currentNodeKey)
+          this.$refs.tree.setCurrentKey(isKeyInData ? this.currentNodeKey : null)
+        }
       })
     },
     /**

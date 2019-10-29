@@ -34,7 +34,6 @@ export default {
   data () {
     return {
       // 树数据的扁平化结构
-      // d2-tree 不使用这个数据
       sourceFlat: [],
       // value 对应的 label 或者 label 数组
       // d2-tree 不使用这个数据
@@ -45,7 +44,6 @@ export default {
   methods: {
     /**
      * @description 计算树数据的扁平化结构
-     * @description d2-tree 不使用这个方法
      */
     getSourceFlat (sourceArray) {
       let result = []
