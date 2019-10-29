@@ -45,6 +45,13 @@
     padding-left: 8px;
     padding-right: 8px;
   }
+  .el-button-group {
+    .el-button--mini {
+      +.el-button--mini {
+        margin-left: 0px;
+      }
+    }
+  }
 }
 
 
