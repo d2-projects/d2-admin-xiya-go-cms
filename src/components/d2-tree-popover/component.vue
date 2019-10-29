@@ -1,7 +1,7 @@
 <template>
-  <el-popover v-bind="box" v-model="active">
+  <el-popover v-bind="box" v-model="active" @show="onBoxShow" @after-leave="onBoxAfterLeave">
     <el-card shadow="never" class="d2-mb-10">
-      <d2-scrollbar style="height: 200px; margin: -10px;">
+      <d2-scrollbar style="height: 300px; margin: -10px;">
         <d2-tree
           v-bind="tree"
           :source="currentSource"
@@ -31,7 +31,18 @@ export default {
     treeMixin
   ],
   props: {
-    tree: { type: Object, default: () => ({}), required: false }
+    // 传递给 tree 组件的设置项
+    tree: {
+      type: Object,
+      default: () => ({}),
+      required: false
+    },
+    // 总是在打开时重新计算 source
+    refreshOnOpen: {
+      type: Boolean,
+      default: true,
+      required: false
+    }
   },
   data () {
     return {
@@ -87,6 +98,20 @@ export default {
       this.currentSource = await this.getDataFromSource(this.source)
       this.getSourceFlat(this.currentSource)
       this.getLabel(this.value)
+    },
+    /**
+     * @description 面板打开时候触发
+     */
+    onBoxShow () {
+      if (!this.refreshOnOpen) return
+      this.getTreeData()
+    },
+    /**
+     * @description 面板关闭动画结束后触发
+     */
+    onBoxAfterLeave () {
+      if (!this.refreshOnOpen) return
+      this.currentSource = []
     },
     /**
      * @description 取消
