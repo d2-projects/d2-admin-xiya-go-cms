@@ -36,8 +36,17 @@ export default {
     }
   },
   computed: {
-    config () {
+    configFromProps () {
       return {
+        nodeKey: this.keyId,
+        props: {
+          label: this.keyLabel,
+          children: this.keyChildren
+        }
+      }
+    },
+    config () {
+      return Object.assign({}, this.configFromProps, {
         data: this.currentData,
         ...this.$attrs,
         ...this.multiple ? {
@@ -47,7 +56,7 @@ export default {
           highlightCurrent: true,
           currentNodeKey: this.currentNodeKey
         }
-      }
+      })
     }
   },
   watch: {

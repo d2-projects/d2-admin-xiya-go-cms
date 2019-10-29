@@ -19,16 +19,13 @@ export default {
     // 是否多选
     multiple: { type: Boolean, default: false, required: false },
     // 标记数据源中那个字段代表节点 ID
-    // d2-tree 不使用这个参数 此参数是 d2-tree-popover 这类组件计算显示文字使用的
-    // d2-tree 的这个参数在 nodeKey
+    // d2-tree 也接收此参数作为 nodeKey 的快捷设置
     keyId: { type: String, default: 'id', required: false },
     // 标记数据源中那个字段代表节点标题
-    // d2-tree 不使用这个参数 此参数是 d2-tree-popover 这类组件计算显示文字使用的
-    // d2-tree 的这个参数在 props.label
+    // d2-tree 也接收此参数作为 props.label 的快捷设置
     keyLabel: { type: String, default: 'menu_name', required: false },
     // 标记数据源中那个字段代表有子节点
-    // d2-tree 不使用这个参数 此参数是 d2-tree-popover 这类组件在 getSourceFlat 中使用的
-    // d2-tree 的这个参数在 props.children
+    // d2-tree 也接收此参数作为 props.children 的快捷设置
     keyChildren: { type: String, default: 'children_list', required: false }
   },
   data () {
