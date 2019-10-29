@@ -1,4 +1,4 @@
-import { isArray, isString, isFunction } from 'lodash'
+import { omit, isArray, isString, isFunction } from 'lodash'
 
 export default {
   // 注意
@@ -50,11 +50,9 @@ export default {
       const push  = tempArray => {
         tempArray.forEach(item => {
           if (item[this.keyChildren].length > 0) {
-            result.push(item)     
             push(item[this.keyChildren])
-          } else {
-            result.push(item)            
           }
+          result.push(omit(item, [ this.keyChildren ]))
         })
       }
       push(sourceArray)
