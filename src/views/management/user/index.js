@@ -3,66 +3,26 @@ import formComponent from './form'
 
 function settingColumns (h = () => {}) {
   return [
-    {
-      prop: 'menu_name',
-      label: '名称',
-      minWidth: '200px',
-      fixed: 'left'
-    },
-    {
-      prop: 'icon',
-      label: '图标',
-      width: '50px',
-      render: ({ row }) => row.icon ? <d2-icon name={ row.icon }></d2-icon> : <span>无</span>
-    },
-    {
-      prop: 'url',
-      label: '地址',
-      minWidth: '200px'
-    },
-    {
-      prop: 'perms',
-      label: '权限标识',
-      width: '200px'
-    },
-    {
-      prop: 'id',
-      label: 'ID',
-      width: '50px',
-      show: false
-    },
-    {
-      prop: 'menu_type',
-      label: '类型',
-      width: '50px',
-      render: ({ row }) => <d2-dict name="menu_type" value={ row.menu_type }></d2-dict>
-    },
-    {
-      prop: 'visible',
-      label: '可见',
-      width: '50px',
-      render: ({ row }) => <d2-dict name="visible" value={ row.visible }></d2-dict>
-    },
-    {
-      prop: 'created_at',
-      label: '创建时间',
-      width: '140px',
-      show: false,
-      formatter: row => utils.time.format(row.created_at, 'YYYY/M/D HH:mm:ss')
-    },
-    {
-      prop: 'updated_at',
-      label: '更新时间',
-      width: '140px',
-      show: false,
-      formatter: row => utils.time.format(row.updated_at, 'YYYY/M/D HH:mm:ss')
-    },
-    {
-      prop: 'remark',
-      label: '备注',
-      width: '200px',
-      show: false
-    }
+    { prop: 'user_name', label: '用户名', minWidth: '100px', fixed: 'left' },
+    { prop: 'id', label: 'ID', minWidth: '100px', show: false },
+    { prop: 'user_type', label: '用户类型', minWidth: '100px' },
+    { prop: 'nickname', label: '昵称', minWidth: '100px' },
+    { prop: 'sex', label: '性别', minWidth: '100px' },
+    { prop: 'avatar', label: '头像', minWidth: '100px' },
+    { prop: 'email', label: '邮箱', width: '200px' },
+    { prop: 'phone', label: '手机', minWidth: '100px' },
+    { prop: 'phonenumber', label: '座机', minWidth: '100px', show: false },
+    { prop: 'dept_id', label: '部门', width: '100px' },
+    { prop: 'user_post', label: '岗位', width: '100px' },
+    { prop: 'user_role', label: '角色', width: '100px' },
+    { prop: 'login_date', label: '上次登录时间', formatter: row => utils.time.format(row.login_date, 'YYYY/M/D HH:mm:ss'), width: '200px', show: false },
+    { prop: 'login_ip', label: '上次登录地址', width: '100px', show: false },
+    { prop: 'remark', label: '备注', width: '100px', show: false },
+    { prop: 'status', label: '状态', width: '100px', show: false },
+    { prop: 'create_by', label: '创建人员', width: '100px', show: false },
+    { prop: 'created_at', label: '创建时间', formatter: row => utils.time.format(row.created_at, 'YYYY/M/D HH:mm:ss'), width: '200px', show: false },
+    { prop: 'update_by', label: '更新人员', width: '100px', show: false },
+    { prop: 'updated_at', label: '更新时间', formatter: row => utils.time.format(row.updated_at, 'YYYY/M/D HH:mm:ss'), width: '200px', show: false }
   ]
 }
 
@@ -71,7 +31,7 @@ function settingActions (h = () => {}) {
     {
       label: '操作',
       align: 'center',
-      width: '120px',
+      width: '90px',
       fixed: 'right',
       render: ({ row }) => {
         const actions = [
@@ -80,14 +40,9 @@ function settingActions (h = () => {}) {
             action: () => this.onEdit(row.id)
           },
           {
-            icon: 'el-icon-plus',
-            type: 'primary',
-            action: () => this.onCreate(row.id)
-          },
-          {
             icon: 'el-icon-delete',
             type: 'danger',
-            confirm: `确定删除 [ ${row.menu_name} ] 吗`,
+            confirm: `确定删除 [ ${row.nickname} ] 吗`,
             action: () => this.onDelete(row.id)
           }
         ]
@@ -159,7 +114,8 @@ export default {
     async loadTableData () {
       this.table.loading = true
       this.table.data = []
-      this.table.data = await this.$api.MENU_ALL()
+      const { list, page } = await this.$api.USER_ALL()
+      this.table.data = list
       this.table.loading = false
     },
     /**

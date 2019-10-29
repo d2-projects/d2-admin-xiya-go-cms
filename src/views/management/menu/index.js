@@ -3,66 +3,18 @@ import formComponent from './form'
 
 function settingColumns (h = () => {}) {
   return [
-    {
-      prop: 'menu_name',
-      label: '名称',
-      minWidth: '200px',
-      fixed: 'left'
-    },
-    {
-      prop: 'icon',
-      label: '图标',
-      width: '50px',
-      render: ({ row }) => row.icon ? <d2-icon name={ row.icon }></d2-icon> : <span>无</span>
-    },
-    {
-      prop: 'url',
-      label: '地址',
-      minWidth: '200px'
-    },
-    {
-      prop: 'perms',
-      label: '权限标识',
-      width: '200px'
-    },
-    {
-      prop: 'id',
-      label: 'ID',
-      width: '50px',
-      show: false
-    },
-    {
-      prop: 'menu_type',
-      label: '类型',
-      width: '50px',
-      render: ({ row }) => <d2-dict name="menu_type" value={ row.menu_type }></d2-dict>
-    },
-    {
-      prop: 'visible',
-      label: '可见',
-      width: '50px',
-      render: ({ row }) => <d2-dict name="visible" value={ row.visible }></d2-dict>
-    },
-    {
-      prop: 'created_at',
-      label: '创建时间',
-      width: '140px',
-      show: false,
-      formatter: row => utils.time.format(row.created_at, 'YYYY/M/D HH:mm:ss')
-    },
-    {
-      prop: 'updated_at',
-      label: '更新时间',
-      width: '140px',
-      show: false,
-      formatter: row => utils.time.format(row.updated_at, 'YYYY/M/D HH:mm:ss')
-    },
-    {
-      prop: 'remark',
-      label: '备注',
-      width: '200px',
-      show: false
-    }
+    { prop: 'menu_name', label: '名称', minWidth: '200px', fixed: 'left' },
+    { prop: 'icon', label: '图标', render: ({ row }) => row.icon ? <d2-icon name={ row.icon }></d2-icon> : <span>无</span>, width: '50px' },
+    { prop: 'url', label: '地址', minWidth: '200px' },
+    { prop: 'perms', label: '权限标识', width: '200px' },
+    { prop: 'id', label: 'ID', width: '50px', show: false },
+    { prop: 'menu_type', label: '类型', render: ({ row }) => <d2-dict name="menu_type" value={ row.menu_type }></d2-dict>, width: '50px' },
+    { prop: 'visible', label: '可见', render: ({ row }) => <d2-dict name="visible" value={ row.visible }></d2-dict>, width: '50px' },
+    { prop: 'created_by', label: '创建人员', width: '100px', show: false },
+    { prop: 'created_at', label: '创建时间', formatter: row => utils.time.format(row.created_at, 'YYYY/M/D HH:mm:ss'), width: '140px', show: false },
+    { prop: 'updated_by', label: '更新人员', width: '100px', show: false },
+    { prop: 'updated_at', label: '更新时间', formatter: row => utils.time.format(row.updated_at, 'YYYY/M/D HH:mm:ss'), width: '140px', show: false },
+    { prop: 'remark', label: '备注', width: '200px', show: false }
   ]
 }
 

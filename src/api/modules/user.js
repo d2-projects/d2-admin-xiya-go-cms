@@ -34,5 +34,16 @@ export default ({ request }) => ({
       url: '/api/user/check_token',
       method: 'post'
     })
+  },
+  /**
+   * @description 查询所有用户
+   * @param {Object} query 查询参数
+   */
+  USER_ALL (query = {}) {
+    return request({
+      url: '/api/user/index',
+      method: 'post',
+      data: query
+    })
   }
 })
