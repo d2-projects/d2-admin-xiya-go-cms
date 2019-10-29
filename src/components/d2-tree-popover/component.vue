@@ -1,7 +1,7 @@
 <template>
   <el-popover v-bind="box" v-model="active" @show="onBoxShow" @after-leave="onBoxAfterLeave">
-    <el-card shadow="never" class="d2-mb-10">
-      <d2-scrollbar style="height: 300px; margin: -10px;">
+    <el-card shadow="never" class="d2-mb-10" v-loading="isTreeLoading">
+      <d2-scrollbar style="height: 200px; margin: -10px;">
         <d2-tree
           v-bind="tree"
           :source="currentSource"
@@ -49,6 +49,9 @@ export default {
       active: false,
       currentValue: 0,
       currentSource: [],
+      status: {
+        isLoadingSource: false
+      },
       boxSetting: {
         placement: 'top-start',
         title: '请选择',
@@ -70,6 +73,9 @@ export default {
       } else {
         return this.valueLabel || '未选择或未匹配'
       }
+    },
+    isTreeLoading () {
+      return this.status.isLoadingSource
     }
   },
   created () {
@@ -95,9 +101,11 @@ export default {
      * @description 计算一次初始的 valueLabels
      */
     async getTreeData () {
+      this.status.isLoadingSource = true
       this.currentSource = await this.getDataFromSource(this.source)
       this.getSourceFlat(this.currentSource)
       this.getLabel(this.value)
+      this.status.isLoadingSource = false
     },
     /**
      * @description 面板打开时候触发
