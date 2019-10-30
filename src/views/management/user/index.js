@@ -45,6 +45,25 @@ function settingActions (h = () => {}) {
   ]
 }
 
+function settingSearch (h = () => {}) {
+  // Recommended sequence
+  // [prop] -> [label] -> [align] -> [minWidth][width] -> [fixed] -> [render][formatter] -> [show]
+  return [
+    {
+      prop: 'user_name',
+      label: '用户名',
+      default: '',
+      render: <el-input vModel={ this.search.form.user_name }/>
+    },
+    {
+      prop: 'phone',
+      label: '手机',
+      default: '',
+      render: <el-input vModel={ this.search.form.phone }/>
+    }
+  ]
+}
+
 export default {
   components: {
     formComponent
@@ -53,18 +72,24 @@ export default {
     const filter = <d2-table-columns-filter { ...{ attrs: this.columnsFilter } } vModel={ this.table.columns }/>
     const page =
       <d2-container spacious>
-        <d2-bar slot="header">
-          <d2-bar-space/>
-          <d2-bar-cell>
-            <el-button-group>
-              <d2-button icon="el-icon-refresh" on-click={ this.reload }/>
-              <d2-button icon="el-icon-set-up" on-click={ () => filter.componentInstance.start() }/>
-            </el-button-group>
-          </d2-bar-cell>
-          <d2-bar-cell>
-            <d2-button type="primary" icon="el-icon-plus" label="新建" on-click={ this.onCreate }/>
-          </d2-bar-cell>
-        </d2-bar>
+        <template slot="header">
+          <d2-bar>
+            <d2-bar-cell>
+              <d2-button icon="el-icon-search"/>
+            </d2-bar-cell>
+            <d2-bar-space/>
+            <d2-bar-cell>
+              <el-button-group>
+                <d2-button icon="el-icon-refresh" on-click={ this.reload }/>
+                <d2-button icon="el-icon-set-up" on-click={ () => filter.componentInstance.start() }/>
+              </el-button-group>
+            </d2-bar-cell>
+            <d2-bar-cell>
+              <d2-button type="primary" icon="el-icon-plus" label="新建" on-click={ this.onCreate }/>
+            </d2-bar-cell>
+          </d2-bar>
+          
+        </template>
         <d2-table { ...{ attrs: this.table } } ref="table"/>
         <form-component ref="formComponent" on-success={ this.reload }/>
         { filter }
@@ -78,6 +103,9 @@ export default {
       ...settingActions.call(this, h)
     ])
     return {
+      search: {
+        form: {}
+      },
       table: {
         loading: false,
         data: [],

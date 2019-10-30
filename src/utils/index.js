@@ -1,7 +1,6 @@
 import * as cookies from './modules/cookies'
 import * as db from './modules/db'
 import * as fn from './modules/fn'
-import * as helper from './modules/helper'
 import * as log from './modules/log'
 import * as time from './modules/time'
 
@@ -10,7 +9,6 @@ const utils = {
   time,
   db,
   fn,
-  helper,
   log,
   import: require('./modules/import.' + process.env.NODE_ENV)
 }

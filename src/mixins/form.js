@@ -1,11 +1,6 @@
 import { cloneDeep } from 'lodash'
-import utils from '@/utils'
 
-export default function ({
-  setting
-}) {
-  const form = utils.helper.getFormFromSetting(setting)
-  const rules = utils.helper.getRulesFromSetting(setting)
+export default function ({ setting }) {
   return {
     render () {
       return <el-dialog
@@ -44,13 +39,14 @@ export default function ({
     data () {
       return {
         cache: {
-          form
+          form: {}
         },
         form: {
-          model: form,
+          model: {},
           labelWidth: '100px',
           statusIcon: true
         },
+        rules: {},
         dialog: {
           visible: false,
           showClose: false,
@@ -79,9 +75,7 @@ export default function ({
       }
     },
     computed: {
-      rules () {
-        return rules
-      },
+      // 表单容器的标题
       title () {
         return this.switchByMode('新建', '编辑')
       },
@@ -106,7 +100,20 @@ export default function ({
         return this.status.isSubmitting
       }
     },
+    created () {
+      this.init()
+    },
     methods: {
+      /**
+       * @description 初始化 这一步将会根据 setting 设置 data 的默认值
+       */
+      init () {
+        const form = this.getFormFromSetting()
+        const rules = this.getRulesFromSetting()
+        this.cache.form = cloneDeep(form)
+        this.rules = cloneDeep(rules)
+        this.form.model = cloneDeep(form)
+      },
       /**
        * @description 请求表单数据
        * @param {Function} fn 请求函数 需要返回 Promise
@@ -192,6 +199,26 @@ export default function ({
        */
       cancle () {
         this.dialog.visible = false
+      },
+      /**
+       * @description 从设置函数中提取表单默认值
+       */
+      getFormFromSetting () {
+        let form = {}
+        setting.call(this).forEach(item => {
+          form[item.prop] = item.default
+        })
+        return form
+      },
+      /**
+       * @description 从设置函数中提取表校验设置
+       */
+      getRulesFromSetting () {
+        let rules = {}
+        setting.call(this)
+          .filter(item => item.rule)
+          .forEach(item => rules[item.prop] = item.rule)
+        return rules
       }
     }
   }
