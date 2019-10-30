@@ -1,4 +1,5 @@
 import utils from '@/utils'
+import pagination from '@/mixins/pagination.js'
 import formComponent from './form'
 
 function settingColumns (h = () => {}) {
@@ -65,6 +66,9 @@ function settingSearch (h = () => {}) {
 }
 
 export default {
+  mixins: [
+    pagination
+  ],
   components: {
     formComponent
   },
@@ -77,6 +81,10 @@ export default {
             <d2-bar slot="title">
               <d2-bar-space/>
               <d2-bar-cell>
+                { this.paginationRenderMini }
+              </d2-bar-cell>
+              <d2-bar-space/>
+              <d2-bar-cell>
                 <el-button-group>
                   <d2-button icon="el-icon-refresh" on-click={ this.reload }/>
                   <d2-button icon="el-icon-set-up" on-click={ () => filter.componentInstance.start() }/>
@@ -87,18 +95,17 @@ export default {
               </d2-bar-cell>
             </d2-bar>
             <el-form { ...{ attrs: this.search.form } } class="is-thin">
-              {
-                settingSearch.call(this, this.$createElement).map(
-                  item =>
-                    <el-form-item label={ item.label } prop={ item.prop }>
-                      { item.render }
-                    </el-form-item>
-                )
-              }
+              { settingSearch.call(this, this.$createElement).map(item => <el-form-item label={ item.label } prop={ item.prop }>{ item.render }</el-form-item>) }
             </el-form>
           </d2-search-panel>
         </template>
         <d2-table { ...{ attrs: this.table } } ref="table"/>
+        <d2-bar slot="footer">
+          <d2-bar-cell>
+            { this.paginationRenderFull }
+          </d2-bar-cell>
+          <d2-bar-space/>
+        </d2-bar>
         <form-component ref="formComponent" on-success={ this.reload }/>
         { filter }
       </d2-container>
@@ -111,6 +118,7 @@ export default {
       ...settingActions.call(this, h)
     ])
     return {
+      // 搜索相关
       search: {
         form: {
           model: {},
@@ -118,11 +126,13 @@ export default {
           labelPosition: 'top'
         }
       },
+      // 主体表格相关
       table: {
         loading: false,
         data: [],
         columns: columns.filter(e => e.show !== false)
       },
+      // 主体表格列过滤相关
       columnsFilter: {
         options: columns
       }
