@@ -52,7 +52,7 @@
           @change="onCheckAllChange">
           {{ showLength }} / {{ options.length }}
         </el-checkbox>
-        <el-tag class="d2-mr-20">Fixed</el-tag>
+        <el-tag>Fixed</el-tag>
       </div>
       <el-divider class="el-divider--mini"/>
       <el-card shadow="never">

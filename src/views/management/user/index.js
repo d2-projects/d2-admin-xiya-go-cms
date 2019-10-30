@@ -37,7 +37,7 @@ function settingActions (h = () => {}) {
       render: ({ row }) => {
         const actions = [
           { icon: 'el-icon-edit-outline', action: () => this.onEdit(row.id) },
-          { icon: 'el-icon-delete', type: 'danger', confirm: `确定删除 [ ${row.nickname} ] 吗`, action: () => this.onDelete(row.id) }
+          { icon: 'el-icon-delete', type: 'danger', confirm: `确定删除 [ ${row.user_name} ] 吗`, action: () => this.onDelete(row.id) }
         ]
         return <d2-table-actions actions={ actions }/>
       }
