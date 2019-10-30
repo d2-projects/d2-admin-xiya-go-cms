@@ -1,11 +1,20 @@
+<style lang="scss">
+.d2-scrollbar {
+  .el-scrollbar__wrap {
+    overflow: auto;
+  }
+}
+</style>
+
 <template>
-  <el-Scrollbar
+  <el-scrollbar
+    class="d2-scrollbar"
     ref="scrollbar"
     v-bind="$attrs"
     v-on="$listeners"
   >
     <slot></slot>
-  </el-Scrollbar>
+  </el-scrollbar>
 </template>
 
 <script>

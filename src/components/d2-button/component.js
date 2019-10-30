@@ -4,7 +4,12 @@ export default {
     const button =
       <el-button
         { ...{ attrs: this.$attrs } }
-        class="d2-button"
+        class={
+          {
+            'd2-button': true,
+            'is-thin': this.thin
+          }
+        }
         style={ this.block ? { width: '100%' } : {} }
         on-click={ () => this.$emit('click') }>
         { this.fa ? <d2-icon name={ this.fa }/> : undefined }
@@ -26,6 +31,11 @@ export default {
       required: false
     },
     block: {
+      type: Boolean,
+      default: false,
+      required: false
+    },
+    thin: {
       type: Boolean,
       default: false,
       required: false

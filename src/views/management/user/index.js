@@ -53,13 +53,13 @@ function settingSearch (h = () => {}) {
       prop: 'user_name',
       label: '用户名',
       default: '',
-      render: <el-input vModel={ this.search.form.user_name }/>
+      render: <el-input vModel={ this.search.form.user_name } style="width:80px;"/>
     },
     {
       prop: 'phone',
       label: '手机',
       default: '',
-      render: <el-input vModel={ this.search.form.phone }/>
+      render: <el-input vModel={ this.search.form.phone } style="width:100px;"/>
     }
   ]
 }
@@ -73,22 +73,30 @@ export default {
     const page =
       <d2-container spacious>
         <template slot="header">
-          <d2-bar>
-            <d2-bar-cell>
-              <d2-button icon="el-icon-search"/>
-            </d2-bar-cell>
-            <d2-bar-space/>
-            <d2-bar-cell>
-              <el-button-group>
-                <d2-button icon="el-icon-refresh" on-click={ this.reload }/>
-                <d2-button icon="el-icon-set-up" on-click={ () => filter.componentInstance.start() }/>
-              </el-button-group>
-            </d2-bar-cell>
-            <d2-bar-cell>
-              <d2-button type="primary" icon="el-icon-plus" label="新建" on-click={ this.onCreate }/>
-            </d2-bar-cell>
-          </d2-bar>
-          
+          <d2-search-panel>
+            <d2-bar slot="title">
+              <d2-bar-space/>
+              <d2-bar-cell>
+                <el-button-group>
+                  <d2-button icon="el-icon-refresh" on-click={ this.reload }/>
+                  <d2-button icon="el-icon-set-up" on-click={ () => filter.componentInstance.start() }/>
+                </el-button-group>
+              </d2-bar-cell>
+              <d2-bar-cell>
+                <d2-button type="primary" icon="el-icon-plus" label="新建" on-click={ this.onCreate }/>
+              </d2-bar-cell>
+            </d2-bar>
+            <el-form { ...{ attrs: this.search.form } } class="is-thin">
+              {
+                settingSearch.call(this, this.$createElement).map(
+                  item =>
+                    <el-form-item label={ item.label } prop={ item.prop }>
+                      { item.render }
+                    </el-form-item>
+                )
+              }
+            </el-form>
+          </d2-search-panel>
         </template>
         <d2-table { ...{ attrs: this.table } } ref="table"/>
         <form-component ref="formComponent" on-success={ this.reload }/>
@@ -104,7 +112,11 @@ export default {
     ])
     return {
       search: {
-        form: {}
+        form: {
+          model: {},
+          inline: true,
+          labelPosition: 'top'
+        }
       },
       table: {
         loading: false,

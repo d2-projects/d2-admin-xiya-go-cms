@@ -110,3 +110,17 @@
 .el-drawer__body {
   position: relative;
 }
+
+
+
+// d2-search-panel 中的 el-form.is-thin
+.d2-search-panel {
+  .el-form.is-thin {
+    .el-form-item.el-form-item--mini {
+      margin-bottom: 0px;
+      .el-form-item__label {
+        padding-bottom: 0px;
+      }
+    }
+  }
+}
