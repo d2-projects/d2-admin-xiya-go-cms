@@ -1,4 +1,4 @@
-import formMixin from '@/mixins/form'
+import form from '@/mixins/crud.form'
 
 function setting (h = () => {}) {
   return [
@@ -67,7 +67,7 @@ function setting (h = () => {}) {
 
 export default {
   mixins: [
-    formMixin({
+    form({
       setting
     })
   ],

@@ -1,5 +1,6 @@
 import utils from '@/utils'
-import pagination from '@/mixins/pagination.js'
+import pagination from '@/mixins/crud.pagination.js'
+import search from '@/mixins/crud.search.js'
 import formComponent from './form'
 
 function settingColumns (h = () => {}) {
@@ -61,13 +62,32 @@ function settingSearch (h = () => {}) {
       label: '手机',
       default: '',
       render: <el-input vModel={ this.search.form.phone } style="width:100px;"/>
+    },
+    {
+      prop: 'status',
+      label: '状态',
+      default: '',
+      render: <d2-dict-select name="user_status" vModel={ this.search.form.status } style="width:100px;"/>
+    },
+    {
+      prop: 'start_time',
+      label: '开始时间',
+      default: '',
+      render: <el-date-picker vModel={ this.search.form.start_time } type="date" placeholder="选择日期" style="width:130px;"/>
+    },
+    {
+      prop: 'end_time',
+      label: '结束时间',
+      default: '',
+      render: <el-date-picker vModel={ this.search.form.end_time } type="date" placeholder="选择日期" style="width:130px;"/>
     }
   ]
 }
 
 export default {
   mixins: [
-    pagination
+    pagination,
+    search
   ],
   components: {
     formComponent
@@ -81,13 +101,13 @@ export default {
             <d2-bar slot="title">
               <d2-bar-space/>
               <d2-bar-cell>
-                { this.paginationRenderMini }
+                { this.paginationMini }
               </d2-bar-cell>
               <d2-bar-space/>
               <d2-bar-cell>
                 <el-button-group>
-                  <d2-button icon="el-icon-refresh" on-click={ this.reload }/>
-                  <d2-button icon="el-icon-set-up" on-click={ () => filter.componentInstance.start() }/>
+                  { this.buttonRefresh }
+                  <d2-button icon="el-icon-set-up" label="设置" on-click={ () => filter.componentInstance.start() }/>
                 </el-button-group>
               </d2-bar-cell>
               <d2-bar-cell>
@@ -96,13 +116,14 @@ export default {
             </d2-bar>
             <el-form { ...{ attrs: this.search.form } } class="is-thin">
               { settingSearch.call(this, this.$createElement).map(item => <el-form-item label={ item.label } prop={ item.prop }>{ item.render }</el-form-item>) }
+              { this.buttonSearchFormItem }
             </el-form>
           </d2-search-panel>
         </template>
         <d2-table { ...{ attrs: this.table } } ref="table"/>
         <d2-bar slot="footer">
           <d2-bar-cell>
-            { this.paginationRenderFull }
+            { this.paginationFull }
           </d2-bar-cell>
           <d2-bar-space/>
         </d2-bar>
@@ -118,14 +139,6 @@ export default {
       ...settingActions.call(this, h)
     ])
     return {
-      // 搜索相关
-      search: {
-        form: {
-          model: {},
-          inline: true,
-          labelPosition: 'top'
-        }
-      },
       // 主体表格相关
       table: {
         loading: false,

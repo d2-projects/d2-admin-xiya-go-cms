@@ -16,6 +16,13 @@ export default context => ({
           { label: '显示', value: 1 },
           { label: '隐藏', value: 2 }
         ]
+      },
+      {
+        name: 'user_status',
+        value: [
+          { label: '正常', value: 1 },
+          { label: '停用', value: 2 }
+        ]
       }
     ]
   },
