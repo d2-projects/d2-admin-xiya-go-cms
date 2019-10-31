@@ -23,7 +23,7 @@ import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/re
 export default {
   name: 'd2-scrollbar',
   inheritAttrs: false,
-  mounted() {
+  mounted () {
     const scrollbar = this.$refs.scrollbar
     addResizeListener(scrollbar.$el, scrollbar.update)
     this.$once('hook:beforeDestroy', () => {

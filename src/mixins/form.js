@@ -217,7 +217,7 @@ export default function ({ setting }) {
         let rules = {}
         setting.call(this)
           .filter(item => item.rule)
-          .forEach(item => rules[item.prop] = item.rule)
+          .forEach(item => { rules[item.prop] = item.rule })
         return rules
       }
     }
