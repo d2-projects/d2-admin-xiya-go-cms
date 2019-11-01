@@ -1,76 +1,75 @@
 import form from '@/mixins/crud.form'
 
-function setting (h = () => {}) {
-  return [
-    {
-      prop: 'menu_name',
-      label: '菜单名称',
-      default: '',
-      rule: { required: true, message: '请设置菜单名称', trigger: 'blur' },
-      render: <el-input vModel={ this.form.model.menu_name }/>
-    },
-    {
-      prop: 'parent_id',
-      label: '上级菜单',
-      default: 0,
-      rule: { required: true, message: '请设置上级菜单', trigger: 'change' },
-      render: <d2-tree-popover vModel={ this.form.model.parent_id } source="MENU_ALL"/>
-    },
-    {
-      prop: 'order_num',
-      label: '显示排序',
-      default: 0,
-      rule: { required: true, message: '请设置显示排序', trigger: 'blur' },
-      render: <el-input-number min={ 1 } vModel={ this.form.model.order_num }/>
-    },
-    {
-      prop: 'url',
-      label: '请求地址',
-      default: '/',
-      rule: { required: true, message: '请设置请求地址', trigger: 'blur' },
-      render: <el-input vModel={ this.form.model.url }/>
-    },
-    {
-      prop: 'menu_type',
-      label: '菜单类型',
-      default: 1,
-      rule: { required: true, message: '请设置请求地址', trigger: 'blur' },
-      render: <d2-dict-select name="menu_type" vModel={ this.form.model.menu_type }/>
-    },
-    {
-      prop: 'visible',
-      label: '菜单状态',
-      default: 1,
-      rule: { required: true, message: '请设置菜单状态', trigger: 'blur' },
-      render: <d2-dict-select name="visible" vModel={ this.form.model.visible }/>
-    },
-    {
-      prop: 'perms',
-      label: '权限标识',
-      default: '',
-      render: <el-input vModel={ this.form.model.perms }/>
-    },
-    {
-      prop: 'icon',
-      label: '图标',
-      default: '',
-      render: <d2-icon-select vModel={ this.form.model.icon }/>
-    },
-    {
-      prop: 'remark',
-      label: '备注',
-      default: '',
-      render: <el-input vModel={ this.form.model.remark }/>
-    }
-  ]
-}
-
 export default {
   mixins: [
-    form({
-      setting
-    })
+    form
   ],
+  computed: {
+    setting () {
+      return [
+        {
+          prop: 'menu_name',
+          default: '',
+          label: '菜单名称',
+          rule: { required: true, message: '请设置菜单名称', trigger: 'blur' },
+          render: <el-input vModel={ this.form.model.menu_name }/>
+        },
+        {
+          prop: 'parent_id',
+          default: 0,
+          label: '上级菜单',
+          rule: { required: true, message: '请设置上级菜单', trigger: 'change' },
+          render: <d2-tree-popover vModel={ this.form.model.parent_id } source="MENU_ALL"/>
+        },
+        {
+          prop: 'order_num',
+          default: 0,
+          label: '显示排序',
+          rule: { required: true, message: '请设置显示排序', trigger: 'blur' },
+          render: <el-input-number min={ 1 } vModel={ this.form.model.order_num }/>
+        },
+        {
+          prop: 'url',
+          default: '/',
+          label: '请求地址',
+          rule: { required: true, message: '请设置请求地址', trigger: 'blur' },
+          render: <el-input vModel={ this.form.model.url }/>
+        },
+        {
+          prop: 'menu_type',
+          default: 1,
+          label: '菜单类型',
+          rule: { required: true, message: '请设置请求地址', trigger: 'blur' },
+          render: <d2-dict-select name="menu_type" vModel={ this.form.model.menu_type }/>
+        },
+        {
+          prop: 'visible',
+          default: 1,
+          label: '菜单状态',
+          rule: { required: true, message: '请设置菜单状态', trigger: 'blur' },
+          render: <d2-dict-select name="visible" vModel={ this.form.model.visible }/>
+        },
+        {
+          prop: 'perms',
+          default: '',
+          label: '权限标识',
+          render: <el-input vModel={ this.form.model.perms }/>
+        },
+        {
+          prop: 'icon',
+          default: '',
+          label: '图标',
+          render: <d2-icon-select vModel={ this.form.model.icon }/>
+        },
+        {
+          prop: 'remark',
+          default: '',
+          label: '备注',
+          render: <el-input vModel={ this.form.model.remark }/>
+        }
+      ]
+    }
+  },
   methods: {
     /**
      * @description 初始化表单为编辑模式
