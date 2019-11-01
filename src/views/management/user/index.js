@@ -97,7 +97,7 @@ export default {
     const page =
       <d2-container spacious>
         <template slot="header">
-          <d2-search-panel>
+          <d2-search-panel vModel={ this.search.panel.active }>
             <d2-bar slot="title">
               <d2-bar-space/>
               <d2-bar-cell>
@@ -116,7 +116,7 @@ export default {
             </d2-bar>
             <el-form { ...{ attrs: this.search.form } } class="is-thin">
               { settingSearch.call(this, this.$createElement).map(item => <el-form-item label={ item.label } prop={ item.prop }>{ item.render }</el-form-item>) }
-              { this.buttonSearchFormItem }
+              { this.formItemButtonSearch }
             </el-form>
           </d2-search-panel>
         </template>
@@ -156,7 +156,7 @@ export default {
   },
   methods: {
     /**
-     * @description 加载所有数据
+     * @description (根据搜索条件)加载所有数据
      * @description 字典
      * @description 表格
      */

@@ -25,7 +25,7 @@
 
 <template>
   <el-collapse :value="active" class="d2-search-panel">
-    <el-collapse-item name="item">
+    <el-collapse-item :name="name">
       <div slot="title" class="d2-search-panel--title" flex="box:first" @click.stop="onItemClick">
         <d2-button :icon="buttonIcon" :label="buttonLabel" @click="toggle" plain thin/>
         <slot name="title"/>
@@ -38,25 +38,48 @@
 </template>
 
 <script>
+const name = 'item'
 export default {
   name: 'd2-search-panel',
+  props: {
+    value: {
+      type: Boolean,
+      default: false,
+      required: false
+    }
+  },
   data () {
     return {
+      name,
       active: ''
+    }
+  },
+  watch: {
+    value: {
+      handler (value) {
+        this.active = value ? this.name : ''
+      },
+      immediate: true
     }
   },
   computed: {
     buttonIcon () {
-      return this.active === 'item' ? 'el-icon-caret-top' : 'el-icon-caret-bottom'
+      return this.active === this.name ? 'el-icon-caret-top' : 'el-icon-caret-bottom'
     },
     buttonLabel () {
-      return this.active === 'item' ? '隐藏搜索' : '展开搜索'
+      return this.active === this.name ? '隐藏搜索' : '展开搜索'
     }
   },
   methods: {
     onItemClick () {},
     toggle () {
-      this.active = this.active === 'item' ? '' : 'item'
+      if (this.active) {
+        this.active = ''
+        this.$emit('input', false)
+      } else {
+        this.active = this.name
+        this.$emit('input', true)
+      }
     }
   }
 }
