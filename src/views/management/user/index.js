@@ -101,12 +101,12 @@ export default {
             <d2-bar slot="title">
               <d2-bar-space/>
               <d2-bar-cell>
-                { this.paginationMini }
+                { this.vNodePaginationMini }
               </d2-bar-cell>
               <d2-bar-space/>
               <d2-bar-cell>
                 <el-button-group>
-                  { this.buttonRefresh }
+                  { this.vNodeButtonRefresh }
                   <d2-button icon="el-icon-set-up" label="设置" on-click={ () => filter.componentInstance.start() }/>
                 </el-button-group>
               </d2-bar-cell>
@@ -116,14 +116,14 @@ export default {
             </d2-bar>
             <el-form { ...{ attrs: this.search.form } } class="is-thin">
               { settingSearch.call(this, this.$createElement).map(item => <el-form-item label={ item.label } prop={ item.prop }>{ item.render }</el-form-item>) }
-              { this.formItemButtonSearch }
+              { this.vNodeFormItemvNodeButtonSearch }
             </el-form>
           </d2-search-panel>
         </template>
         <d2-table { ...{ attrs: this.table } } ref="table"/>
         <d2-bar slot="footer">
           <d2-bar-cell>
-            { this.paginationFull }
+            { this.vNodePaginationFull }
           </d2-bar-cell>
           <d2-bar-space/>
         </d2-bar>

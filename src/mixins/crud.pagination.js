@@ -10,7 +10,7 @@ export default {
   },
   computed: {
     // 小型分页
-    paginationMini () {
+    vNodePaginationMini () {
       const pagination =
         <el-pagination
           layout="prev, pager, next"
@@ -24,7 +24,7 @@ export default {
       return pagination
     },
     // 完整功能的分页
-    paginationFull () {
+    vNodePaginationFull () {
       const pagination =
         <el-pagination
           layout="total, sizes, prev, pager, next, jumper"
