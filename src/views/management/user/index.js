@@ -1,6 +1,6 @@
 import utils from '@/utils'
 import pagination from '@/mixins/crud.pagination.js'
-import search from '@/mixins/crud.search.js'
+import data from '@/mixins/crud.data.js'
 import formComponent from './form'
 
 function settingColumns (h = () => {}) {
@@ -87,7 +87,7 @@ function settingSearch (h = () => {}) {
 export default {
   mixins: [
     pagination,
-    search
+    data
   ],
   components: {
     formComponent
@@ -106,7 +106,7 @@ export default {
               <d2-bar-space/>
               <d2-bar-cell>
                 <el-button-group>
-                  { this.vNodeButtonRefresh }
+                  { this.vNodeButtonSearch }
                   <d2-button icon="el-icon-set-up" label="设置" on-click={ () => filter.componentInstance.start() }/>
                 </el-button-group>
               </d2-bar-cell>
@@ -120,7 +120,7 @@ export default {
             </el-form>
           </d2-search-panel>
         </template>
-        <d2-table { ...{ attrs: this.table } } ref="table"/>
+        <d2-table { ...{ attrs: this.table } } loading={ this.isTableLoading } ref="table"/>
         <d2-bar slot="footer">
           <d2-bar-cell>
             { this.vNodePaginationFull }
@@ -141,7 +141,6 @@ export default {
     return {
       // 主体表格相关
       table: {
-        loading: false,
         data: [],
         columns: columns.filter(e => e.show !== false)
       },
@@ -160,19 +159,20 @@ export default {
      * @description 字典
      * @description 表格
      */
-    reload () {
-      this.loadTableData()
+    async reload () {
+      await this.doLoadData(this.loadTableData)
     },
     /**
      * @description 加载表格数据
      * @description 需要加入 reload 方法中
      */
     async loadTableData () {
-      this.table.loading = true
       this.table.data = []
       const { list, page } = await this.$api.USER_ALL()
+      this.paginationUpdateCurrent(page.page_no)
+      this.paginationUpdateSize(page.page_size)
+      this.paginationUpdateTotal(page.tatal_count)
       this.table.data = list
-      this.table.loading = false
     },
     /**
      * @description 新建

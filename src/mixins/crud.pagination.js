@@ -44,11 +44,11 @@ export default {
       this.pagination.current = value
     },
     // 分页组件 更新分页大小
-    paginationUpdateSize () {
+    paginationUpdateSize (value) {
       this.pagination.size = value
     },
     // 分页组件 更新总页数
-    paginationUpdateTotal () {
+    paginationUpdateTotal (value) {
       this.pagination.total = value
     },
     // 分页组件 更新分页尺寸的时候触发
