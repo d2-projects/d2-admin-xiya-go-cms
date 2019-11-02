@@ -36,7 +36,7 @@ export default {
             { this.vNodeSearchForm }
           </d2-search-panel>
         </template>
-        <d2-table { ...{ attrs: this.table } } loading={ this.isTableLoading } ref="table"/>
+        <d2-table { ...{ attrs: this.table } } loading={ this.isTableLoading } ref="table" on-sort-change={ this.onTableSortChange }/>
         <d2-bar slot="footer">
           <d2-bar-cell>
             { this.vNodePaginationFull }

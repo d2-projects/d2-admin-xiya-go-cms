@@ -4,12 +4,12 @@ import utils from '@/utils'
 export default {
   data () {
     return {
-      // 主体表格相关
+      // 主体表格
       table: {
         data: [],
         columns: []
       },
-      // 搜索相关
+      // 搜索
       search: {
         panel: {
           active: false
@@ -20,13 +20,19 @@ export default {
           labelPosition: 'top'
         }
       },
-      // 主体表格列过滤相关
+      // 主体表格列过滤
       columnsFilter: {
         options: []
       },
+      // 页面状态
       status: {
         isLoadingData: false,
         isLoadingDict: false
+      },
+      // 排序
+      sort: {
+        prop: '',
+        type: ''
       }
     }
   },
@@ -106,7 +112,9 @@ export default {
       return {
         ...this.search.form.model,
         page: this.pagination.current,
-        page_size: this.pagination.size
+        page_size: this.pagination.size,
+        order_column_name: this.sort.prop,
+        order_type: this.sort.type
       }
     }
   },
@@ -115,6 +123,18 @@ export default {
     this.initTableColumns()
   },
   methods: {
+    /**
+     * @description 表格排序变化时触发
+     */
+    onTableSortChange ({ prop, order }) {
+      this.sort.prop = prop
+      switch (order) {
+        case 'ascending': this.sort.type = 'ASC'; break;
+        case 'descending': this.sort.type = 'DESC'; break;
+        default: this.sort.type = ''; break;
+      }
+      this.research()
+    },
     // init
     // 根据 settingSearch 初始化搜索条件
     initSearchForm () {
