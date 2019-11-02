@@ -18,14 +18,9 @@ export default {
     }
   },
   computed: {
-    vNodeFormItemvNodeButtonSearch () {
-      const button =
-      <el-form-item
-        label="操作">
-        { this.vNodeButtonSearchInForm }
-      </el-form-item>
-      return button
-    },
+    // vNode
+    // 搜索按钮
+    // 搜索表单中的搜索按钮
     vNodeButtonSearchInForm () {
       const button =
       <d2-button
@@ -37,12 +32,17 @@ export default {
         thin/>
       return button
     },
+    // vNode
+    // 搜索按钮
+    // 顶栏始终显示的搜索按钮
     vNodeButtonSearch () {
-      return <d2-button
+      const button =
+      <d2-button
         icon="el-icon-refresh"
         label="刷新"
         loading={ this.isSearchButtonLoading }
         on-click={ this.reload || function () {} }/>
+      return button
     },
     // 搜索按钮 loading 状态
     // 正在加载原始数据 || 正在加载字典

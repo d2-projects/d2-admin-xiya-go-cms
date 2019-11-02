@@ -116,7 +116,9 @@ export default {
             </d2-bar>
             <el-form { ...{ attrs: this.search.form } } class="is-thin">
               { settingSearch.call(this, this.$createElement).map(item => <el-form-item label={ item.label } prop={ item.prop }>{ item.render }</el-form-item>) }
-              { this.vNodeFormItemvNodeButtonSearch }
+              <el-form-item label="操作">
+                { this.vNodeButtonSearchInForm }
+              </el-form-item>
             </el-form>
           </d2-search-panel>
         </template>
