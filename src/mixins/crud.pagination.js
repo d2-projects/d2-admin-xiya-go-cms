@@ -39,6 +39,13 @@ export default {
     }
   },
   methods: {
+    // 分页组件 更新
+    // 这是一个常见的通用更新页码方式，适用于一般的查询返回
+    paginationUpdate (page) {
+      this.paginationUpdateCurrent(page.page_no)
+      this.paginationUpdateSize(page.page_size)
+      this.paginationUpdateTotal(page.tatal_count)
+    },
     // 分页组件 更新当前页码
     paginationUpdateCurrent (value) {
       this.pagination.current = value

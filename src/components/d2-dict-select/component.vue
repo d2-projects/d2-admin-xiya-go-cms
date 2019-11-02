@@ -13,6 +13,7 @@
 </template>
 
 <script>
+import { cloneDeep } from 'lodash'
 import { mapActions } from 'vuex'
 export default {
   name: 'd2-dict-select',
@@ -27,16 +28,21 @@ export default {
       default: '',
       required: false
     },
+    // 增加 [全部] 选项
     all: {
       type: Boolean,
       default: false,
       required: false
     },
+    // 增加 [全部] 选项
+    // [全部] 选项的标题
     allLabel: {
       type: String,
       default: '全部',
       required: false
     },
+    // 增加 [全部] 选项
+    // [全部] 选项的值
     allValue: {
       type: [ Number, String ],
       default: 0,
@@ -55,7 +61,7 @@ export default {
           label: this.allLabel,
           value: this.allValue
         }
-        const options = await this.get(name)
+        const options = cloneDeep(await this.dictGet(name))
         if (this.all) {
           options.unshift(optionItenAll)
         }
@@ -65,9 +71,9 @@ export default {
     }
   },
   methods: {
-    ...mapActions('d2admin/dict', [
-      'get'
-    ]),
+    ...mapActions('d2admin/dict', {
+      dictGet: 'get'
+    }),
     onSelectChange (value) {
       this.$emit('input', value)
     }

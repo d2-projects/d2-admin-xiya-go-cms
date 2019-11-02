@@ -133,9 +133,7 @@ export default {
       await this.doLoadData(async () => {
         this.table.data = []
         const { list, page } = await this.$api.USER_ALL()
-        this.paginationUpdateCurrent(page.page_no)
-        this.paginationUpdateSize(page.page_size)
-        this.paginationUpdateTotal(page.tatal_count)
+        this.paginationUpdate(page)
         this.table.data = list
       })
     },

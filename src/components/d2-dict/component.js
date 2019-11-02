@@ -30,14 +30,14 @@ export default {
   watch: {
     name: {
       async handler (name) {
-        this.options = await this.get(name)
+        this.options = await this.dictGet(name)
       },
       immediate: true
     }
   },
   methods: {
-    ...mapActions('d2admin/dict', [
-      'get'
-    ])
+    ...mapActions('d2admin/dict', {
+      dictGet: 'get'
+    })
   }
 }
