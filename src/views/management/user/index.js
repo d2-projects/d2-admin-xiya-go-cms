@@ -99,7 +99,7 @@ export default {
     settingSearch () {
       return [
         {
-          prop: 'user_name', label: '用户名', default: '123',
+          prop: 'user_name', label: '用户名', default: '',
           render: <el-input vModel={ this.search.form.model.user_name } style="width:80px;"/>
         },
         {
@@ -132,7 +132,7 @@ export default {
     async research () {
       await this.doLoadData(async () => {
         this.table.data = []
-        const { list, page } = await this.$api.USER_ALL()
+        const { list, page } = await this.$api.USER_ALL(this.searchData)
         this.paginationUpdate(page)
         this.table.data = list
       })

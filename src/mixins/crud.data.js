@@ -99,6 +99,15 @@ export default {
     // 正在加载原始数据 || 正在加载字典
     isTableLoading () {
       return this.status.isLoadingData || this.status.isLoadingDict
+    },
+    // 搜索时发送的数据
+    // 自动整合 [搜索项] [分页设置] [排序]
+    searchData () {
+      return {
+        ...this.search.form.model,
+        page: this.pagination.current,
+        page_size: this.pagination.size
+      }
     }
   },
   created () {
