@@ -129,9 +129,15 @@ export default {
     onTableSortChange ({ prop, order }) {
       this.sort.prop = prop
       switch (order) {
-        case 'ascending': this.sort.type = 'ASC'; break;
-        case 'descending': this.sort.type = 'DESC'; break;
-        default: this.sort.type = ''; break;
+        case 'ascending':
+          this.sort.type = 'ASC'
+          break
+        case 'descending':
+          this.sort.type = 'DESC'
+          break
+        default:
+          this.sort.type = ''
+          break
       }
       this.research()
     },

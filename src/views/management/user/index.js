@@ -85,7 +85,10 @@ export default {
     settingActions () {
       return [
         {
-          label: '操作', align: 'center', width: '90px', fixed: 'right',
+          label: '操作',
+          align: 'center',
+          width: '90px',
+          fixed: 'right',
           render: ({ row }) => {
             const actions = [
               { icon: 'el-icon-edit-outline', action: () => this.edit(row.id) },
@@ -102,23 +105,33 @@ export default {
     settingSearch () {
       return [
         {
-          prop: 'user_name', label: '用户名', default: '',
+          prop: 'user_name',
+          label: '用户名',
+          default: '',
           render: <el-input vModel={ this.search.form.model.user_name } style="width:80px;"/>
         },
         {
-          prop: 'phone', label: '手机', default: '',
+          prop: 'phone',
+          label: '手机',
+          default: '',
           render: <el-input vModel={ this.search.form.model.phone } style="width:100px;"/>
         },
         {
-          prop: 'status', label: '状态', default: 0,
+          prop: 'status',
+          label: '状态',
+          default: 0,
           render: <d2-dict-select vModel={ this.search.form.model.status } name="user_status" style="width:100px;" all/>
         },
         {
-          prop: 'start_time', label: '开始时间', default: '',
+          prop: 'start_time',
+          label: '开始时间',
+          default: '',
           render: <el-date-picker vModel={ this.search.form.model.start_time } value-format="yyyy-MM-dd" type="date" placeholder="开始时间" style="width:130px;"/>
         },
         {
-          prop: 'end_time', label: '结束时间', default: '',
+          prop: 'end_time',
+          label: '结束时间',
+          default: '',
           render: <el-date-picker vModel={ this.search.form.model.end_time } value-format="yyyy-MM-dd" type="date" placeholder="结束时间" style="width:130px;"/>
         }
       ]
