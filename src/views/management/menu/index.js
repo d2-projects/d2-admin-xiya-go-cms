@@ -1,55 +1,11 @@
 import utils from '@/utils'
+import table from '@/mixins/crud.table.js'
 import formComponent from './form'
 
-function settingColumns (h = () => {}) {
-  return [
-    { prop: 'menu_name', label: '名称', minWidth: '200px', fixed: 'left' },
-    { prop: 'icon', label: '图标', render: ({ row }) => row.icon ? <d2-icon name={ row.icon }></d2-icon> : <span>无</span>, width: '50px' },
-    { prop: 'url', label: '地址', minWidth: '200px' },
-    { prop: 'perms', label: '权限标识', width: '200px' },
-    { prop: 'id', label: 'ID', width: '50px', show: false },
-    { prop: 'menu_type', label: '类型', render: ({ row }) => <d2-dict name="menu_type" value={ row.menu_type }/>, width: '50px' },
-    { prop: 'visible', label: '可见', render: ({ row }) => <d2-dict name="visible" value={ row.visible }/>, width: '50px' },
-    { prop: 'created_by', label: '创建人员', width: '100px', show: false },
-    { prop: 'created_at', label: '创建时间', formatter: row => utils.time.format(row.created_at, 'YYYY/M/D HH:mm:ss'), width: '140px', show: false },
-    { prop: 'updated_by', label: '更新人员', width: '100px', show: false },
-    { prop: 'updated_at', label: '更新时间', formatter: row => utils.time.format(row.updated_at, 'YYYY/M/D HH:mm:ss'), width: '140px', show: false },
-    { prop: 'remark', label: '备注', width: '200px', show: false }
-  ]
-}
-
-function settingActions (h = () => {}) {
-  return [
-    {
-      label: '操作',
-      align: 'center',
-      width: '120px',
-      fixed: 'right',
-      render: ({ row }) => {
-        const actions = [
-          {
-            icon: 'el-icon-edit-outline',
-            action: () => this.onEdit(row.id)
-          },
-          {
-            icon: 'el-icon-plus',
-            type: 'primary',
-            action: () => this.onCreate(row.id)
-          },
-          {
-            icon: 'el-icon-delete',
-            type: 'danger',
-            confirm: `确定删除 [ ${row.menu_name} ] 吗`,
-            action: () => this.onDelete(row.id)
-          }
-        ]
-        return <d2-table-actions actions={ actions }/>
-      }
-    }
-  ]
-}
-
 export default {
+  mixins: [
+    table
+  ],
   components: {
     formComponent
   },
@@ -57,85 +13,128 @@ export default {
     const filter = <d2-table-columns-filter { ...{ attrs: this.columnsFilter } } vModel={ this.table.columns }/>
     const page =
       <d2-container spacious>
-        <d2-bar slot="header">
-          <d2-bar-space/>
-          <d2-bar-cell>
-            <el-button-group>
-              <d2-button icon="el-icon-refresh" on-click={ this.reload }/>
-              <d2-button icon="el-icon-set-up" on-click={ () => filter.componentInstance.start() }/>
-            </el-button-group>
-          </d2-bar-cell>
-          <d2-bar-cell>
-            <d2-button type="primary" icon="el-icon-plus" label="新建" on-click={ this.onCreate }/>
-          </d2-bar-cell>
-        </d2-bar>
+        <template slot="header">
+          <d2-bar>
+            <d2-bar-space/>
+            <d2-bar-cell>
+              <el-button-group>
+                { this.vNodeButtonSearch }
+                <d2-button icon="el-icon-set-up" label="设置" on-click={ () => filter.componentInstance.start() }/>
+              </el-button-group>
+            </d2-bar-cell>
+            <d2-bar-cell>
+              { this.vNodeButtonCreate }
+            </d2-bar-cell>
+          </d2-bar>
+        </template>
+        <d2-table
+          ref="table"
+          { ...{ attrs: this.table } }
+          loading={ this.isTableLoading }
+          on-sort-change={ this.onTableSortChange }/>
         <d2-table { ...{ attrs: this.table } } ref="table"/>
-        <form-component ref="formComponent" on-success={ this.reload }/>
+        <form-component ref="formComponent" on-success={ this.research }/>
         { filter }
       </d2-container>
     return page
   },
-  data () {
-    const h = this.$createElement
-    const columns = utils.fn.arrayAddUniqueId([
-      ...settingColumns.call(this, h),
-      ...settingActions.call(this, h)
-    ])
-    return {
-      table: {
-        loading: false,
-        data: [],
-        columns: columns.filter(e => e.show !== false)
-      },
-      columnsFilter: {
-        options: columns
-      }
+  computed: {
+    // 配置项
+    // 表格列
+    // [prop] -> [label] -> [align] -> [minWidth][width] -> [fixed] -> [other] -> [render][formatter] -> [show]
+    settingColumns () {
+      return [
+        { prop: 'menu_name', label: '名称', minWidth: '200px', fixed: 'left' },
+        { prop: 'icon', label: '图标', render: ({ row }) => row.icon ? <d2-icon name={ row.icon }></d2-icon> : <span>无</span>, width: '50px' },
+        { prop: 'url', label: '地址', minWidth: '200px' },
+        { prop: 'perms', label: '权限标识', width: '200px' },
+        { prop: 'id', label: 'ID', width: '50px', show: false },
+        { prop: 'menu_type', label: '类型', render: ({ row }) => <d2-dict name="menu_type" value={ row.menu_type }/>, width: '50px' },
+        { prop: 'visible', label: '可见', render: ({ row }) => <d2-dict name="visible" value={ row.visible }/>, width: '50px' },
+        { prop: 'created_by', label: '创建人员', width: '100px', show: false },
+        { prop: 'created_at', label: '创建时间', formatter: row => utils.time.format(row.created_at, 'YYYY/M/D HH:mm:ss'), width: '140px', show: false },
+        { prop: 'updated_by', label: '更新人员', width: '100px', show: false },
+        { prop: 'updated_at', label: '更新时间', formatter: row => utils.time.format(row.updated_at, 'YYYY/M/D HH:mm:ss'), width: '140px', show: false },
+        { prop: 'remark', label: '备注', width: '200px', show: false }
+      ]
+    },
+    // 配置项
+    // 表格操作列
+    // [prop] -> [label] -> [align] -> [minWidth][width] -> [fixed] -> [other] -> [render][formatter] -> [show]
+    settingActions () {
+      return [
+        {
+          label: '操作',
+          align: 'center',
+          width: '120px',
+          fixed: 'right',
+          render: ({ row }) => {
+            const actions = [
+              {
+                icon: 'el-icon-edit-outline',
+                action: () => this.edit(row.id)
+              },
+              {
+                icon: 'el-icon-plus',
+                type: 'primary',
+                action: () => this.create(row.id)
+              },
+              {
+                icon: 'el-icon-delete',
+                type: 'danger',
+                confirm: `确定删除 [ ${row.menu_name} ] 吗`,
+                action: () => this.delete(row.id)
+              }
+            ]
+            return <d2-table-actions actions={ actions }/>
+          }
+        }
+      ]
     }
   },
-  created () {
-    this.reload()
+  async created () {
+    await this.loadDict()
+    await this.research()
   },
   methods: {
     /**
-     * @description 加载所有数据
-     * @description 字典
-     * @description 表格
+     * @description (根据搜索条件)加载数据
      */
-    reload () {
-      this.loadTableData()
+    async research () {
+      await this.doLoadData(async () => {
+        this.table.data = []
+        this.table.data = await this.$api.MENU_ALL()
+      })
     },
     /**
-     * @description 加载表格数据
-     * @description 需要加入 reload 方法中
+     * @description 加载字典数据
      */
-    async loadTableData () {
-      this.table.loading = true
-      this.table.data = []
-      this.table.data = await this.$api.MENU_ALL()
-      this.table.loading = false
+    async loadDict () {
+      await this.doLoadDict(async () => {})
     },
     /**
      * @description 新建
      * @param {number} pid 新建项目的父级 id
      */
-    onCreate (pid = 0) {
+    create (pid = 0) {
       this.$refs.formComponent.create(pid)
     },
     /**
      * @description 编辑
      * @param {object} id 编辑的行 id
      */
-    onEdit (id) {
+    edit (id) {
       this.$refs.formComponent.edit(id)
     },
     /**
      * @description 删除
+     * @param {object} id 删除的行 id
      */
-    onDelete (id) {
+    delete (id) {
       this.$api.MENU_DELETE(id)
         .then(() => {
           this.$message({ message: '删除成功', type: 'success' })
-          this.reload()
+          this.research()
         })
         .catch(() => {})
     }

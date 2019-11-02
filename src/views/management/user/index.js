@@ -1,12 +1,10 @@
 import utils from '@/utils'
-import pagination from '@/mixins/crud.pagination.js'
-import data from '@/mixins/crud.data.js'
+import table from '@/mixins/crud.table.js'
 import formComponent from './form'
 
 export default {
   mixins: [
-    pagination,
-    data
+    table
   ],
   components: {
     formComponent
@@ -36,7 +34,11 @@ export default {
             { this.vNodeSearchForm }
           </d2-search-panel>
         </template>
-        <d2-table { ...{ attrs: this.table } } loading={ this.isTableLoading } ref="table" on-sort-change={ this.onTableSortChange }/>
+        <d2-table
+          ref="table"
+          { ...{ attrs: this.table } }
+          loading={ this.isTableLoading }
+          on-sort-change={ this.onTableSortChange }/>
         <d2-bar slot="footer">
           <d2-bar-cell>
             { this.vNodePaginationFull }
