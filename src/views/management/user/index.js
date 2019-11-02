@@ -108,15 +108,15 @@ export default {
         },
         {
           prop: 'status', label: '状态', default: 0,
-          render: <d2-dict-select name="user_status" vModel={ this.search.form.model.status } style="width:100px;" all/>
+          render: <d2-dict-select vModel={ this.search.form.model.status } name="user_status" style="width:100px;" all/>
         },
         {
           prop: 'start_time', label: '开始时间', default: '',
-          render: <el-date-picker vModel={ this.search.form.model.start_time } type="date" placeholder="选择日期" style="width:130px;"/>
+          render: <el-date-picker vModel={ this.search.form.model.start_time } value-format="yyyy-MM-dd" type="date" placeholder="开始时间" style="width:130px;"/>
         },
         {
           prop: 'end_time', label: '结束时间', default: '',
-          render: <el-date-picker vModel={ this.search.form.model.end_time } type="date" placeholder="选择日期" style="width:130px;"/>
+          render: <el-date-picker vModel={ this.search.form.model.end_time } value-format="yyyy-MM-dd" type="date" placeholder="结束时间" style="width:130px;"/>
         }
       ]
     }
