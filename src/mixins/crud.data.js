@@ -41,22 +41,22 @@ export default {
     // 搜索表单
     vNodeSearchForm () {
       const form =
-      <el-form { ...{ attrs: this.search.form } } class="is-thin">
-        {
-          this.settingSearch.map(item => {
-            const formItem =
-              <el-form-item
-                label={ item.label }
-                prop={ item.prop }>
-                { item.render }
-              </el-form-item>
-            return formItem
-          })
-        }
-        <el-form-item label="操作">
-          { this.vNodeButtonSearchInForm }
-        </el-form-item>
-      </el-form>
+        <el-form { ...{ attrs: this.search.form } } class="is-thin">
+          {
+            this.settingSearch.map(item => {
+              const formItem =
+                <el-form-item
+                  label={ item.label }
+                  prop={ item.prop }>
+                  { item.render }
+                </el-form-item>
+              return formItem
+            })
+          }
+          <el-form-item label="操作">
+            { this.vNodeButtonSearchInForm }
+          </el-form-item>
+        </el-form>
       return form
     },
     // vNode
@@ -64,13 +64,13 @@ export default {
     // 搜索表单中的搜索按钮
     vNodeButtonSearchInForm () {
       const button =
-      <d2-button
-        icon="el-icon-search"
-        label="搜索"
-        type="primary"
-        loading={ this.isSearchButtonLoading }
-        on-click={ this.research || function () {} }
-        thin/>
+        <d2-button
+          icon="el-icon-search"
+          label="搜索"
+          type="primary"
+          loading={ this.isSearchButtonLoading }
+          on-click={ this.research || function () {} }
+          thin/>
       return button
     },
     // vNode
@@ -78,11 +78,11 @@ export default {
     // 顶栏始终显示的搜索按钮
     vNodeButtonSearch () {
       const button =
-      <d2-button
-        icon="el-icon-refresh"
-        label="刷新"
-        loading={ this.isSearchButtonLoading }
-        on-click={ this.research || function () {} }/>
+        <d2-button
+          icon="el-icon-refresh"
+          label="刷新"
+          loading={ this.isSearchButtonLoading }
+          on-click={ this.research || function () {} }/>
       return button
     },
     // vNode
