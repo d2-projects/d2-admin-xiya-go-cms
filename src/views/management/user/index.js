@@ -51,21 +51,21 @@ export default {
   computed: {
     // 配置项
     // 表格列
-    // [prop] -> [label] -> [align] -> [minWidth][width] -> [fixed] -> [render][formatter] -> [show]
+    // [prop] -> [label] -> [align] -> [minWidth][width] -> [fixed] -> [other] -> [render][formatter] -> [show]
     settingColumns () {
       return [
         { prop: 'user_name', label: '用户名', minWidth: '100px', fixed: 'left' },
         { prop: 'id', label: 'ID', minWidth: '100px', show: false },
         { prop: 'user_type', label: '用户类型', minWidth: '100px' },
         { prop: 'nickname', label: '昵称', minWidth: '100px' },
-        { prop: 'sex', label: '性别', minWidth: '50px' },
-        { prop: 'avatar', label: '头像', minWidth: '50px' },
+        { prop: 'sex', label: '性别', minWidth: '80px' },
+        { prop: 'avatar', label: '头像', minWidth: '80px' },
         { prop: 'email', label: '邮箱', minWidth: '150px' },
         { prop: 'phone', label: '手机', minWidth: '100px' },
         { prop: 'phonenumber', label: '座机', minWidth: '100px', show: false },
-        { prop: 'dept_id', label: '部门', width: '50px' },
-        { prop: 'user_post', label: '岗位', width: '50px' },
-        { prop: 'user_role', label: '角色', width: '50px' },
+        { prop: 'dept_id', label: '部门', width: '80px' },
+        { prop: 'user_post', label: '岗位', width: '80px' },
+        { prop: 'user_role', label: '角色', width: '80px' },
         { prop: 'login_date', label: '上次登录时间', width: '200px', formatter: row => utils.time.format(row.login_date, 'YYYY/M/D HH:mm:ss'), show: false },
         { prop: 'login_ip', label: '上次登录地址', width: '100px', show: false },
         { prop: 'remark', label: '备注', width: '100px', show: false },
@@ -74,11 +74,14 @@ export default {
         { prop: 'created_at', label: '创建时间', width: '200px', formatter: row => utils.time.format(row.created_at, 'YYYY/M/D HH:mm:ss'), show: false },
         { prop: 'update_by', label: '更新人员', width: '100px', show: false },
         { prop: 'updated_at', label: '更新时间', width: '200px', formatter: row => utils.time.format(row.updated_at, 'YYYY/M/D HH:mm:ss'), show: false }
-      ]
+      ].map(setting => {
+        setting.sortable = 'custom'
+        return setting
+      })
     },
     // 配置项
     // 表格操作列
-    // [prop] -> [label] -> [align] -> [minWidth][width] -> [fixed] -> [render][formatter] -> [show]
+    // [prop] -> [label] -> [align] -> [minWidth][width] -> [fixed] -> [other] -> [render][formatter] -> [show]
     settingActions () {
       return [
         {

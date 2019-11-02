@@ -124,3 +124,18 @@
     }
   }
 }
+
+
+
+// 表格排序符号缩小
+.el-table.el-table--mini {
+  .caret-wrapper {
+    height: 23px;
+    .sort-caret.ascending {
+      top: 0px;
+    }
+    .sort-caret.descending {
+      bottom: 0px;
+    }
+  }
+}
