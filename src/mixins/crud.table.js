@@ -69,7 +69,7 @@ export default {
     // 搜索按钮
     // 搜索表单中的搜索按钮
     vNodeButtonSearchInForm () {
-      const button =
+      const node =
         <d2-button
           icon="el-icon-search"
           label="搜索"
@@ -77,34 +77,54 @@ export default {
           loading={ this.isSearchButtonLoading }
           on-click={ this.research || function () {} }
           thin/>
-      return button
+      return node
     },
     // vNode
     // 搜索按钮
     // 顶栏始终显示的搜索按钮
     vNodeButtonSearch () {
-      const button =
+      const node =
         <d2-button
           icon="el-icon-refresh"
           label="刷新"
           loading={ this.isSearchButtonLoading }
           on-click={ this.research || function () {} }/>
-      return button
+      return node
+    },
+    // vNode
+    // 列过滤触发按钮
+    vNodeButtonTableColumnsFilterTrigger () {
+      const node =
+        <d2-button
+          icon="el-icon-set-up"
+          label="设置"
+          on-click={ this.tableColumnsFilterStart }/>
+      return node
+    },
+    // vNode
+    // 表格列设置
+    vNodeTableColumnsFilter () {
+      const node =
+        <d2-table-columns-filter
+          ref="d2-table-columns-filter"
+          { ...{ attrs: this.columnsFilter } }
+          vModel={ this.table.columns }/>
+      return node
     },
     // vNode
     // 新建按钮
     vNodeButtonCreate () {
-      const button =
+      const node =
         <d2-button
           type="primary"
           icon="el-icon-plus"
           label="新建"
           on-click={ this.create || function () {} }/>
-      return button
+      return node
     },
     // 小型分页
     vNodePaginationMini () {
-      const pagination =
+      const node =
         <el-pagination
           layout="prev, pager, next"
           on-current-change={ this.paginationCurrentChange }
@@ -114,11 +134,11 @@ export default {
           pager-count={ 5 }
           small>
         </el-pagination>
-      return pagination
+      return node
     },
     // 完整功能的分页
     vNodePaginationFull () {
-      const pagination =
+      const node =
         <el-pagination
           layout="total, sizes, prev, pager, next, jumper"
           page-sizes={ [ 10, 20, 30, 40 ] }
@@ -128,7 +148,7 @@ export default {
           page-size={ this.pagination.size }
           total={ this.pagination.total }>
         </el-pagination>
-      return pagination
+      return node
     },
     // 搜索按钮 loading 状态
     // 正在加载原始数据 || 正在加载字典
@@ -174,6 +194,12 @@ export default {
           break
       }
       this.research()
+    },
+    /**
+     * @description 触发列设置面板显示
+     */
+    tableColumnsFilterStart () {
+      this.$refs['d2-table-columns-filter'].start()
     },
     // init
     // 根据 settingSearch 初始化搜索条件

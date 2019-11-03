@@ -10,7 +10,6 @@ export default {
     formComponent
   },
   render () {
-    const filter = <d2-table-columns-filter { ...{ attrs: this.columnsFilter } } vModel={ this.table.columns }/>
     const page =
       <d2-container spacious>
         <template slot="header">
@@ -19,7 +18,7 @@ export default {
             <d2-bar-cell>
               <el-button-group>
                 { this.vNodeButtonSearch }
-                <d2-button icon="el-icon-set-up" label="设置" on-click={ () => filter.componentInstance.start() }/>
+                { this.vNodeButtonTableColumnsFilterTrigger }
               </el-button-group>
             </d2-bar-cell>
             <d2-bar-cell>
@@ -34,7 +33,7 @@ export default {
           on-sort-change={ this.onTableSortChange }/>
         <d2-table { ...{ attrs: this.table } } ref="table"/>
         <form-component ref="formComponent" on-success={ this.research }/>
-        { filter }
+        { this.vNodeTableColumnsFilter }
       </d2-container>
     return page
   },
