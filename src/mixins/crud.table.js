@@ -122,6 +122,7 @@ export default {
           on-click={ this.create || function () {} }/>
       return node
     },
+    // vNode
     // 小型分页
     vNodePaginationMini () {
       const node =
@@ -136,6 +137,7 @@ export default {
         </el-pagination>
       return node
     },
+    // vNode
     // 完整功能的分页
     vNodePaginationFull () {
       const node =
@@ -201,8 +203,10 @@ export default {
     tableColumnsFilterStart () {
       this.$refs['d2-table-columns-filter'].start()
     },
-    // init
-    // 根据 settingSearch 初始化搜索条件
+    /**
+     * @description init
+     * @description 根据 settingSearch 初始化搜索条件
+     */
     initSearchForm () {
       if (this.settingSearch === undefined) return
       const data = {}
@@ -211,9 +215,11 @@ export default {
       })
       this.search.form.model = data
     },
-    // init
-    // 合并 settingColumns 和 settingActions
-    // 并加上 id
+    /**
+     * @description init
+     * @description 合并 settingColumns 和 settingActions
+     * @description 并加上 id
+     */
     initTableColumns () {
       const columns = utils.fn.arrayAddUniqueId([
         ...this.settingColumns,
@@ -222,30 +228,48 @@ export default {
       this.table.columns = cloneDeep(columns.filter(e => e.show !== false))
       this.columnsFilter.options = cloneDeep(columns)
     },
-    // 分页组件 更新
-    // 这是一个常见的通用更新页码方式，适用于一般的查询返回
+    /**
+     * @description 分页组件
+     * @description 整体更新
+     * @description 这是一个常见的通用更新页码方式，适用于一般的查询返回
+     */
     paginationUpdate (page) {
       this.paginationUpdateCurrent(page.page_no)
       this.paginationUpdateSize(page.page_size)
       this.paginationUpdateTotal(page.tatal_count)
     },
-    // 分页组件 更新当前页码
+    /**
+     * @description 分页组件
+     * @description 更新当前页码
+     */
     paginationUpdateCurrent (value) {
       this.pagination.current = value
     },
-    // 分页组件 更新分页大小
+    /**
+     * @description 分页组件
+     * @description 更新分页大小
+     */
     paginationUpdateSize (value) {
       this.pagination.size = value
     },
-    // 分页组件 更新总页数
+    /**
+     * @description 分页组件
+     * @description 更新总页数
+     */
     paginationUpdateTotal (value) {
       this.pagination.total = value
     },
-    // 分页组件 更新分页尺寸的时候触发
+    /**
+     * @description 分页组件
+     * @description 更新分页尺寸的时候触发
+     */
     paginationSizeChange () {
       console.log('paginationSizeChange')
     },
-    // 分页组件 当前页码更新时触发
+    /**
+     * @description 分页组件
+     * @description 当前页码更新时触发
+     */
     paginationCurrentChange () {
       console.log('paginationCurrentChange')
     },
