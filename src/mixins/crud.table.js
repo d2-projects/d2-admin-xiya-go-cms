@@ -128,7 +128,7 @@ export default {
       const node =
         <el-pagination
           layout="prev, pager, next"
-          on-current-change={ this.paginationCurrentChange }
+          on-current-change={ this.research || function () {} }
           current-page={ this.pagination.current }
           page-size={ this.pagination.size }
           total={ this.pagination.total }
@@ -144,8 +144,8 @@ export default {
         <el-pagination
           layout="total, sizes, prev, pager, next, jumper"
           page-sizes={ [ 10, 20, 30, 40 ] }
-          on-size-change={ this.paginationSizeChange }
-          on-current-change={ this.paginationCurrentChange }
+          on-size-change={ this.research || function () {} }
+          on-current-change={ this.research || function () {} }
           current-page={ this.pagination.current }
           page-size={ this.pagination.size }
           total={ this.pagination.total }>
@@ -258,20 +258,6 @@ export default {
      */
     paginationUpdateTotal (value) {
       this.pagination.total = value
-    },
-    /**
-     * @description 分页组件
-     * @description 更新分页尺寸的时候触发
-     */
-    paginationSizeChange () {
-      console.log('paginationSizeChange')
-    },
-    /**
-     * @description 分页组件
-     * @description 当前页码更新时触发
-     */
-    paginationCurrentChange () {
-      console.log('paginationCurrentChange')
     },
     /**
      * @description 请求表格数据

@@ -15,7 +15,6 @@
   }
   .d2-search-panel--title {
     flex-grow: 1;
-    margin-right: 10px;
   }
   .d2-search-panel--content {
     margin-top: 10px;
