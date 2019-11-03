@@ -61,6 +61,7 @@ export default {
           }
           <el-form-item label="操作">
             { this.vNodeButtonSearchInForm }
+            { this.vNodeButtonSearchFormResetInForm }
           </el-form-item>
         </el-form>
       return form
@@ -76,6 +77,18 @@ export default {
           type="primary"
           loading={ this.isSearchButtonLoading }
           on-click={ this.research || function () {} }
+          thin/>
+      return node
+    },
+    // vNode
+    // 搜索表单中的重置按钮
+    vNodeButtonSearchFormResetInForm () {
+      const node =
+        <d2-button
+          icon="el-icon-refresh"
+          label="重置"
+          on-click={ this.initSearchForm }
+          plain
           thin/>
       return node
     },
