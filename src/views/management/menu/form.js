@@ -1,9 +1,7 @@
 import form from '@/mixins/crud.form'
 
 export default {
-  mixins: [
-    form
-  ],
+  mixins: [ form ],
   computed: {
     setting () {
       return [
@@ -39,7 +37,7 @@ export default {
           prop: 'menu_type',
           default: 1,
           label: '菜单类型',
-          rule: { required: true, message: '请设置请求地址', trigger: 'blur' },
+          rule: { required: true, message: '请设置菜单类型', trigger: 'blur' },
           render: <d2-dict-select name="menu_type" vModel={ this.form.model.menu_type }/>
         },
         {

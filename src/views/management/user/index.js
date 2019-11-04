@@ -47,18 +47,18 @@ export default {
     // [prop] -> [label] -> [align] -> [minWidth][width] -> [fixed] -> [other] -> [render][formatter] -> [show]
     settingColumns () {
       return [
-        { prop: 'user_name', label: '用户名', minWidth: '100px', fixed: 'left' },
+        { prop: 'user_name', label: '登录账号', minWidth: '100px', fixed: 'left' },
+        { prop: 'nickname', label: '昵称', minWidth: '100px' },
         { prop: 'id', label: 'ID', minWidth: '100px', show: false },
         { prop: 'user_type', label: '用户类型', minWidth: '100px' },
-        { prop: 'nickname', label: '昵称', minWidth: '100px' },
-        { prop: 'sex', label: '性别', minWidth: '80px' },
-        { prop: 'avatar', label: '头像', minWidth: '80px' },
+        { prop: 'sex', label: '性别', minWidth: '100px' },
+        { prop: 'avatar', label: '头像', minWidth: '100px' },
         { prop: 'email', label: '邮箱', minWidth: '150px' },
         { prop: 'phone', label: '手机', minWidth: '100px' },
         { prop: 'phonenumber', label: '座机', minWidth: '100px', show: false },
-        { prop: 'dept_id', label: '部门', width: '80px' },
-        { prop: 'user_post', label: '岗位', width: '80px' },
-        { prop: 'user_role', label: '角色', width: '80px' },
+        { prop: 'dept_id', label: '归属部门', width: '100px' },
+        { prop: 'user_post', label: '岗位', width: '100px' },
+        { prop: 'user_role', label: '角色', width: '100px' },
         { prop: 'login_date', label: '上次登录时间', width: '200px', formatter: row => utils.time.format(row.login_date, 'YYYY/M/D HH:mm:ss'), show: false },
         { prop: 'login_ip', label: '上次登录地址', width: '100px', show: false },
         { prop: 'remark', label: '备注', width: '100px', show: false },
@@ -99,9 +99,9 @@ export default {
       return [
         {
           prop: 'user_name',
-          label: '用户名',
+          label: '登录账号',
           default: '',
-          render: <el-input vModel={ this.search.form.model.user_name } style="width:80px;"/>
+          render: <el-input vModel={ this.search.form.model.user_name } style="width:100px;"/>
         },
         {
           prop: 'phone',

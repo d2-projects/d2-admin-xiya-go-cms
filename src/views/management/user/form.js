@@ -1,71 +1,84 @@
 import form from '@/mixins/crud.form'
 
 export default {
-  mixins: [
-    form
-  ],
+  mixins: [ form ],
   computed: {
     setting () {
       return [
         {
-          prop: 'menu_name',
+          prop: 'nickname',
           default: '',
-          label: '菜单名称',
-          rule: { required: true, message: '请设置菜单名称', trigger: 'blur' },
-          render: <el-input vModel={ this.form.model.menu_name }/>
+          label: '昵称',
+          rule: { required: true, message: '请设置昵称', trigger: 'blur' },
+          render: <el-input vModel={ this.form.model.nickname }/>
         },
         {
-          prop: 'parent_id',
-          default: 0,
-          label: '上级菜单',
-          rule: { required: true, message: '请设置上级菜单', trigger: 'change' },
-          render: <d2-tree-popover vModel={ this.form.model.parent_id } source="MENU_ALL"/>
+          prop: 'user_name',
+          default: '',
+          label: '登录账号',
+          rule: { required: true, message: '请设置登录账号', trigger: 'blur' },
+          render: <el-input vModel={ this.form.model.user_name }/>
         },
         {
-          prop: 'order_num',
-          default: 0,
-          label: '显示排序',
-          rule: { required: true, message: '请设置显示排序', trigger: 'blur' },
-          render: <el-input-number min={ 1 } vModel={ this.form.model.order_num }/>
+          prop: 'user_type',
+          default: '',
+          label: '用户类型',
+          rule: { required: true, message: '请设置用户类型', trigger: 'blur' },
+          render: <el-input vModel={ this.form.model.user_type }/>
         },
         {
-          prop: 'url',
-          default: '/',
-          label: '请求地址',
-          rule: { required: true, message: '请设置请求地址', trigger: 'blur' },
-          render: <el-input vModel={ this.form.model.url }/>
+          prop: 'email',
+          default: '',
+          label: '邮箱',
+          rule: { required: true, message: '请设置邮箱', trigger: 'blur' },
+          render: <el-input vModel={ this.form.model.email }/>
         },
         {
-          prop: 'menu_type',
+          prop: 'phone',
+          default: '',
+          label: '手机号码',
+          rule: { required: true, message: '请设置手机号码', trigger: 'blur' },
+          render: <el-input vModel={ this.form.model.phone }/>
+        },
+        {
+          prop: 'phonenumber',
+          default: '',
+          label: '座机',
+          render: <el-input vModel={ this.form.model.phonenumber }/>
+        },
+        {
+          prop: 'sex',
           default: 1,
-          label: '菜单类型',
-          rule: { required: true, message: '请设置请求地址', trigger: 'blur' },
-          render: <d2-dict-select name="menu_type" vModel={ this.form.model.menu_type }/>
+          label: '性别',
+          rule: { required: true, message: '请设置性别', trigger: 'blur' },
+          render: <d2-dict-select name="sex" vModel={ this.form.model.sex }/>
         },
         {
-          prop: 'visible',
-          default: 1,
-          label: '菜单状态',
-          rule: { required: true, message: '请设置菜单状态', trigger: 'blur' },
-          render: <d2-dict-select name="visible" vModel={ this.form.model.visible }/>
-        },
-        {
-          prop: 'perms',
+          prop: 'avatar',
           default: '',
-          label: '权限标识',
-          render: <el-input vModel={ this.form.model.perms }/>
+          label: '头像',
+          render: <el-input vModel={ this.form.model.avatar }/>
         },
         {
-          prop: 'icon',
+          prop: 'password',
           default: '',
-          label: '图标',
-          render: <d2-icon-select vModel={ this.form.model.icon }/>
+          label: '登录密码',
+          rule: { required: true, message: '请设置登录密码', trigger: 'blur' },
+          render: <el-input vModel={ this.form.model.password }/>
         },
         {
-          prop: 'remark',
+          prop: 'user_post',
           default: '',
-          label: '备注',
-          render: <el-input vModel={ this.form.model.remark }/>
+          label: '岗位',
+          rule: { required: true, message: '请设置岗位', trigger: 'blur' },
+          render: <el-input vModel={ this.form.model.user_post }/>
+        },
+        {
+          prop: 'user_role',
+          default: '',
+          label: '角色',
+          rule: { required: true, message: '请设置角色', trigger: 'blur' },
+          render: <el-input vModel={ this.form.model.user_role }/>
         }
       ]
     }
@@ -78,7 +91,7 @@ export default {
       this.setMode('edit')
       this.open()
       try {
-        this.form.model = await this.doLoadData(() => this.$api.MENU_DETAIL(id))
+        this.form.model = await this.doLoadData(() => this.$api.USER_DETAIL(id))
       } catch (error) {
         this.cancle()
       }
@@ -86,10 +99,8 @@ export default {
     /**
      * @description 初始化表单为新建模式
      */
-    async create (pid = 0) {
-      this.setFormData({
-        parent_id: pid
-      })
+    async create () {
+      this.setFormData()
       this.setMode('create')
       this.open()
     },
@@ -100,8 +111,8 @@ export default {
       this.$refs.form.validate(async valid => {
         if (!valid) return
         const fn = this.switchByMode(
-          () => this.$api.MENU_CREATE(this.form.model),
-          () => this.$api.MENU_UPDATE(this.form.model)
+          () => this.$api.USER_CREATE(this.form.model),
+          () => this.$api.USER_UPDATE(this.form.model)
         )
         try {
           await this.doSubmit(fn)

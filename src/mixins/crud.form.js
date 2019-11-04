@@ -5,7 +5,7 @@ export default {
     return <el-dialog
       { ...{ attrs: this.dialog } }
       title={ this.title }
-      on-close={ () => { this.dialog.visible = false } }>
+      on-close={ this.cancle }>
       <el-form
         ref="form"
         { ...{ attrs: this.form } }
@@ -197,6 +197,7 @@ export default {
      * @description 关闭面板
      */
     cancle () {
+      this.$refs.form && this.$refs.form.clearValidate()
       this.dialog.visible = false
     },
     /**

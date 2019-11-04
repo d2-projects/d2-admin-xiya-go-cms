@@ -1,6 +1,6 @@
 export default ({ request }) => ({
   /**
-   * @description 菜单管理列表 只获取某级菜单下的数据
+   * @description 菜单列表 只获取某级菜单下的数据
    * @description http://yapi.xiya.vip/project/11/interface/api/190
    * @param {Object} data {Number} parent 父级菜单 id
    */
@@ -14,7 +14,7 @@ export default ({ request }) => ({
     })
   },
   /**
-   * @description 菜单管理列表
+   * @description 菜单列表
    * @description 获取所有菜单的层级关系
    * @description http://yapi.xiya.vip/project/11/interface/api/170
    */
@@ -25,7 +25,7 @@ export default ({ request }) => ({
     })
   },
   /**
-   * @description 菜单管理创建
+   * @description 菜单创建
    * @description http://yapi.xiya.vip/project/11/interface/api/100
    */
   MENU_CREATE (data) {
@@ -49,7 +49,7 @@ export default ({ request }) => ({
     })
   },
   /**
-   * @description 菜单管理编辑
+   * @description 菜单编辑
    * @description http://yapi.xiya.vip/project/11/interface/api/165
    */
   MENU_UPDATE (data) {
@@ -60,7 +60,7 @@ export default ({ request }) => ({
     })
   },
   /**
-   * @description 菜单管理删除
+   * @description 菜单删除
    * @description http://yapi.xiya.vip/project/11/interface/api/110
    */
   MENU_DELETE (id) {

@@ -23,6 +23,13 @@ export default context => ({
           { label: '正常', value: 1 },
           { label: '停用', value: 2 }
         ]
+      },
+      {
+        name: 'sex',
+        value: [
+          { label: '男', value: 1 },
+          { label: '女', value: 2 }
+        ]
       }
     ]
   },
