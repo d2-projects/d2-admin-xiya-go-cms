@@ -104,21 +104,21 @@ export default {
     },
     /**
      * @description 新建
-     * @param {number} pid 新建项目的父级 id
+     * @param {Number} pid 新建项目的父级 id
      */
     create (pid = 0) {
       this.$refs['form-component'].create(pid)
     },
     /**
      * @description 编辑
-     * @param {object} id 编辑的行 id
+     * @param {Number} id 编辑行的 id
      */
     edit (id) {
       this.$refs['form-component'].edit(id)
     },
     /**
      * @description 删除
-     * @param {object} id 删除的行 id
+     * @param {Number} id 删除行的 id
      */
     delete (id) {
       this.$api.MENU_DELETE(id)

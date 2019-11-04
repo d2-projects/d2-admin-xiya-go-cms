@@ -221,13 +221,15 @@ export default {
     /**
      * @description 需要在外部实现
      * @description 编辑
+     * @param {Number} id 编辑行的 id
      */
-    edit () {},
+    edit (id) {},
     /**
      * @description 需要在外部实现
      * @description 删除
+     * @param {Number} id 删除行的 id
      */
-    delete () {},
+    delete (id) {},
     /**
      * @description 表格排序变化时触发
      */
