@@ -26,13 +26,8 @@ export default {
             </d2-bar-cell>
           </d2-bar>
         </template>
-        <d2-table
-          ref="table"
-          { ...{ attrs: this.table } }
-          loading={ this.isTableLoading }
-          on-sort-change={ this.onTableSortChange }/>
-        <d2-table { ...{ attrs: this.table } } ref="table"/>
-        <form-component ref="formComponent" on-success={ this.research }/>
+        { this.vNodeTable }
+        <form-component ref="form-component" on-success={ this.research }/>
         { this.vNodeTableColumnsFilter }
       </d2-container>
     return page
@@ -116,14 +111,14 @@ export default {
      * @param {number} pid 新建项目的父级 id
      */
     create (pid = 0) {
-      this.$refs.formComponent.create(pid)
+      this.$refs['form-component'].create(pid)
     },
     /**
      * @description 编辑
      * @param {object} id 编辑的行 id
      */
     edit (id) {
-      this.$refs.formComponent.edit(id)
+      this.$refs['form-component'].edit(id)
     },
     /**
      * @description 删除

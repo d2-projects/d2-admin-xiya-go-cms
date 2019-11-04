@@ -44,9 +44,20 @@ export default {
   },
   computed: {
     // vNode
+    // 主体表格
+    vNodeTable () {
+      const node =
+        <d2-table
+          ref="table"
+          { ...{ attrs: this.table } }
+          loading={ this.isTableLoading }
+          on-sort-change={ this.onTableSortChange }/>
+      return node
+    },
+    // vNode
     // 搜索表单
     vNodeSearchForm () {
-      const form =
+      const node =
         <el-form { ...{ attrs: this.search.form } } class="is-thin">
           {
             this.settingSearch.map(item => {
@@ -64,7 +75,7 @@ export default {
             { this.vNodeButtonSearchFormResetInForm }
           </el-form-item>
         </el-form>
-      return form
+      return node
     },
     // vNode
     // 搜索按钮
@@ -87,7 +98,7 @@ export default {
         <d2-button
           icon="el-icon-refresh"
           label="重置"
-          on-click={ this.initSearchForm }
+          on-click={ this.searchFormReset }
           plain
           thin/>
       return node
@@ -227,6 +238,13 @@ export default {
         data[setting.prop] = setting.default
       })
       this.search.form.model = data
+    },
+    /**
+     * @description 重置搜索表单
+     */
+    searchFormReset () {
+      this.initSearchForm()
+      this.research()
     },
     /**
      * @description init

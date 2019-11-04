@@ -33,18 +33,14 @@ export default {
             { this.vNodeSearchForm }
           </d2-search-panel>
         </template>
-        <d2-table
-          ref="table"
-          { ...{ attrs: this.table } }
-          loading={ this.isTableLoading }
-          on-sort-change={ this.onTableSortChange }/>
+        { this.vNodeTable }
         <d2-bar slot="footer">
           <d2-bar-cell>
             { this.vNodePaginationFull }
           </d2-bar-cell>
           <d2-bar-space/>
         </d2-bar>
-        <form-component ref="formComponent" on-success={ this.research }/>
+        <form-component ref="form-component" on-success={ this.research }/>
         { this.vNodeTableColumnsFilter }
       </d2-container>
     return page
@@ -164,14 +160,14 @@ export default {
      * @description 新建
      */
     create () {
-      this.$refs.formComponent.create()
+      this.$refs['form-component'].create()
     },
     /**
      * @description 编辑
      * @param {object} id 编辑的行 id
      */
     edit (id) {
-      this.$refs.formComponent.edit(id)
+      this.$refs['form-component'].edit(id)
     },
     /**
      * @description 删除
