@@ -204,6 +204,31 @@ export default {
   },
   methods: {
     /**
+     * @description 需要在外部实现
+     * @description 加载数据
+     */
+    async research () {},
+    /**
+     * @description 需要在外部实现
+     * @description 加载字典数据
+     */
+    async loadDict () {},
+    /**
+     * @description 需要在外部实现
+     * @description 新建
+     */
+    create () {},
+    /**
+     * @description 需要在外部实现
+     * @description 编辑
+     */
+    edit () {},
+    /**
+     * @description 需要在外部实现
+     * @description 删除
+     */
+    delete () {},
+    /**
      * @description 表格排序变化时触发
      */
     onTableSortChange ({ prop, order }) {

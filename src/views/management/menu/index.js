@@ -3,12 +3,8 @@ import table from '@/mixins/crud.table.js'
 import formComponent from './form'
 
 export default {
-  mixins: [
-    table
-  ],
-  components: {
-    formComponent
-  },
+  mixins: [ table ],
+  components: { formComponent },
   render () {
     const page =
       <d2-container spacious>
@@ -92,7 +88,7 @@ export default {
   },
   methods: {
     /**
-     * @description (根据搜索条件)加载数据
+     * @description 加载数据
      */
     async research () {
       await this.doLoadData(async () => {
