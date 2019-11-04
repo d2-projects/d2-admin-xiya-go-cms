@@ -25,6 +25,13 @@ export default context => ({
         ]
       },
       {
+        name: 'user_type',
+        value: [
+          { label: '管理员', value: 1 },
+          { label: '操作员', value: 2 }
+        ]
+      },
+      {
         name: 'sex',
         value: [
           { label: '男', value: 1 },

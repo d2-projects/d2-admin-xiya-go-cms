@@ -21,10 +21,10 @@ export default {
         },
         {
           prop: 'user_type',
-          default: '',
+          default: 1,
           label: '用户类型',
           rule: { required: true, message: '请设置用户类型', trigger: 'blur' },
-          render: <el-input vModel={ this.form.model.user_type }/>
+          render: <d2-dict-select name="user_type" vModel={ this.form.model.user_type }/>
         },
         {
           prop: 'email',
@@ -70,14 +70,12 @@ export default {
           prop: 'user_post',
           default: '',
           label: '岗位',
-          rule: { required: true, message: '请设置岗位', trigger: 'blur' },
           render: <el-input vModel={ this.form.model.user_post }/>
         },
         {
           prop: 'user_role',
           default: '',
           label: '角色',
-          rule: { required: true, message: '请设置角色', trigger: 'blur' },
           render: <el-input vModel={ this.form.model.user_role }/>
         }
       ]
