@@ -111,17 +111,6 @@ export default {
   },
   methods: {
     /**
-     * @description 加载数据
-     */
-    async research () {
-      await this.doLoadData(async () => {
-        this.table.data = []
-        const { list, page } = await this.$api.POST_ALL(this.searchData)
-        this.paginationUpdate(page)
-        this.table.data = list
-      })
-    },
-    /**
      * @description 编辑
      * @param {Number} id 编辑行的 id
      */

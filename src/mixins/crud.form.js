@@ -115,7 +115,7 @@ export default {
       this.setMode('edit')
       this.open()
       try {
-        this.form.model = await this.doLoadData(() => (this.$api[this.api.detail] || function () { return Promise.resolve({}) })(id))
+        this.form.model = await this.doLoadData(() => (this.$api[this.api.detail] || function () {})(id))
       } catch (error) {
         this.cancle()
       }

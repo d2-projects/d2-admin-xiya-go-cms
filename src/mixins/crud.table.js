@@ -1,4 +1,4 @@
-import { cloneDeep } from 'lodash'
+import { cloneDeep, isArray, isObject } from 'lodash'
 import utils from '@/utils'
 
 export default {
@@ -209,7 +209,18 @@ export default {
      * @description 需要在外部实现
      * @description 加载数据
      */
-    async research () {},
+    async research () {
+      const searchFunction = this.$api[this.api.index] || function () {}
+      const result = await searchFunction(this.searchData)
+      this.table.data = []
+      if (isArray(result)) {
+        this.table.data = result
+      } else if (isObject(result) && isArray(result.list) && isObject(result.page)) {
+        const { list, page } = result
+        this.paginationUpdate(page)
+        this.table.data = list
+      }
+    },
     /**
      * @description 加载字典数据
      */

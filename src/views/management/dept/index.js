@@ -114,15 +114,6 @@ export default {
   },
   methods: {
     /**
-     * @description 加载数据
-     */
-    async research () {
-      await this.doLoadData(async () => {
-        this.table.data = []
-        this.table.data = await this.$api.DEPT_ALL(this.searchData)
-      })
-    },
-    /**
      * @description 新建
      * @description 树形结构表格 重新定义新建方法
      * @param {Number} pid 新建项目的父级 id
