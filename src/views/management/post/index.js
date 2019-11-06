@@ -41,6 +41,14 @@ export default {
       </d2-container>
     return page
   },
+  data () {
+    return {
+      api: {
+        index: 'POST_ALL',
+        delete: 'POST_DELETE'
+      }
+    }
+  },
   computed: {
     // 配置项
     // 表格列
@@ -114,12 +122,6 @@ export default {
       })
     },
     /**
-     * @description 加载字典数据
-     */
-    async loadDict () {
-      await this.doLoadDict(async () => {})
-    },
-    /**
      * @description 编辑
      * @param {Number} id 编辑行的 id
      */
@@ -131,7 +133,7 @@ export default {
      * @param {Number} id 删除行的 id
      */
     delete (id) {
-      this.$api.MENU_DELETE(id)
+      this.$api.POST_DELETE(id)
         .then(() => {
           this.$message({ message: '删除成功', type: 'success' })
           this.research()

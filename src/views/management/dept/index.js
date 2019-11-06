@@ -31,6 +31,14 @@ export default {
       </d2-container>
     return page
   },
+  data () {
+    return {
+      api: {
+        index: 'DEPT_ALL',
+        delete: 'DEPT_DELETE'
+      }
+    }
+  },
   computed: {
     // 配置项
     // 表格列
@@ -115,12 +123,6 @@ export default {
       })
     },
     /**
-     * @description 加载字典数据
-     */
-    async loadDict () {
-      await this.doLoadDict(async () => {})
-    },
-    /**
      * @description 新建
      * @description 树形结构表格 重新定义新建方法
      * @param {Number} pid 新建项目的父级 id
@@ -142,7 +144,7 @@ export default {
      * @param {Number} id 删除行的 id
      */
     delete (id) {
-      this.$api.MENU_DELETE(id)
+      this.$api.DEPT_DELETE(id)
         .then(() => {
           this.$message({ message: '删除成功', type: 'success' })
           this.research()

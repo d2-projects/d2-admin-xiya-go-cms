@@ -28,6 +28,14 @@ export default {
       </d2-container>
     return page
   },
+  data () {
+    return {
+      api: {
+        index: 'MENU_ALL',
+        delete: 'MENU_DELETE'
+      }
+    }
+  },
   computed: {
     // 配置项
     // 表格列
@@ -91,12 +99,6 @@ export default {
         this.table.data = []
         this.table.data = await this.$api.MENU_ALL()
       })
-    },
-    /**
-     * @description 加载字典数据
-     */
-    async loadDict () {
-      await this.doLoadDict(async () => {})
     },
     /**
      * @description 新建

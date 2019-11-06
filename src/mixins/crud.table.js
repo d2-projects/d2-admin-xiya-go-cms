@@ -211,10 +211,11 @@ export default {
      */
     async research () {},
     /**
-     * @description 需要在外部实现
      * @description 加载字典数据
      */
-    async loadDict () {},
+    async loadDict () {
+      await this.doLoadDict(Promise.resolve)
+    },
     /**
      * @description 需要在外部实现
      * @description 新建
