@@ -198,9 +198,11 @@ export default {
       }
     }
   },
-  created () {
+  async created () {
     this.initSearchForm()
     this.initTableColumns()
+    await this.loadDict()
+    await this.research()
   },
   methods: {
     /**

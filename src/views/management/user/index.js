@@ -130,10 +130,6 @@ export default {
       ]
     }
   },
-  async created () {
-    await this.loadDict()
-    await this.research()
-  },
   methods: {
     /**
      * @description 加载数据
