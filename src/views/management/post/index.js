@@ -124,12 +124,6 @@ export default {
       await this.doLoadDict(async () => {})
     },
     /**
-     * @description 新建
-     */
-    create () {
-      this.$refs['form-component'].create()
-    },
-    /**
      * @description 编辑
      * @param {Number} id 编辑行的 id
      */

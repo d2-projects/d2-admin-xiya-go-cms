@@ -217,7 +217,9 @@ export default {
      * @description 需要在外部实现
      * @description 新建
      */
-    create () {},
+    create () {
+      this.$refs['form-component'].create()
+    },
     /**
      * @description 需要在外部实现
      * @description 编辑
