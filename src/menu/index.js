@@ -5,7 +5,8 @@ export default [
     children: [
       { path: '/management/menu/list', title: '菜单管理' },
       { path: '/management/user/list', title: '用户管理' },
-      { path: '/management/dept/list', title: '部门管理' }
+      { path: '/management/dept/list', title: '部门管理' },
+      { path: '/management/post/list', title: '岗位管理' }
     ]
   }
 ]
