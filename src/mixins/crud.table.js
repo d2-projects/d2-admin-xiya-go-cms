@@ -238,11 +238,12 @@ export default {
       this.$refs['form-component'].create()
     },
     /**
-     * @description 需要在外部实现
      * @description 编辑
      * @param {Number} id 编辑行的 id
      */
-    edit (id) {},
+    edit (id) {
+      this.$refs['form-component'].edit(id)
+    },
     /**
      * @description 删除
      * @param {Number} id 删除行的 id

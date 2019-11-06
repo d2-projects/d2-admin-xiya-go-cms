@@ -122,13 +122,6 @@ export default {
       this.$refs['form-component'].create({
         parent_id: pid
       })
-    },
-    /**
-     * @description 编辑
-     * @param {Number} id 编辑行的 id
-     */
-    edit (id) {
-      this.$refs['form-component'].edit(id)
     }
   }
 }
