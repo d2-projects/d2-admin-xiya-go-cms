@@ -192,6 +192,7 @@ export default {
      */
     open () {
       this.dialog.visible = true
+      this.$nextTick(() => this.clearValidate())
     },
     /**
      * @description 关闭面板
