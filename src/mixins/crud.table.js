@@ -1,4 +1,4 @@
-import { cloneDeep, isArray, isObject } from 'lodash'
+import { cloneDeep, isArray, isObject, isFunction } from 'lodash'
 import utils from '@/utils'
 
 export default {
@@ -210,9 +210,10 @@ export default {
      * @description 加载数据
      */
     async research () {
-      const searchFunction = this.$api[this.api.index] || function () {}
-      const result = await searchFunction(this.searchData)
       this.table.data = []
+      const search = this.$api[this.api.index]
+      if (!isFunction(search)) return
+      const result = await search(this.searchData)
       if (isArray(result)) {
         this.table.data = result
       } else if (isObject(result) && isArray(result.list) && isObject(result.page)) {
