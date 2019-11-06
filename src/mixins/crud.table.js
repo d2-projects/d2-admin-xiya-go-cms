@@ -214,7 +214,7 @@ export default {
      * @description 加载字典数据
      */
     async loadDict () {
-      await this.doLoadDict(Promise.resolve)
+      await this.doLoadDict(() => Promise.resolve({}))
     },
     /**
      * @description 需要在外部实现
