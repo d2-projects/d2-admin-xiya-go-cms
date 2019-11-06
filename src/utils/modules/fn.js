@@ -20,8 +20,6 @@ export function getFromMulti (parent = {}, paths = [], defaultValue = '') {
   return result
 }
 
-
-
 /**
  * @description 给指定的数组添加唯一 id 字段
  * @description https://github.com/dylang/shortid

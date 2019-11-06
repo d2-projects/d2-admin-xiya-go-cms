@@ -16,29 +16,29 @@ const now = dayjs()
 // https://github.com/iamkun/dayjs/blob/dev/docs/zh-cn/API-reference.md#显示
 
 exports.default = function () {
-	const formatSettings = [
-		'HH:mm',
-		'HH:mm:ss',
-		'YYYY/M/D',
-		'YYYY/MM/DD',
-		'YYYY年M月D日',
-		'YYYY年M月D日 HH:mm',
-		'YYYY年M月D日 dddd HH:mm',
-		'YYYY年M月D日 Ah点mm分',
-		'YYYY年M月D日 dddd Ah点mm分'
-	]
-	let result = {}
-	formatSettings.forEach(setting => {
-		const body = `timeFormat('${setting}')`
-		result[`vue filter timeFormat ${setting}`] = {
-			scope: 'javascript,typescript,vue,vue-html',
-			prefix: `filter timeFormat ${setting}`,
-			body: [ body ],
-			description: [
-				'# D2Admin 内置 Vue 过滤器',
-				`渲染输出: ${now.format(setting)}`,
-			].join('\n# ')
-		}
-	})
-	return result
+  const formatSettings = [
+    'HH:mm',
+    'HH:mm:ss',
+    'YYYY/M/D',
+    'YYYY/MM/DD',
+    'YYYY年M月D日',
+    'YYYY年M月D日 HH:mm',
+    'YYYY年M月D日 dddd HH:mm',
+    'YYYY年M月D日 Ah点mm分',
+    'YYYY年M月D日 dddd Ah点mm分'
+  ]
+  let result = {}
+  formatSettings.forEach(setting => {
+    const body = `timeFormat('${setting}')`
+    result[`vue filter timeFormat ${setting}`] = {
+      scope: 'javascript,typescript,vue,vue-html',
+      prefix: `filter timeFormat ${setting}`,
+      body: [ body ],
+      description: [
+        '# D2Admin 内置 Vue 过滤器',
+        `渲染输出: ${now.format(setting)}`
+      ].join('\n# ')
+    }
+  })
+  return result
 }

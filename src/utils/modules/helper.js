@@ -13,15 +13,15 @@ export function isLegalUsername (value) {
  * @param {String} value 需要校验的数据
  */
 export function isLegalPassword (value) {
-  if(value.length < 6 || value.length > 16){
+  if (value.length < 6 || value.length > 16) {
     return false
   }
-  //如果包含上述四种以外的字符 false
-  if(/[^A-Za-z_0-9]/.test(value)){
+  // 如果包含上述四种以外的字符 false
+  if (/[^A-Za-z_0-9]/.test(value)) {
     return false
   }
-  //如果全为大写、小写、下划线、数字, false
-  if(/(^[a-z]+$)|(^[A-Z]+$)|(^_+$)|(^\d+$)/g.test(value)){
+  // 如果全为大写、小写、下划线、数字, false
+  if (/(^[a-z]+$)|(^[A-Z]+$)|(^_+$)|(^\d+$)/g.test(value)) {
     return false
   }
   return true
@@ -31,7 +31,7 @@ export function isLegalPassword (value) {
  * @description 合法的电话号码
  * @param {String} value 需要校验的数据
  */
-export function isLegalPhone(value){
+export function isLegalPhone (value) {
   return /^1[3-9]\d{9}$/.test(value)
 }
 
@@ -40,6 +40,6 @@ export function isLegalPhone(value){
  * @description 名称允许汉字、字母、数字，域名只允许英文域名
  * @param {String} value 需要校验的数据
  */
-export function isLegalEmail(value){
+export function isLegalEmail (value) {
   return /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/.test(value)
 }

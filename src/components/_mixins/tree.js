@@ -44,7 +44,7 @@ export default {
      */
     getSourceFlat (sourceArray) {
       let result = []
-      const push  = tempArray => {
+      const push = tempArray => {
         tempArray.forEach(item => {
           if (item[this.keyChildren].length > 0) {
             push(item[this.keyChildren])
@@ -91,11 +91,9 @@ export default {
       if (isArray(source)) {
         result = source
       } else if (isString(source) && isFunction(this.$api[source])) {
-        try { result = await this.$api[source]() }
-        catch (error) { result = [] }
+        try { result = await this.$api[source]() } catch (error) { result = [] }
       } else if (isFunction(source)) {
-        try { result = await source() }
-        catch (error) { result = [] }
+        try { result = await source() } catch (error) { result = [] }
       }
       return result
     }
