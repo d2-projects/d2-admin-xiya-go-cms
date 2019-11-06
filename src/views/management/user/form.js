@@ -95,14 +95,6 @@ export default {
       }
     },
     /**
-     * @description 初始化表单为新建模式
-     */
-    async create () {
-      this.setFormData()
-      this.setMode('create')
-      this.open()
-    },
-    /**
      * @description 提交表单
      */
     submit () {

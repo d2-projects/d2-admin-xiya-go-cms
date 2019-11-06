@@ -83,6 +83,7 @@ export default {
     },
     /**
      * @description 初始化表单为新建模式
+     * @description 树形结构表格 重新定义新建方法
      */
     async create (pid = 0) {
       this.setFormData({

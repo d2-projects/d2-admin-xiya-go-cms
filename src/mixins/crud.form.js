@@ -104,6 +104,16 @@ export default {
   },
   methods: {
     /**
+     * @description 需要在外部实现
+     * @description 初始化表单为编辑模式
+     */
+    async edit () {},
+    /**
+     * @description 需要在外部实现
+     * @description 提交表单
+     */
+    submit () {},
+    /**
      * @description 初始化 这一步将会根据 setting 设置 data 的默认值
      */
     init () {
@@ -112,6 +122,14 @@ export default {
       this.cache.form = cloneDeep(form)
       this.rules = cloneDeep(rules)
       this.form.model = cloneDeep(form)
+    },
+    /**
+     * @description 初始化表单为新建模式
+     */
+    async create () {
+      this.setFormData()
+      this.setMode('create')
+      this.open()
     },
     /**
      * @description 请求表单数据
