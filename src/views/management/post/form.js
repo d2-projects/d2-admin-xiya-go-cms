@@ -2,6 +2,15 @@ import form from '@/mixins/crud.form'
 
 export default {
   mixins: [ form ],
+  data () {
+    return {
+      api: {
+        detail: 'POST_DETAIL',
+        create: 'POST_CREATE',
+        update: 'POST_UPDATE'
+      }
+    }
+  },
   computed: {
     setting () {
       return [
@@ -40,38 +49,6 @@ export default {
           render: <el-input vModel={ this.form.model.remark }/>
         }
       ]
-    }
-  },
-  methods: {
-    /**
-     * @description 初始化表单为编辑模式
-     */
-    async edit (id) {
-      this.setMode('edit')
-      this.open()
-      try {
-        this.form.model = await this.doLoadData(() => this.$api.POST_DETAIL(id))
-      } catch (error) {
-        this.cancle()
-      }
-    },
-    /**
-     * @description 提交表单
-     */
-    submit () {
-      this.$refs.form.validate(async valid => {
-        if (!valid) return
-        const fn = this.switchByMode(
-          () => this.$api.POST_CREATE(this.form.model),
-          () => this.$api.POST_UPDATE(this.form.model)
-        )
-        try {
-          await this.doSubmit(fn)
-          this.$message({ message: '提交成功', type: 'success' })
-          this.$emit('success')
-          this.cancle()
-        } catch (error) {}
-      })
     }
   }
 }

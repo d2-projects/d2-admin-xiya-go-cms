@@ -37,6 +37,11 @@ export default {
   },
   data () {
     return {
+      api: {
+        detail: '',
+        create: '',
+        update: ''
+      },
       cache: {
         form: {}
       },
@@ -104,15 +109,35 @@ export default {
   },
   methods: {
     /**
-     * @description 需要在外部实现
      * @description 初始化表单为编辑模式
      */
-    async edit () {},
+    async edit (id) {
+      this.setMode('edit')
+      this.open()
+      try {
+        this.form.model = await this.doLoadData(() => (this.$api[this.api.detail] || function () { return Promise.resolve({}) })(id))
+      } catch (error) {
+        this.cancle()
+      }
+    },
     /**
-     * @description 需要在外部实现
      * @description 提交表单
      */
-    submit () {},
+    submit () {
+      this.$refs.form.validate(async valid => {
+        if (!valid) return
+        const fn = this.switchByMode(
+          () => (this.$api[this.api.create] || Promise.resolve)(this.form.model),
+          () => (this.$api[this.api.update] || Promise.resolve)(this.form.model)
+        )
+        try {
+          await this.doSubmit(fn)
+          this.$message({ message: '提交成功', type: 'success' })
+          this.$emit('success')
+          this.cancle()
+        } catch (error) {}
+      })
+    },
     /**
      * @description 初始化 这一步将会根据 setting 设置 data 的默认值
      */

@@ -2,6 +2,15 @@ import form from '@/mixins/crud.form'
 
 export default {
   mixins: [ form ],
+  data () {
+    return {
+      api: {
+        detail: 'MENU_DETAIL',
+        create: 'MENU_CREATE',
+        update: 'MENU_UPDATE'
+      }
+    }
+  },
   computed: {
     setting () {
       return [
@@ -70,18 +79,6 @@ export default {
   },
   methods: {
     /**
-     * @description 初始化表单为编辑模式
-     */
-    async edit (id) {
-      this.setMode('edit')
-      this.open()
-      try {
-        this.form.model = await this.doLoadData(() => this.$api.MENU_DETAIL(id))
-      } catch (error) {
-        this.cancle()
-      }
-    },
-    /**
      * @description 初始化表单为新建模式
      * @description 树形结构表格 重新定义新建方法
      */
@@ -91,24 +88,6 @@ export default {
       })
       this.setMode('create')
       this.open()
-    },
-    /**
-     * @description 提交表单
-     */
-    submit () {
-      this.$refs.form.validate(async valid => {
-        if (!valid) return
-        const fn = this.switchByMode(
-          () => this.$api.MENU_CREATE(this.form.model),
-          () => this.$api.MENU_UPDATE(this.form.model)
-        )
-        try {
-          await this.doSubmit(fn)
-          this.$message({ message: '提交成功', type: 'success' })
-          this.$emit('success')
-          this.cancle()
-        } catch (error) {}
-      })
     }
   }
 }
