@@ -19,7 +19,7 @@ export default {
                 </el-button-group>
               </d2-bar-cell>
               <d2-bar-cell>
-                { this.vNodeButtonCreate }
+                { this.vNodeButtonCreateWithParentId0 }
               </d2-bar-cell>
             </d2-bar>
             { this.vNodeSearchForm }
@@ -78,7 +78,9 @@ export default {
               {
                 icon: 'el-icon-plus',
                 type: 'primary',
-                action: () => this.create(row.id)
+                action: () => this.create({
+                  parent_id: row.id
+                })
               },
               {
                 icon: 'el-icon-delete',
@@ -110,18 +112,6 @@ export default {
           render: <d2-dict-select vModel={ this.search.form.model.status } name="status" style="width:100px;" all/>
         }
       ]
-    }
-  },
-  methods: {
-    /**
-     * @description 新建
-     * @description 树形结构表格 重新定义新建方法
-     * @param {Number} pid 新建项目的父级 id
-     */
-    create (pid = 0) {
-      this.$refs['form-component'].create({
-        parent_id: pid
-      })
     }
   }
 }

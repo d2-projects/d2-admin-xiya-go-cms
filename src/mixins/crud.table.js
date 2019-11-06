@@ -143,7 +143,19 @@ export default {
           type="primary"
           icon="el-icon-plus"
           label="新建"
-          on-click={ this.create || function () {} }/>
+          on-click={ this.create }/>
+      return node
+    },
+    // vNode
+    // 新建按钮
+    // 新建按钮 { parent_id: 0 }
+    vNodeButtonCreateWithParentId0 () {
+      const node =
+        <d2-button
+          type="primary"
+          icon="el-icon-plus"
+          label="新建"
+          on-click={ () => this.create({ parent_id: 0 }) }/>
       return node
     },
     // vNode
@@ -231,11 +243,10 @@ export default {
       await this.doLoadDict(() => Promise.resolve({}))
     },
     /**
-     * @description 需要在外部实现
      * @description 新建
      */
-    create () {
-      this.$refs['form-component'].create()
+    create (data = {}) {
+      this.$refs['form-component'].create(data)
     },
     /**
      * @description 编辑
