@@ -23,7 +23,7 @@ export default {
     keyId: { type: String, default: 'id', required: false },
     // 标记数据源中那个字段代表节点标题
     // d2-tree 也接收此参数作为 props.label 的快捷设置
-    keyLabel: { type: String, default: 'menu_name', required: false },
+    keyLabel: { type: String, default: 'label', required: false },
     // 标记数据源中那个字段代表有子节点
     // d2-tree 也接收此参数作为 props.children 的快捷设置
     keyChildren: { type: String, default: 'children_list', required: false }

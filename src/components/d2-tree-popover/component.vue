@@ -6,6 +6,9 @@
           v-bind="tree"
           :source="currentSource"
           :multiple="multiple"
+          :keyId="keyId"
+          :keyLabel="keyLabel"
+          :keyChildren="keyChildren"
           v-model="currentValue"/>
       </d2-scrollbar>
     </el-card>

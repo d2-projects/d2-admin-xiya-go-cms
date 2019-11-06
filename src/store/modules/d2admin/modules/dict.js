@@ -18,7 +18,7 @@ export default context => ({
         ]
       },
       {
-        name: 'user_status',
+        name: 'status',
         value: [
           { label: '正常', value: 1 },
           { label: '停用', value: 2 }

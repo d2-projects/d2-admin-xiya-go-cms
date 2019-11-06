@@ -17,7 +17,7 @@ export default {
           default: 0,
           label: '上级菜单',
           rule: { required: true, message: '请设置上级菜单', trigger: 'change' },
-          render: <d2-tree-popover vModel={ this.form.model.parent_id } source="MENU_ALL"/>
+          render: <d2-tree-popover vModel={ this.form.model.parent_id } source="MENU_ALL" key-label="menu_name"/>
         },
         {
           prop: 'order_num',

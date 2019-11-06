@@ -20,7 +20,8 @@ const frameIn = [
       { path: 'redirect/:route*', name: 'redirect', hidden: true, component: utils.import('system/function/redirect') },
       // 系统管理
       { path: 'management/menu/list', name: 'management-menu-list', meta: { title: '菜单管理', auth: true }, component: utils.import('management/menu') },
-      { path: 'management/user/list', name: 'management-user-list', meta: { title: '用户管理', auth: true }, component: utils.import('management/user') }
+      { path: 'management/user/list', name: 'management-user-list', meta: { title: '用户管理', auth: true }, component: utils.import('management/user') },
+      { path: 'management/dept/list', name: 'management-dept-list', meta: { title: '部门管理', auth: true }, component: utils.import('management/dept') }
     ]
   }
 ]
