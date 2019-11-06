@@ -151,8 +151,8 @@ export default {
     /**
      * @description 初始化表单为新建模式
      */
-    async create () {
-      this.setFormData()
+    async create (data = {}) {
+      this.setFormData(data)
       this.setMode('create')
       this.open()
     },
@@ -203,10 +203,10 @@ export default {
     },
     /**
      * 设置表单
-     * @param {Object} config 覆盖默认值的数据
+     * @param {Object} data 覆盖默认值的数据
      */
-    setFormData (config = {}) {
-      this.form.model = Object.assign(cloneDeep(this.cache.form), config)
+    setFormData (data = {}) {
+      this.form.model = Object.assign(cloneDeep(this.cache.form), data)
     },
     /**
      * 设置表单模式

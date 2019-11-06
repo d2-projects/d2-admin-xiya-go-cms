@@ -108,7 +108,9 @@ export default {
      * @param {Number} pid 新建项目的父级 id
      */
     create (pid = 0) {
-      this.$refs['form-component'].create(pid)
+      this.$refs['form-component'].create({
+        parent_id: pid
+      })
     },
     /**
      * @description 编辑
