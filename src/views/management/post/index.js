@@ -82,7 +82,7 @@ export default {
           render: ({ row }) => {
             const actions = [
               { icon: 'el-icon-edit-outline', action: () => this.edit(row.id) },
-              { icon: 'el-icon-delete', type: 'danger', confirm: `确定删除 [ ${row.user_name} ] 吗`, action: () => this.delete(row.id) }
+              { icon: 'el-icon-delete', type: 'danger', confirm: `确定删除 [ ${row.post_name} ] 吗`, action: () => this.delete(row.id) }
             ]
             return <d2-table-actions actions={ actions }/>
           }
@@ -116,18 +116,6 @@ export default {
      */
     edit (id) {
       this.$refs['form-component'].edit(id)
-    },
-    /**
-     * @description 删除
-     * @param {Number} id 删除行的 id
-     */
-    delete (id) {
-      this.$api.POST_DELETE(id)
-        .then(() => {
-          this.$message({ message: '删除成功', type: 'success' })
-          this.research()
-        })
-        .catch(() => {})
     }
   }
 }

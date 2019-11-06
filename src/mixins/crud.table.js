@@ -206,13 +206,15 @@ export default {
   },
   methods: {
     /**
-     * @description 需要在外部实现
      * @description 加载数据
      */
     async research () {
       this.table.data = []
       const search = this.$api[this.api.index]
-      if (!isFunction(search)) return
+      if (!isFunction(search)) {
+        this.$message.error('未找到 API')
+        return
+      }
       const result = await search(this.searchData)
       if (isArray(result)) {
         this.table.data = result
@@ -242,11 +244,22 @@ export default {
      */
     edit (id) {},
     /**
-     * @description 需要在外部实现
      * @description 删除
      * @param {Number} id 删除行的 id
      */
-    delete (id) {},
+    delete (id) {
+      const deleteFunction = this.$api[this.api.delete]
+      if (!isFunction(deleteFunction)) {
+        this.$message.error('未找到 API')
+        return
+      }
+      deleteFunction(id)
+        .then(() => {
+          this.$message.success('删除成功')
+          this.research()
+        })
+        .catch(() => {})
+    },
     /**
      * @description 表格排序变化时触发
      */

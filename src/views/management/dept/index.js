@@ -129,18 +129,6 @@ export default {
      */
     edit (id) {
       this.$refs['form-component'].edit(id)
-    },
-    /**
-     * @description 删除
-     * @param {Number} id 删除行的 id
-     */
-    delete (id) {
-      this.$api.DEPT_DELETE(id)
-        .then(() => {
-          this.$message({ message: '删除成功', type: 'success' })
-          this.research()
-        })
-        .catch(() => {})
     }
   }
 }
