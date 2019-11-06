@@ -9,42 +9,42 @@ export default {
           prop: 'menu_name',
           default: '',
           label: '菜单名称',
-          rule: { required: true, message: '请设置菜单名称', trigger: 'blur' },
+          rule: { required: true, message: '必填', trigger: 'change' },
           render: <el-input vModel={ this.form.model.menu_name }/>
         },
         {
           prop: 'parent_id',
           default: 0,
           label: '上级菜单',
-          rule: { required: true, message: '请设置上级菜单', trigger: 'change' },
+          rule: { required: true, message: '必填', trigger: 'change' },
           render: <d2-tree-popover vModel={ this.form.model.parent_id } source="MENU_ALL" key-label="menu_name"/>
         },
         {
           prop: 'order_num',
           default: 0,
           label: '显示排序',
-          rule: { required: true, message: '请设置显示排序', trigger: 'blur' },
+          rule: { required: true, message: '必填', trigger: 'change' },
           render: <el-input-number min={ 1 } vModel={ this.form.model.order_num }/>
         },
         {
           prop: 'url',
           default: '/',
           label: '请求地址',
-          rule: { required: true, message: '请设置请求地址', trigger: 'blur' },
+          rule: { required: true, message: '必填', trigger: 'change' },
           render: <el-input vModel={ this.form.model.url }/>
         },
         {
           prop: 'menu_type',
           default: 1,
           label: '菜单类型',
-          rule: { required: true, message: '请设置菜单类型', trigger: 'blur' },
+          rule: { required: true, message: '必填', trigger: 'change' },
           render: <d2-dict-select name="menu_type" vModel={ this.form.model.menu_type }/>
         },
         {
           prop: 'visible',
           default: 1,
           label: '菜单状态',
-          rule: { required: true, message: '请设置菜单状态', trigger: 'blur' },
+          rule: { required: true, message: '必填', trigger: 'change' },
           render: <d2-dict-select name="visible" vModel={ this.form.model.visible }/>
         },
         {

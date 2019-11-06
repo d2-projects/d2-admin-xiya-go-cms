@@ -197,8 +197,14 @@ export default {
      * @description 关闭面板
      */
     cancle () {
-      this.$refs.form && this.$refs.form.clearValidate()
+      this.clearValidate()
       this.dialog.visible = false
+    },
+    /**
+     * @description 清空表单校验
+     */
+    clearValidate () {
+      this.$refs.form && this.$refs.form.clearValidate()
     },
     /**
      * @description 从设置函数中提取表单默认值

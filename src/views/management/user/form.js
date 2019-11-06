@@ -9,35 +9,35 @@ export default {
           prop: 'nickname',
           default: '',
           label: '昵称',
-          rule: { required: true, message: '请设置昵称', trigger: 'blur' },
+          rule: { required: true, message: '必填', trigger: 'change' },
           render: <el-input vModel={ this.form.model.nickname }/>
         },
         {
           prop: 'user_name',
           default: '',
           label: '登录账号',
-          rule: { required: true, message: '请设置登录账号', trigger: 'blur' },
+          rule: { required: true, message: '必填', trigger: 'change' },
           render: <el-input vModel={ this.form.model.user_name }/>
         },
         {
           prop: 'user_type',
           default: 1,
           label: '用户类型',
-          rule: { required: true, message: '请设置用户类型', trigger: 'blur' },
+          rule: { required: true, message: '必填', trigger: 'change' },
           render: <d2-dict-select name="user_type" vModel={ this.form.model.user_type }/>
         },
         {
           prop: 'email',
           default: '',
           label: '邮箱',
-          rule: { required: true, message: '请设置邮箱', trigger: 'blur' },
+          rule: { required: true, message: '必填', trigger: 'change' },
           render: <el-input vModel={ this.form.model.email }/>
         },
         {
           prop: 'phone',
           default: '',
           label: '手机号码',
-          rule: { required: true, message: '请设置手机号码', trigger: 'blur' },
+          rule: { required: true, message: '必填', trigger: 'change' },
           render: <el-input vModel={ this.form.model.phone }/>
         },
         {
@@ -50,7 +50,7 @@ export default {
           prop: 'sex',
           default: 1,
           label: '性别',
-          rule: { required: true, message: '请设置性别', trigger: 'blur' },
+          rule: { required: true, message: '必填', trigger: 'change' },
           render: <d2-dict-select name="sex" vModel={ this.form.model.sex }/>
         },
         {
@@ -63,7 +63,7 @@ export default {
           prop: 'password',
           default: '',
           label: '登录密码',
-          rule: { required: true, message: '请设置登录密码', trigger: 'blur' },
+          rule: { required: true, message: '必填', trigger: 'change' },
           render: <el-input vModel={ this.form.model.password }/>
         },
         {

@@ -1,4 +1,5 @@
 import form from '@/mixins/crud.form'
+import utils from '@/utils/index'
 
 export default {
   mixins: [ form ],
@@ -9,49 +10,55 @@ export default {
           prop: 'dept_name',
           default: '',
           label: '部门名称',
-          rule: { required: true, message: '请设置部门名称', trigger: 'blur' },
+          rule: { required: true, message: '必填', trigger: 'change' },
           render: <el-input vModel={ this.form.model.dept_name }/>
         },
         {
           prop: 'leader',
           default: '',
           label: '负责人',
-          rule: { required: true, message: '请设置负责人', trigger: 'blur' },
+          rule: { required: true, message: '必填', trigger: 'change' },
           render: <el-input vModel={ this.form.model.leader }/>
         },
         {
           prop: 'email',
           default: '',
           label: '部门邮箱',
-          rule: { required: true, message: '请设置部门邮箱', trigger: 'blur' },
+          rule: [
+            { required: true, message: '必填', trigger: 'change' },
+            { validator: (rule, value, callback) => callback(utils.helper.isLegalEmail(value) ? undefined : new Error('邮箱格式不正确')), trigger: 'change' }
+          ],
           render: <el-input vModel={ this.form.model.email }/>
         },
         {
           prop: 'phone',
           default: '',
           label: '部门电话',
-          rule: { required: true, message: '请设置部门电话', trigger: 'blur' },
+          rule: [
+            { required: true, message: '必填', trigger: 'change' },
+            { validator: (rule, value, callback) => callback(utils.helper.isLegalPhone(value) ? undefined : new Error('电话格式不正确')), trigger: 'change' }
+          ],
           render: <el-input vModel={ this.form.model.phone }/>
         },
         {
           prop: 'parent_id',
           default: 0,
           label: '上级部门',
-          rule: { required: true, message: '请设置上级部门', trigger: 'change' },
+          rule: { required: true, message: '必填', trigger: 'change' },
           render: <d2-tree-popover vModel={ this.form.model.parent_id } source="DEPT_ALL" key-label="dept_name"/>
         },
         {
           prop: 'order_num',
-          default: 0,
+          default: 1,
           label: '显示排序',
-          rule: { required: true, message: '请设置显示排序', trigger: 'blur' },
+          rule: { required: true, message: '必填', trigger: 'change' },
           render: <el-input-number min={ 1 } vModel={ this.form.model.order_num }/>
         },
         {
           prop: 'status',
           default: 1,
           label: '状态',
-          rule: { required: true, message: '请设置状态', trigger: 'change' },
+          rule: { required: true, message: '必填', trigger: 'change' },
           render: <d2-dict-select vModel={ this.form.model.status } name="status" style="width:100px;"/>
         },
         {
