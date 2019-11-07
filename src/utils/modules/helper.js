@@ -27,7 +27,7 @@ export function isLegalPassword (value) {
   return true
 }
 /**
- * @description 同上面方法
+ * @description 同 isLegalPassword
  * @description 适用于表单校验
  */
 export function isLegalPasswordValidator (rule, value, callback) {
@@ -42,7 +42,7 @@ export function isLegalMobilePhone (value) {
   return /^1[3-9]\d{9}$/.test(value)
 }
 /**
- * @description 同上面方法
+ * @description 同 isLegalMobilePhone
  * @description 适用于表单校验
  */
 export function isLegalMobilePhoneValidator (rule, value, callback) {
@@ -57,8 +57,9 @@ export function isLegalMobilePhoneValidator (rule, value, callback) {
 export function isLegalEmail (value) {
   return /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/.test(value)
 }
+
 /**
- * @description 同上面方法
+ * @description 同 isLegalEmail
  * @description 适用于表单校验
  */
 export function isLegalEmailValidator (rule, value, callback) {

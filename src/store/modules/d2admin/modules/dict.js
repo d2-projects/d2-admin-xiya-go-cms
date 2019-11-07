@@ -37,6 +37,13 @@ export default context => ({
           { label: '男', value: 1 },
           { label: '女', value: 2 }
         ]
+      },
+      {
+        name: 'data_scope',
+        value: [
+          { label: '全部数据权限', value: 1 },
+          { label: '自定义数据权限', value: 2 }
+        ]
       }
     ]
   },

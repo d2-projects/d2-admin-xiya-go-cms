@@ -1,7 +1,6 @@
 export default ({ request }) => ({
   /**
    * @description 岗位列表
-   * @description 获取所有岗位的层级关系
    * @description http://yapi.xiya.vip/project/11/interface/api/75
    */
   POST_ALL (query = {}) {
