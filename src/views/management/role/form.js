@@ -29,27 +29,6 @@ export default {
           render: <el-input vModel={ this.form.model.role_key }/>
         },
         {
-          prop: 'data_scope',
-          default: 1,
-          label: '数据范围',
-          rule: { required: true, message: '必填', trigger: 'change' },
-          render: <d2-dict-select vModel={ this.form.model.data_scope } name="data_scope" style="width:150px;"/>
-        },
-        {
-          prop: 'role_menu',
-          default: '',
-          label: '菜单权限',
-          rule: { required: true, message: '必填', trigger: 'change' },
-          render: <el-input vModel={ this.form.model.role_menu }/>
-        },
-        {
-          prop: 'role_dept',
-          default: '',
-          label: '部门权限',
-          rule: { required: true, message: '必填', trigger: 'change' },
-          render: <el-input vModel={ this.form.model.role_dept }/>
-        },
-        {
           prop: 'role_sort',
           default: 0,
           label: '显示顺序',
@@ -62,6 +41,13 @@ export default {
           label: '状态',
           rule: { required: true, message: '必填', trigger: 'change' },
           render: <d2-dict-select vModel={ this.form.model.status } name="status" style="width:100px;"/>
+        },
+        {
+          prop: 'role_menu',
+          default: '',
+          label: '菜单权限',
+          rule: { required: true, message: '必填', trigger: 'change' },
+          render: <d2-tree vModel={ this.form.model.role_menu } source="MENU_ALL" key-label="menu_name" multiple stringify/>
         },
         {
           prop: 'remark',

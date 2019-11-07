@@ -81,8 +81,16 @@ export default {
      * @description 将默认选择的值设置到树上
      */
     updateDefaultValue () {
-      if (this.multiple) this.defaultCheckedKeys = this.value
-      else this.currentNodeKey = this.value
+      // 根据是否多选 分别设置 tree 的属性
+      if (this.multiple) {
+        if (this.stringify) {
+          this.defaultCheckedKeys = this.value.split(',')
+        } else {
+          this.defaultCheckedKeys = this.value
+        }        
+      } else {
+        this.currentNodeKey = this.value
+      }
       if (!this.$refs.tree) return
       this.$nextTick(() => {
         if (this.multiple) {
@@ -102,6 +110,7 @@ export default {
       // 更新 value
       if (this.multiple) return
       this.$emit('input', data.id)
+      this.elFormItem.onFieldChange()
     },
     /**
      * @description el-tree 事件 | check
@@ -111,7 +120,13 @@ export default {
       this.$emit('check', data, info)
       // 更新 value
       if (!this.multiple) return
-      this.$emit('input', info.checkedKeys)
+      if (this.stringify) {
+        this.$emit('input', info.checkedKeys.join(','))
+        this.elFormItem.onFieldChange()
+      } else {
+        this.$emit('input', info.checkedKeys)
+        this.elFormItem.onFieldChange()
+      }
     }
   }
 }

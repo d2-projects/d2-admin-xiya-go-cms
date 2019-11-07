@@ -80,12 +80,13 @@ export default {
         {
           label: '操作',
           align: 'center',
-          width: '90px',
+          width: '240px',
           fixed: 'right',
           render: ({ row }) => {
             const actions = [
-              { icon: 'el-icon-edit-outline', action: () => this.edit(row.id) },
-              { icon: 'el-icon-delete', type: 'danger', confirm: `确定删除 [ ${row.role_name} ] 吗`, action: () => this.delete(row.id) }
+              { icon: 'el-icon-edit-outline', label: '修改', action: () => this.edit(row.id) },
+              { icon: 'el-icon-edit-outline', label: '数据权限', action: () => this.edit(row.id) },
+              { icon: 'el-icon-delete', label: '删除', type: 'danger', confirm: `确定删除 [ ${row.role_name} ] 吗`, action: () => this.delete(row.id) }
             ]
             return <d2-table-actions actions={ actions }/>
           }

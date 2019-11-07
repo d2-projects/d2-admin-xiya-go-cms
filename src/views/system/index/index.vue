@@ -24,20 +24,14 @@ export default {
       tree1: {
         defaultExpandAll: true,
         nodeKey: 'id',
-        props: {
-          label: 'menu_name',
-          children: 'children_list'
-        }
+        keyLabel: 'menu_name'
       },
       value2: [ 86 ],
       tree2: {
         multiple: true,
         defaultExpandAll: true,
         nodeKey: 'id',
-        props: {
-          label: 'menu_name',
-          children: 'children_list'
-        }
+        keyLabel: 'menu_name'
       }
     }
   }

@@ -1,13 +1,16 @@
 import { omit, isArray, isString, isFunction } from 'lodash'
 
 export default {
+  inject: [
+    'elFormItem'
+  ],
   // 注意
   // 如果包含 d2-tree 的组件引入了这个 mixin
   // 并且通过 <d2-tree v-bind="$attrs"/> 传递参数
   // 千万不要忘记下面这些参数已经不包含在 $attrs
   props: {
     // 选中或者勾选的值
-    value: { type: [ Number, Array ], default: 0, required: false },
+    value: { type: [ String, Number, Array ], default: 0, required: false },
     // 数据源
     // 可以直接传递数组为树的数据
     // 如果传递函数，该方法需要返回 promise<Array>
@@ -18,6 +21,8 @@ export default {
     },
     // 是否多选
     multiple: { type: Boolean, default: false, required: false },
+    // 是否序列为字符串
+    stringify: { type: Boolean, default: false, required: false },
     // 标记数据源中那个字段代表节点 ID
     // d2-tree 也接收此参数作为 nodeKey 的快捷设置
     keyId: { type: String, default: 'id', required: false },

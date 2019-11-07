@@ -52,7 +52,8 @@ router.beforeEach(async (to, from, next) => {
   //   back: true
   // })
   if (to.matched.some(r => r.meta.auth)) {
-    try { await api.USER_CHECK_TOKEN() } catch (error) {}
+    // 可以在这里加上登录状态的验证
+    // try { await api.USER_CHECK_TOKEN() } catch (error) {}
     next()
     NProgress.done()
   } else {
