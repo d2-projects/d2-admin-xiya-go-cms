@@ -35,7 +35,7 @@ export default {
           label: '部门邮箱',
           rule: [
             { required: true, message: '必填', trigger: 'change' },
-            { validator: (rule, value, callback) => callback(utils.helper.isLegalEmail(value) ? undefined : new Error('邮箱格式不正确')), trigger: 'change' }
+            { validator: utils.helper.isLegalEmailValidator, trigger: 'change' }
           ],
           render: <el-input vModel={ this.form.model.email }/>
         },
@@ -45,7 +45,7 @@ export default {
           label: '部门电话',
           rule: [
             { required: true, message: '必填', trigger: 'change' },
-            { validator: (rule, value, callback) => callback(utils.helper.isLegalPhone(value) ? undefined : new Error('电话格式不正确')), trigger: 'change' }
+            { validator: utils.helper.isLegalMobilePhoneValidator, trigger: 'change' }
           ],
           render: <el-input vModel={ this.form.model.phone }/>
         },

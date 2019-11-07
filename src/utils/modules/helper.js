@@ -26,13 +26,27 @@ export function isLegalPassword (value) {
   }
   return true
 }
+/**
+ * @description 同上面方法
+ * @description 适用于表单校验
+ */
+export function isLegalPasswordValidator (rule, value, callback) {
+  callback(isLegalPassword(value) ? undefined : new Error('6-15个字符，至少包括大写、小写、下划线、数字两种'))
+}
 
 /**
- * @description 合法的电话号码
+ * @description 合法的手机号码
  * @param {String} value 需要校验的数据
  */
-export function isLegalPhone (value) {
+export function isLegalMobilePhone (value) {
   return /^1[3-9]\d{9}$/.test(value)
+}
+/**
+ * @description 同上面方法
+ * @description 适用于表单校验
+ */
+export function isLegalMobilePhoneValidator (rule, value, callback) {
+  callback(isLegalMobilePhone(value) ? undefined : new Error('手机号码格式不正确'))
 }
 
 /**
@@ -42,4 +56,11 @@ export function isLegalPhone (value) {
  */
 export function isLegalEmail (value) {
   return /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/.test(value)
+}
+/**
+ * @description 同上面方法
+ * @description 适用于表单校验
+ */
+export function isLegalEmailValidator (rule, value, callback) {
+  callback(isLegalEmail(value) ? undefined : new Error('邮箱格式不正确'))
 }
