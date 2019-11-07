@@ -11,41 +11,16 @@ export default {
     }
   },
   props: {
-    value: {
-      type: [ Number, String ],
-      default: null,
-      required: false
-    },
-    name: {
-      type: String,
-      default: '',
-      required: false
-    },
-    tag: {
-      type: String,
-      default: 'span',
-      required: false
-    },
-    // 增加 [全部] 选项
-    all: {
-      type: Boolean,
-      default: false,
-      required: false
-    },
-    // 增加 [全部] 选项
-    // [全部] 选项的标题
-    allLabel: {
-      type: String,
-      default: '全部',
-      required: false
-    },
-    // 增加 [全部] 选项
-    // [全部] 选项的值
-    allValue: {
-      type: [ Number, String ],
-      default: 0,
-      required: false
-    }
+    // 绑定的值
+    value: { type: [ Number, String ], default: null, required: false },
+    // 字典名
+    name: { type: String, default: '', required: false },
+    // [全部] 选项
+    all: { type: Boolean, default: false, required: false },
+    // [全部] 选项 标题
+    allLabel: { type: String, default: '全部', required: false },
+    // [全部] 选项 值
+    allValue: { type: [ Number, String ], default: 0, required: false }
   },
   computed: {
     currentLabel () {
