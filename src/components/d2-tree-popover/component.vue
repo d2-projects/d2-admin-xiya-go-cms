@@ -27,12 +27,12 @@
 
 <script>
 import { cloneDeep } from 'lodash'
-import treeMixin from '../_mixins/tree'
+import tree from '@/mixins/component.tree'
 
 export default {
   name: 'd2-tree-popover',
   mixins: [
-    treeMixin
+    tree
   ],
   props: {
     // 传递给 tree 组件的设置项

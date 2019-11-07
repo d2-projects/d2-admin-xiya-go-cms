@@ -1,9 +1,6 @@
 import { omit, isArray, isString, isFunction } from 'lodash'
 
 export default {
-  inject: [
-    'elFormItem'
-  ],
   // 注意
   // 如果包含 d2-tree 的组件引入了这个 mixin
   // 并且通过 <d2-tree v-bind="$attrs"/> 传递参数

@@ -10,23 +10,26 @@
 }
 </style>
 
-<template>
-  <el-tree
-    class="d2-tree"
-    ref="tree"
-    v-bind="config"
-    @current-change="currentChange"
-    @check="check">
-  </el-tree>
-</template>
-
 <script>
-import treeMixin from '../_mixins/tree'
+import tree from '@/mixins/component.tree'
+import fieldChange from '@/mixins/el.fieldChange'
 
 export default {
   name: 'd2-tree',
+  render () {
+    const component =
+      <el-tree
+        class="d2-tree"
+        ref="tree"
+        { ...{ attrs: this.config } }
+        on-current-change={ this.currentChange }
+        on-check={ this.check }>
+      </el-tree>
+    return component
+  },
   mixins: [
-    treeMixin
+    tree,
+    fieldChange
   ],
   data () {
     return {
@@ -110,7 +113,7 @@ export default {
       // 更新 value
       if (this.multiple) return
       this.$emit('input', data.id)
-      this.elFormItem.onFieldChange()
+      this.fieldChange()
     },
     /**
      * @description el-tree 事件 | check
@@ -122,10 +125,10 @@ export default {
       if (!this.multiple) return
       if (this.stringify) {
         this.$emit('input', info.checkedKeys.join(','))
-        this.elFormItem.onFieldChange()
+        this.fieldChange()
       } else {
         this.$emit('input', info.checkedKeys)
-        this.elFormItem.onFieldChange()
+        this.fieldChange()
       }
     }
   }
