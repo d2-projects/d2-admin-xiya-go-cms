@@ -56,7 +56,7 @@ export default {
     settingColumns () {
       return [
         { prop: 'role_name', label: '角色名称', minWidth: '100px', fixed: 'left' },
-        { prop: 'role_key', label: '角色权限', minWidth: '100px' },
+        { prop: 'role_key', label: '权限字符', minWidth: '100px' },
         { prop: 'data_scope', label: '数据范围', minWidth: '100px' },
         { prop: 'role_menu', label: '菜单权限', minWidth: '100px' },
         { prop: 'role_dept', label: '部门权限', minWidth: '100px' },
@@ -106,7 +106,7 @@ export default {
         },
         {
           prop: 'role_key',
-          label: '角色权限',
+          label: '权限字符',
           default: '',
           render: <el-input vModel={ this.search.form.model.role_key } style="width:100px;"/>
         },

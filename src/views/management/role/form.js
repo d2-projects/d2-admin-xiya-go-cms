@@ -24,7 +24,7 @@ export default {
         {
           prop: 'role_key',
           default: '',
-          label: '角色权限',
+          label: '权限字符',
           rule: { required: true, message: '必填', trigger: 'change' },
           render: <el-input vModel={ this.form.model.role_key }/>
         },
@@ -46,7 +46,6 @@ export default {
           prop: 'role_menu',
           default: '',
           label: '菜单权限',
-          rule: { required: true, message: '必填', trigger: 'change' },
           render: <d2-tree vModel={ this.form.model.role_menu } source="MENU_ALL" key-label="menu_name" multiple stringify/>
         },
         {
