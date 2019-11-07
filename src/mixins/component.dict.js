@@ -6,13 +6,14 @@ export default {
   mixins: [ fieldChange ],
   data () {
     return {
+      currentValue: null,
       options: []
     }
   },
   props: {
     value: {
       type: [ Number, String ],
-      default: undefined,
+      default: null,
       required: false
     },
     name: {
@@ -42,7 +43,7 @@ export default {
     }
   },
   computed: {
-    currentValue () {
+    currentLabel () {
       const item = this.options.find(e => e.value === this.value)
       return item ? item.label : ''
     }
@@ -59,6 +60,12 @@ export default {
           options.unshift(optionItenAll)
         }
         this.options = options
+      },
+      immediate: true
+    },
+    value: {
+      handler (value) {
+        this.currentValue = cloneDeep(value)
       },
       immediate: true
     }

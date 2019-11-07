@@ -36,17 +36,17 @@ export default {
           render: <el-input-number min={ 1 } vModel={ this.form.model.role_sort }/>
         },
         {
-          prop: 'status',
-          default: 1,
-          label: '状态',
-          rule: { required: true, message: '必填', trigger: 'change' },
-          render: <d2-dict-select vModel={ this.form.model.status } name="status" style="width:100px;"/>
-        },
-        {
           prop: 'role_menu',
           default: '',
           label: '菜单权限',
           render: <d2-tree vModel={ this.form.model.role_menu } source="MENU_ALL" key-label="menu_name" multiple stringify/>
+        },
+        {
+          prop: 'status',
+          default: 1,
+          label: '状态',
+          rule: { required: true, message: '必填', trigger: 'change' },
+          render: <d2-dict-radio vModel={ this.form.model.status } name="status"/>
         },
         {
           prop: 'remark',

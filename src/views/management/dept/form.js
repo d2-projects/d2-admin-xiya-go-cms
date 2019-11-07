@@ -68,7 +68,7 @@ export default {
           default: 1,
           label: '状态',
           rule: { required: true, message: '必填', trigger: 'change' },
-          render: <d2-dict-select vModel={ this.form.model.status } name="status" style="width:100px;"/>
+          render: <d2-dict-radio vModel={ this.form.model.status } name="status"/>
         },
         {
           prop: 'remark',

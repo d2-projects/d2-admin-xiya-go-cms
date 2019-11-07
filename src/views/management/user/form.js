@@ -86,6 +86,19 @@ export default {
           default: '',
           label: '角色',
           render: <el-input vModel={ this.form.model.user_role }/>
+        },
+        {
+          prop: 'status',
+          default: 1,
+          label: '状态',
+          rule: { required: true, message: '必填', trigger: 'change' },
+          render: <d2-dict-radio vModel={ this.form.model.status } name="status"/>
+        },
+        {
+          prop: 'remark',
+          default: '',
+          label: '备注',
+          render: <el-input vModel={ this.form.model.remark }/>
         }
       ]
     }
