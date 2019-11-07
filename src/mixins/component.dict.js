@@ -21,6 +21,11 @@ export default {
       default: '',
       required: false
     },
+    tag: {
+      type: String,
+      default: 'span',
+      required: false
+    },
     // 增加 [全部] 选项
     all: {
       type: Boolean,
@@ -46,6 +51,12 @@ export default {
     currentLabel () {
       const item = this.options.find(e => e.value === this.value)
       return item ? item.label : ''
+    },
+    attrs () {
+      const defaultAttrs = {
+        placeholder: '123'
+      }
+      return Object.assign(defaultAttrs, this.$attrs)
     }
   },
   watch: {

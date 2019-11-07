@@ -4,6 +4,6 @@ export default {
   name: 'd2-dict',
   mixins: [ dict ],
   render () {
-    return <span class="d2-dict">{ this.currentLabel }</span>
+    return <this.tag { ...{ attrs: this.attrs } }>{ this.currentLabel }</this.tag>
   }
 }

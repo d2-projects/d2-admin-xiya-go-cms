@@ -5,7 +5,7 @@ export default {
   mixins: [ dict ],
   render () {
     const component =
-      <el-radio-group vModel={ this.currentValue } on-change={ this.onChange }>
+      <el-radio-group { ...{ attrs: this.attrs } } vModel={ this.currentValue } on-change={ this.onChange }>
         {
           this.options.map(
             item =>
