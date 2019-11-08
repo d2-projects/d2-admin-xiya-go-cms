@@ -18,9 +18,7 @@ export default {
                   { this.vNodeButtonTableColumnsFilterTrigger }
                 </el-button-group>
               </d2-bar-cell>
-              <d2-bar-cell>
-                { this.vNodeButtonCreateWithParentId0 }
-              </d2-bar-cell>
+              <d2-bar-cell>{ this.vNodeButtonCreateWithParentId0 }</d2-bar-cell>
             </d2-bar>
             { this.vNodeSearchForm }
           </d2-search-panel>

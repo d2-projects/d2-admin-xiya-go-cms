@@ -16,9 +16,7 @@ export default {
           <d2-search-panel vModel={ this.search.panel.active }>
             <d2-bar slot="title">
               <d2-bar-space/>
-              <d2-bar-cell>
-                { this.vNodePaginationMini }
-              </d2-bar-cell>
+              <d2-bar-cell>{ this.vNodePaginationMini }</d2-bar-cell>
               <d2-bar-space/>
               <d2-bar-cell>
                 <el-button-group>
@@ -26,18 +24,14 @@ export default {
                   { this.vNodeButtonTableColumnsFilterTrigger }
                 </el-button-group>
               </d2-bar-cell>
-              <d2-bar-cell>
-                { this.vNodeButtonCreate }
-              </d2-bar-cell>
+              <d2-bar-cell>{ this.vNodeButtonCreate }</d2-bar-cell>
             </d2-bar>
             { this.vNodeSearchForm }
           </d2-search-panel>
         </template>
         { this.vNodeTable }
         <d2-bar slot="footer">
-          <d2-bar-cell>
-            { this.vNodePaginationFull }
-          </d2-bar-cell>
+          <d2-bar-cell>{ this.vNodePaginationFull }</d2-bar-cell>
           <d2-bar-space/>
         </d2-bar>
         <component-form ref="form" on-success={ this.research }/>
