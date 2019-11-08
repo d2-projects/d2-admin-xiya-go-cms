@@ -50,7 +50,6 @@ export default {
         { prop: 'user_name', label: '登录账号', minWidth: '100px', fixed: 'left' },
         { prop: 'nickname', label: '昵称', minWidth: '100px' },
         { prop: 'id', label: 'ID', minWidth: '100px', show: false },
-        { prop: 'user_type', label: '用户类型', minWidth: '100px' },
         { prop: 'sex', label: '性别', minWidth: '100px' },
         { prop: 'avatar', label: '头像', minWidth: '100px' },
         { prop: 'email', label: '邮箱', minWidth: '150px' },

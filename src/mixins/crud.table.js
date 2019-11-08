@@ -1,3 +1,4 @@
+import { mapActions } from 'vuex'
 import { cloneDeep, isArray, isObject, isFunction } from 'lodash'
 import utils from '@/utils'
 
@@ -217,6 +218,9 @@ export default {
     await this.research()
   },
   methods: {
+    ...mapActions('d2admin/dict', {
+      dictSet: 'set'
+    }),
     /**
      * @description 加载数据
      */

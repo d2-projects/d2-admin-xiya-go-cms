@@ -73,12 +73,6 @@ export default {
           render: <el-input vModel={ this.form.model.user_post }/>
         },
         {
-          prop: 'user_type',
-          default: 1,
-          label: '用户类型',
-          render: <d2-dict-select name="user_type" vModel={ this.form.model.user_type }/>
-        },
-        {
           prop: 'user_role',
           default: 1,
           label: '角色',
@@ -91,6 +85,15 @@ export default {
           render: <el-input vModel={ this.form.model.remark }/>
         }
       ]
+    }
+  },
+  methods: {
+    /**
+     * @description 加载需要的字典数据
+     */
+    async loadDict () {
+      console.log(await this.$api.ROLE_ALL())
+      console.log(await this.$api.POST_ALL())
     }
   }
 }
