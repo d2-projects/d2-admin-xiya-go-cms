@@ -22,51 +22,30 @@ export default {
           render: <el-input vModel={ this.form.model.nickname }/>
         },
         {
-          prop: 'user_name',
+          prop: 'dept_id',
           default: '',
-          label: '登录账号',
+          label: '归属部门',
           rule: { required: true, message: '必填', trigger: 'change' },
-          render: <el-input vModel={ this.form.model.user_name }/>
-        },
-        {
-          prop: 'user_type',
-          default: 1,
-          label: '用户类型',
-          rule: { required: true, message: '必填', trigger: 'change' },
-          render: <d2-dict-select name="user_type" vModel={ this.form.model.user_type }/>
-        },
-        {
-          prop: 'email',
-          default: '',
-          label: '邮箱',
-          rule: { required: true, message: '必填', trigger: 'change' },
-          render: <el-input vModel={ this.form.model.email }/>
+          render: <d2-tree-popover vModel={ this.form.model.dept_id } source="DEPT_ALL" key-label="dept_name"/>
         },
         {
           prop: 'phone',
           default: '',
           label: '手机号码',
-          rule: { required: true, message: '必填', trigger: 'change' },
           render: <el-input vModel={ this.form.model.phone }/>
         },
         {
-          prop: 'phonenumber',
+          prop: 'email',
           default: '',
-          label: '座机',
-          render: <el-input vModel={ this.form.model.phonenumber }/>
+          label: '邮箱',
+          render: <el-input vModel={ this.form.model.email }/>
         },
         {
-          prop: 'sex',
-          default: 1,
-          label: '性别',
+          prop: 'user_name',
+          default: '',
+          label: '用户名称',
           rule: { required: true, message: '必填', trigger: 'change' },
-          render: <d2-dict-select name="sex" vModel={ this.form.model.sex }/>
-        },
-        {
-          prop: 'avatar',
-          default: '',
-          label: '头像',
-          render: <el-input vModel={ this.form.model.avatar }/>
+          render: <el-input vModel={ this.form.model.user_name }/>
         },
         {
           prop: 'password',
@@ -76,23 +55,28 @@ export default {
           render: <el-input vModel={ this.form.model.password }/>
         },
         {
+          prop: 'sex',
+          default: 0,
+          label: '性别',
+          render: <d2-dict-select name="sex" vModel={ this.form.model.sex } all-label="未知" all/>
+        },
+        {
+          prop: 'status',
+          default: 1,
+          label: '状态',
+          render: <d2-dict-radio vModel={ this.form.model.status } name="status"/>
+        },
+        {
           prop: 'user_post',
           default: '',
           label: '岗位',
           render: <el-input vModel={ this.form.model.user_post }/>
         },
         {
-          prop: 'user_role',
-          default: '',
-          label: '角色',
-          render: <el-input vModel={ this.form.model.user_role }/>
-        },
-        {
-          prop: 'status',
+          prop: 'user_type',
           default: 1,
-          label: '状态',
-          rule: { required: true, message: '必填', trigger: 'change' },
-          render: <d2-dict-radio vModel={ this.form.model.status } name="status"/>
+          label: '用户类型',
+          render: <d2-dict-select name="user_type" vModel={ this.form.model.user_type }/>
         },
         {
           prop: 'remark',
