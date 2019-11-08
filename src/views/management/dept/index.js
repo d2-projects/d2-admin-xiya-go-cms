@@ -1,10 +1,10 @@
 import utils from '@/utils'
 import table from '@/mixins/crud.table.js'
-import formComponent from './form'
+import componentForm from './form'
 
 export default {
   mixins: [ table ],
-  components: { formComponent },
+  components: { componentForm },
   render () {
     const page =
       <d2-container spacious>
@@ -26,7 +26,7 @@ export default {
           </d2-search-panel>
         </template>
         { this.vNodeTable }
-        <form-component ref="form-component" on-success={ this.research }/>
+        <form ref="form" on-success={ this.research }/>
         { this.vNodeTableColumnsFilter }
       </d2-container>
     return page

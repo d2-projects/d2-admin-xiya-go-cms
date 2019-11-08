@@ -244,16 +244,19 @@ export default {
     },
     /**
      * @description 新建
+     * @param {Object} data 新建时默认数据
+     * @param {String} ref 表单组件的 ref
      */
-    create (data = {}) {
-      this.$refs['form-component'].create(data)
+    create (data = {}, ref = 'form') {
+      this.$refs[ref].create(data)
     },
     /**
      * @description 编辑
      * @param {Number} id 编辑行的 id
+     * @param {String} ref 表单组件的 ref
      */
-    edit (id) {
-      this.$refs['form-component'].edit(id)
+    edit (id, ref = 'form') {
+      this.$refs[ref].edit(id)
     },
     /**
      * @description 删除
