@@ -47,6 +47,7 @@ export default {
       },
       form: {
         model: {},
+        modelDefault: {},
         labelWidth: '100px',
         statusIcon: true
       },
@@ -83,6 +84,10 @@ export default {
     title () {
       return this.switchByMode('新建', '编辑')
     },
+    // 表单是否发生了改动
+    isFormChanged () {
+      return JSON.stringify(this.form.model) !== JSON.stringify(this.form.modelDefault)
+    },
     // 表单 loading 状态
     // 正在加载原始数据 || 正在加载字典
     isFormLoading () {
@@ -94,9 +99,9 @@ export default {
       return this.status.isLoadingData || this.status.isLoadingDict || this.status.isSubmitting
     },
     // 提交按钮 禁用 状态
-    // 正在加载原始数据 || 正在加载字典
+    // 正在加载原始数据 || 正在加载字典 || 表单没有发生修改
     isSubmitButtonDisabled () {
-      return this.status.isLoadingData || this.status.isLoadingDict
+      return this.status.isLoadingData || this.status.isLoadingDict || !this.isFormChanged
     },
     // 提交按钮 loading 状态
     // 正在提交
@@ -115,10 +120,19 @@ export default {
       this.setMode('edit')
       this.open()
       try {
-        this.form.model = await this.doLoadData(() => (this.$api[this.api.detail] || function () {})(id))
+        const model = await this.doLoadData(() => (this.$api[this.api.detail] || function () {})(id))
+        this.setFormData(model)
       } catch (error) {
         this.cancle()
       }
+    },
+    /**
+     * @description 初始化表单为新建模式
+     */
+    async create (data = {}) {
+      this.setFormData(data)
+      this.setMode('create')
+      this.open()
     },
     /**
      * @description 提交表单
@@ -147,14 +161,6 @@ export default {
       this.cache.form = cloneDeep(form)
       this.rules = cloneDeep(rules)
       this.form.model = cloneDeep(form)
-    },
-    /**
-     * @description 初始化表单为新建模式
-     */
-    async create (data = {}) {
-      this.setFormData(data)
-      this.setMode('create')
-      this.open()
     },
     /**
      * @description 请求表单数据
@@ -206,7 +212,9 @@ export default {
      * @param {Object} data 覆盖默认值的数据
      */
     setFormData (data = {}) {
-      this.form.model = Object.assign(cloneDeep(this.cache.form), data)
+      const model = Object.assign(cloneDeep(this.cache.form), data)
+      this.form.model = cloneDeep(model)
+      this.form.modelDefault = cloneDeep(model)
     },
     /**
      * 设置表单模式

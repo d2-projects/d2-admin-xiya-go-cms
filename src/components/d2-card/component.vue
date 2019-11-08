@@ -1,7 +1,7 @@
 <template>
   <el-card shadow="never" class="d2-card">
     <div :style="cardBodyStyle">
-      <d2-scrollbar style="height: 100px;">
+      <d2-scrollbar style="height: 300px;">
         <div :style="scrollInnerStyle">
           <slot></slot>
         </div>
@@ -17,24 +17,20 @@ const scrollBarWidth = 6
 export default {
   name: 'd2-card',
   props: {
-    height: { type: String, default: '', required: false },
-    paddingTop: { type: Number, default: 10, required: false },
-    paddingBottom: { type: Number, default: 10, required: false },
-    paddingLeft: { type: Number, default: 10, required: false },
-    paddingRight: { type: Number, default: scrollBarWidth, required: false }
+    height: { type: String, default: '', required: false }
   },
   computed: {
     cardBodyStyle () {
       return {
-        marginTop: `${this.paddingTop - elCardPadding}px`,
-        marginBottom: `${this.paddingBottom - elCardPadding}px`,
-        marginLeft: `${this.paddingLeft - elCardPadding}px`,
-        marginRight: `${this.paddingRight - elCardPadding - scrollBarPadding}px`
+        marginTop: '-10px',
+        marginBottom: '-10px',
+        marginLeft: '-10px',
+        marginRight: '-20px'
       }
     },
     scrollInnerStyle () {
       return {
-        marginRight: `${this.paddingRight + scrollBarWidth}px`
+        marginRight: '10px'
       }
     }
   }
