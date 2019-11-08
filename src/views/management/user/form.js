@@ -79,6 +79,12 @@ export default {
           render: <d2-dict-select name="user_type" vModel={ this.form.model.user_type }/>
         },
         {
+          prop: 'user_role',
+          default: 1,
+          label: '角色',
+          render: <el-input vModel={ this.form.model.user_role }/>
+        },
+        {
           prop: 'remark',
           default: '',
           label: '备注',
