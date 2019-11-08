@@ -27,6 +27,19 @@ export default {
           label: '权限字符',
           rule: { required: true, message: '必填', trigger: 'change' },
           render: <el-input vModel={ this.form.model.role_key } disabled/>
+        },
+        {
+          prop: 'data_scope',
+          default: '',
+          label: '数据范围',
+          rule: { required: true, message: '必填', trigger: 'change' },
+          render: <d2-dict-select vModel={ this.form.model.data_scope } name="data_scope"/>
+        },
+        {
+          prop: 'role_dept',
+          default: '',
+          label: '部门权限',
+          render: <d2-tree vModel={ this.form.model.role_dept } source="DEPT_ALL" key-label="dept_name" multiple stringify/>
         }
       ]
     }
