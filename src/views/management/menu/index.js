@@ -64,23 +64,9 @@ export default {
           fixed: 'right',
           render: ({ row }) => {
             const actions = [
-              {
-                icon: 'el-icon-edit-outline',
-                action: () => this.edit(row.id)
-              },
-              {
-                icon: 'el-icon-plus',
-                type: 'primary',
-                action: () => this.create({
-                  parent_id: row.id
-                })
-              },
-              {
-                icon: 'el-icon-delete',
-                type: 'danger',
-                confirm: `确定删除 [ ${row.menu_name} ] 吗`,
-                action: () => this.delete(row.id)
-              }
+              { icon: 'el-icon-edit-outline', action: () => this.edit(row.id) },
+              { icon: 'el-icon-plus', type: 'primary', action: () => this.create({ parent_id: row.id }) },
+              { icon: 'el-icon-delete', type: 'danger', confirm: `确定删除 [ ${row.menu_name} ] 吗`, action: () => this.delete(row.id) }
             ]
             return <d2-table-actions actions={ actions }/>
           }
