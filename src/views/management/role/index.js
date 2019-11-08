@@ -1,10 +1,14 @@
 import utils from '@/utils'
 import table from '@/mixins/crud.table.js'
 import componentForm from './form'
+import componentForm2 from './form2'
 
 export default {
   mixins: [ table ],
-  components: { componentForm },
+  components: {
+    componentForm,
+    componentForm2
+  },
   render () {
     const page =
       <d2-container spacious>
@@ -36,7 +40,8 @@ export default {
           </d2-bar-cell>
           <d2-bar-space/>
         </d2-bar>
-        <form ref="form" on-success={ this.research }/>
+        <component-form ref="form" on-success={ this.research }/>
+        <component-form-2 ref="form2" on-success={ this.research }/>
         { this.vNodeTableColumnsFilter }
       </d2-container>
     return page
@@ -85,7 +90,7 @@ export default {
           render: ({ row }) => {
             const actions = [
               { icon: 'el-icon-edit-outline', label: '修改', action: () => this.edit(row.id) },
-              { icon: 'el-icon-edit-outline', label: '数据权限', action: () => this.edit(row.id) },
+              { icon: 'el-icon-edit-outline', label: '数据权限', action: () => this.edit(row.id, 'form2') },
               { icon: 'el-icon-delete', label: '删除', type: 'danger', confirm: `确定删除 [ ${row.role_name} ] 吗`, action: () => this.delete(row.id) }
             ]
             return <d2-table-actions actions={ actions }/>

@@ -26,7 +26,7 @@ export default {
           </d2-search-panel>
         </template>
         { this.vNodeTable }
-        <form ref="form" on-success={ this.research }/>
+        <component-form ref="form" on-success={ this.research }/>
         { this.vNodeTableColumnsFilter }
       </d2-container>
     return page

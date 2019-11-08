@@ -36,7 +36,7 @@ export default {
           </d2-bar-cell>
           <d2-bar-space/>
         </d2-bar>
-        <form ref="form" on-success={ this.research }/>
+        <component-form ref="form" on-success={ this.research }/>
         { this.vNodeTableColumnsFilter }
       </d2-container>
     return page
