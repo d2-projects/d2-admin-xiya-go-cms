@@ -8,18 +8,16 @@ export default {
   render () {
     const page =
       <d2-container spacious>
-        <template slot="header">
-          <d2-bar>
-            <d2-bar-space/>
-            <d2-bar-cell>
-              <el-button-group>
-                { this.vNodeButtonSearch }
-                { this.vNodeButtonTableColumnsFilterTrigger }
-              </el-button-group>
-            </d2-bar-cell>
-            <d2-bar-cell>{ this.vNodeButtonCreateWithParentId0 }</d2-bar-cell>
-          </d2-bar>
-        </template>
+        <d2-bar slot="header">
+          <d2-bar-space/>
+          <d2-bar-cell>
+            <el-button-group>
+              { this.vNodeButtonSearch }
+              { this.vNodeButtonTableColumnsFilterTrigger }
+            </el-button-group>
+          </d2-bar-cell>
+          <d2-bar-cell>{ this.vNodeButtonCreateWithParentId0 }</d2-bar-cell>
+        </d2-bar>
         { this.vNodeTable }
         <component-form ref="form" on-success={ this.research }/>
         { this.vNodeTableColumnsFilter }

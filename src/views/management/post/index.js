@@ -8,23 +8,21 @@ export default {
   render () {
     const page =
       <d2-container spacious>
-        <template slot="header">
-          <d2-search-panel vModel={ this.search.panel.active }>
-            <d2-bar slot="title">
-              <d2-bar-space/>
-              <d2-bar-cell>{ this.vNodePaginationMini }</d2-bar-cell>
-              <d2-bar-space/>
-              <d2-bar-cell>
-                <el-button-group>
-                  { this.vNodeButtonSearch }
-                  { this.vNodeButtonTableColumnsFilterTrigger }
-                </el-button-group>
-              </d2-bar-cell>
-              <d2-bar-cell>{ this.vNodeButtonCreate }</d2-bar-cell>
-            </d2-bar>
-            { this.vNodeSearchForm }
-          </d2-search-panel>
-        </template>
+        <d2-search-panel slot="header" vModel={ this.search.panel.active }>
+          <d2-bar slot="title">
+            <d2-bar-space/>
+            <d2-bar-cell>{ this.vNodePaginationMini }</d2-bar-cell>
+            <d2-bar-space/>
+            <d2-bar-cell>
+              <el-button-group>
+                { this.vNodeButtonSearch }
+                { this.vNodeButtonTableColumnsFilterTrigger }
+              </el-button-group>
+            </d2-bar-cell>
+            <d2-bar-cell>{ this.vNodeButtonCreate }</d2-bar-cell>
+          </d2-bar>
+          { this.vNodeSearchForm }
+        </d2-search-panel>
         { this.vNodeTable }
         <d2-bar slot="footer">
           <d2-bar-cell>{ this.vNodePaginationFull }</d2-bar-cell>
