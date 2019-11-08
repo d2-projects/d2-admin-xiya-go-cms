@@ -13,12 +13,14 @@ export default {
         disabled={ this.isFormDisabled }
         v-loading={ this.isFormLoading }>
         {
-          this.setting.map(
-            item =>
-              <el-form-item label={ item.label } prop={ item.prop }>
-                { item.render }
-              </el-form-item>
-          )
+          this.setting
+            .filter(item => item.if === undefined || item.if)
+            .map(
+              item =>
+                <el-form-item label={ item.label } prop={ item.prop }>
+                  { item.render }
+                </el-form-item>
+            )
         }
       </el-form>
       <el-form label-width={ this.form.labelWidth }>
@@ -48,8 +50,7 @@ export default {
       form: {
         model: {},
         modelDefault: {},
-        labelWidth: '100px',
-        statusIcon: true
+        labelWidth: '100px'
       },
       rules: {},
       dialog: {
