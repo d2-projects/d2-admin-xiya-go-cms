@@ -31,7 +31,7 @@ export default ({ request }) => ({
   MENU_CREATE (data) {
     return request({
       url: '/api/menu/create',
-      method: 'post',
+      method: 'put',
       data
     })
   },

@@ -1,7 +1,10 @@
-import { mapActions } from 'vuex'
 import { cloneDeep } from 'lodash'
+import dict from './crud.dict'
 
 export default {
+  mixins: [
+    dict
+  ],
   render () {
     return <el-dialog
       { ...{ attrs: this.dialog } }
@@ -115,9 +118,6 @@ export default {
     this.init()
   },
   methods: {
-    ...mapActions('d2admin/dict', {
-      dictSet: 'set'
-    }),
     /**
      * @description 初始化表单为编辑模式
      */
@@ -172,11 +172,6 @@ export default {
       this.rules = cloneDeep(rules)
       this.form.model = cloneDeep(form)
     },
-    /**
-     * @description 加载需要的字典数据
-     * @description 这个步骤会在 edit 和 create 步骤中被调用
-     */
-    async loadDict () {},
     /**
      * @description 请求表单数据
      * @param {Function} fn 请求函数 需要返回 Promise

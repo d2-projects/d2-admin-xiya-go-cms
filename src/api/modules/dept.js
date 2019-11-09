@@ -18,7 +18,7 @@ export default ({ request }) => ({
   DEPT_CREATE (data) {
     return request({
       url: '/api/dept/create',
-      method: 'post',
+      method: 'put',
       data
     })
   },

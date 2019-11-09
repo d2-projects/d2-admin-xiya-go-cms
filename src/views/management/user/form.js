@@ -74,7 +74,7 @@ export default {
         },
         {
           prop: 'user_role',
-          default: 1,
+          default: '',
           label: '角色',
           render: <d2-dict-select name="user_role" vModel={ this.form.model.user_role }/>
         },
@@ -92,13 +92,15 @@ export default {
      * @description 加载需要的字典数据
      */
     async loadDict () {
-      this.dictSet({
+      await this.loadDictOne({
         name: 'user_post',
-        value: (await this.$api.POST_ALL()).list.map(e => ({ label: e.post_name, value: e.id }))
+        method: this.$api.POST_ALL,
+        label: 'post_name'
       })
-      this.dictSet({
+      await this.loadDictOne({
         name: 'user_role',
-        value: (await this.$api.ROLE_ALL()).list.map(e => ({ label: e.role_name, value: e.id }))
+        method: this.$api.ROLE_ALL,
+        label: 'role_name'
       })
     }
   }

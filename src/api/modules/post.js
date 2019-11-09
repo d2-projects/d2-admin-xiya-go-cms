@@ -17,7 +17,7 @@ export default ({ request }) => ({
   POST_CREATE (data) {
     return request({
       url: '/api/post/create',
-      method: 'post',
+      method: 'put',
       data
     })
   },

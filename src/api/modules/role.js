@@ -17,7 +17,7 @@ export default ({ request }) => ({
   ROLE_CREATE (data) {
     return request({
       url: '/api/role/create',
-      method: 'post',
+      method: 'put',
       data
     })
   },

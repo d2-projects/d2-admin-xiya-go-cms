@@ -54,7 +54,7 @@ export default ({ request }) => ({
   USER_CREATE (data) {
     return request({
       url: '/api/user/create',
-      method: 'post',
+      method: 'put',
       data
     })
   },

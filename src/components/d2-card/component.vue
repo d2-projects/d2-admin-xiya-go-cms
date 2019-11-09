@@ -11,9 +11,6 @@
 </template>
 
 <script>
-const elCardPadding = 20
-const scrollBarPadding = 2
-const scrollBarWidth = 6
 export default {
   name: 'd2-card',
   props: {
