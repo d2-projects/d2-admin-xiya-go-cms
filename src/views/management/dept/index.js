@@ -91,7 +91,7 @@ export default {
           prop: 'status',
           label: '状态',
           default: 0,
-          render: <d2-dict-select vModel={ this.search.form.model.status } name="status" style="width:100px;" all/>
+          render: <d2-dict-radio vModel={ this.search.form.model.status } name="status" button all/>
         }
       ]
     }
