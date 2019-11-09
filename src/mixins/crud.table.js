@@ -216,8 +216,8 @@ export default {
   async created () {
     this.initSearchForm()
     this.initTableColumns()
-    await this.loadDict()
-    await this.research()
+    this.loadDict()
+    this.research()
   },
   methods: {
     ...mapActions('d2admin/dict', {
@@ -233,7 +233,8 @@ export default {
         this.$message.error('未找到 API')
         return
       }
-      const result = await search(this.searchData)
+      
+      const result = await this.doLoadData(() => search(this.searchData))
       if (isArray(result)) {
         this.table.data = result
       } else if (isObject(result) && isArray(result.list) && isObject(result.page)) {
@@ -246,7 +247,7 @@ export default {
      * @description 加载字典数据
      */
     async loadDict () {
-      await this.doLoadDict(() => Promise.resolve({}))
+      await this.doLoadDict()
     },
     /**
      * @description 新建
@@ -372,7 +373,7 @@ export default {
      * @description 请求表格数据
      * @param {Function} fn 请求函数 需要返回 Promise
      */
-    async doLoadData (fn) {
+    async doLoadData (fn = () => {}) {
       this.status.isLoadingData = true
       try {
         const data = await fn()
@@ -387,7 +388,7 @@ export default {
      * @description 请求字典数据
      * @param {Function} fn 请求函数 需要返回 Promise
      */
-    async doLoadDict (fn) {
+    async doLoadDict (fn = () => {}) {
       this.status.isLoadingDict = true
       try {
         const data = await fn()
