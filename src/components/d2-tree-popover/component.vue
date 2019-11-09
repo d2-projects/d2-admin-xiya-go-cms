@@ -29,11 +29,13 @@
 <script>
 import { cloneDeep } from 'lodash'
 import tree from '@/mixins/component.tree'
+import fieldChange from '@/mixins/el.fieldChange'
 
 export default {
   name: 'd2-tree-popover',
   mixins: [
-    tree
+    tree,
+    fieldChange
   ],
   props: {
     // 传递给 tree 组件的设置项
@@ -138,6 +140,7 @@ export default {
      */
     submit () {
       this.$emit('input', this.currentValue)
+      this.fieldChange()
       this.active = false
     }
   }
