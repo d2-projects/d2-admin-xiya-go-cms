@@ -54,7 +54,7 @@ export default {
       return [
         { prop: 'role_name', label: '角色名称', minWidth: '100px', fixed: 'left' },
         { prop: 'role_key', label: '权限字符', minWidth: '100px' },
-        { prop: 'data_scope', label: '数据范围', minWidth: '100px' },
+        { prop: 'data_scope', label: '数据范围', minWidth: '100px', render: ({ row }) => <d2-dict value={ row.data_scope } name="data_scope"/> },
         { prop: 'role_sort', label: '显示顺序', minWidth: '100px', show: false },
         { prop: 'status', label: '状态', width: '100px', show: false },
         { prop: 'remark', label: '备注', width: '100px', show: false },
