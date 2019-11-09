@@ -57,6 +57,7 @@ export default context => ({
      * @param {Object} payload {Array} value 字典数据
      */
     set ({ state }, { name = '', value = [] } = {}) {
+      console.log('set')
       const dictIndex = state.dicts.findIndex(e => e.name === name)
       if (dictIndex < 0) {
         state.dicts.push({ name, value })

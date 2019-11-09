@@ -70,13 +70,13 @@ export default {
           prop: 'user_post',
           default: '',
           label: '岗位',
-          render: <el-input vModel={ this.form.model.user_post }/>
+          render: <d2-dict-select name="user_post" vModel={ this.form.model.user_post }/>
         },
         {
           prop: 'user_role',
           default: 1,
           label: '角色',
-          render: <el-input vModel={ this.form.model.user_role }/>
+          render: <d2-dict-select name="user_role" vModel={ this.form.model.user_role }/>
         },
         {
           prop: 'remark',
@@ -92,8 +92,14 @@ export default {
      * @description 加载需要的字典数据
      */
     async loadDict () {
-      console.log(await this.$api.ROLE_ALL())
-      console.log(await this.$api.POST_ALL())
+      this.dictSet({
+        name: 'user_post',
+        value: (await this.$api.POST_ALL()).list.map(e => ({ label: e.post_name, value: e.id }))
+      })
+      this.dictSet({
+        name: 'user_role',
+        value: (await this.$api.ROLE_ALL()).list.map(e => ({ label: e.role_name, value: e.id }))
+      })
     }
   }
 }

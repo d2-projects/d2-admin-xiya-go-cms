@@ -129,6 +129,7 @@ export default {
         const model = await this.doLoadData(() => (this.$api[this.api.detail] || function () {})(id))
         this.setFormData(model)
       } catch (error) {
+        console.log(error)
         this.cancle()
       }
     },
@@ -136,9 +137,9 @@ export default {
      * @description 初始化表单为新建模式
      */
     async create (data = {}) {
-      this.setFormData(data)
       this.setMode('create')
       this.open()
+      this.setFormData(data)
       await this.doLoadDict(this.loadDict)
     },
     /**
@@ -156,7 +157,9 @@ export default {
           this.$message({ message: '提交成功', type: 'success' })
           this.$emit('success')
           this.cancle()
-        } catch (error) {}
+        } catch (error) {
+          console.log(error)
+        }
       })
     },
     /**
@@ -171,6 +174,7 @@ export default {
     },
     /**
      * @description 加载需要的字典数据
+     * @description 这个步骤会在 edit 和 create 步骤中被调用
      */
     async loadDict () {},
     /**
@@ -184,6 +188,7 @@ export default {
         this.status.isLoadingData = false
         return Promise.resolve(data)
       } catch (error) {
+        console.log(error)
         this.status.isLoadingData = false
         return Promise.reject(error)
       }
@@ -199,6 +204,7 @@ export default {
         this.status.isLoadingDict = false
         return Promise.resolve(data)
       } catch (error) {
+        console.log(error)
         this.status.isLoadingDict = false
         return Promise.reject(error)
       }
@@ -214,6 +220,7 @@ export default {
         this.status.isSubmitting = false
         return Promise.resolve(data)
       } catch (error) {
+        console.log(error)
         this.status.isSubmitting = false
         return Promise.reject(error)
       }

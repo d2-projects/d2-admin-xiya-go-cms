@@ -1,5 +1,5 @@
 import { cloneDeep } from 'lodash'
-import { mapActions } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 import fieldChange from '@/mixins/el.fieldChange'
 
 export default {
@@ -23,29 +23,27 @@ export default {
     allValue: { type: [ Number, String ], default: 0, required: false }
   },
   computed: {
+    ...mapState('d2admin/dict', [
+      'dicts'
+    ]),
     currentLabel () {
       const item = this.options.find(e => e.value === this.value)
       return item ? item.label : ''
     },
     attrs () {
       const defaultAttrs = {
-        placeholder: '123'
+        placeholder: '请选择'
       }
       return Object.assign(defaultAttrs, this.$attrs)
     }
   },
   watch: {
+    dicts () {
+      this.reload()
+    },
     name: {
-      async handler (name) {
-        const optionItenAll = {
-          label: this.allLabel,
-          value: this.allValue
-        }
-        const options = cloneDeep(await this.dictGet(name))
-        if (this.all) {
-          options.unshift(optionItenAll)
-        }
-        this.options = options
+      handler () {
+        this.reload()
       },
       immediate: true
     },
@@ -60,6 +58,17 @@ export default {
     ...mapActions('d2admin/dict', {
       dictGet: 'get'
     }),
+    async reload () {
+      const optionItenAll = {
+        label: this.allLabel,
+        value: this.allValue
+      }
+      const options = cloneDeep(await this.dictGet(this.name))
+      if (this.all) {
+        options.unshift(optionItenAll)
+      }
+      this.options = options
+    },
     onChange (value) {
       this.$emit('input', value)
       this.fieldChange()
