@@ -71,13 +71,13 @@ export default {
           prop: 'user_post',
           default: '',
           label: '岗位',
-          render: <d2-dict-select name="user_post" vModel={ this.form.model.user_post }/>
+          render: <d2-dict-select name="user_post" vModel={ this.form.model.user_post } multiple stringify/>
         },
         {
           prop: 'user_role',
           default: '',
           label: '角色',
-          render: <d2-dict-select name="user_role" vModel={ this.form.model.user_role }/>
+          render: <d2-dict-select name="user_role" vModel={ this.form.model.user_role } multiple stringify/>
         },
         {
           prop: 'remark',
@@ -93,16 +93,20 @@ export default {
      * @description 加载需要的字典数据
      */
     async loadDict () {
+      // 岗位
       await this.loadDictOne({
         name: 'user_post',
         method: this.$api.POST_ALL,
         query: { fields: 'id,post_name' },
+        path: 'list',
         label: 'post_name'
       })
+      // 角色
       await this.loadDictOne({
         name: 'user_role',
         method: this.$api.ROLE_ALL,
         query: { fields: 'id,role_name' },
+        path: 'list',
         label: 'role_name'
       })
     }

@@ -8,9 +8,17 @@ export default {
     }),
     /**
      * @description 加载需要的字典数据
-     * @description 这个步骤会在 edit 和 create 步骤中被调用
+     * @description 这个方法一般在页面上需要再次实现
      */
-    async loadDict () {},
+    async loadDict () {
+      // eg
+      // await this.loadDictOne({
+      //   name: 'user_post',
+      //   method: this.$api.POST_ALL,
+      //   query: { fields: 'id,post_name' },
+      //   label: 'post_name'
+      // })
+    },
     /**
      * @description 加载一个字典
      * @param {Object} config {String} name 字典名称
@@ -23,23 +31,32 @@ export default {
       name = '',
       method = () => {},
       query = {},
-      path = 'list',
+      path = '',
       label = 'label',
       value = 'id'
     }) {
       try {
-        const result = await method(Object.assign({
-          page_size: 9999
-        }, query))
-        this.dictSet({
-          name,
-          value: get(result, path, []).map(e => ({
-            label: e[label],
-            value: e[value]
-          }))
-        })
+        const result = await method(Object.assign({ page_size: 9999 }, query))
+        let dictValue = (path ? get(result, path, []) : result).map(e => ({ label: e[label], value: e[value] }))
+        this.dictSet({ name, value: dictValue })
       } catch (error) {
         console.log(error)
+      }
+    },
+    /**
+     * @description 请求字典数据
+     * @param {Function} fn 请求函数 需要返回 Promise
+     */
+    async doLoadDict (fn = () => {}) {
+      this.status.isLoadingDict = true
+      try {
+        const data = await fn()
+        this.status.isLoadingDict = false
+        return Promise.resolve(data)
+      } catch (error) {
+        console.log(error)
+        this.status.isLoadingDict = false
+        return Promise.reject(error)
       }
     }
   }

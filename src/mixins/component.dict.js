@@ -1,9 +1,13 @@
 import { cloneDeep } from 'lodash'
 import { mapState, mapActions } from 'vuex'
 import fieldChange from '@/mixins/el.fieldChange'
+import multiple from '@/mixins/component.multiple'
 
 export default {
-  mixins: [ fieldChange ],
+  mixins: [
+    fieldChange,
+    multiple
+  ],
   data () {
     return {
       currentValue: null,
@@ -12,7 +16,7 @@ export default {
   },
   props: {
     // 绑定的值
-    value: { type: [ Number, String ], default: null, required: false },
+    value: { type: [ Number, String, Array ], default: null, required: false },
     // 字典名
     name: { type: String, default: '', required: false },
     // [全部] 选项
@@ -27,8 +31,13 @@ export default {
       'dicts'
     ]),
     currentLabel () {
-      const item = this.options.find(e => e.value === this.value)
-      return item ? item.label : ''
+      if (this.multiple) {
+        const num = this.tryParseMultipleString(this.value).length
+        return `${num} 个项目`
+      } else {
+        const item = this.options.find(e => e.value === this.value)
+        return item ? item.label : ''
+      }
     },
     attrs () {
       const defaultAttrs = {
@@ -49,7 +58,7 @@ export default {
     },
     value: {
       handler (value) {
-        this.currentValue = cloneDeep(value)
+        this.currentValue = this.tryParseMultipleString(value)
       },
       immediate: true
     }
@@ -70,7 +79,8 @@ export default {
       this.options = options
     },
     onChange (value) {
-      this.$emit('input', value)
+      const result = this.tryStringify(value)
+      this.$emit('input', result)
       this.fieldChange()
     }
   }

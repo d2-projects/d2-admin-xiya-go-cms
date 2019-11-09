@@ -64,14 +64,14 @@ export default {
         { prop: 'user_name', label: '登录账号', minWidth: '100px', fixed: 'left' },
         { prop: 'nickname', label: '昵称', minWidth: '100px' },
         { prop: 'id', label: 'ID', minWidth: '100px', show: false },
-        { prop: 'sex', label: '性别', minWidth: '100px' },
+        { prop: 'sex', label: '性别', minWidth: '100px', render: ({ row }) => <d2-dict name="sex" value={ row.sex }/> },
         { prop: 'avatar', label: '头像', minWidth: '100px' },
         { prop: 'email', label: '邮箱', minWidth: '150px' },
         { prop: 'phone', label: '手机', minWidth: '100px' },
         { prop: 'phonenumber', label: '座机', minWidth: '100px', show: false },
-        { prop: 'dept_id', label: '归属部门', width: '100px' },
-        { prop: 'user_post', label: '岗位', width: '100px' },
-        { prop: 'user_role', label: '角色', width: '100px' },
+        { prop: 'dept_id', label: '归属部门', width: '100px', render: ({ row }) => <d2-dict name="dept" value={ row.dept_id }/> },
+        { prop: 'user_post', label: '岗位', width: '100px', show: false },
+        { prop: 'user_role', label: '角色', width: '100px', show: false },
         { prop: 'login_date', label: '上次登录时间', width: '200px', formatter: row => utils.time.format(row.login_date, 'YYYY/M/D HH:mm:ss'), show: false },
         { prop: 'login_ip', label: '上次登录地址', width: '100px', show: false },
         { prop: 'remark', label: '备注', width: '100px', show: false },
@@ -148,6 +148,19 @@ export default {
           show: false
         }
       ]
+    }
+  },
+  methods: {
+    /**
+     * @description 加载需要的字典数据
+     */
+    async loadDict () {
+      // 归属部门
+      await this.loadDictOne({
+        name: 'dept',
+        method: async () => utils.helper.flatTree({ data: await this.$api.DEPT_ALL() }),
+        label: 'dept_name'
+      })
     }
   }
 }

@@ -1,8 +1,12 @@
 import { mapActions } from 'vuex'
 import { cloneDeep, isArray, isObject, isFunction } from 'lodash'
 import utils from '@/utils'
+import dict from './crud.dict'
 
 export default {
+  mixins: [
+    dict
+  ],
   data () {
     return {
       // 主体表格
@@ -244,7 +248,6 @@ export default {
   async created () {
     this.initSearchForm()
     this.initTableColumns()
-    this.loadDict()
     this.research()
   },
   methods: {
@@ -261,7 +264,7 @@ export default {
         this.$message.error('未找到 API')
         return
       }
-      
+      this.doLoadDict(this.loadDict)
       const result = await this.doLoadData(() => search(this.searchData))
       if (isArray(result)) {
         this.table.data = result
@@ -270,12 +273,6 @@ export default {
         this.paginationUpdate(page)
         this.table.data = list
       }
-    },
-    /**
-     * @description 加载字典数据
-     */
-    async loadDict () {
-      await this.doLoadDict()
     },
     /**
      * @description 新建
@@ -408,21 +405,6 @@ export default {
         return Promise.resolve(data)
       } catch (error) {
         this.status.isLoadingData = false
-        return Promise.reject(error)
-      }
-    },
-    /**
-     * @description 请求字典数据
-     * @param {Function} fn 请求函数 需要返回 Promise
-     */
-    async doLoadDict (fn = () => {}) {
-      this.status.isLoadingDict = true
-      try {
-        const data = await fn()
-        this.status.isLoadingDict = false
-        return Promise.resolve(data)
-      } catch (error) {
-        this.status.isLoadingDict = false
         return Promise.reject(error)
       }
     }

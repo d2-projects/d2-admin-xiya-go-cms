@@ -91,8 +91,8 @@ export default {
   watch: {
     value: {
       handler (value) {
-        this.currentValue = cloneDeep(this.value)
-        this.getLabel(this.currentValue)
+        this.currentValue = this.tryParseMultipleString(this.value)
+        this.getLabel(this.value)
       },
       immediate: true
     },
@@ -132,7 +132,7 @@ export default {
      * @description 取消
      */
     cancle () {
-      this.currentValue = cloneDeep(this.value)
+      this.currentValue = this.tryParseMultipleString(this.value)
       this.active = false
     },
     /**

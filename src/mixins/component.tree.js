@@ -1,6 +1,11 @@
-import { omit, isArray, isString, isFunction } from 'lodash'
+import { isArray, isString, isFunction } from 'lodash'
+import multiple from '@/mixins/component.multiple'
+import utils from '@/utils'
 
 export default {
+  mixins: [
+    multiple
+  ],
   // 注意
   // 如果包含 d2-tree 的组件引入了这个 mixin
   // 并且通过 <d2-tree v-bind="$attrs"/> 传递参数
@@ -16,12 +21,8 @@ export default {
       default: () => [],
       required: false
     },
-    // 是否多选
-    multiple: { type: Boolean, default: false, required: false },
     // 多选的时候 是否混合半选状态
     halfMix: { type: Boolean, default: false, required: false },
-    // 是否序列为字符串
-    stringify: { type: Boolean, default: false, required: false },
     // 标记数据源中那个字段代表节点 ID
     // d2-tree 也接收此参数作为 nodeKey 的快捷设置
     keyId: { type: String, default: 'id', required: false },
@@ -47,24 +48,18 @@ export default {
      * @description 计算树数据的扁平化结构
      */
     getSourceFlat (sourceArray) {
-      let result = []
-      const push = tempArray => {
-        tempArray.forEach(item => {
-          if (item[this.keyChildren].length > 0) {
-            push(item[this.keyChildren])
-          }
-          result.push(omit(item, [ this.keyChildren ]))
-        })
-      }
-      push(sourceArray)
-      this.sourceFlat = result
+      this.sourceFlat = utils.helper.flatTree({
+        data: sourceArray,
+        keyChildren: this.keyChildren
+      })
     },
     /**
      * @description 计算 label 或者 label 数组
+     * @description 这里接收的就是原始的 value，需要做多种情况的判断
      */
     getLabel (value) {
       if (this.multiple) {
-        this.getValueLabels(value)
+        this.getValueLabels(this.tryParseMultipleString(value))
       } else {
         this.getValueLabel(value)
       }

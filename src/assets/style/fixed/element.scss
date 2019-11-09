@@ -143,3 +143,14 @@
     }
   }
 }
+
+
+
+// el-select 多选模式下 tag 样式调整
+.el-select.el-select--mini {
+  .el-tag.el-tag--mini {
+    i.el-tag__close.el-icon-close {
+      right: -4px;
+    }
+  }
+}

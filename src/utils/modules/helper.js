@@ -1,3 +1,5 @@
+import { omit } from 'lodash'
+
 /**
  * @description 合法的用户名
  * @description 3~10个字符 只能是字母 数字 下划线
@@ -64,4 +66,24 @@ export function isLegalEmail (value) {
  */
 export function isLegalEmailValidator (rule, value, callback) {
   callback(isLegalEmail(value) ? undefined : new Error('邮箱格式不正确'))
+}
+
+/**
+ * @description 将树形数据扁平化
+ * @param {Object} config {Array} data 树形数据
+ * @param {Object} config {String} keyChildren 子节点字段名
+ */
+export function flatTree ({
+  data = [],
+  keyChildren = 'children_list'
+} = {}) {
+  let flat = []
+  const push = tempArray => {
+    tempArray.forEach(item => {
+      if (item[keyChildren].length > 0) push(item[keyChildren])
+      flat.push(omit(item, [ keyChildren ]))
+    })
+  }
+  push(data)
+  return flat
 }

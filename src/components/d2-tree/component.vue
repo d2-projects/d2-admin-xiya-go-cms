@@ -125,11 +125,7 @@ export default {
     updateDefaultValue () {
       // 根据是否多选 分别设置 tree 的属性
       if (this.multiple) {
-        if (this.stringify) {
-          this.defaultCheckedKeys = this.removeHalf(this.value.split(',').map(Number))
-        } else {
-          this.defaultCheckedKeys = this.removeHalf(this.value)
-        }        
+        this.defaultCheckedKeys = this.removeHalf(this.tryParseMultipleString(this.value))
       } else {
         this.currentNodeKey = this.value
       }
@@ -164,15 +160,9 @@ export default {
       // 更新 value
       if (!this.multiple) return
       const value = concat(info.checkedKeys, this.halfMix ? info.halfCheckedKeys : [])
-      if (this.stringify) {
-        this.$emit('input', value.join(','))
-        this.$emit('change', value.join(','))
-        this.fieldChange()
-      } else {
-        this.$emit('input', value)
-        this.$emit('change', value)
-        this.fieldChange()
-      }
+      this.$emit('input', this.tryStringify(value))
+      this.$emit('change', this.tryStringify(value))
+      this.fieldChange()
     }
   }
 }

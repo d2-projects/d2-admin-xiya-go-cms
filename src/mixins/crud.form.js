@@ -203,22 +203,6 @@ export default {
       }
     },
     /**
-     * @description 请求字典数据
-     * @param {Function} fn 请求函数 需要返回 Promise
-     */
-    async doLoadDict (fn = () => {}) {
-      this.status.isLoadingDict = true
-      try {
-        const data = await fn()
-        this.status.isLoadingDict = false
-        return Promise.resolve(data)
-      } catch (error) {
-        console.log(error)
-        this.status.isLoadingDict = false
-        return Promise.reject(error)
-      }
-    },
-    /**
      * @description 发送数据
      * @param {Function} fn 请求函数 需要返回 Promise
      */
