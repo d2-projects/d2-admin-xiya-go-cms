@@ -133,7 +133,8 @@
 // 表格排序符号缩小
 .el-table.el-table--mini {
   .caret-wrapper {
-    height: 23px;
+    height: 22px;
+    top: -1px;
     .sort-caret.ascending {
       top: 0px;
     }
