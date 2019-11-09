@@ -1,13 +1,14 @@
 import utils from '@/utils'
 import table from '@/mixins/crud.table.js'
 import componentForm from './form'
+import './style.scss'
 
 export default {
   mixins: [ table ],
   components: { componentForm },
   render () {
     const page =
-      <d2-container spacious>
+      <d2-container spacious class="page-management-user">
         <d2-search-panel slot="header" vModel={ this.search.panel.active }>
           <d2-bar slot="title">
             <d2-bar-space/>
@@ -23,7 +24,20 @@ export default {
           </d2-bar>
           { this.vNodeSearchForm }
         </d2-search-panel>
-        { this.vNodeTable }
+        <el-container class="container">
+          <el-aside width="240px">
+            <d2-tree
+              vModel={ this.search.form.model.dept_id }
+              source="DEPT_ALL"
+              key-label="dept_name"
+              expand-on-click-node={ false }
+              default-expand-all
+              on-change={ this.research }/>
+          </el-aside>
+          <el-main>
+            { this.vNodeTable }
+          </el-main>
+        </el-container>
         <d2-bar slot="footer">
           <d2-bar-cell>{ this.vNodePaginationFull }</d2-bar-cell>
           <d2-bar-space/>
@@ -125,6 +139,13 @@ export default {
           label: '结束时间',
           default: '',
           render: <el-date-picker vModel={ this.search.form.model.end_time } value-format="yyyy-MM-dd" type="date" placeholder="结束时间" style="width:130px;"/>
+        },
+        {
+          prop: 'dept_id',
+          label: '部门',
+          default: 0,
+          render: <el-input vModel={ this.search.form.model.dept_id } style="width:100px;"/>,
+          show: false
         }
       ]
     }

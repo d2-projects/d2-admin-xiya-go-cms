@@ -13,7 +13,7 @@ export default {
       // 搜索
       search: {
         panel: {
-          active: false
+          active: true
         },
         form: {
           model: {},
@@ -61,15 +61,17 @@ export default {
       const node =
         <el-form { ...{ attrs: this.search.form } } class="is-thin">
           {
-            this.settingSearch.map(item => {
-              const formItem =
-                <el-form-item
-                  label={ item.label }
-                  prop={ item.prop }>
-                  { item.render }
-                </el-form-item>
-              return formItem
-            })
+            this.settingSearch
+              .filter(item => item.show !== false)
+              .map(item => {
+                const formItem =
+                  <el-form-item
+                    label={ item.label }
+                    prop={ item.prop }>
+                    { item.render }
+                  </el-form-item>
+                return formItem
+              })
           }
           <el-form-item label="操作">
             { this.vNodeButtonSearchInForm }
@@ -88,7 +90,7 @@ export default {
           label="搜索"
           type="primary"
           loading={ this.isSearchButtonLoading }
-          on-click={ this.research || function () {} }
+          on-click={ this.research }
           thin/>
       return node
     },
@@ -113,7 +115,7 @@ export default {
           icon="el-icon-refresh"
           label="刷新"
           loading={ this.isSearchButtonLoading }
-          on-click={ this.research || function () {} }/>
+          on-click={ this.research }/>
       return node
     },
     // vNode
@@ -165,7 +167,7 @@ export default {
       const node =
         <el-pagination
           layout="prev, pager, next"
-          on-current-change={ this.research || function () {} }
+          on-current-change={ this.research }
           current-page={ this.pagination.current }
           page-size={ this.pagination.size }
           total={ this.pagination.total }
@@ -181,8 +183,8 @@ export default {
         <el-pagination
           layout="total, sizes, prev, pager, next, jumper"
           page-sizes={ [ 10, 20, 30, 40 ] }
-          on-size-change={ this.research || function () {} }
-          on-current-change={ this.research || function () {} }
+          on-size-change={ this.research }
+          on-current-change={ this.research }
           current-page={ this.pagination.current }
           page-size={ this.pagination.size }
           total={ this.pagination.total }>

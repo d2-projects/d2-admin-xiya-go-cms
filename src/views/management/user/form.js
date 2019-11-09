@@ -58,7 +58,7 @@ export default {
           prop: 'sex',
           default: 0,
           label: '性别',
-          render: <d2-dict-select name="sex" vModel={ this.form.model.sex } all-label="未知" all/>
+          render: <d2-dict-select name="sex" vModel={ this.form.model.sex }/>
         },
         {
           prop: 'status',

@@ -152,6 +152,7 @@ export default {
       // 更新 value
       if (this.multiple) return
       this.$emit('input', data.id)
+      this.$emit('change', data.id)
       this.fieldChange()
     },
     /**
@@ -165,9 +166,11 @@ export default {
       const value = concat(info.checkedKeys, this.halfMix ? info.halfCheckedKeys : [])
       if (this.stringify) {
         this.$emit('input', value.join(','))
+        this.$emit('change', value.join(','))
         this.fieldChange()
       } else {
         this.$emit('input', value)
+        this.$emit('change', value)
         this.fieldChange()
       }
     }
