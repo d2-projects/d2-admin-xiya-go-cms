@@ -17,8 +17,7 @@ export default {
         disabled={ this.isFormDisabled }
         v-loading={ this.isFormLoading }>
         {
-          this.setting
-            .filter(item => item.if === undefined || item.if)
+          this.settingFilteredShow
             .map(
               item =>
                 <el-form-item label={ item.label } prop={ item.prop }>
@@ -85,6 +84,21 @@ export default {
     }
   },
   computed: {
+    // 表单设置
+    setting () {
+      return []
+    },
+    // 表单设置
+    // 过滤掉无效的字段
+    settingFilteredIf () {
+      return this.setting.filter(item => item.if === undefined || item.if)
+    },
+    // 表单设置
+    // 过滤掉无效的字段
+    // 过滤掉不显示的字段
+    settingFilteredShow () {
+      return this.settingFilteredIf.filter(item => item.show !== false)
+    },
     // 表单容器的标题
     title () {
       return this.switchByMode('新建', '编辑')
@@ -148,12 +162,12 @@ export default {
     submit () {
       this.$refs.form.validate(async valid => {
         if (!valid) return
-        const fn = this.switchByMode(
+        const submit = this.switchByMode(
           () => (this.$api[this.api.create] || Promise.resolve)(this.form.model),
           () => (this.$api[this.api.update] || Promise.resolve)(this.form.model)
         )
         try {
-          await this.doSubmit(fn)
+          await this.doSubmit(submit)
           this.$message({ message: '提交成功', type: 'success' })
           this.$emit('success')
           this.cancle()
@@ -176,7 +190,7 @@ export default {
      * @description 请求表单数据
      * @param {Function} fn 请求函数 需要返回 Promise
      */
-    async doLoadData (fn) {
+    async doLoadData (fn = () => {}) {
       this.status.isLoadingData = true
       try {
         const data = await fn()
@@ -192,7 +206,7 @@ export default {
      * @description 请求字典数据
      * @param {Function} fn 请求函数 需要返回 Promise
      */
-    async doLoadDict (fn) {
+    async doLoadDict (fn = () => {}) {
       this.status.isLoadingDict = true
       try {
         const data = await fn()
@@ -208,7 +222,7 @@ export default {
      * @description 发送数据
      * @param {Function} fn 请求函数 需要返回 Promise
      */
-    async doSubmit (fn) {
+    async doSubmit (fn = () => {}) {
       this.status.isSubmitting = true
       try {
         const data = await fn()
@@ -276,7 +290,7 @@ export default {
      */
     getFormFromSetting () {
       let form = {}
-      this.setting.forEach(item => {
+      this.settingFilteredIf.forEach(item => {
         form[item.prop] = item.default
       })
       return form
@@ -286,7 +300,7 @@ export default {
      */
     getRulesFromSetting () {
       let rules = {}
-      this.setting
+      this.settingFilteredIf
         .filter(item => item.rule)
         .forEach(item => { rules[item.prop] = item.rule })
       return rules

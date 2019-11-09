@@ -49,7 +49,7 @@ export default {
   computed: {
     // 配置项
     // 表格列
-    // [prop] -> [label] -> [align] -> [minWidth][width] -> [fixed] -> [other] -> [render][formatter] -> [show]
+    // [prop] -> [label] -> [align] -> [minWidth][width] -> [fixed] -> [other] -> [render][formatter] -> [if][show]
     settingColumns () {
       return [
         { prop: 'role_name', label: '角色名称', minWidth: '100px', fixed: 'left' },
@@ -69,7 +69,7 @@ export default {
     },
     // 配置项
     // 表格操作列
-    // [prop] -> [label] -> [align] -> [minWidth][width] -> [fixed] -> [other] -> [render][formatter] -> [show]
+    // [prop] -> [label] -> [align] -> [minWidth][width] -> [fixed] -> [other] -> [render][formatter] -> [if][show]
     settingActions () {
       return [
         {
@@ -90,7 +90,7 @@ export default {
     },
     // 配置项
     // 搜索
-    // [prop] -> [label] -> [default] -> [render]
+    // [prop] -> [label] -> [default] -> [render] -> [if][show]
     settingSearch () {
       return [
         {

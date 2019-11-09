@@ -43,15 +43,16 @@ export default {
         {
           prop: 'user_name',
           default: '',
-          label: '用户名称',
+          label: '用户名',
           rule: { required: true, message: '必填', trigger: 'change' },
           render: <el-input vModel={ this.form.model.user_name }/>
         },
         {
           prop: 'password',
           default: '',
-          label: '登录密码',
+          label: '密码',
           rule: { required: true, message: '必填', trigger: 'change' },
+          if: this.mode === 'create',
           render: <el-input vModel={ this.form.model.password }/>
         },
         {
@@ -95,11 +96,13 @@ export default {
       await this.loadDictOne({
         name: 'user_post',
         method: this.$api.POST_ALL,
+        query: { fields: 'id,post_name' },
         label: 'post_name'
       })
       await this.loadDictOne({
         name: 'user_role',
         method: this.$api.ROLE_ALL,
+        query: { fields: 'id,role_name' },
         label: 'role_name'
       })
     }

@@ -61,8 +61,7 @@ export default {
       const node =
         <el-form { ...{ attrs: this.search.form } } class="is-thin">
           {
-            this.settingSearch
-              .filter(item => item.show !== false)
+            this.settingSearchFilteredShow
               .map(item => {
                 const formItem =
                   <el-form-item
@@ -191,6 +190,35 @@ export default {
         </el-pagination>
       return node
     },
+    // 配置项
+    // 表格列
+    // [prop] -> [label] -> [align] -> [minWidth][width] -> [fixed] -> [other] -> [render][formatter] -> [if][show]
+    settingColumns () {
+      return []
+    },
+    // 配置项
+    // 表格操作列
+    // [prop] -> [label] -> [align] -> [minWidth][width] -> [fixed] -> [other] -> [render][formatter] -> [if][show]
+    settingActions () {
+      return []
+    },
+    // 配置项
+    // 搜索
+    // [prop] -> [label] -> [default] -> [render] -> [if][show]
+    settingSearch () {
+      return []
+    },
+    // 表单设置
+    // 过滤掉无效的字段
+    settingSearchFilteredIf () {
+      return this.settingSearch.filter(item => item.if === undefined || item.if)
+    },
+    // 表单设置
+    // 过滤掉无效的字段
+    // 过滤掉不显示的字段
+    settingSearchFilteredShow () {
+      return this.settingSearchFilteredIf.filter(item => item.show !== false)
+    },
     // 搜索按钮 loading 状态
     // 正在加载原始数据 || 正在加载字典
     isSearchButtonLoading () {
@@ -308,12 +336,11 @@ export default {
     },
     /**
      * @description init
-     * @description 根据 settingSearch 初始化搜索条件
+     * @description 根据 settingSearchFilteredIf 初始化搜索条件
      */
     initSearchForm () {
-      if (this.settingSearch === undefined) return
       const data = {}
-      this.settingSearch.forEach(setting => {
+      this.settingSearchFilteredIf.forEach(setting => {
         data[setting.prop] = setting.default
       })
       this.search.form.model = data

@@ -28,7 +28,9 @@ export default {
       value = 'id'
     }) {
       try {
-        const result = await method(Object.assign({ page_size: 9999 }, query))
+        const result = await method(Object.assign({
+          page_size: 9999
+        }, query))
         this.dictSet({
           name,
           value: get(result, path, []).map(e => ({
