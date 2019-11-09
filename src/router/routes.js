@@ -19,11 +19,11 @@ const frameIn = [
       // 页面重定向 必须保留
       { path: 'redirect/:route*', name: 'redirect', hidden: true, component: utils.import('system/function/redirect') },
       // 系统管理
-      { path: 'management/menu/list', name: 'management-menu-list', meta: { title: '菜单管理', auth: true }, component: utils.import('management/menu') },
-      { path: 'management/user/list', name: 'management-user-list', meta: { title: '用户管理', auth: true }, component: utils.import('management/user') },
-      { path: 'management/dept/list', name: 'management-dept-list', meta: { title: '部门管理', auth: true }, component: utils.import('management/dept') },
-      { path: 'management/post/list', name: 'management-post-list', meta: { title: '岗位管理', auth: true }, component: utils.import('management/post') },
-      { path: 'management/role/list', name: 'management-role-list', meta: { title: '角色管理', auth: true }, component: utils.import('management/role') }
+      { path: 'management/menu', name: 'management-menu', meta: { title: '菜单管理', auth: true }, component: utils.import('management/menu') },
+      { path: 'management/user', name: 'management-user', meta: { title: '用户管理', auth: true }, component: utils.import('management/user') },
+      { path: 'management/dept', name: 'management-dept', meta: { title: '部门管理', auth: true }, component: utils.import('management/dept') },
+      { path: 'management/post', name: 'management-post', meta: { title: '岗位管理', auth: true }, component: utils.import('management/post') },
+      { path: 'management/role', name: 'management-role', meta: { title: '角色管理', auth: true }, component: utils.import('management/role') }
     ]
   }
 ]
