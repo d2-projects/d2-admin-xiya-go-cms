@@ -39,7 +39,7 @@ export default {
           prop: 'role_menu',
           default: '',
           label: '菜单权限',
-          render: <d2-tree vModel={ this.form.model.role_menu } source="MENU_ALL" key-label="menu_name" multiple stringify/>
+          render: <d2-tree vModel={ this.form.model.role_menu } source="MENU_ALL" key-label="menu_name" multiple half-mix stringify/>
         },
         {
           prop: 'status',

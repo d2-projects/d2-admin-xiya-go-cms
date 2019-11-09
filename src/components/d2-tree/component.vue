@@ -11,6 +11,7 @@
 </style>
 
 <script>
+import { concat } from 'lodash'
 import tree from '@/mixins/component.tree'
 import fieldChange from '@/mixins/el.fieldChange'
 
@@ -72,6 +73,44 @@ export default {
   },
   methods: {
     /**
+     * @description 删除 half 状态的数据
+     */
+    removeHalf (sourceArray) {
+      if (!this.halfMix) return sourceArray
+      /**
+       * 找到这个值在 tree 中的对应并且判断是否子集都选中
+       * 如果没有找到 返回 false
+       * 如果找到了 并且子集都选中 返回 false
+       * 如果找到了 子集没有都选中 返回 true
+       */
+      const isHalf = value => {
+        let node = {}
+        let half = false
+        const find = treeArray => {
+          for (let index = 0; index < treeArray.length; index++) {
+            const element = treeArray[index]
+            if (element[this.keyId] === value) {
+              node = element
+              break
+            } else {
+              find(element[this.keyChildren])
+            }
+          }
+        }
+        find(this.currentData)
+        const children = node[this.keyChildren] || []
+        for (let index = 0; index < children.length; index++) {
+          const element = children[index]
+          if (sourceArray.findIndex(e => e === element[this.keyId]) < 0) {
+            half = true
+            break
+          }
+        }
+        return half
+      }
+      return sourceArray.filter(e => !isHalf(e))
+    },
+    /**
      * @description 初始化 根据 source 的数据类型设置数据
      */
     async init () {
@@ -87,9 +126,9 @@ export default {
       // 根据是否多选 分别设置 tree 的属性
       if (this.multiple) {
         if (this.stringify) {
-          this.defaultCheckedKeys = this.value.split(',')
+          this.defaultCheckedKeys = this.removeHalf(this.value.split(',').map(Number))
         } else {
-          this.defaultCheckedKeys = this.value
+          this.defaultCheckedKeys = this.removeHalf(this.value)
         }        
       } else {
         this.currentNodeKey = this.value
@@ -123,11 +162,12 @@ export default {
       this.$emit('check', data, info)
       // 更新 value
       if (!this.multiple) return
+      const value = concat(info.checkedKeys, this.halfMix ? info.halfCheckedKeys : [])
       if (this.stringify) {
-        this.$emit('input', info.checkedKeys.join(','))
+        this.$emit('input', value.join(','))
         this.fieldChange()
       } else {
-        this.$emit('input', info.checkedKeys)
+        this.$emit('input', value)
         this.fieldChange()
       }
     }

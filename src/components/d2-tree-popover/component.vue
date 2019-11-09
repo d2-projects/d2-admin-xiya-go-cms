@@ -6,6 +6,7 @@
           v-bind="tree"
           :source="currentSource"
           :multiple="multiple"
+          :halfMix="halfMix"
           :stringify="stringify"
           :keyId="keyId"
           :keyLabel="keyLabel"

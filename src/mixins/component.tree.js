@@ -18,6 +18,8 @@ export default {
     },
     // 是否多选
     multiple: { type: Boolean, default: false, required: false },
+    // 多选的时候 是否混合半选状态
+    halfMix: { type: Boolean, default: false, required: false },
     // 是否序列为字符串
     stringify: { type: Boolean, default: false, required: false },
     // 标记数据源中那个字段代表节点 ID
