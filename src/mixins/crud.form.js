@@ -228,6 +228,7 @@ export default {
         .filter(item => item.rule)
         .forEach(item => { rules[item.prop] = item.rule })
       this.form.rules = this.$_.cloneDeep(rules)
+      this.clearValidate()
     },
     /**
      * 设置表单模式
@@ -269,7 +270,9 @@ export default {
      * @description 清空表单校验
      */
     clearValidate () {
-      this.$refs.form && this.$refs.form.clearValidate()
+      this.$nextTick(() => {
+        this.$refs.form && this.$refs.form.clearValidate()
+      })
     }
   }
 }

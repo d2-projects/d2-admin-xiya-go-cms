@@ -80,6 +80,7 @@ export default {
     onChange (value) {
       const result = this.tryStringify(value)
       this.$emit('input', result)
+      this.$emit('change', result)
       this.fieldChange()
     }
   }
