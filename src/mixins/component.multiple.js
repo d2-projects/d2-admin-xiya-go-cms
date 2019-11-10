@@ -1,5 +1,3 @@
-import { isString, isArray } from 'lodash'
-
 export default {
   props: {
     // 多选
@@ -9,14 +7,14 @@ export default {
   },
   methods: {
     tryParseMultipleString (value) {
-      if (isString(value) && this.multiple && this.stringify) {
+      if (this.$_.isString(value) && this.multiple && this.stringify) {
         return value.split(',').filter(e => e !== '').map(Number)
       } else {
         return value
       }
     },
     tryStringify (value) {
-      if (isArray(value) && this.multiple && this.stringify) {
+      if (this.$_.isArray(value) && this.multiple && this.stringify) {
         return value.join(',')
       } else {
         return value

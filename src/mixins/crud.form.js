@@ -1,4 +1,3 @@
-import { cloneDeep } from 'lodash'
 import dict from './crud.dict'
 
 export default {
@@ -157,14 +156,22 @@ export default {
       await this.doLoadDict(this.loadDict)
     },
     /**
+     * @description 在提交表单之前可选进行数据处理
+     * @param {Object} data 默认的表单数据
+     */
+    submitDataTransform (data) {
+      return data
+    },
+    /**
      * @description 提交表单
      */
     submit () {
       this.$refs.form.validate(async valid => {
         if (!valid) return
+        const data = this.submitDataTransform(this.form.model)
         const submit = this.switchByMode(
-          () => (this.$api[this.api.create] || Promise.resolve)(this.form.model),
-          () => (this.$api[this.api.update] || Promise.resolve)(this.form.model)
+          () => (this.$api[this.api.create] || Promise.resolve)(data),
+          () => (this.$api[this.api.update] || Promise.resolve)(data)
         )
         try {
           await this.doSubmit(submit)
@@ -182,9 +189,9 @@ export default {
     init () {
       const form = this.getFormFromSetting()
       const rules = this.getRulesFromSetting()
-      this.cache.form = cloneDeep(form)
-      this.rules = cloneDeep(rules)
-      this.form.model = cloneDeep(form)
+      this.cache.form = this.$_.cloneDeep(form)
+      this.rules = this.$_.cloneDeep(rules)
+      this.form.model = this.$_.cloneDeep(form)
     },
     /**
      * @description 请求表单数据
@@ -223,9 +230,9 @@ export default {
      * @param {Object} data 覆盖默认值的数据
      */
     setFormData (data = {}) {
-      const model = Object.assign(cloneDeep(this.cache.form), data)
-      this.form.model = cloneDeep(model)
-      this.form.modelDefault = cloneDeep(model)
+      const model = Object.assign(this.$_.cloneDeep(this.cache.form), data)
+      this.form.model = this.$_.cloneDeep(model)
+      this.form.modelDefault = this.$_.cloneDeep(model)
     },
     /**
      * 设置表单模式

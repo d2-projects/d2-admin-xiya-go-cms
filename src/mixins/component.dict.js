@@ -1,4 +1,3 @@
-import { cloneDeep } from 'lodash'
 import { mapState, mapActions } from 'vuex'
 import fieldChange from '@/mixins/el.fieldChange'
 import multiple from '@/mixins/component.multiple'
@@ -72,7 +71,7 @@ export default {
         label: this.allLabel,
         value: this.allValue
       }
-      const options = cloneDeep(await this.dictGet(this.name))
+      const options = this.$_.cloneDeep(await this.dictGet(this.name))
       if (this.all) {
         options.unshift(optionItenAll)
       }

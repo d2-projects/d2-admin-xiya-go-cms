@@ -9,7 +9,6 @@
 </template>
 
 <script>
-import { last, get } from 'lodash'
 export default {
   data () {
     return {
@@ -26,7 +25,7 @@ export default {
   watch: {
     $route: {
       handler (to) {
-        this.path = get(last(to.matched), 'components.default.__source')
+        this.path = this.$_.get(this.$_.last(to.matched), 'components.default.__source')
       },
       immediate: true
     }

@@ -1,5 +1,4 @@
 import { mapActions } from 'vuex'
-import { get } from 'lodash'
 
 export default {
   methods: {
@@ -37,7 +36,7 @@ export default {
     }) {
       try {
         const result = await method(Object.assign({ page_size: 9999 }, query))
-        let dictValue = (path ? get(result, path, []) : result).map(e => ({ label: e[label], value: e[value] }))
+        let dictValue = (path ? this.$_.get(result, path, []) : result).map(e => ({ label: e[label], value: e[value] }))
         this.dictSet({ name, value: dictValue })
       } catch (error) {
         console.log(error)

@@ -108,7 +108,6 @@
 </template>
 
 <script>
-import { cloneDeep } from 'lodash'
 import draggable from 'vuedraggable'
 
 // 输入 全部分表格列设置
@@ -185,9 +184,9 @@ export default {
     // currentValue.length === options.length
     // value.length <= options.length
     refresh () {
-      const options = cloneDeep(this.options)
-      const value = cloneDeep(this.value)
-      const currentValueOld = cloneDeep(this.currentValue)
+      const options = this.$_.cloneDeep(this.options)
+      const value = this.$_.cloneDeep(this.value)
+      const currentValueOld = this.$_.cloneDeep(this.currentValue)
       let currentValue = []
       let checkAll = true
       // 设置比较源
@@ -215,7 +214,7 @@ export default {
     },
     // 还原
     reset () {
-      this.currentValue = cloneDeep(this.options).map(e => {
+      this.currentValue = this.$_.cloneDeep(this.options).map(e => {
         e.show = e.show === false ? e.show : true
         return e
       })

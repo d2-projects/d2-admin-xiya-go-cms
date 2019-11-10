@@ -1,5 +1,4 @@
 import { mapActions } from 'vuex'
-import { cloneDeep, isArray, isObject, isFunction } from 'lodash'
 import utils from '@/utils'
 import dict from './crud.dict'
 
@@ -260,15 +259,15 @@ export default {
     async research () {
       this.table.data = []
       const search = this.$api[this.api.index]
-      if (!isFunction(search)) {
+      if (!this.$_.isFunction(search)) {
         this.$message.error('未找到 API')
         return
       }
       this.doLoadDict(this.loadDict)
       const result = await this.doLoadData(() => search(this.searchData))
-      if (isArray(result)) {
+      if (this.$_.isArray(result)) {
         this.table.data = result
-      } else if (isObject(result) && isArray(result.list) && isObject(result.page)) {
+      } else if (this.$_.isObject(result) && this.$_.isArray(result.list) && this.$_.isObject(result.page)) {
         const { list, page } = result
         this.paginationUpdate(page)
         this.table.data = list
@@ -296,7 +295,7 @@ export default {
      */
     delete (id) {
       const deleteFunction = this.$api[this.api.delete]
-      if (!isFunction(deleteFunction)) {
+      if (!this.$_.isFunction(deleteFunction)) {
         this.$message.error('未找到 API')
         return
       }
@@ -359,8 +358,8 @@ export default {
         ...this.settingColumns,
         ...this.settingActions
       ])
-      this.table.columns = cloneDeep(columns.filter(e => e.show !== false))
-      this.columnsFilter.options = cloneDeep(columns)
+      this.table.columns = this.$_.cloneDeep(columns.filter(e => e.show !== false))
+      this.columnsFilter.options = this.$_.cloneDeep(columns)
     },
     /**
      * @description 分页组件

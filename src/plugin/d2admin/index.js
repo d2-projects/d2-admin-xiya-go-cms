@@ -15,6 +15,7 @@ import i18n from '@/i18n.js'
 // 功能插件
 import pluginApi from '@/plugin/api'
 import pluginError from '@/plugin/error'
+import pluginLodash from '@/plugin/lodash'
 import pluginLog from '@/plugin/log'
 import pluginOpen from '@/plugin/open'
 
@@ -38,6 +39,7 @@ export default {
     // 插件
     Vue.use(pluginApi)
     Vue.use(pluginError)
+    Vue.use(pluginLodash)
     Vue.use(pluginLog)
     Vue.use(pluginOpen)
   }

@@ -1,5 +1,3 @@
-import { omit } from 'lodash'
-
 export default {
   name: 'd2-table-actions',
   render () {
@@ -11,7 +9,7 @@ export default {
               const attrsDefault = {
                 plain: true
               }
-              const attrs = omit(action, [
+              const attrs = this.$_.omit(action, [
                 'action'
               ])
               const button =

@@ -27,7 +27,6 @@
 </template>
 
 <script>
-import { cloneDeep } from 'lodash'
 import tree from '@/mixins/component.tree'
 import fieldChange from '@/mixins/el.fieldChange'
 

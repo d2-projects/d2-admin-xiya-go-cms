@@ -11,7 +11,6 @@
 </style>
 
 <script>
-import { concat } from 'lodash'
 import tree from '@/mixins/component.tree'
 import fieldChange from '@/mixins/el.fieldChange'
 
@@ -159,7 +158,7 @@ export default {
       this.$emit('check', data, info)
       // 更新 value
       if (!this.multiple) return
-      const value = concat(info.checkedKeys, this.halfMix ? info.halfCheckedKeys : [])
+      const value = this.$_.concat(info.checkedKeys, this.halfMix ? info.halfCheckedKeys : [])
       this.$emit('input', this.tryStringify(value))
       this.$emit('change', this.tryStringify(value))
       this.fieldChange()
