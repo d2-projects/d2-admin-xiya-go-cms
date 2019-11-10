@@ -18,10 +18,11 @@ export default ({ request }) => ({
    * @description 获取所有菜单的层级关系
    * @description http://yapi.xiya.vip/project/11/interface/api/170
    */
-  MENU_ALL () {
+  MENU_ALL (query = {}) {
     return request({
       url: '/api/menu/menus',
-      method: 'post'
+      method: 'post',
+      data: query
     })
   },
   /**

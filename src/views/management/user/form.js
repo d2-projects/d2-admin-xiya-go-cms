@@ -19,7 +19,10 @@ export default {
           prop: 'user_name',
           default: '',
           label: '用户名',
-          rule: { required: true, message: '必填', trigger: 'change' },
+          rule: [
+            { required: true, message: '必填', trigger: 'change' },
+            { validator: utils.helper.isLegalUsernameValidator, trigger: 'change' }
+          ],
           render: <el-input vModel={ this.form.model.user_name }/>
         },
         {
@@ -35,7 +38,7 @@ export default {
           label: '密码',
           rule: { required: true, message: '必填', trigger: 'change' },
           if: this.mode === 'create',
-          render: <el-input vModel={ this.form.model.password }/>
+          render: <el-input vModel={ this.form.model.password } type="password"/>
         },
         {
           prop: 'sex',
@@ -68,13 +71,13 @@ export default {
           prop: 'user_post',
           default: '',
           label: '岗位',
-          render: <d2-dict-select name="user_post" vModel={ this.form.model.user_post } multiple stringify/>
+          render: <d2-dict-select name="user_post" vModel={ this.form.model.user_post } style="width: 100%;" multiple stringify/>
         },
         {
           prop: 'user_role',
           default: '',
           label: '角色',
-          render: <d2-dict-select name="user_role" vModel={ this.form.model.user_role } multiple stringify/>
+          render: <d2-dict-select name="user_role" vModel={ this.form.model.user_role } style="width: 100%;" multiple stringify/>
         },
         {
           prop: 'status',
