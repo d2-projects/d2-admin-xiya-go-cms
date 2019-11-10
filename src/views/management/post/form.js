@@ -40,7 +40,7 @@ export default {
           default: 1,
           label: '状态',
           rule: { required: true, message: '必填', trigger: 'change' },
-          render: <d2-dict-radio vModel={ this.form.model.status } name="status"/>
+          render: <d2-dict-radio vModel={ this.form.model.status } name="status" button/>
         },
         {
           prop: 'remark',

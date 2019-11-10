@@ -60,7 +60,7 @@ export default {
           prop: 'status',
           default: 1,
           label: '状态',
-          render: <d2-dict-radio vModel={ this.form.model.status } name="status"/>
+          render: <d2-dict-radio vModel={ this.form.model.status } name="status" button/>
         },
         {
           prop: 'remark',

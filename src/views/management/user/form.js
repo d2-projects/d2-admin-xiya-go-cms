@@ -16,39 +16,18 @@ export default {
     setting () {
       return [
         {
-          prop: 'nickname',
-          default: '',
-          label: '昵称',
-          rule: { required: true, message: '必填', trigger: 'change' },
-          render: <el-input vModel={ this.form.model.nickname }/>
-        },
-        {
-          prop: 'dept_id',
-          default: '',
-          label: '归属部门',
-          rule: { required: true, message: '必填', trigger: 'change' },
-          render: <d2-tree-popover vModel={ this.form.model.dept_id } source="DEPT_ALL" key-label="dept_name"/>
-        },
-        {
-          prop: 'phone',
-          default: '',
-          label: '手机号码',
-          rule: { validator: utils.helper.isLegalMobilePhoneValidator, trigger: 'change' },
-          render: <el-input vModel={ this.form.model.phone }/>
-        },
-        {
-          prop: 'email',
-          default: '',
-          label: '邮箱',
-          rule: { validator: utils.helper.isLegalEmailValidator, trigger: 'change' },
-          render: <el-input vModel={ this.form.model.email }/>
-        },
-        {
           prop: 'user_name',
           default: '',
           label: '用户名',
           rule: { required: true, message: '必填', trigger: 'change' },
           render: <el-input vModel={ this.form.model.user_name }/>
+        },
+        {
+          prop: 'nickname',
+          default: '',
+          label: '昵称',
+          rule: { required: true, message: '必填', trigger: 'change' },
+          render: <el-input vModel={ this.form.model.nickname }/>
         },
         {
           prop: 'password',
@@ -65,10 +44,25 @@ export default {
           render: <d2-dict-select name="sex" vModel={ this.form.model.sex }/>
         },
         {
-          prop: 'status',
-          default: 1,
-          label: '状态',
-          render: <d2-dict-radio vModel={ this.form.model.status } name="status"/>
+          prop: 'phone',
+          default: '',
+          label: '手机号码',
+          rule: { validator: utils.helper.isLegalMobilePhoneValidator, trigger: 'change' },
+          render: <el-input vModel={ this.form.model.phone }/>
+        },
+        {
+          prop: 'email',
+          default: '',
+          label: '邮箱',
+          rule: { validator: utils.helper.isLegalEmailValidator, trigger: 'change' },
+          render: <el-input vModel={ this.form.model.email }/>
+        },
+        {
+          prop: 'dept_id',
+          default: '',
+          label: '归属部门',
+          rule: { required: true, message: '必填', trigger: 'change' },
+          render: <d2-tree-popover vModel={ this.form.model.dept_id } source="DEPT_ALL" key-label="dept_name"/>
         },
         {
           prop: 'user_post',
@@ -81,6 +75,12 @@ export default {
           default: '',
           label: '角色',
           render: <d2-dict-select name="user_role" vModel={ this.form.model.user_role } multiple stringify/>
+        },
+        {
+          prop: 'status',
+          default: 1,
+          label: '状态',
+          render: <d2-dict-radio vModel={ this.form.model.status } name="status" button/>
         },
         {
           prop: 'remark',
