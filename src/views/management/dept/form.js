@@ -23,38 +23,31 @@ export default {
           render: <el-input vModel={ this.form.model.dept_name }/>
         },
         {
+          prop: 'parent_id',
+          default: 0,
+          label: '上级部门',
+          rule: { required: true, message: '必填', trigger: 'change' },
+          render: <d2-tree-popover vModel={ this.form.model.parent_id } source="DEPT_ALL" key-label="dept_name"/>
+        },
+        {
           prop: 'leader',
           default: '',
           label: '负责人',
-          rule: { required: true, message: '必填', trigger: 'change' },
           render: <el-input vModel={ this.form.model.leader }/>
         },
         {
           prop: 'email',
           default: '',
           label: '部门邮箱',
-          rule: [
-            { required: true, message: '必填', trigger: 'change' },
-            { validator: utils.helper.isLegalEmailValidator, trigger: 'change' }
-          ],
+          rule: { validator: utils.helper.isLegalEmailValidator, trigger: 'change' },
           render: <el-input vModel={ this.form.model.email }/>
         },
         {
           prop: 'phone',
           default: '',
           label: '部门电话',
-          rule: [
-            { required: true, message: '必填', trigger: 'change' },
-            { validator: utils.helper.isLegalMobilePhoneValidator, trigger: 'change' }
-          ],
+          rule: { validator: utils.helper.isLegalMobilePhoneValidator, trigger: 'change' },
           render: <el-input vModel={ this.form.model.phone }/>
-        },
-        {
-          prop: 'parent_id',
-          default: 0,
-          label: '上级部门',
-          rule: { required: true, message: '必填', trigger: 'change' },
-          render: <d2-tree-popover vModel={ this.form.model.parent_id } source="DEPT_ALL" key-label="dept_name"/>
         },
         {
           prop: 'order_num',
@@ -67,7 +60,6 @@ export default {
           prop: 'status',
           default: 1,
           label: '状态',
-          rule: { required: true, message: '必填', trigger: 'change' },
           render: <d2-dict-radio vModel={ this.form.model.status } name="status"/>
         },
         {

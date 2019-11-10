@@ -1,4 +1,5 @@
 import form from '@/mixins/crud.form'
+import utils from '@/utils/index'
 
 export default {
   mixins: [ form ],
@@ -32,12 +33,14 @@ export default {
           prop: 'phone',
           default: '',
           label: '手机号码',
+          rule: { validator: utils.helper.isLegalMobilePhoneValidator, trigger: 'change' },
           render: <el-input vModel={ this.form.model.phone }/>
         },
         {
           prop: 'email',
           default: '',
           label: '邮箱',
+          rule: { validator: utils.helper.isLegalEmailValidator, trigger: 'change' },
           render: <el-input vModel={ this.form.model.email }/>
         },
         {
@@ -109,6 +112,19 @@ export default {
         path: 'list',
         label: 'role_name'
       })
+    },
+    /**
+     * @description 在提交表单之前可选进行数据处理
+     * @param {Object} data 默认的表单数据
+     */
+    transformSubmitData (data) {
+      if (this.mode === 'edit') {
+        // 编辑模式下删除密码字段
+        return this.$_.omit(data, [ 'password' ])
+      } else {
+        // 新建模式下全部发送
+        return data
+      }
     }
   }
 }

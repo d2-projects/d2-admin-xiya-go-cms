@@ -8,6 +8,17 @@ import { omit } from 'lodash'
 export function isLegalUsername (value) {
   return /^[A-Za-z_0-9]{3,10}$/.test(value)
 }
+/**
+ * @description 同 isLegalUsername
+ * @description 适用于表单校验
+ */
+export function isLegalUsernameValidator (rule, value, callback) {
+  callback(
+    value === '' || isLegalUsername(value)
+      ? undefined
+      : new Error('3~10个字符 只能是字母 数字 下划线')
+  )
+}
 
 /**
  * @description 合法的密码
@@ -33,7 +44,11 @@ export function isLegalPassword (value) {
  * @description 适用于表单校验
  */
 export function isLegalPasswordValidator (rule, value, callback) {
-  callback(isLegalPassword(value) ? undefined : new Error('6-15个字符，至少包括大写、小写、下划线、数字两种'))
+  callback(
+    value === '' || isLegalPassword(value)
+      ? undefined
+      : new Error('6-15个字符，至少包括大写、小写、下划线、数字两种')
+  )
 }
 
 /**
@@ -48,7 +63,11 @@ export function isLegalMobilePhone (value) {
  * @description 适用于表单校验
  */
 export function isLegalMobilePhoneValidator (rule, value, callback) {
-  callback(isLegalMobilePhone(value) ? undefined : new Error('手机号码格式不正确'))
+  callback(
+    value === '' || isLegalMobilePhone(value)
+      ? undefined
+      : new Error('手机号码格式不正确')
+  )
 }
 
 /**
@@ -65,7 +84,11 @@ export function isLegalEmail (value) {
  * @description 适用于表单校验
  */
 export function isLegalEmailValidator (rule, value, callback) {
-  callback(isLegalEmail(value) ? undefined : new Error('邮箱格式不正确'))
+  callback(
+    value === '' || isLegalEmail(value)
+      ? undefined
+      : new Error('邮箱格式不正确')
+  )
 }
 
 /**

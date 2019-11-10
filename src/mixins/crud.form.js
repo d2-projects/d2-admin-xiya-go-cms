@@ -159,7 +159,7 @@ export default {
      * @description 在提交表单之前可选进行数据处理
      * @param {Object} data 默认的表单数据
      */
-    submitDataTransform (data) {
+    transformSubmitData (data) {
       return data
     },
     /**
@@ -168,7 +168,7 @@ export default {
     submit () {
       this.$refs.form.validate(async valid => {
         if (!valid) return
-        const data = this.submitDataTransform(this.form.model)
+        const data = this.transformSubmitData(this.form.model)
         const submit = this.switchByMode(
           () => (this.$api[this.api.create] || Promise.resolve)(data),
           () => (this.$api[this.api.update] || Promise.resolve)(data)
