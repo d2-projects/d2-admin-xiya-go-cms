@@ -12,7 +12,6 @@ export default {
       <el-form
         ref="form"
         { ...{ attrs: this.form } }
-        rules={ this.rules }
         disabled={ this.isFormDisabled }
         v-loading={ this.isFormLoading }>
         {
@@ -48,10 +47,10 @@ export default {
       },
       form: {
         model: {},
+        rules: {},
         modelDefault: {},
         labelWidth: '100px'
       },
-      rules: {},
       dialog: {
         visible: false,
         showClose: false,
@@ -89,6 +88,14 @@ export default {
     settingFilteredShow () {
       return this.setting.filter(item => item.show !== false)
     },
+    // 根据表单设置计算出表单默认值
+    formFromSetting () {
+      let form = {}
+      this.setting.forEach(item => {
+        form[item.prop] = item.default
+      })
+      return this.$_.cloneDeep(form)
+    },
     // 表单容器的标题
     title () {
       return this.switchByMode('新建', '编辑')
@@ -124,7 +131,7 @@ export default {
      */
     async edit (id) {
       this.setMode('edit')
-      this.rules = this.getRulesFromSetting()
+      this.updateRules()
       this.open()
       try {
         await this.doLoadDict(this.loadDict)
@@ -140,9 +147,9 @@ export default {
      */
     async create (data = {}) {
       this.setMode('create')
-      this.rules = this.getRulesFromSetting()
-      this.open()
+      this.updateRules()
       this.setFormData(data)
+      this.open()
       await this.doLoadDict(this.loadDict)
     },
     /**
@@ -210,9 +217,17 @@ export default {
      * @param {Object} data 覆盖默认值的数据
      */
     setFormData (data = {}) {
-      const model = Object.assign(this.getFormFromSetting(), data)
+      const model = Object.assign(this.$_.cloneDeep(this.formFromSetting), data)
       this.form.model = this.$_.cloneDeep(model)
       this.form.modelDefault = this.$_.cloneDeep(model)
+    },
+    // 计算校验规则
+    updateRules () {
+      let rules = {}
+      this.setting
+        .filter(item => item.rule)
+        .forEach(item => { rules[item.prop] = item.rule })
+      this.form.rules = this.$_.cloneDeep(rules)
     },
     /**
      * 设置表单模式
@@ -255,26 +270,6 @@ export default {
      */
     clearValidate () {
       this.$refs.form && this.$refs.form.clearValidate()
-    },
-    /**
-     * @description 从设置函数中提取表单默认值
-     */
-    getFormFromSetting () {
-      let form = {}
-      this.setting.forEach(item => {
-        form[item.prop] = item.default
-      })
-      return this.$_.cloneDeep(form)
-    },
-    /**
-     * @description 从设置函数中提取表校验设置
-     */
-    getRulesFromSetting () {
-      let rules = {}
-      this.setting
-        .filter(item => item.rule)
-        .forEach(item => { rules[item.prop] = item.rule })
-      return this.$_.cloneDeep(rules)
     }
   }
 }
