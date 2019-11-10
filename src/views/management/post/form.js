@@ -19,14 +19,14 @@ export default {
           default: '',
           label: '岗位名称',
           rule: { required: true, message: '必填', trigger: 'change' },
-          render: <el-input vModel={ this.form.model.post_name }/>
+          render: <el-input vModel={ this.form.model.post_name } clearable/>
         },
         {
           prop: 'post_code',
           default: '',
           label: '岗位编码',
           rule: { required: true, message: '必填', trigger: 'change' },
-          render: <el-input vModel={ this.form.model.post_code }/>
+          render: <el-input vModel={ this.form.model.post_code } clearable/>
         },
         {
           prop: 'post_sort',
@@ -46,7 +46,7 @@ export default {
           prop: 'remark',
           default: '',
           label: '备注',
-          render: <el-input vModel={ this.form.model.remark }/>
+          render: <el-input vModel={ this.form.model.remark } clearable/>
         }
       ]
     }

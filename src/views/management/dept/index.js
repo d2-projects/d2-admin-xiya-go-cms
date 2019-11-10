@@ -85,7 +85,7 @@ export default {
           prop: 'dept_name',
           label: '名称',
           default: '',
-          render: <el-input vModel={ this.search.form.model.dept_name } style="width:100px;"/>
+          render: <el-input vModel={ this.search.form.model.dept_name } style="width:100px;" clearable/>
         },
         {
           prop: 'status',

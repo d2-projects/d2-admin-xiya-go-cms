@@ -20,7 +20,7 @@ export default {
           default: '',
           label: '部门名称',
           rule: { required: true, message: '必填', trigger: 'change' },
-          render: <el-input vModel={ this.form.model.dept_name }/>
+          render: <el-input vModel={ this.form.model.dept_name } clearable/>
         },
         {
           prop: 'parent_id',
@@ -33,21 +33,21 @@ export default {
           prop: 'leader',
           default: '',
           label: '负责人',
-          render: <el-input vModel={ this.form.model.leader }/>
+          render: <el-input vModel={ this.form.model.leader } clearable/>
         },
         {
           prop: 'email',
           default: '',
           label: '部门邮箱',
           rule: { validator: utils.helper.isLegalEmailValidator, trigger: 'change' },
-          render: <el-input vModel={ this.form.model.email }/>
+          render: <el-input vModel={ this.form.model.email } clearable/>
         },
         {
           prop: 'phone',
           default: '',
           label: '部门电话',
           rule: { validator: utils.helper.isLegalMobilePhoneValidator, trigger: 'change' },
-          render: <el-input vModel={ this.form.model.phone }/>
+          render: <el-input vModel={ this.form.model.phone } clearable/>
         },
         {
           prop: 'order_num',
@@ -66,7 +66,7 @@ export default {
           prop: 'remark',
           default: '',
           label: '备注',
-          render: <el-input vModel={ this.form.model.remark }/>
+          render: <el-input vModel={ this.form.model.remark } clearable/>
         }
       ]
     }

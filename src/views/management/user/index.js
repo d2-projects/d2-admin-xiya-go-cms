@@ -114,13 +114,13 @@ export default {
           prop: 'user_name',
           label: '登录账号',
           default: '',
-          render: <el-input vModel={ this.search.form.model.user_name } style="width:100px;"/>
+          render: <el-input vModel={ this.search.form.model.user_name } style="width:100px;" clearable/>
         },
         {
           prop: 'phone',
           label: '手机',
           default: '',
-          render: <el-input vModel={ this.search.form.model.phone } style="width:100px;"/>
+          render: <el-input vModel={ this.search.form.model.phone } style="width:100px;" clearable/>
         },
         {
           prop: 'status',
@@ -144,7 +144,7 @@ export default {
           prop: 'dept_id',
           label: '部门',
           default: 0,
-          render: <el-input vModel={ this.search.form.model.dept_id } style="width:100px;"/>,
+          render: <el-input vModel={ this.search.form.model.dept_id } style="width:100px;" clearable/>,
           show: false
         }
       ]

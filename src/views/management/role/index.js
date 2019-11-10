@@ -97,13 +97,13 @@ export default {
           prop: 'role_name',
           label: '角色名称',
           default: '',
-          render: <el-input vModel={ this.search.form.model.role_name } style="width:100px;"/>
+          render: <el-input vModel={ this.search.form.model.role_name } style="width:100px;" clearable/>
         },
         {
           prop: 'role_key',
           label: '权限字符',
           default: '',
-          render: <el-input vModel={ this.search.form.model.role_key } style="width:100px;"/>
+          render: <el-input vModel={ this.search.form.model.role_key } style="width:100px;" clearable/>
         },
         {
           prop: 'status',

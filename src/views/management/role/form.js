@@ -19,14 +19,14 @@ export default {
           default: '',
           label: '角色名称',
           rule: { required: true, message: '必填', trigger: 'change' },
-          render: <el-input vModel={ this.form.model.role_name }/>
+          render: <el-input vModel={ this.form.model.role_name } clearable/>
         },
         {
           prop: 'role_key',
           default: '',
           label: '权限字符',
           rule: { required: true, message: '必填', trigger: 'change' },
-          render: <el-input vModel={ this.form.model.role_key }/>
+          render: <el-input vModel={ this.form.model.role_key } clearable/>
         },
         {
           prop: 'role_sort',
@@ -52,7 +52,7 @@ export default {
           prop: 'remark',
           default: '',
           label: '备注',
-          render: <el-input vModel={ this.form.model.remark }/>
+          render: <el-input vModel={ this.form.model.remark } clearable/>
         }
       ]
     }

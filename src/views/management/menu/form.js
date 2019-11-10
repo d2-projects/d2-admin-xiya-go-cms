@@ -19,7 +19,7 @@ export default {
           default: '',
           label: '菜单名称',
           rule: { required: true, message: '必填', trigger: 'change' },
-          render: <el-input vModel={ this.form.model.menu_name }/>
+          render: <el-input vModel={ this.form.model.menu_name } clearable/>
         },
         {
           prop: 'parent_id',
@@ -40,7 +40,7 @@ export default {
           default: '/',
           label: '请求地址',
           rule: { required: true, message: '必填', trigger: 'change' },
-          render: <el-input vModel={ this.form.model.url }/>
+          render: <el-input vModel={ this.form.model.url } clearable/>
         },
         {
           prop: 'menu_type',
@@ -60,7 +60,7 @@ export default {
           prop: 'perms',
           default: '',
           label: '权限标识',
-          render: <el-input vModel={ this.form.model.perms }/>
+          render: <el-input vModel={ this.form.model.perms } clearable/>
         },
         {
           prop: 'icon',
@@ -72,7 +72,7 @@ export default {
           prop: 'remark',
           default: '',
           label: '备注',
-          render: <el-input vModel={ this.form.model.remark }/>
+          render: <el-input vModel={ this.form.model.remark } clearable/>
         }
       ]
     }

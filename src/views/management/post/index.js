@@ -90,7 +90,7 @@ export default {
           prop: 'post_name',
           label: '岗位名称',
           default: '',
-          render: <el-input vModel={ this.search.form.model.post_name } style="width:100px;"/>
+          render: <el-input vModel={ this.search.form.model.post_name } style="width:100px;" clearable/>
         },
         {
           prop: 'status',

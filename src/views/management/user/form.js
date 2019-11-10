@@ -23,14 +23,14 @@ export default {
             { required: true, message: '必填', trigger: 'change' },
             { validator: utils.helper.isLegalUsernameValidator, trigger: 'change' }
           ],
-          render: <el-input vModel={ this.form.model.user_name }/>
+          render: <el-input vModel={ this.form.model.user_name } clearable/>
         },
         {
           prop: 'nickname',
           default: '',
           label: '昵称',
           rule: { required: true, message: '必填', trigger: 'change' },
-          render: <el-input vModel={ this.form.model.nickname }/>
+          render: <el-input vModel={ this.form.model.nickname } clearable/>
         },
         {
           prop: 'password',
@@ -38,7 +38,7 @@ export default {
           label: '密码',
           rule: { required: true, message: '必填', trigger: 'change' },
           if: this.mode === 'create',
-          render: <el-input vModel={ this.form.model.password } type="password"/>
+          render: <el-input vModel={ this.form.model.password } type="password" clearable/>
         },
         {
           prop: 'sex',
@@ -51,14 +51,14 @@ export default {
           default: '',
           label: '手机号码',
           rule: { validator: utils.helper.isLegalMobilePhoneValidator, trigger: 'change' },
-          render: <el-input vModel={ this.form.model.phone }/>
+          render: <el-input vModel={ this.form.model.phone } clearable/>
         },
         {
           prop: 'email',
           default: '',
           label: '邮箱',
           rule: { validator: utils.helper.isLegalEmailValidator, trigger: 'change' },
-          render: <el-input vModel={ this.form.model.email }/>
+          render: <el-input vModel={ this.form.model.email } clearable/>
         },
         {
           prop: 'dept_id',
@@ -89,7 +89,7 @@ export default {
           prop: 'remark',
           default: '',
           label: '备注',
-          render: <el-input vModel={ this.form.model.remark }/>
+          render: <el-input vModel={ this.form.model.remark } clearable/>
         }
       ]
     }
