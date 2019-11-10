@@ -31,7 +31,7 @@ export default {
         default: 1,
         label: '菜单类型',
         rule: { required: true, message: '必填', trigger: 'change' },
-        render: <d2-dict-radio name="menu_type" vModel={ this.form.model.menu_type } on-change={ this.updateRules } button/>
+        render: <d2-dict-radio name="menu_type" vModel={ this.form.model.menu_type } on-change={ this.onMenuTypeChange } button/>
       }
       const orderNum = {
         prop: 'order_num',
@@ -98,6 +98,13 @@ export default {
         orderNum,
         remark
       ]
+    }
+  },
+  methods: {
+    onMenuTypeChange (menuType) {
+      console.log(menuType)
+      console.log(this.form.model)
+      this.reloadRules()
     }
   }
 }

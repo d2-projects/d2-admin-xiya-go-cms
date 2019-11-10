@@ -48,7 +48,7 @@ export default {
       form: {
         model: {},
         rules: {},
-        modelDefault: {},
+        modelDefault: {}, // model 的原始值 用来校验表单是否发生变化
         labelWidth: '100px'
       },
       dialog: {
@@ -131,7 +131,7 @@ export default {
      */
     async edit (id) {
       this.setMode('edit')
-      this.updateRules()
+      this.reloadRules()
       this.open()
       try {
         await this.doLoadDict(this.loadDict)
@@ -147,7 +147,7 @@ export default {
      */
     async create (data = {}) {
       this.setMode('create')
-      this.updateRules()
+      this.reloadRules()
       this.setFormData(data)
       this.open()
       await this.doLoadDict(this.loadDict)
@@ -213,7 +213,7 @@ export default {
       }
     },
     /**
-     * 设置表单
+     * @description 设置表单
      * @param {Object} data 覆盖默认值的数据
      */
     setFormData (data = {}) {
@@ -222,7 +222,7 @@ export default {
       this.form.modelDefault = this.$_.cloneDeep(model)
     },
     // 计算校验规则
-    updateRules () {
+    reloadRules () {
       let rules = {}
       this.setting
         .filter(item => item.rule)
@@ -231,7 +231,7 @@ export default {
       this.clearValidate()
     },
     /**
-     * 设置表单模式
+     * @description 设置表单模式
      * @param {String} mode 模式名称 edit or create
      */
     setMode (mode) {
