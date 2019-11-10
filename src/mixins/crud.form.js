@@ -46,9 +46,6 @@ export default {
         create: '',
         update: ''
       },
-      cache: {
-        form: {}
-      },
       form: {
         model: {},
         modelDefault: {},
@@ -127,15 +124,13 @@ export default {
       return this.status.isSubmitting
     }
   },
-  created () {
-    this.init()
-  },
   methods: {
     /**
      * @description 初始化表单为编辑模式
      */
     async edit (id) {
       this.setMode('edit')
+      this.rules = this.getRulesFromSetting()
       this.open()
       try {
         await this.doLoadDict(this.loadDict)
@@ -151,6 +146,7 @@ export default {
      */
     async create (data = {}) {
       this.setMode('create')
+      this.rules = this.getRulesFromSetting()
       this.open()
       this.setFormData(data)
       await this.doLoadDict(this.loadDict)
@@ -182,16 +178,6 @@ export default {
           console.log(error)
         }
       })
-    },
-    /**
-     * @description 初始化 这一步将会根据 setting 设置 data 的默认值
-     */
-    init () {
-      const form = this.getFormFromSetting()
-      const rules = this.getRulesFromSetting()
-      this.cache.form = this.$_.cloneDeep(form)
-      this.rules = this.$_.cloneDeep(rules)
-      this.form.model = this.$_.cloneDeep(form)
     },
     /**
      * @description 请求表单数据
@@ -230,7 +216,7 @@ export default {
      * @param {Object} data 覆盖默认值的数据
      */
     setFormData (data = {}) {
-      const model = Object.assign(this.$_.cloneDeep(this.cache.form), data)
+      const model = Object.assign(this.getFormFromSetting(), data)
       this.form.model = this.$_.cloneDeep(model)
       this.form.modelDefault = this.$_.cloneDeep(model)
     },
@@ -284,7 +270,7 @@ export default {
       this.settingFilteredIf.forEach(item => {
         form[item.prop] = item.default
       })
-      return form
+      return this.$_.cloneDeep(form)
     },
     /**
      * @description 从设置函数中提取表校验设置
@@ -294,7 +280,7 @@ export default {
       this.settingFilteredIf
         .filter(item => item.rule)
         .forEach(item => { rules[item.prop] = item.rule })
-      return rules
+      return this.$_.cloneDeep(rules)
     }
   }
 }
