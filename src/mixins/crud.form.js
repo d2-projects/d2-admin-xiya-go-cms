@@ -85,15 +85,9 @@ export default {
       return []
     },
     // 表单设置
-    // 过滤掉无效的字段
-    settingFilteredIf () {
-      return this.setting.filter(item => item.if === undefined || item.if)
-    },
-    // 表单设置
-    // 过滤掉无效的字段
     // 过滤掉不显示的字段
     settingFilteredShow () {
-      return this.settingFilteredIf.filter(item => item.show !== false)
+      return this.setting.filter(item => item.show !== false)
     },
     // 表单容器的标题
     title () {
@@ -267,7 +261,7 @@ export default {
      */
     getFormFromSetting () {
       let form = {}
-      this.settingFilteredIf.forEach(item => {
+      this.setting.forEach(item => {
         form[item.prop] = item.default
       })
       return this.$_.cloneDeep(form)
@@ -277,7 +271,7 @@ export default {
      */
     getRulesFromSetting () {
       let rules = {}
-      this.settingFilteredIf
+      this.setting
         .filter(item => item.rule)
         .forEach(item => { rules[item.prop] = item.rule })
       return this.$_.cloneDeep(rules)

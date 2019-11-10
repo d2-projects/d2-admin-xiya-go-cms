@@ -32,14 +32,15 @@ export default {
           rule: { required: true, message: '必填', trigger: 'change' },
           render: <el-input vModel={ this.form.model.nickname } clearable/>
         },
-        {
-          prop: 'password',
-          default: '',
-          label: '密码',
-          rule: { required: true, message: '必填', trigger: 'change' },
-          if: this.mode === 'create',
-          render: <el-input vModel={ this.form.model.password } type="password" clearable/>
-        },
+        ...this.mode === 'create' ? [
+          {
+            prop: 'password',
+            default: '',
+            label: '密码',
+            rule: { required: true, message: '必填', trigger: 'change' },
+            render: <el-input vModel={ this.form.model.password } type="password" clearable/>
+          }
+        ] : [],
         {
           prop: 'sex',
           default: 0,

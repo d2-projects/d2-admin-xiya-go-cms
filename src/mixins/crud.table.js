@@ -212,15 +212,9 @@ export default {
       return []
     },
     // 表单设置
-    // 过滤掉无效的字段
-    settingSearchFilteredIf () {
-      return this.settingSearch.filter(item => item.if === undefined || item.if)
-    },
-    // 表单设置
-    // 过滤掉无效的字段
     // 过滤掉不显示的字段
     settingSearchFilteredShow () {
-      return this.settingSearchFilteredIf.filter(item => item.show !== false)
+      return this.settingSearch.filter(item => item.show !== false)
     },
     // 搜索按钮 loading 状态
     // 正在加载原始数据 || 正在加载字典
@@ -332,11 +326,11 @@ export default {
     },
     /**
      * @description init
-     * @description 根据 settingSearchFilteredIf 初始化搜索条件
+     * @description 根据 settingSearch 初始化搜索条件
      */
     initSearchForm () {
       const data = {}
-      this.settingSearchFilteredIf.forEach(setting => {
+      this.settingSearch.forEach(setting => {
         data[setting.prop] = setting.default
       })
       this.search.form.model = data

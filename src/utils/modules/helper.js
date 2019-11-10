@@ -6,7 +6,7 @@ import { omit } from 'lodash'
  * @param {String} value 需要校验的数据
  */
 export function isLegalUsername (value) {
-  return /^[A-Za-z_0-9]{3,10}$/.test(value)
+  return /^[A-Za-z_0-9]{3,12}$/.test(value)
 }
 /**
  * @description 同 isLegalUsername
