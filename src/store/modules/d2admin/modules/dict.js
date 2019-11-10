@@ -32,6 +32,13 @@ export default context => ({
         ]
       },
       {
+        name: 'is_frame',
+        value: [
+          { label: '普通', value: 1 },
+          { label: '外链', value: 2 }
+        ]
+      },
+      {
         name: 'data_scope',
         value: [
           { label: '全部数据权限', value: 1 },
