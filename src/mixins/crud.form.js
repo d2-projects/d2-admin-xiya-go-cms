@@ -1,8 +1,15 @@
+import utils from '@/utils'
+import helper from './crud.form.helper'
+import status from './crud.status'
 import dict from './crud.dict'
+import dialog from './crud.form.dialog'
 
 export default {
   mixins: [
-    dict
+    helper,
+    status,
+    dict,
+    dialog
   ],
   render () {
     return <el-dialog
@@ -12,14 +19,16 @@ export default {
       <el-form
         ref="form"
         { ...{ attrs: this.form } }
+        rules={ this.rulesFromSetting }
         disabled={ this.isFormDisabled }
         v-loading={ this.isFormLoading }>
         {
-          this.settingFilteredShow
+          this.setting
+            .filter(item => item.show !== false)
             .map(
               item =>
                 <el-form-item label={ item.label } prop={ item.prop }>
-                  { item.render }
+                  { item.render() }
                 </el-form-item>
             )
         }
@@ -47,17 +56,7 @@ export default {
       },
       form: {
         model: {},
-        rules: {},
-        modelDefault: {}, // model 的原始值 用来校验表单是否发生变化
         labelWidth: '100px'
-      },
-      dialog: {
-        visible: false,
-        showClose: false,
-        top: '0px',
-        width: '400px',
-        customClass: 'el-dialog__no-top-border',
-        appendToBody: true
       },
       buttons: {
         cancle: {
@@ -70,73 +69,50 @@ export default {
           icon: 'el-icon-check'
         }
       },
-      status: {
-        isLoadingData: false,
-        isLoadingDict: false,
-        isSubmitting: false
-      },
-      mode: ''
+      mode: '',
+      detail: {}
     }
   },
   computed: {
     // 表单设置
-    setting () {
-      return []
-    },
-    // 表单设置
-    // 过滤掉不显示的字段
-    settingFilteredShow () {
-      return this.setting.filter(item => item.show !== false)
-    },
+    setting () { return [] },
+    // 根据表单设置计算出校验规规则
+    rulesFromSetting () { return this.$_.fromPairs(this.setting.filter(item => item.rule).map(item => [item.prop, item.rule])) },
     // 根据表单设置计算出表单默认值
-    formFromSetting () {
-      let form = {}
-      this.setting.forEach(item => {
-        form[item.prop] = item.default
-      })
-      return this.$_.cloneDeep(form)
-    },
-    // 表单容器的标题
-    title () {
-      return this.switchByMode('新建', '编辑')
-    },
-    // 表单是否发生了改动
-    isFormChanged () {
-      return JSON.stringify(this.form.model) !== JSON.stringify(this.form.modelDefault)
-    },
-    // 表单 loading 状态
-    // 正在加载原始数据 || 正在加载字典
-    isFormLoading () {
-      return this.status.isLoadingData || this.status.isLoadingDict
-    },
-    // 表单 禁用 状态
-    // 正在加载原始数据 || 正在加载字典 || 正在提交
-    isFormDisabled () {
-      return this.status.isLoadingData || this.status.isLoadingDict || this.status.isSubmitting
-    },
-    // 提交按钮 禁用 状态
-    // 正在加载原始数据 || 正在加载字典 || 表单没有发生修改
-    isSubmitButtonDisabled () {
-      return this.status.isLoadingData || this.status.isLoadingDict || !this.isFormChanged
-    },
-    // 提交按钮 loading 状态
-    // 正在提交
-    isSubmitButtonLoading () {
-      return this.status.isSubmitting
-    }
+    formFromSetting () { return this.$_.fromPairs(this.setting.map(item => [item.prop, item.default])) },
+    // 根据表单设置和详情计算出表单值
+    formFromSettingAndDetail () { return Object.assign({}, this.formFromSetting, this.detail) },
+    // 表单是否发生变化
+    isFormChanged () { return !utils.helper.isValueSameObject(this.formFromSettingAndDetail, this.form.model) }
+  },
+  watch: {
+    rulesFromSetting: 'clearValidate'
   },
   methods: {
+    /**
+     * @description 重新计算 model
+     */
+    reloadModel ({
+      pick = []
+    } = {}) {
+      this.$set(this.form, 'model', Object.assign(
+        {},
+        // 默认值
+        this.formFromSettingAndDetail,
+        // 从旧的数据中保留的值
+        this.$_.pick(this.form.model, pick)
+      ))
+    },
     /**
      * @description 初始化表单为编辑模式
      */
     async edit (id) {
       this.setMode('edit')
-      this.reloadRules()
       this.open()
       try {
         await this.doLoadDict(this.loadDict)
-        const model = await this.doLoadData(() => (this.$api[this.api.detail] || function () {})(id))
-        this.setFormData(model)
+        this.detail = await this.doLoadData(() => (this.$api[this.api.detail] || function () {})(id))
+        this.reloadModel()
       } catch (error) {
         console.log(error)
         this.cancle()
@@ -147,8 +123,8 @@ export default {
      */
     async create (data = {}) {
       this.setMode('create')
-      this.reloadRules()
-      this.setFormData(data)
+      this.detail = data
+      this.reloadModel()
       this.open()
       await this.doLoadDict(this.loadDict)
     },
@@ -156,9 +132,7 @@ export default {
      * @description 在提交表单之前可选进行数据处理
      * @param {Object} data 默认的表单数据
      */
-    transformSubmitData (data) {
-      return data
-    },
+    transformSubmitData (data) { return data },
     /**
      * @description 提交表单
      */
@@ -178,100 +152,6 @@ export default {
         } catch (error) {
           console.log(error)
         }
-      })
-    },
-    /**
-     * @description 请求表单数据
-     * @param {Function} fn 请求函数 需要返回 Promise
-     */
-    async doLoadData (fn = () => {}) {
-      this.status.isLoadingData = true
-      try {
-        const data = await fn()
-        this.status.isLoadingData = false
-        return Promise.resolve(data)
-      } catch (error) {
-        console.log(error)
-        this.status.isLoadingData = false
-        return Promise.reject(error)
-      }
-    },
-    /**
-     * @description 发送数据
-     * @param {Function} fn 请求函数 需要返回 Promise
-     */
-    async doSubmit (fn = () => {}) {
-      this.status.isSubmitting = true
-      try {
-        const data = await fn()
-        this.status.isSubmitting = false
-        return Promise.resolve(data)
-      } catch (error) {
-        console.log(error)
-        this.status.isSubmitting = false
-        return Promise.reject(error)
-      }
-    },
-    /**
-     * @description 设置表单
-     * @param {Object} data 覆盖默认值的数据
-     */
-    setFormData (data = {}) {
-      const model = Object.assign(this.$_.cloneDeep(this.formFromSetting), data)
-      this.form.model = this.$_.cloneDeep(model)
-      this.form.modelDefault = this.$_.cloneDeep(model)
-    },
-    // 计算校验规则
-    reloadRules () {
-      let rules = {}
-      this.setting
-        .filter(item => item.rule)
-        .forEach(item => { rules[item.prop] = item.rule })
-      this.form.rules = this.$_.cloneDeep(rules)
-      this.clearValidate()
-    },
-    /**
-     * @description 设置表单模式
-     * @param {String} mode 模式名称 edit or create
-     */
-    setMode (mode) {
-      this.mode = mode
-    },
-    /**
-     * @description 根据不同的模式 返回不同的值
-     * @param {*} createModeValve 新增模式返回值
-     * @param {*} editModeValue 编辑模式返回值
-     * @param {*} defaultValue 没有匹配的模式返回值 默认为 createModeValve
-     */
-    switchByMode (createModeValve = '', editModeValue = '', defaultValue = createModeValve) {
-      if (this.mode === 'create') {
-        return createModeValve
-      } else if (this.mode === 'edit') {
-        return editModeValue
-      } else {
-        return defaultValue
-      }
-    },
-    /**
-     * @description 打开面板
-     */
-    open () {
-      this.dialog.visible = true
-      this.$nextTick(() => this.clearValidate())
-    },
-    /**
-     * @description 关闭面板
-     */
-    cancle () {
-      this.clearValidate()
-      this.dialog.visible = false
-    },
-    /**
-     * @description 清空表单校验
-     */
-    clearValidate () {
-      this.$nextTick(() => {
-        this.$refs.form && this.$refs.form.clearValidate()
       })
     }
   }

@@ -1,4 +1,44 @@
-import { omit } from 'lodash'
+import { omit, keys } from 'lodash'
+
+/**
+ * 比较两个数组是否值一样 忽略顺序
+ * @param {Array} array1 比较的数组
+ * @param {Array} array2 比较的数组
+ */
+export function isValueSameArray (array1, array2) {
+  let result = true
+  if (array1.length !== array2.length) {
+    result = false
+  } else {
+    array1.forEach(item => {
+      if (array2.indexOf(item) < 0) {
+        result = false
+      }
+    })
+  }
+  return result
+}
+
+/**
+ * 比较两个对象是否值一样 忽略顺序
+ * @param {Array} array1 比较的对象
+ * @param {Array} array2 比较的对象
+ */
+export function isValueSameObject (object1, object2) {
+  let result = true
+  const keys1 = keys(object1)
+  const keys2 = keys(object2)
+  if (!isValueSameArray(keys1, keys2)) {
+    result = false
+  } else {
+    keys1.forEach(keyName => {
+      if (object1[keyName] !== object2[keyName]) {
+        result = false
+      }
+    })
+  }
+  return result
+}
 
 /**
  * @description 合法的用户名

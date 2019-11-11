@@ -97,31 +97,31 @@ export default {
           prop: 'role_name',
           label: '角色名称',
           default: '',
-          render: <el-input vModel={ this.search.form.model.role_name } style="width:100px;" clearable/>
+          render: () => <el-input vModel={ this.search.form.model.role_name } style="width:100px;" clearable/>
         },
         {
           prop: 'role_key',
           label: '权限字符',
           default: '',
-          render: <el-input vModel={ this.search.form.model.role_key } style="width:100px;" clearable/>
+          render: () => <el-input vModel={ this.search.form.model.role_key } style="width:100px;" clearable/>
         },
         {
           prop: 'status',
           label: '状态',
           default: 0,
-          render: <d2-dict-radio vModel={ this.search.form.model.status } name="status" button all/>
+          render: () => <d2-dict-radio vModel={ this.search.form.model.status } name="status" button all/>
         },
         {
           prop: 'start_time',
           label: '开始时间',
           default: '',
-          render: <el-date-picker vModel={ this.search.form.model.start_time } value-format="yyyy-MM-dd" type="date" placeholder="开始时间" style="width:130px;"/>
+          render: () => <el-date-picker vModel={ this.search.form.model.start_time } value-format="yyyy-MM-dd" type="date" placeholder="开始时间" style="width:130px;"/>
         },
         {
           prop: 'end_time',
           label: '结束时间',
           default: '',
-          render: <el-date-picker vModel={ this.search.form.model.end_time } value-format="yyyy-MM-dd" type="date" placeholder="结束时间" style="width:130px;"/>
+          render: () => <el-date-picker vModel={ this.search.form.model.end_time } value-format="yyyy-MM-dd" type="date" placeholder="结束时间" style="width:130px;"/>
         }
       ]
     }

@@ -85,13 +85,13 @@ export default {
           prop: 'dept_name',
           label: '名称',
           default: '',
-          render: <el-input vModel={ this.search.form.model.dept_name } style="width:100px;" clearable/>
+          render: () => <el-input vModel={ this.search.form.model.dept_name } style="width:100px;" clearable/>
         },
         {
           prop: 'status',
           label: '状态',
           default: 0,
-          render: <d2-dict-radio vModel={ this.search.form.model.status } name="status" button all/>
+          render: () => <d2-dict-radio vModel={ this.search.form.model.status } name="status" button all/>
         }
       ]
     }

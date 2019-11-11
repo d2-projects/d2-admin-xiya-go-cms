@@ -1,6 +1,13 @@
 import { mapActions } from 'vuex'
 
 export default {
+  data () {
+    return {
+      status: {
+        isLoadingDict: false
+      }
+    }
+  },
   methods: {
     ...mapActions('d2admin/dict', {
       dictSet: 'set'

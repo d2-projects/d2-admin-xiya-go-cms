@@ -85,13 +85,13 @@ export default {
           prop: 'menu_name',
           label: '名称',
           default: '',
-          render: <el-input vModel={ this.search.form.model.menu_name } style="width:100px;" clearable/>
+          render: () => <el-input vModel={ this.search.form.model.menu_name } style="width:100px;" clearable/>
         },
         {
           prop: 'visible',
           label: '可见性',
           default: 0,
-          render: <d2-dict-radio vModel={ this.search.form.model.visible } name="visible" button all/>
+          render: () => <d2-dict-radio vModel={ this.search.form.model.visible } name="visible" button all/>
         }
       ]
     }

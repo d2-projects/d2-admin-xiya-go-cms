@@ -20,53 +20,53 @@ export default {
           default: '',
           label: '部门名称',
           rule: { required: true, message: '必填', trigger: 'change' },
-          render: <el-input vModel={ this.form.model.dept_name } clearable/>
+          render: () => <el-input vModel={ this.form.model.dept_name } clearable/>
         },
         {
           prop: 'parent_id',
           default: 0,
           label: '上级部门',
           rule: { required: true, message: '必填', trigger: 'change' },
-          render: <d2-tree-popover vModel={ this.form.model.parent_id } source="DEPT_ALL" key-label="dept_name"/>
+          render: () => <d2-tree-popover vModel={ this.form.model.parent_id } source="DEPT_ALL" key-label="dept_name"/>
         },
         {
           prop: 'leader',
           default: '',
           label: '负责人',
-          render: <el-input vModel={ this.form.model.leader } clearable/>
+          render: () => <el-input vModel={ this.form.model.leader } clearable/>
         },
         {
           prop: 'email',
           default: '',
           label: '部门邮箱',
           rule: { validator: utils.helper.isLegalEmailValidator, trigger: 'change' },
-          render: <el-input vModel={ this.form.model.email } clearable/>
+          render: () => <el-input vModel={ this.form.model.email } clearable/>
         },
         {
           prop: 'phone',
           default: '',
           label: '部门电话',
           rule: { validator: utils.helper.isLegalMobilePhoneValidator, trigger: 'change' },
-          render: <el-input vModel={ this.form.model.phone } clearable/>
+          render: () => <el-input vModel={ this.form.model.phone } clearable/>
         },
         {
           prop: 'order_num',
           default: 1,
           label: '显示排序',
           rule: { required: true, message: '必填', trigger: 'change' },
-          render: <el-input-number min={ 1 } vModel={ this.form.model.order_num }/>
+          render: () => <el-input-number min={ 1 } vModel={ this.form.model.order_num }/>
         },
         {
           prop: 'status',
           default: 1,
           label: '状态',
-          render: <d2-dict-radio vModel={ this.form.model.status } name="status" button/>
+          render: () => <d2-dict-radio vModel={ this.form.model.status } name="status" button/>
         },
         {
           prop: 'remark',
           default: '',
           label: '备注',
-          render: <el-input vModel={ this.form.model.remark } clearable/>
+          render: () => <el-input vModel={ this.form.model.remark } clearable/>
         }
       ]
     }

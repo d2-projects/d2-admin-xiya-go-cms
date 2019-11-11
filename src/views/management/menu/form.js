@@ -18,72 +18,72 @@ export default {
         default: '',
         label: '菜单名称',
         rule: { required: true, message: '必填', trigger: 'change' },
-        render: <el-input vModel={ this.form.model.menu_name } clearable/>
+        render: () => <el-input vModel={ this.form.model.menu_name } clearable/>
       }
       const parentId = {
         prop: 'parent_id',
         default: 0,
         label: '上级菜单',
-        render: <d2-tree-popover vModel={ this.form.model.parent_id } source="MENU_ALL" key-label="menu_name"/>
+        render: () => <d2-tree-popover vModel={ this.form.model.parent_id } source="MENU_ALL" key-label="menu_name"/>
       }
       const menuType = {
         prop: 'menu_type',
         default: 1,
         label: '菜单类型',
         rule: { required: true, message: '必填', trigger: 'change' },
-        render: <d2-dict-radio name="menu_type" vModel={ this.form.model.menu_type } on-change={ this.onMenuTypeChange } button/>
+        render: () => <d2-dict-radio name="menu_type" vModel={ this.form.model.menu_type } on-change={ this.onMenuTypeChange } button/>
       }
       const orderNum = {
         prop: 'order_num',
         default: 0,
         label: '显示排序',
         rule: { required: true, message: '必填', trigger: 'change' },
-        render: <el-input-number min={ 1 } vModel={ this.form.model.order_num }/>
+        render: () => <el-input-number min={ 1 } vModel={ this.form.model.order_num }/>
       }
       const url = {
         prop: 'url',
         default: '/',
         label: '请求地址',
         rule: { required: true, message: '必填', trigger: 'change' },
-        render: <el-input vModel={ this.form.model.url } clearable/>
+        render: () => <el-input vModel={ this.form.model.url } clearable/>
       }
       const component = {
         prop: 'component',
         default: '/',
         label: '页面组件',
         rule: { required: true, message: '必填', trigger: 'change' },
-        render: <el-input vModel={ this.form.model.component } clearable/>
+        render: () => <el-input vModel={ this.form.model.component } clearable/>
       }
       const perms = {
         prop: 'perms',
         default: '',
         label: '权限标识',
-        render: <el-input vModel={ this.form.model.perms } clearable/>
+        render: () => <el-input vModel={ this.form.model.perms } clearable/>
       }
       const icon = {
         prop: 'icon',
         default: '',
         label: '图标',
-        render: <d2-icon-select vModel={ this.form.model.icon }/>
+        render: () => <d2-icon-select vModel={ this.form.model.icon }/>
       }
       const visible = {
         prop: 'visible',
         default: 1,
         label: '可见性',
         rule: { required: true, message: '必填', trigger: 'change' },
-        render: <d2-dict-radio name="visible" vModel={ this.form.model.visible } button/>
+        render: () => <d2-dict-radio name="visible" vModel={ this.form.model.visible } button/>
       }
       const isFrame = {
         prop: 'is_frame',
         default: 1,
         label: '外链',
-        render: <d2-dict-radio name="is_frame" vModel={ this.form.model.is_frame } button/>
+        render: () => <d2-dict-radio name="is_frame" vModel={ this.form.model.is_frame } button/>
       }
       const remark = {
         prop: 'remark',
         default: '',
         label: '备注',
-        render: <el-input vModel={ this.form.model.remark } clearable/>
+        render: () => <el-input vModel={ this.form.model.remark } clearable/>
       }
       return [
         menuName,
@@ -102,9 +102,15 @@ export default {
   },
   methods: {
     onMenuTypeChange (menuType) {
-      console.log(menuType)
-      console.log(this.form.model)
-      this.reloadRules()
+      this.reloadModel({
+        pick: [
+          'menu_name',
+          'parent_id',
+          'menu_type',
+          'order_num',
+          'remark'
+        ]
+      })
     }
   }
 }
