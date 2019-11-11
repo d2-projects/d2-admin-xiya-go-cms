@@ -5,7 +5,7 @@ import { omit, keys } from 'lodash'
  * @param {Array} array1 比较的数组
  * @param {Array} array2 比较的数组
  */
-export function isValueSameArray (array1, array2) {
+export function isIdenticalArray (array1, array2) {
   let result = true
   if (array1.length !== array2.length) {
     result = false
@@ -24,11 +24,11 @@ export function isValueSameArray (array1, array2) {
  * @param {Array} array1 比较的对象
  * @param {Array} array2 比较的对象
  */
-export function isValueSameObject (object1, object2) {
+export function isIdenticalObject (object1, object2) {
   let result = true
   const keys1 = keys(object1)
   const keys2 = keys(object2)
-  if (!isValueSameArray(keys1, keys2)) {
+  if (!isIdenticalArray(keys1, keys2)) {
     result = false
   } else {
     keys1.forEach(keyName => {

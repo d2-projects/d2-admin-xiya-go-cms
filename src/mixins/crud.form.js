@@ -83,7 +83,7 @@ export default {
     // 根据表单设置和详情计算出表单值
     formFromSettingAndDetail () { return Object.assign({}, this.formFromSetting, this.detail) },
     // 表单是否发生变化
-    isFormChanged () { return !utils.helper.isValueSameObject(this.formFromSettingAndDetail, this.form.model) }
+    isFormChanged () { return !utils.helper.isIdenticalObject(this.formFromSettingAndDetail, this.form.model) }
   },
   watch: {
     rulesFromSetting: 'clearValidate'
@@ -91,6 +91,7 @@ export default {
   methods: {
     /**
      * @description 重新计算 model
+     * @param {Object} config {Array} pick 需要从旧的表单数据中保留的字段
      */
     reloadModel ({
       pick = []
@@ -105,6 +106,7 @@ export default {
     },
     /**
      * @description 初始化表单为编辑模式
+     * @param {Number} id 编辑表单的唯一 id
      */
     async edit (id) {
       this.setMode('edit')

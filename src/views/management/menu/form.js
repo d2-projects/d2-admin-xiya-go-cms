@@ -49,10 +49,10 @@ export default {
       }
       const component = {
         prop: 'component',
-        default: '/',
+        default: '',
         label: '页面组件',
         rule: { required: true, message: '必填', trigger: 'change' },
-        render: () => <el-input vModel={ this.form.model.component } clearable/>
+        render: () => <el-input vModel={ this.form.model.component } placeholder="utils.import('The path here')" clearable/>
       }
       const perms = {
         prop: 'perms',
@@ -86,8 +86,8 @@ export default {
         render: () => <el-input vModel={ this.form.model.remark } clearable/>
       }
       return [
-        menuName,
         parentId,
+        menuName,
         menuType,
         // 菜单类型 menu_type === 目录 1：[菜单图标] [是否外链] [路由地址] [可见性]
         ...this.form.model.menu_type === 1 ? [ icon, isFrame, url, visible ] : [],
