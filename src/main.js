@@ -1,6 +1,7 @@
 // Vue
 import Vue from 'vue'
 import i18n from './i18n'
+import dict from './dict'
 import App from './App'
 // store must be imported before d2Admin
 import store from '@/store/index'
