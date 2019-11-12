@@ -43,5 +43,12 @@ import store from '@/store/index'
       { label: '全部数据权限', value: 1 },
       { label: '自定义数据权限', value: 2 }
     ]
+  },
+  {
+    name: 'config_type',
+    value: [
+      { label: '内置', value: 1 },
+      { label: '非内置', value: 2 }
+    ]
   }
 ].forEach(dict => store.dispatch('d2admin/dict/set', dict))
