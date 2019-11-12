@@ -30,28 +30,24 @@ export default {
         prop: 'menu_type',
         default: 1,
         label: '菜单类型',
-        rule: { required: true, message: '必填', trigger: 'change' },
         render: () => <d2-dict-radio name="menu_type" vModel={ this.form.model.menu_type } on-change={ this.onMenuTypeChange } button/>
       }
       const orderNum = {
         prop: 'order_num',
         default: 0,
         label: '显示排序',
-        rule: { required: true, message: '必填', trigger: 'change' },
         render: () => <el-input-number min={ 1 } vModel={ this.form.model.order_num }/>
       }
       const url = {
         prop: 'url',
         default: '/',
         label: '请求地址',
-        rule: { required: true, message: '必填', trigger: 'change' },
         render: () => <el-input vModel={ this.form.model.url } clearable/>
       }
       const component = {
         prop: 'component',
         default: '',
         label: '页面组件',
-        rule: { required: true, message: '必填', trigger: 'change' },
         render: () => <el-input vModel={ this.form.model.component } placeholder="utils.import('The path here')" clearable/>
       }
       const perms = {
@@ -70,7 +66,6 @@ export default {
         prop: 'visible',
         default: 1,
         label: '可见性',
-        rule: { required: true, message: '必填', trigger: 'change' },
         render: () => <d2-dict-radio name="visible" vModel={ this.form.model.visible } button/>
       }
       const isFrame = {

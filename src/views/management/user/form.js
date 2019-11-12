@@ -104,7 +104,7 @@ export default {
       await this.loadDictOne({
         name: 'user_post',
         method: this.$api.POST_ALL,
-        query: { fields: 'id,post_name' },
+        fields: 'id,post_name',
         path: 'list',
         label: 'post_name'
       })
@@ -112,7 +112,7 @@ export default {
       await this.loadDictOne({
         name: 'user_role',
         method: this.$api.ROLE_ALL,
-        query: { fields: 'id,role_name' },
+        fields: 'id,role_name',
         path: 'list',
         label: 'role_name'
       })

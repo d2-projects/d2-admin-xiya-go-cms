@@ -21,7 +21,7 @@ export default {
       // await this.loadDictOne({
       //   name: 'user_post',
       //   method: this.$api.POST_ALL,
-      //   query: { fields: 'id,post_name' },
+      //   fields: 'id,post_name',
       //   label: 'post_name'
       // })
     },
@@ -29,20 +29,29 @@ export default {
      * @description 加载一个字典
      * @param {Object} config {String} name 字典名称
      * @param {Object} config {Function} method 请求方法
+     * @param {Object} config {String} fields 需要的字段
      * @param {Object} config {Object} query 请求参数
+     * @param {Object} config {String} path 返回数据的列表字段位置
      * @param {Object} config {String} label 字典 label 字段名
      * @param {Object} config {String} value 字典 value 字段名
      */
     async loadDictOne ({
       name = '',
       method = () => {},
+      fields = '',
       query = {},
       path = '',
       label = 'label',
       value = 'id'
     }) {
       try {
-        const result = await method(Object.assign({ page_size: 9999 }, query))
+        const result = await method(
+          Object.assign(
+            { page_size: 9999 },
+            fields ? { fields } : {},
+            query
+          )
+        )
         let dictValue = (path ? this.$_.get(result, path, []) : result).map(e => ({ label: e[label], value: e[value] }))
         this.dictSet({ name, value: dictValue })
       } catch (error) {
