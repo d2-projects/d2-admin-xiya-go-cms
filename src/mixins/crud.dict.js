@@ -16,15 +16,7 @@ export default {
      * @description 加载需要的字典数据
      * @description 这个方法一般在页面上需要再次实现
      */
-    async loadDict () {
-      // eg
-      // await this.loadDictOne({
-      //   name: 'user_post',
-      //   method: this.$api.POST_ALL,
-      //   fields: 'id,post_name',
-      //   label: 'post_name'
-      // })
-    },
+    async loadDict () {},
     /**
      * @description 加载一个字典
      * @param {Object} config {String} name 字典名称
