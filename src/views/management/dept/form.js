@@ -26,7 +26,6 @@ export default {
           prop: 'parent_id',
           default: 0,
           label: '上级部门',
-          rule: { required: true, message: '必填', trigger: 'change' },
           render: () => <d2-tree-popover vModel={ this.form.model.parent_id } source="DEPT_ALL" key-label="dept_name"/>
         },
         {
@@ -53,7 +52,6 @@ export default {
           prop: 'order_num',
           default: 1,
           label: '显示排序',
-          rule: { required: true, message: '必填', trigger: 'change' },
           render: () => <el-input-number min={ 1 } vModel={ this.form.model.order_num }/>
         },
         {
