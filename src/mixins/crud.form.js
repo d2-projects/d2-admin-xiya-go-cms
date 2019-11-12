@@ -12,40 +12,23 @@ export default {
     dialog
   ],
   render () {
-    return <el-dialog
-      { ...{ attrs: this.dialog } }
-      title={ this.title }
-      on-close={ this.cancle }>
-      <el-form
-        ref="form"
-        { ...{ attrs: this.form } }
-        rules={ this.rulesFromSetting }
-        disabled={ this.isFormDisabled }
-        v-loading={ this.isFormLoading }>
-        {
-          this.setting
-            .filter(item => item.show !== false)
-            .map(
-              item =>
-                <el-form-item label={ item.label } prop={ item.prop }>
-                  { item.render() }
-                </el-form-item>
-            )
-        }
-      </el-form>
-      <el-form label-width={ this.form.labelWidth }>
-        <el-form-item>
-          <d2-button
-            { ...{ attrs: this.buttons.cancle } }
-            on-click={ this.cancle }/>
-          <d2-button
-            { ...{ attrs: this.buttons.submit } }
-            loading={ this.isSubmitButtonLoading }
-            disabled={ this.isSubmitButtonDisabled }
-            on-click={ this.submit }/>
-        </el-form-item>
-      </el-form>
-    </el-dialog>
+    const component =
+      <el-dialog { ...{ attrs: this.dialog } } title={ this.title } on-close={ this.cancle }>
+        <el-form ref="form" { ...{ attrs: this.form } } rules={ this.rulesFromSetting } disabled={ this.isFormDisabled } v-loading={ this.isFormLoading }>
+          {
+            this.setting
+              .filter(item => item.show !== false)
+              .map(item => <el-form-item label={ item.label } prop={ item.prop }>{ item.render() }</el-form-item>)
+          }
+        </el-form>
+        <el-form label-width={ this.form.labelWidth }>
+          <el-form-item>
+            <d2-button { ...{ attrs: this.buttons.cancle } } on-click={ this.cancle }/>
+            <d2-button { ...{ attrs: this.buttons.submit } } loading={ this.isSubmitButtonLoading } disabled={ this.isSubmitButtonDisabled } on-click={ this.submit }/>
+          </el-form-item>
+        </el-form>
+      </el-dialog>
+    return component
   },
   data () {
     return {
