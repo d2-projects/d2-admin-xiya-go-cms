@@ -32,7 +32,6 @@ export default {
           prop: 'role_sort',
           default: 0,
           label: '显示顺序',
-          rule: { required: true, message: '必填', trigger: 'change' },
           render: () => <el-input-number min={ 1 } vModel={ this.form.model.role_sort }/>
         },
         {
@@ -45,7 +44,6 @@ export default {
           prop: 'status',
           default: 1,
           label: '状态',
-          rule: { required: true, message: '必填', trigger: 'change' },
           render: () => <d2-dict-radio vModel={ this.form.model.status } name="status" button/>
         },
         {

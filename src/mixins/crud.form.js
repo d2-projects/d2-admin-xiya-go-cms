@@ -75,16 +75,17 @@ export default {
     /**
      * @description 重新计算 model
      * @param {Object} config {Array} pick 需要从旧的表单数据中保留的字段
+     * @param {Object} config {Object} data 需要特殊设置的数据
      */
     reloadModel ({
-      pick = []
+      pick = [],
+      data = {}
     } = {}) {
       this.$set(this.form, 'model', Object.assign(
         {},
-        // 默认值
         this.formFromSettingAndDetail,
-        // 从旧的数据中保留的值
-        this.$_.pick(this.form.model, pick)
+        this.$_.pick(this.form.model, pick),
+        data
       ))
     },
     /**

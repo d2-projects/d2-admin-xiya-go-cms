@@ -15,25 +15,11 @@ export default {
     setting () {
       return [
         {
-          prop: 'role_name',
-          default: '',
-          label: '角色名称',
-          rule: { required: true, message: '必填', trigger: 'change' },
-          render: () => <el-input vModel={ this.form.model.role_name } clearable disabled/>
-        },
-        {
-          prop: 'role_key',
-          default: '',
-          label: '权限字符',
-          rule: { required: true, message: '必填', trigger: 'change' },
-          render: () => <el-input vModel={ this.form.model.role_key } clearable disabled/>
-        },
-        {
           prop: 'data_scope',
           default: '',
           label: '数据范围',
           rule: { required: true, message: '必填', trigger: 'change' },
-          render: () => <d2-dict-select vModel={ this.form.model.data_scope } name="data_scope"/>
+          render: () => <d2-dict-select vModel={ this.form.model.data_scope } name="data_scope" on-change={ this.onMenuTypeChange }/>
         },
         ...this.form.model.data_scope === 2 ? [
           {
@@ -44,6 +30,21 @@ export default {
           }
         ] : []
       ]
+    }
+  },
+  methods: {
+    onMenuTypeChange (menuType) {
+      this.reloadModel({
+        pick: [
+          'role_name',
+          'role_key',
+          'data_scope'
+        ],
+        data: {
+          // 全部数据权限时 清空部门权限
+          ...menuType === 1 ? { role_dept: '' } : {}
+        }
+      })
     }
   }
 }
