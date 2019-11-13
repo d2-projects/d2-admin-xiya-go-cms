@@ -48,7 +48,7 @@ export default {
     settingColumns () {
       return [
         { prop: 'dict_label', label: '字典标签', minWidth: '100px', fixed: 'left' },
-        { prop: 'dict_id', label: '字典值', minWidth: '100px' },
+        { prop: 'dict_value', label: '字典值', minWidth: '100px' },
         { prop: 'status', label: '状态', width: '100px', show: false },
         { prop: 'remark', label: '备注', width: '100px', show: false },
         { prop: 'create_by', label: '创建人员', width: '100px', show: false },
@@ -96,6 +96,12 @@ export default {
           label: '字典标签',
           default: '',
           render: () => <el-input vModel={ this.search.form.model.dict_label } style="width:100px;" clearable/>
+        },
+        {
+          prop: 'dict_value',
+          label: '字典值',
+          default: '',
+          render: () => <el-input vModel={ this.search.form.model.dict_value } style="width:100px;" clearable/>
         },
         {
           prop: 'status',
