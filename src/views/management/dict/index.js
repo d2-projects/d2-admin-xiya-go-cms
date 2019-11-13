@@ -1,3 +1,4 @@
+import { mapActions } from 'vuex'
 import utils from '@/utils'
 import table from '@/mixins/crud.table.js'
 import componentForm from './form'
@@ -102,7 +103,11 @@ export default {
     }
   },
   methods: {
+    ...mapActions('d2admin/page', [
+      'closeBy'
+    ]),
     goDictData (id) {
+      this.closeBy(page => page.name === 'management-dict-data')
       this.$router.push({
         name: 'management-dict-data',
         query: {

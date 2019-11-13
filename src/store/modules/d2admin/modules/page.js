@@ -209,6 +209,24 @@ export default context => ({
     },
     /**
      * @class opened
+     * @description 关闭符合条件的标签页
+     * @param {Object} vuex context
+     * @param {Function} iteratee 迭代器
+     */
+    async closeBy ({ state, commit, dispatch }, iteratee = () => false) {
+      // 过滤出新的标签页列表
+      state.opened = state.opened.filter(page => {
+        let result = false
+        if (iteratee(page)) {
+          result = true
+        }
+        return !result
+      })
+      // 持久化
+      await dispatch('opened2db')
+    },
+    /**
+     * @class opened
      * @description 关闭当前标签左边的标签
      * @param {Object} vuex context
      * @param {Object} payload { pageSelect: 当前选中的tagName }
