@@ -1,10 +1,12 @@
 import { mapActions } from 'vuex'
 import utils from '@/utils'
 import dict from './crud.dict'
+import pagination from './crud.pagination'
 
 export default {
   mixins: [
-    dict
+    dict,
+    pagination
   ],
   provide () {
     return {
@@ -32,12 +34,6 @@ export default {
       // 主体表格列过滤
       columnsFilter: {
         options: []
-      },
-      // 分页
-      pagination: {
-        current: 1,
-        size: 10,
-        total: 100
       },
       // 页面状态
       status: {
@@ -168,36 +164,6 @@ export default {
           on-click={ () => this.create({ parent_id: 0 }) }/>
       return node
     },
-    // vNode
-    // 小型分页
-    vNodePaginationMini () {
-      const node =
-        <el-pagination
-          layout="prev, pager, next"
-          on-current-change={ this.research }
-          current-page={ this.pagination.current }
-          page-size={ this.pagination.size }
-          total={ this.pagination.total }
-          pager-count={ 5 }
-          small>
-        </el-pagination>
-      return node
-    },
-    // vNode
-    // 完整功能的分页
-    vNodePaginationFull () {
-      const node =
-        <el-pagination
-          layout="total, sizes, prev, pager, next, jumper"
-          page-sizes={ [ 10, 20, 30, 40 ] }
-          on-size-change={ this.research }
-          on-current-change={ this.research }
-          current-page={ this.pagination.current }
-          page-size={ this.pagination.size }
-          total={ this.pagination.total }>
-        </el-pagination>
-      return node
-    },
     // 配置项
     // 表格列
     // [prop] -> [label] -> [align] -> [minWidth][width] -> [fixed] -> [other] -> [render][formatter] -> [if][show]
@@ -236,8 +202,7 @@ export default {
     searchData () {
       return {
         ...this.search.form.model,
-        page: this.pagination.current,
-        page_size: this.pagination.size,
+        ...this.paginationSearchData || {},
         order_column_name: this.sort.prop,
         order_type: this.sort.type
       }
@@ -253,23 +218,36 @@ export default {
       dictSet: 'set'
     }),
     /**
+     * @description 搜索方法 这个方法可以在外部自定义
+     * @returns 数据
+     */
+    searchMethod () {
+      const method = this.$api[this.api.index]
+      if (!this.$_.isFunction(method)) {
+        this.$message.error('未找到 API')
+        return Promise.reject()
+      }
+      return this.$api[this.api.index](this.searchData)
+    },
+    /**
      * @description 加载数据
      */
     async research () {
-      this.table.data = []
-      const search = this.$api[this.api.index]
-      if (!this.$_.isFunction(search)) {
-        this.$message.error('未找到 API')
-        return
-      }
-      this.doLoadDict(this.loadDict)
-      const result = await this.doLoadData(() => search(this.searchData))
-      if (this.$_.isArray(result)) {
-        this.table.data = result
-      } else if (this.$_.isObject(result) && this.$_.isArray(result.list) && this.$_.isObject(result.page)) {
-        const { list, page } = result
-        this.paginationUpdate(page)
-        this.table.data = list
+      try {
+        this.doLoadDict(this.loadDict)
+        const result = await this.doLoadData(this.searchMethod)
+        if (this.$_.isArray(result)) {
+          this.table.data = result
+        } else if (this.$_.isObject(result) && this.$_.isArray(result.list) && this.$_.isObject(result.page)) {
+          const { list, page } = result
+          this.paginationUpdate(page)
+          this.table.data = list
+        } else {
+          this.table.data = []
+          this.paginationReset()
+        }
+      } catch (error) {
+        console.log(error)
       }
     },
     /**
@@ -359,37 +337,6 @@ export default {
       ])
       this.table.columns = this.$_.cloneDeep(columns.filter(e => e.show !== false))
       this.columnsFilter.options = this.$_.cloneDeep(columns)
-    },
-    /**
-     * @description 分页组件
-     * @description 整体更新
-     * @description 这是一个常见的通用更新页码方式，适用于一般的查询返回
-     */
-    paginationUpdate (page) {
-      this.paginationUpdateCurrent(page.page_no)
-      this.paginationUpdateSize(page.page_size)
-      this.paginationUpdateTotal(page.tatal_count)
-    },
-    /**
-     * @description 分页组件
-     * @description 更新当前页码
-     */
-    paginationUpdateCurrent (value) {
-      this.pagination.current = value
-    },
-    /**
-     * @description 分页组件
-     * @description 更新分页大小
-     */
-    paginationUpdateSize (value) {
-      this.pagination.size = value
-    },
-    /**
-     * @description 分页组件
-     * @description 更新总页数
-     */
-    paginationUpdateTotal (value) {
-      this.pagination.total = value
     },
     /**
      * @description 请求表格数据

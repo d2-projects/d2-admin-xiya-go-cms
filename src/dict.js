@@ -57,5 +57,12 @@ import store from '@/store/index'
       { label: '内置', value: 1 },
       { label: '非内置', value: 2 }
     ]
+  },
+  {
+    name: 'dict_value_type',
+    value: [
+      { label: '数字', value: 1 },
+      { label: '字符', value: 2 }
+    ]
   }
 ].forEach(dict => store.dispatch('d2admin/dict/set', dict))

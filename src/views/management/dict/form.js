@@ -29,6 +29,13 @@ export default {
           render: () => <el-input vModel={ this.form.model.dict_type } clearable/>
         },
         {
+          prop: 'dict_value_type',
+          default: 1,
+          label: '数据类型',
+          rule: { required: true, message: '必填', trigger: 'change' },
+          render: () => <d2-dict-radio vModel={ this.form.model.dict_value_type } name="dict_value_type" button/>
+        },
+        {
           prop: 'status',
           default: 1,
           label: '状态',

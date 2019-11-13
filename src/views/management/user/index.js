@@ -26,13 +26,7 @@ export default {
         </d2-search-panel>
         <el-container class="container">
           <el-aside width="240px">
-            <d2-tree
-              vModel={ this.search.form.model.dept_id }
-              source="DEPT_ALL"
-              key-label="dept_name"
-              expand-on-click-node={ false }
-              default-expand-all
-              on-change={ this.research }/>
+            <d2-tree vModel={ this.search.form.model.dept_id } source="DEPT_ALL" key-label="dept_name" expand-on-click-node={ false } default-expand-all on-change={ this.research }/>
           </el-aside>
           <el-main>
             { this.vNodeTable }
