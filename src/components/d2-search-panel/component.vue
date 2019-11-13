@@ -26,7 +26,7 @@
   <el-collapse :value="active" class="d2-search-panel">
     <el-collapse-item :name="name">
       <div slot="title" class="d2-search-panel--title" flex="box:first" @click.stop="onItemClick">
-        <d2-button :icon="buttonIcon" :label="buttonLabel" @click="toggle" plain thin/>
+        <d2-button :icon="buttonIcon" :label="buttonLabel" class="d2-mr-10" @click="toggle" plain thin/>
         <slot name="title"/>
       </div>
       <div class="d2-search-panel--content">

@@ -11,7 +11,7 @@ export default {
           }
         }
         style={ this.block ? { width: '100%' } : {} }
-        on-click={ () => this.$emit('click') }>
+        on-click={ this.onClick }>
         { this.fa ? <d2-icon name={ this.fa }/> : undefined }
         { this.fa && (this.label || this.$slots.default) ? ' ' : undefined }
         { this.label ? this.label : undefined }
@@ -30,6 +30,11 @@ export default {
       default: '',
       required: false
     },
+    to: {
+      type: [ String, Object ],
+      default: '',
+      required: false
+    },
     block: {
       type: Boolean,
       default: false,
@@ -39,6 +44,14 @@ export default {
       type: Boolean,
       default: false,
       required: false
+    }
+  },
+  methods: {
+    onClick (e) {
+      if (this.to) {
+        this.$router.push(this.to)
+      }
+      this.$emit('click', e)
     }
   }
 }

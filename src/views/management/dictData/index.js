@@ -10,6 +10,9 @@ export default {
       <d2-container spacious>
         <d2-search-panel slot="header" vModel={ this.search.panel.active }>
           <d2-bar slot="title">
+            <d2-bar-cell>
+              <d2-button label="返回字典列表" to="/management/dict"/>
+            </d2-bar-cell>
             <d2-bar-space/>
             <d2-bar-cell>{ this.vNodePaginationMini }</d2-bar-cell>
             <d2-bar-space/>

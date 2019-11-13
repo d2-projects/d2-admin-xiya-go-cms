@@ -209,7 +209,7 @@ export default context => ({
     },
     /**
      * @class opened
-     * @description 关闭符合条件的标签页
+     * @description 关闭符合条件的标签页 请注意最好不要关闭当前页
      * @param {Object} vuex context
      * @param {Function} iteratee 迭代器
      */
