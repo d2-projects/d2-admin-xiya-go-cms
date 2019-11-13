@@ -9,7 +9,7 @@ export default {
               const attrsDefault = {
                 plain: true
               }
-              const attrs = this.$_.omit(action, [
+              const attrs = this._.omit(action, [
                 'action'
               ])
               const button =

@@ -158,7 +158,7 @@ export default {
       this.$emit('check', data, info)
       // 更新 value
       if (!this.multiple) return
-      const value = this.$_.concat(info.checkedKeys, this.halfMix ? info.halfCheckedKeys : [])
+      const value = this._.concat(info.checkedKeys, this.halfMix ? info.halfCheckedKeys : [])
       this.$emit('input', this.tryStringify(value))
       this.$emit('change', this.tryStringify(value))
       this.fieldChange()

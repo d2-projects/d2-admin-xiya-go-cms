@@ -86,11 +86,11 @@ export default {
      */
     async getDataFromSource (source) {
       let result = []
-      if (this.$_.isArray(source)) {
+      if (this._.isArray(source)) {
         result = source
-      } else if (this.$_.isString(source) && this.$_.isFunction(this.$api[source])) {
+      } else if (this._.isString(source) && this._.isFunction(this.$api[source])) {
         try { result = await this.$api[source]() } catch (error) { result = [] }
-      } else if (this.$_.isFunction(source)) {
+      } else if (this._.isFunction(source)) {
         try { result = await source() } catch (error) { result = [] }
       }
       return result

@@ -44,7 +44,7 @@ export default {
             query
           )
         )
-        let dictValue = (path ? this.$_.get(result, path, []) : result).map(e => ({ label: e[label], value: e[value] }))
+        let dictValue = (path ? this._.get(result, path, []) : result).map(e => ({ label: e[label], value: e[value] }))
         this.dictSet({ name, value: dictValue })
       } catch (error) {
         console.log(error)

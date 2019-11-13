@@ -71,7 +71,7 @@ export default {
         label: this.allLabel,
         value: this.allValue
       }
-      const options = this.$_.cloneDeep(await this.dictGet(this.name))
+      const options = this._.cloneDeep(await this.dictGet(this.name))
       if (this.all) {
         options.unshift(optionItenAll)
       }

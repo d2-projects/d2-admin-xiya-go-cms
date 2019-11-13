@@ -34,7 +34,7 @@ export default {
   methods: {
     // 生成滚动事件的 handler
     handleMaker (wait) {
-      return this.$_.throttle(e => {
+      return this._.throttle(e => {
         this.$emit('scroll', {
           x: e.target.scrollLeft,
           y: e.target.scrollTop

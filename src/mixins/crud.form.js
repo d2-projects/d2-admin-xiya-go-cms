@@ -65,9 +65,9 @@ export default {
     // 表单设置
     setting () { return [] },
     // 根据表单设置计算出校验规规则
-    rulesFromSetting () { return this.$_.fromPairs(this.setting.filter(item => item.rule).map(item => [item.prop, item.rule])) },
+    rulesFromSetting () { return this._.fromPairs(this.setting.filter(item => item.rule).map(item => [item.prop, item.rule])) },
     // 根据表单设置计算出表单默认值
-    formFromSetting () { return this.$_.fromPairs(this.setting.map(item => [item.prop, item.default])) },
+    formFromSetting () { return this._.fromPairs(this.setting.map(item => [item.prop, item.default])) },
     // 根据表单设置和详情计算出表单值
     formFromSettingAndDetail () { return Object.assign({}, this.formFromSetting, this.detail) },
     // 表单是否发生变化
@@ -89,7 +89,7 @@ export default {
       this.$set(this.form, 'model', Object.assign(
         {},
         this.formFromSettingAndDetail,
-        this.$_.pick(this.form.model, pick),
+        this._.pick(this.form.model, pick),
         data
       ))
     },
@@ -132,8 +132,8 @@ export default {
         if (!valid) return
         const data = this.transformSubmitData(this.form.model)
         const submit = this.switchByMode(
-          () => (this.$api[this.api.create] || Promise.resolve)(data),
-          () => (this.$api[this.api.update] || Promise.resolve)(data)
+          () => (this.$api[this.api.create] || Promise.reject)(data),
+          () => (this.$api[this.api.update] || Promise.reject)(data)
         )
         try {
           await this.doSubmit(submit)

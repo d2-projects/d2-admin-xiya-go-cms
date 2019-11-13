@@ -14,11 +14,11 @@ export default {
     const vnode = vnodeList[0] || null
     if (vnode.tag === 'button') {
       const defaultFun = vnode.data.on.click
-      const throttleFun = this.$_.throttle(defaultFun, wait, options)
+      const throttleFun = this._.throttle(defaultFun, wait, options)
       vnode.data.on.click = throttleFun
     } else if (vnode.componentOptions && vnode.componentOptions.tag === 'el-button') {
       const defaultFun = vnode.componentOptions.listeners.click
-      const throttleFun = this.$_.throttle(defaultFun, wait, options)
+      const throttleFun = this._.throttle(defaultFun, wait, options)
       vnode.componentOptions.listeners.click = throttleFun
     } else {
       console.warn('<d2-throttle> 组件内只能出现下面组件的任意一个且唯一 el-button、button')

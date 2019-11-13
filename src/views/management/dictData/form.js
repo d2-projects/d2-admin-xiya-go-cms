@@ -2,6 +2,13 @@ import form from '@/mixins/crud.form'
 
 export default {
   mixins: [ form ],
+  props: {
+    dictValueType: {
+      type: Number,
+      default: 1,
+      required: true
+    }
+  },
   data () {
     return {
       api: {
@@ -13,13 +20,28 @@ export default {
   },
   computed: {
     setting () {
+      const dictValueNumber = {
+        prop: 'dict_number',
+        default: 1,
+        label: '字典键值',
+        rule: { required: true, message: '必填', trigger: 'change' },
+        render: () => <el-input-number min={ 1 } vModel={ this.form.model.dict_number }/>
+      }
+      const dictValueString = {
+        prop: 'dict_value',
+        default: '',
+        label: '字典键值',
+        rule: { required: true, message: '必填', trigger: 'change' },
+        render: () => <el-input vModel={ this.form.model.dict_value } clearable/>
+      }
+      const dictValue = this.dictValueType === 1 ? dictValueNumber : dictValueString
       return [
         {
           prop: 'dict_id',
-          default: this.$_.get(this.search, 'form.model.dict_id', ''),
+          default: this._.get(this.search, 'form.model.dict_id', ''),
           label: '字典',
           rule: { required: true, message: '必填', trigger: 'change' },
-          render: () => <d2-dict-select vModel={ this.form.model.dict_id } name="dict_id"/>
+          render: () => <d2-dict value={ this.form.model.dict_id } name="dict_id" disabled/>
         },
         {
           prop: 'dict_label',
@@ -28,13 +50,7 @@ export default {
           rule: { required: true, message: '必填', trigger: 'change' },
           render: () => <el-input vModel={ this.form.model.dict_label } clearable/>
         },
-        {
-          prop: 'dict_value',
-          default: '',
-          label: '字典键值',
-          rule: { required: true, message: '必填', trigger: 'change' },
-          render: () => <el-input vModel={ this.form.model.dict_value } clearable/>
-        },
+        dictValue,
         {
           prop: 'css_class',
           default: '',

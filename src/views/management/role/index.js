@@ -125,5 +125,10 @@ export default {
         }
       ]
     }
+  },
+  async created () {
+    this.initSearchForm()
+    this.initTableColumns()
+    this.research()
   }
 }

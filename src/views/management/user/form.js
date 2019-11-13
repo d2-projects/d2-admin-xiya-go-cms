@@ -124,7 +124,7 @@ export default {
     transformSubmitData (data) {
       if (this.mode === 'edit') {
         // 编辑模式下删除密码字段
-        return this.$_.omit(data, [ 'password' ])
+        return this._.omit(data, [ 'password' ])
       } else {
         // 新建模式下全部发送
         return data

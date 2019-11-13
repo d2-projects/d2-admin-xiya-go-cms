@@ -33,7 +33,7 @@ export default {
           <d2-bar-cell>{ this.vNodePaginationFull }</d2-bar-cell>
           <d2-bar-space/>
         </d2-bar>
-        <component-form ref="form" on-success={ this.research }/>
+        <component-form ref="form" dict-value-type={ this.dictValueType } on-success={ this.research }/>
         { this.vNodeTableColumnsFilter }
       </d2-container>
     return page
@@ -43,7 +43,9 @@ export default {
       api: {
         index: 'DICTDATA_ALL',
         delete: 'DICTDATA_DELETE'
-      }
+      },
+      // [本页面特有] 当前选择的字典的值类型 1 数字 2 字符
+      dictValueType: 1
     }
   },
   computed: {
@@ -53,7 +55,7 @@ export default {
     settingColumns () {
       return [
         { prop: 'dict_label', label: '字典标签', minWidth: '100px', fixed: 'left' },
-        { prop: 'dict_value', label: '字典值', minWidth: '100px' },
+        { prop: this.dictValueType === 1 ? 'dict_number' : 'dict_value', label: '字典值', minWidth: '100px' },
         { prop: 'status', label: '状态', width: '100px', show: false },
         { prop: 'remark', label: '备注', width: '100px', show: false },
         { prop: 'create_by', label: '创建人员', width: '100px', show: false },
@@ -117,7 +119,22 @@ export default {
       ]
     }
   },
+  async created () {
+    this.initSearchForm()
+    this.initTableColumns()
+    this.research()
+  },
   methods: {
+    /**
+     * @description 搜索方法
+     * @returns 数据
+     */
+    async searchMethod () {
+      const method = this.$api[this.api.index]
+      const data = await method(this.searchData)
+      this.dictValueType = this._.get(data, 'dict_type.dict_value_type', 1)
+      return data
+    },
     /**
      * @description 加载需要的字典数据
      */

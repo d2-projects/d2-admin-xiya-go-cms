@@ -144,6 +144,11 @@ export default {
       ]
     }
   },
+  async created () {
+    this.initSearchForm()
+    this.initTableColumns()
+    this.research()
+  },
   methods: {
     /**
      * @description 加载需要的字典数据

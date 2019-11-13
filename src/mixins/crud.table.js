@@ -93,7 +93,7 @@ export default {
           label="搜索"
           type="primary"
           loading={ this.isSearchButtonLoading }
-          on-click={ this.research }
+          on-click={ () => this.research() }
           thin/>
       return node
     },
@@ -104,7 +104,7 @@ export default {
         <d2-button
           icon="el-icon-refresh"
           label="重置"
-          on-click={ this.searchFormReset }
+          on-click={ () => this.searchFormReset() }
           plain
           thin/>
       return node
@@ -118,7 +118,7 @@ export default {
           icon="el-icon-refresh"
           label="刷新"
           loading={ this.isSearchButtonLoading }
-          on-click={ this.research }/>
+          on-click={ () => this.research() }/>
       return node
     },
     // vNode
@@ -128,7 +128,7 @@ export default {
         <d2-button
           icon="el-icon-set-up"
           label="设置"
-          on-click={ this.tableColumnsFilterStart }/>
+          on-click={ () => this.tableColumnsFilterStart() }/>
       return node
     },
     // vNode
@@ -149,7 +149,7 @@ export default {
           type="primary"
           icon="el-icon-plus"
           label="新建"
-          on-click={ this.create }/>
+          on-click={ () => this.create() }/>
       return node
     },
     // vNode
@@ -208,11 +208,6 @@ export default {
       }
     }
   },
-  async created () {
-    this.initSearchForm()
-    this.initTableColumns()
-    this.research()
-  },
   methods: {
     ...mapActions('d2admin/dict', {
       dictSet: 'set'
@@ -223,11 +218,11 @@ export default {
      */
     searchMethod () {
       const method = this.$api[this.api.index]
-      if (!this.$_.isFunction(method)) {
+      if (!this._.isFunction(method)) {
         this.$message.error('未找到 API')
         return Promise.reject()
       }
-      return this.$api[this.api.index](this.searchData)
+      return method(this.searchData)
     },
     /**
      * @description 加载数据
@@ -236,9 +231,9 @@ export default {
       try {
         this.doLoadDict(this.loadDict)
         const result = await this.doLoadData(this.searchMethod)
-        if (this.$_.isArray(result)) {
+        if (this._.isArray(result)) {
           this.table.data = result
-        } else if (this.$_.isObject(result) && this.$_.isArray(result.list) && this.$_.isObject(result.page)) {
+        } else if (this._.isObject(result) && this._.isArray(result.list) && this._.isObject(result.page)) {
           const { list, page } = result
           this.paginationUpdate(page)
           this.table.data = list
@@ -272,7 +267,7 @@ export default {
      */
     delete (id) {
       const deleteFunction = this.$api[this.api.delete]
-      if (!this.$_.isFunction(deleteFunction)) {
+      if (!this._.isFunction(deleteFunction)) {
         this.$message.error('未找到 API')
         return
       }
@@ -335,8 +330,8 @@ export default {
         ...this.settingColumns,
         ...this.settingActions
       ])
-      this.table.columns = this.$_.cloneDeep(columns.filter(e => e.show !== false))
-      this.columnsFilter.options = this.$_.cloneDeep(columns)
+      this.table.columns = this._.cloneDeep(columns.filter(e => e.show !== false))
+      this.columnsFilter.options = this._.cloneDeep(columns)
     },
     /**
      * @description 请求表格数据

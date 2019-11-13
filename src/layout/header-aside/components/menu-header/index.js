@@ -121,7 +121,7 @@ export default {
     // 默认判断父元素和子元素的大小，以确定初始情况是否显示滚动
     window.addEventListener('load', this.checkScroll)
     // 全局窗口变化监听，判断父元素和子元素的大小，从而控制isScroll的开关
-    this.throttledCheckScroll = this.$_.throttle(this.checkScroll, 300)
+    this.throttledCheckScroll = this._.throttle(this.checkScroll, 300)
     window.addEventListener('resize', this.throttledCheckScroll)
   },
   beforeDestroy () {
