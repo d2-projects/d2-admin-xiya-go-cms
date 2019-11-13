@@ -25,9 +25,24 @@
 <template>
   <el-collapse :value="active" class="d2-search-panel">
     <el-collapse-item :name="name">
-      <div slot="title" class="d2-search-panel--title" flex="box:first" @click.stop="onItemClick">
-        <d2-button :icon="buttonIcon" :label="buttonLabel" class="d2-mr-10" @click="toggle" plain thin/>
-        <slot name="title"/>
+      <div slot="title" class="d2-search-panel--title" flex @click.stop="onItemClick">
+        <div v-if="hasPrefixSlot">
+          <slot name="prefix"/>
+        </div>
+        <d2-button
+          :icon="buttonIcon"
+          :label="buttonLabel"
+          :class="{
+            'd2-ml-10': hasPrefixSlot,
+            'd2-mr-10': hasTitleSlot,
+          }"
+          flex-box="0"
+          @click="toggle"
+          plain
+          thin/>
+        <div v-if="hasTitleSlot" flex-box="1">
+          <slot name="title"/>
+        </div>
       </div>
       <div class="d2-search-panel--content">
         <slot/>
@@ -67,6 +82,12 @@ export default {
     },
     buttonLabel () {
       return this.active === this.name ? '隐藏搜索' : '展开搜索'
+    },
+    hasPrefixSlot () {
+      return !!this.$slots.prefix
+    },
+    hasTitleSlot () {
+      return !!this.$slots.title
     }
   },
   methods: {
