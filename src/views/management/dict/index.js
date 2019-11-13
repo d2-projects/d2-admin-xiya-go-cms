@@ -94,6 +94,24 @@ export default {
           render: () => <el-input vModel={ this.search.form.model.dict_name } style="width:100px;" clearable/>
         },
         {
+          prop: 'dict_type',
+          label: '字典类型',
+          default: '',
+          render: () => <el-input vModel={ this.search.form.model.dict_type } style="width:100px;" clearable/>
+        },
+        {
+          prop: 'start_time',
+          label: '开始时间',
+          default: '',
+          render: () => <el-date-picker vModel={ this.search.form.model.start_time } value-format="yyyy-MM-dd" type="date" placeholder="开始时间" style="width:130px;"/>
+        },
+        {
+          prop: 'end_time',
+          label: '结束时间',
+          default: '',
+          render: () => <el-date-picker vModel={ this.search.form.model.end_time } value-format="yyyy-MM-dd" type="date" placeholder="结束时间" style="width:130px;"/>
+        },
+        {
           prop: 'status',
           label: '状态',
           default: 0,

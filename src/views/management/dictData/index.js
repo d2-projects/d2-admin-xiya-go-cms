@@ -92,7 +92,7 @@ export default {
       return [
         {
           prop: 'dict_id',
-          label: '字典',
+          label: '字典名称',
           default: Number(this.$route.query.dict_id || ''),
           render: () => <d2-dict-select vModel={ this.search.form.model.dict_id } name="dict_id"/>
         },
