@@ -50,6 +50,7 @@ export default {
       return [
         { prop: 'dict_name', label: '名称', minWidth: '100px', fixed: 'left', render: ({ row }) => <d2-button type="text" label={ row.dict_name } on-click={ () => this.goDictData(row.id) }/> },
         { prop: 'dict_type', label: '标识', minWidth: '100px', render: ({ row }) => <d2-button type="text" label={ row.dict_type } on-click={ () => this.goDictData(row.id) }/> },
+        { prop: 'dict_value_type', label: '标识', minWidth: '100px', render: ({ row }) => <d2-dict name="dict_value_type" value={ row.dict_value_type }/> },
         { prop: 'status', label: '状态', width: '100px', show: false },
         { prop: 'remark', label: '备注', width: '100px', show: false },
         { prop: 'create_by', label: '创建人员', width: '100px', show: false },
@@ -119,11 +120,6 @@ export default {
         }
       ]
     }
-  },
-  async created () {
-    this.initSearchForm()
-    this.initTableColumns()
-    this.research()
   },
   methods: {
     ...mapActions('d2admin/page', [

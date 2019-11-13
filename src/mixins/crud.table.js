@@ -208,6 +208,11 @@ export default {
       }
     }
   },
+  async created () {
+    this.initSearchForm()
+    this.initTableColumns()
+    this.research()
+  },
   methods: {
     ...mapActions('d2admin/dict', {
       dictSet: 'set'

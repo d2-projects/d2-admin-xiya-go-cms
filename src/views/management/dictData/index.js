@@ -24,7 +24,11 @@ export default {
                 { this.vNodeButtonTableColumnsFilterTrigger }
               </el-button-group>
             </d2-bar-cell>
-            <d2-bar-cell>{ this.vNodeButtonCreate }</d2-bar-cell>
+            {
+              this.dictValueType !== 0
+                ? <d2-bar-cell>{ this.vNodeButtonCreate }</d2-bar-cell>
+                : undefined
+            }
           </d2-bar>
           { this.vNodeSearchForm }
         </d2-search-panel>
@@ -55,7 +59,19 @@ export default {
     settingColumns () {
       return [
         { prop: 'dict_label', label: '字典标签', minWidth: '100px', fixed: 'left' },
-        { prop: this.dictValueType === 1 ? 'dict_number' : 'dict_value', label: '字典值', minWidth: '100px' },
+        {
+          prop: 'dict_number',
+          label: '字典值',
+          minWidth: '100px',
+          formatter: row => row.dict_number === 0 ? '' : row.dict_number,
+          show: this.dictValueType === 0 || this.dictValueType === 1
+        },
+        {
+          prop: 'dict_value',
+          label: '字典值',
+          minWidth: '100px',
+          show: this.dictValueType === 0 || this.dictValueType === 2
+        },
         { prop: 'status', label: '状态', width: '100px', show: false },
         { prop: 'remark', label: '备注', width: '100px', show: false },
         { prop: 'create_by', label: '创建人员', width: '100px', show: false },
@@ -71,15 +87,16 @@ export default {
     // 表格操作列
     // [prop] -> [label] -> [align] -> [minWidth][width] -> [fixed] -> [other] -> [render][formatter] -> [if][show]
     settingActions () {
+      const showEdit = this.dictValueType !== 0
       return [
         {
           label: '操作',
           align: 'center',
-          width: '90px',
+          width: showEdit ? '90px' : '60px',
           fixed: 'right',
           render: ({ row }) => {
             const actions = [
-              { icon: 'el-icon-edit-outline', action: () => this.edit(row.id) },
+              ...showEdit ? [ { icon: 'el-icon-edit-outline', action: () => this.edit(row.id) } ]: [],
               { icon: 'el-icon-delete', type: 'danger', confirm: `确定删除 [ ${row.dict_label} ] 吗`, action: () => this.delete(row.id) }
             ]
             return <d2-table-actions actions={ actions }/>
@@ -96,7 +113,7 @@ export default {
           prop: 'dict_id',
           label: '字典名称',
           default: Number(this.$route.query.dict_id || ''),
-          render: () => <d2-dict-select vModel={ this.search.form.model.dict_id } name="dict_id"/>
+          render: () => <d2-dict-select vModel={ this.search.form.model.dict_id } name="dict_id" all/>
         },
         {
           prop: 'dict_label',
@@ -119,11 +136,6 @@ export default {
       ]
     }
   },
-  async created () {
-    this.initSearchForm()
-    this.initTableColumns()
-    this.research()
-  },
   methods: {
     /**
      * @description 搜索方法
@@ -132,7 +144,8 @@ export default {
     async searchMethod () {
       const method = this.$api[this.api.index]
       const data = await method(this.searchData)
-      this.dictValueType = this._.get(data, 'dict_type.dict_value_type', 1)
+      this.dictValueType = this._.get(data, 'dict_value_type', 0)
+      this.initTableColumns()
       return data
     },
     /**
