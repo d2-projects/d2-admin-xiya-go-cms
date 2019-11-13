@@ -6,6 +6,11 @@ export default {
   mixins: [
     dict
   ],
+  provide () {
+    return {
+      search: this.search
+    }
+  },
   data () {
     return {
       // 主体表格
@@ -333,7 +338,7 @@ export default {
       this.settingSearch.forEach(setting => {
         data[setting.prop] = setting.default
       })
-      this.search.form.model = data
+      this.$set(this.search.form, 'model', data)
     },
     /**
      * @description 重置搜索表单

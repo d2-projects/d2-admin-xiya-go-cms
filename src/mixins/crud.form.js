@@ -11,6 +11,11 @@ export default {
     dict,
     dialog
   ],
+  inject: {
+    search: {
+      default: () => ({})
+    }
+  },
   render () {
     const component =
       <el-dialog { ...{ attrs: this.dialog } } title={ this.title } on-close={ this.cancle }>

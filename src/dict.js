@@ -38,6 +38,13 @@ import store from '@/store/index'
     ]
   },
   {
+    name: 'is_default',
+    value: [
+      { label: '默认', value: 1 },
+      { label: '非默认', value: 2 }
+    ]
+  },
+  {
     name: 'data_scope',
     value: [
       { label: '全部数据权限', value: 1 },

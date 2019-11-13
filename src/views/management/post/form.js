@@ -30,7 +30,7 @@ export default {
         },
         {
           prop: 'post_sort',
-          default: 0,
+          default: 1,
           label: '显示顺序',
           render: () => <el-input-number min={ 1 } vModel={ this.form.model.post_sort }/>
         },

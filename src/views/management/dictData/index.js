@@ -36,8 +36,8 @@ export default {
   data () {
     return {
       api: {
-        index: 'DICT_ALL',
-        delete: 'DICT_DELETE'
+        index: 'DICTDATA_ALL',
+        delete: 'DICTDATA_DELETE'
       }
     }
   },
@@ -47,8 +47,8 @@ export default {
     // [prop] -> [label] -> [align] -> [minWidth][width] -> [fixed] -> [other] -> [render][formatter] -> [if][show]
     settingColumns () {
       return [
-        { prop: 'dict_name', label: '字典名称', minWidth: '100px', fixed: 'left', render: ({ row }) => <d2-button type="text" label={ row.dict_name } on-click={ () => this.goDictData(row.id) }/> },
-        { prop: 'dict_type', label: '字典类型', minWidth: '100px', render: ({ row }) => <d2-button type="text" label={ row.dict_type } on-click={ () => this.goDictData(row.id) }/> },
+        { prop: 'dict_label', label: '字典标签', minWidth: '100px', fixed: 'left' },
+        { prop: 'dict_id', label: '字典值', minWidth: '100px' },
         { prop: 'status', label: '状态', width: '100px', show: false },
         { prop: 'remark', label: '备注', width: '100px', show: false },
         { prop: 'create_by', label: '创建人员', width: '100px', show: false },
@@ -68,13 +68,12 @@ export default {
         {
           label: '操作',
           align: 'center',
-          width: '120px',
+          width: '90px',
           fixed: 'right',
           render: ({ row }) => {
             const actions = [
               { icon: 'el-icon-edit-outline', action: () => this.edit(row.id) },
-              { icon: 'el-icon-view', action: () => this.goDictData(row.id) },
-              { icon: 'el-icon-delete', type: 'danger', confirm: `确定删除 [ ${row.dict_name} ] 吗`, action: () => this.delete(row.id) }
+              { icon: 'el-icon-delete', type: 'danger', confirm: `确定删除 [ ${row.dict_label} ] 吗`, action: () => this.delete(row.id) }
             ]
             return <d2-table-actions actions={ actions }/>
           }
@@ -87,10 +86,16 @@ export default {
     settingSearch () {
       return [
         {
-          prop: 'dict_name',
-          label: '字典名称',
+          prop: 'dict_id',
+          label: '字典',
+          default: Number(this.$route.query.dict_id || ''),
+          render: () => <d2-dict-select vModel={ this.search.form.model.dict_id } name="dict_id"/>
+        },
+        {
+          prop: 'dict_label',
+          label: '字典标签',
           default: '',
-          render: () => <el-input vModel={ this.search.form.model.dict_name } style="width:100px;" clearable/>
+          render: () => <el-input vModel={ this.search.form.model.dict_label } style="width:100px;" clearable/>
         },
         {
           prop: 'status',
@@ -102,12 +107,17 @@ export default {
     }
   },
   methods: {
-    goDictData (id) {
-      this.$router.push({
-        name: 'management-dict-data',
-        query: {
-          dict_id: id
-        }
+    /**
+     * @description 加载需要的字典数据
+     */
+    async loadDict () {
+      // 字典类型
+      await this.loadDictOne({
+        name: 'dict_id',
+        method: this.$api.DICT_ALL,
+        fields: 'dict_name,id',
+        path: 'list',
+        label: 'dict_name'
       })
     }
   }

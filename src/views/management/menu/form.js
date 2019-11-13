@@ -34,7 +34,7 @@ export default {
       }
       const orderNum = {
         prop: 'order_num',
-        default: 0,
+        default: 1,
         label: '显示排序',
         render: () => <el-input-number min={ 1 } vModel={ this.form.model.order_num }/>
       }
