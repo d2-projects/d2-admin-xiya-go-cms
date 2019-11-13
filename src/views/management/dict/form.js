@@ -17,14 +17,14 @@ export default {
         {
           prop: 'dict_name',
           default: '',
-          label: '字典名称',
+          label: '名称',
           rule: { required: true, message: '必填', trigger: 'change' },
           render: () => <el-input vModel={ this.form.model.dict_name } clearable/>
         },
         {
           prop: 'dict_type',
           default: '',
-          label: '字典类型',
+          label: '标识',
           rule: { required: true, message: '必填', trigger: 'change' },
           render: () => <el-input vModel={ this.form.model.dict_type } clearable/>
         },
@@ -33,7 +33,7 @@ export default {
           default: 1,
           label: '数据类型',
           rule: { required: true, message: '必填', trigger: 'change' },
-          render: () => <d2-dict-radio vModel={ this.form.model.dict_value_type } name="dict_value_type" button/>
+          render: () => <d2-dict-radio vModel={ this.form.model.dict_value_type } name="dict_value_type" disabled={ this.mode !== 'create' } button/>
         },
         {
           prop: 'status',

@@ -17,7 +17,7 @@ export default {
         {
           prop: 'dict_id',
           default: this.$_.get(this.search, 'form.model.dict_id', ''),
-          label: '字典类型',
+          label: '字典',
           rule: { required: true, message: '必填', trigger: 'change' },
           render: () => <d2-dict-select vModel={ this.form.model.dict_id } name="dict_id"/>
         },
@@ -79,7 +79,7 @@ export default {
      * @description 加载需要的字典数据
      */
     async loadDict () {
-      // 字典类型
+      // 字典
       await this.loadDictOne({
         name: 'dict_id',
         method: this.$api.DICT_ALL,
