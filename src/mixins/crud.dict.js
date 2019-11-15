@@ -51,6 +51,17 @@ export default {
       }
     },
     /**
+     * @description 加载一个字典
+     * @description 从专门的字典接口加载
+     */
+    async loadDictOneFromApi (name) {
+      const result = await this.$api.DICTDATA_ALL({
+        page_size: 9999,
+        dict_type: name
+      })
+      console.log(result)
+    },
+    /**
      * @description 请求字典数据
      * @param {Function} fn 请求函数 需要返回 Promise
      */

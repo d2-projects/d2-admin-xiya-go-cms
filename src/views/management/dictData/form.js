@@ -3,7 +3,7 @@ import form from '@/mixins/crud.form'
 export default {
   mixins: [ form ],
   props: {
-    dictValueType: {
+    dictType: {
       type: Number,
       default: 1,
       required: true
@@ -34,7 +34,7 @@ export default {
         rule: { required: true, message: '必填', trigger: 'change' },
         render: () => <el-input vModel={ this.form.model.dict_value } clearable/>
       }
-      const dictValue = this.dictValueType === 1 ? dictValueNumber : dictValueString
+      const dictValue = this.dictType === 1 ? dictValueNumber : dictValueString
       return [
         {
           prop: 'dict_id',

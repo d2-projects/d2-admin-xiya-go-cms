@@ -37,7 +37,7 @@ export default {
           <d2-bar-cell>{ this.vNodePaginationFull }</d2-bar-cell>
           <d2-bar-space/>
         </d2-bar>
-        <component-form ref="form" dict-value-type={ this.dictValueType } on-success={ this.research }/>
+        <component-form ref="form" dict-type={ this.dictValueType } on-success={ this.research }/>
         { this.vNodeTableColumnsFilter }
       </d2-container>
     return page
@@ -110,10 +110,10 @@ export default {
     settingSearch () {
       return [
         {
-          prop: 'dict_id',
+          prop: 'dict_type',
           label: '字典名称',
-          default: Number(this.$route.query.dict_id || ''),
-          render: () => <d2-dict-select vModel={ this.search.form.model.dict_id } name="dict_id" all/>
+          default: this.$route.query.dict_type || '',
+          render: () => <d2-dict-select vModel={ this.search.form.model.dict_type } name="dict_type" all/>
         },
         {
           prop: 'dict_label',
@@ -154,11 +154,12 @@ export default {
     async loadDict () {
       // 字典
       await this.loadDictOne({
-        name: 'dict_id',
+        name: 'dict_type',
         method: this.$api.DICT_ALL,
-        fields: 'dict_name,id',
+        // fields: 'dict_name,dict_type',
         path: 'list',
-        label: 'dict_name'
+        label: 'dict_name',
+        value: 'dict_type'
       })
     }
   }

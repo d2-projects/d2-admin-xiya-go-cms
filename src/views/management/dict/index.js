@@ -48,8 +48,8 @@ export default {
     // [prop] -> [label] -> [align] -> [minWidth][width] -> [fixed] -> [other] -> [render][formatter] -> [if][show]
     settingColumns () {
       return [
-        { prop: 'dict_name', label: '名称', minWidth: '100px', fixed: 'left', render: ({ row }) => <d2-button type="text" label={ row.dict_name } on-click={ () => this.goDictData(row.id) }/> },
-        { prop: 'dict_type', label: '标识', minWidth: '100px', render: ({ row }) => <d2-button type="text" label={ row.dict_type } on-click={ () => this.goDictData(row.id) }/> },
+        { prop: 'dict_name', label: '名称', minWidth: '100px', fixed: 'left', render: ({ row }) => <d2-button type="text" label={ row.dict_name } on-click={ () => this.goDictData(row.dict_type) }/> },
+        { prop: 'dict_type', label: '标识', minWidth: '100px', render: ({ row }) => <d2-button type="text" label={ row.dict_type } on-click={ () => this.goDictData(row.dict_type) }/> },
         { prop: 'dict_value_type', label: '标识', minWidth: '100px', render: ({ row }) => <d2-dict name="dict_value_type" value={ row.dict_value_type }/> },
         { prop: 'status', label: '状态', width: '100px', show: false },
         { prop: 'remark', label: '备注', width: '100px', show: false },
@@ -75,7 +75,7 @@ export default {
           render: ({ row }) => {
             const actions = [
               { icon: 'el-icon-edit-outline', action: () => this.edit(row.id) },
-              { icon: 'el-icon-collection', action: () => this.goDictData(row.id) },
+              { icon: 'el-icon-collection', action: () => this.goDictData(row.dict_type) },
               { icon: 'el-icon-delete', type: 'danger', confirm: `确定删除 [ ${row.dict_name} ] 吗`, action: () => this.delete(row.id) }
             ]
             return <d2-table-actions actions={ actions }/>
@@ -125,12 +125,12 @@ export default {
     ...mapActions('d2admin/page', [
       'closeBy'
     ]),
-    goDictData (id) {
+    goDictData (type) {
       this.closeBy(page => page.name === 'management-dict-data')
       this.$router.push({
         name: 'management-dict-data',
         query: {
-          dict_id: id
+          dict_type: type
         }
       })
     }
