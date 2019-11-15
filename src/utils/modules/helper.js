@@ -1,4 +1,4 @@
-import { omit, keys } from 'lodash'
+import { omit, keys, toNumber, isNaN } from 'lodash'
 
 /**
  * 比较两个数组是否值一样 忽略顺序
@@ -149,4 +149,12 @@ export function flatTree ({
   }
   push(data)
   return flat
+}
+
+/**
+ * @description 传入一个值 返回处理成数字的结果
+ */
+export function getNumberOrZero (value) {
+  const result = toNumber(value)
+  return isNaN(result) ? 0 : result
 }

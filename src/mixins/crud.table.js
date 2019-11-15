@@ -208,6 +208,10 @@ export default {
       }
     }
   },
+  watch: {
+    settingColumns: 'initTableColumns',
+    settingActions: 'initTableColumns'
+  },
   async created () {
     this.initSearchForm()
     this.initTableColumns()

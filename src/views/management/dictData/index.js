@@ -49,7 +49,7 @@ export default {
         delete: 'DICTDATA_DELETE'
       },
       // [本页面特有] 当前选择的字典的值类型 1 数字 2 字符
-      dictValueType: 1
+      dictValueType: 0
     }
   },
   computed: {
@@ -59,6 +59,7 @@ export default {
     settingColumns () {
       return [
         { prop: 'dict_label', label: '字典标签', minWidth: '100px', fixed: 'left' },
+        { prop: 'dict_type', label: '标识', minWidth: '100px' },
         {
           prop: 'dict_number',
           label: '字典值',
@@ -110,10 +111,10 @@ export default {
     settingSearch () {
       return [
         {
-          prop: 'dict_type',
+          prop: 'dict_id',
           label: '字典名称',
-          default: this.$route.query.dict_type || '',
-          render: () => <d2-dict-select vModel={ this.search.form.model.dict_type } name="dict_type" all/>
+          default: this.dictId,
+          render: () => <d2-dict-select vModel={ this.search.form.model.dict_id } name="dict_id" all/>
         },
         {
           prop: 'dict_label',
@@ -134,6 +135,10 @@ export default {
           render: () => <d2-dict-radio vModel={ this.search.form.model.status } name="status" button all/>
         }
       ]
+    },
+    // [本页面特有] 父级字典项目的 id 强制转为数字
+    dictId () {
+      return utils.helper.getNumberOrZero(this.$route.query.dict_id)
     }
   },
   methods: {
@@ -142,11 +147,17 @@ export default {
      * @returns 数据
      */
     async searchMethod () {
+      // 获得父级字典的类型
+      const dictIdInSearchForm = this.search.form.model.dict_id
+      if (dictIdInSearchForm !== 0) {
+        const dict = await this.$api.DICT_DETAIL(dictIdInSearchForm)
+        this.dictValueType = this._.get(dict, 'dict_value_type', 0)
+      }
+      // 获取当前字典下的条目
       const method = this.$api[this.api.index]
-      const data = await method(this.searchData)
-      this.dictValueType = this._.get(data, 'dict_value_type', 0)
-      this.initTableColumns()
-      return data
+      const dictData = await method(this.searchData)
+      // 返回给下一步处理
+      return dictData
     },
     /**
      * @description 加载需要的字典数据
@@ -154,12 +165,11 @@ export default {
     async loadDict () {
       // 字典
       await this.loadDictOne({
-        name: 'dict_type',
+        name: 'dict_id',
         method: this.$api.DICT_ALL,
-        // fields: 'dict_name,dict_type',
+        fields: 'dict_name,id',
         path: 'list',
-        label: 'dict_name',
-        value: 'dict_type'
+        label: 'dict_name'
       })
     }
   }
