@@ -42,12 +42,12 @@ export default {
     settingColumns () {
       return [
         { prop: 'dept_name', label: '名称', minWidth: '200px', fixed: 'left' },
-        { prop: 'email', label: '邮箱', minWidth: '200px' },
-        { prop: 'phone', label: '联系电话', minWidth: '200px' },
-        { prop: 'status', label: '状态', minWidth: '200px' },
-        { prop: 'parent_id', label: '上级部门', minWidth: '200px' },
-        { prop: 'order_num', label: '显示排序', minWidth: '200px' },
-        { prop: 'leader', label: '负责人', minWidth: '200px' },
+        { prop: 'email', label: '邮箱', minWidth: '200px', show: false },
+        { prop: 'phone', label: '联系电话', minWidth: '200px', show: false },
+        { prop: 'status', label: '状态', minWidth: '200px', show: false },
+        { prop: 'parent_id', label: '上级部门', minWidth: '200px', show: false },
+        { prop: 'order_num', label: '显示排序', minWidth: '200px', show: false },
+        { prop: 'leader', label: '负责人', minWidth: '200px', show: false },
         { prop: 'created_by', label: '创建人员', width: '100px', show: false },
         { prop: 'created_at', label: '创建时间', formatter: row => utils.time.format(row.created_at, 'YYYY/M/D HH:mm:ss'), width: '140px', show: false },
         { prop: 'updated_by', label: '更新人员', width: '100px', show: false },
