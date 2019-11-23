@@ -67,7 +67,7 @@ export default {
           prop: 'is_default',
           default: 1,
           label: '系统默认',
-          render: () => <d2-dict-radio vModel={ this.form.model.is_default } name="is_default" button/>
+          render: () => <d2-dict-radio vModel={ this.form.model.is_default } name="is" button/>
         },
         {
           prop: 'dict_sort',

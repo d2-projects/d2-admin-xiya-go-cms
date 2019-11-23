@@ -50,7 +50,7 @@ export default {
         { prop: 'config_name', label: '参数名称', minWidth: '100px', fixed: 'left' },
         { prop: 'config_key', label: '参数键名', minWidth: '100px' },
         { prop: 'config_value', label: '参数键值', minWidth: '100px' },
-        { prop: 'config_type', label: '系统内置', minWidth: '100px', render: ({ row }) => <d2-dict value={ row.config_type } name="config_type"/> },
+        { prop: 'config_type', label: '系统内置', minWidth: '100px', render: ({ row }) => <d2-dict value={ row.config_type } name="is"/> },
         { prop: 'remark', label: '备注', width: '100px', show: false },
         { prop: 'create_by', label: '创建人员', width: '100px', show: false },
         { prop: 'created_at', label: '创建时间', width: '200px', formatter: row => utils.time.format(row.created_at, 'YYYY/M/D HH:mm:ss'), show: false },
@@ -108,7 +108,7 @@ export default {
           prop: 'config_type',
           label: '系统内置',
           default: 0,
-          render: () => <d2-dict-radio vModel={ this.search.form.model.config_type } name="config_type" button all/>
+          render: () => <d2-dict-radio vModel={ this.search.form.model.config_type } name="is" button all/>
         }
       ]
     }

@@ -63,7 +63,7 @@ export default {
         { prop: 'email', label: '邮箱', minWidth: '150px' },
         { prop: 'phone', label: '手机', minWidth: '100px' },
         { prop: 'phonenumber', label: '座机', minWidth: '100px', show: false },
-        { prop: 'dept_id', label: '归属部门', width: '100px', render: ({ row }) => <d2-dict name="dept" value={ row.dept_id }/> },
+        { prop: 'dept_id', label: '归属部门', width: '100px', render: ({ row }) => <d2-dict name="dept" value={ row.dept_id } custom/> },
         { prop: 'user_post', label: '岗位', width: '100px', show: false },
         { prop: 'user_role', label: '角色', width: '100px', show: false },
         { prop: 'login_date', label: '上次登录时间', width: '200px', formatter: row => utils.time.format(row.login_date, 'YYYY/M/D HH:mm:ss'), show: false },

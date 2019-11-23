@@ -100,7 +100,6 @@ export default {
      * @description 加载需要的字典数据
      */
     async loadDict () {
-      await this.loadDictOneFromApi('sex')
       // 岗位
       await this.loadDictOne({
         name: 'user_post',

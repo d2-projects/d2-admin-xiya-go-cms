@@ -39,7 +39,7 @@ export default {
           prop: 'config_type',
           default: 1,
           label: '系统内置',
-          render: () => <d2-dict-radio vModel={ this.form.model.config_type } name="config_type" button/>
+          render: () => <d2-dict-radio vModel={ this.form.model.config_type } name="is" button/>
         },
         {
           prop: 'remark',

@@ -1,4 +1,3 @@
-import { mapActions } from 'vuex'
 import utils from '@/utils'
 import dict from './crud.dict'
 import pagination from './crud.pagination'
@@ -218,9 +217,6 @@ export default {
     this.research()
   },
   methods: {
-    ...mapActions('d2admin/dict', {
-      dictSet: 'set'
-    }),
     /**
      * @description 搜索方法 这个方法可以在外部自定义
      * @returns 数据
@@ -229,7 +225,7 @@ export default {
       const method = this.$api[this.api.index]
       if (!this._.isFunction(method)) {
         this.$message.error('未找到 API')
-        return Promise.reject()
+        return Promise.reject(new Error('未找到 API'))
       }
       return method(this.searchData)
     },

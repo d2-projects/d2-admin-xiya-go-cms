@@ -72,7 +72,7 @@ export default {
         prop: 'is_frame',
         default: 1,
         label: '外链',
-        render: () => <d2-dict-radio name="is_frame" vModel={ this.form.model.is_frame } button/>
+        render: () => <d2-dict-radio name="is" vModel={ this.form.model.is_frame } button/>
       }
       const remark = {
         prop: 'remark',

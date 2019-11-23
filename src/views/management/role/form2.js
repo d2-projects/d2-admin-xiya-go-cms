@@ -21,6 +21,9 @@ export default {
           rule: { required: true, message: '必填', trigger: 'change' },
           render: () => <d2-dict-select vModel={ this.form.model.data_scope } name="data_scope" on-change={ this.onMenuTypeChange }/>
         },
+        // data_scope
+        // 1 全部
+        // 2 自定义
         ...this.form.model.data_scope === 2 ? [
           {
             prop: 'role_dept',

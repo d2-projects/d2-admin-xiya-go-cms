@@ -1,4 +1,4 @@
-import { mapActions } from 'vuex'
+import { mapMutations } from 'vuex'
 
 export default {
   data () {
@@ -9,7 +9,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions('d2admin/dict', {
+    ...mapMutations('d2admin/dict', {
       dictSet: 'set'
     }),
     /**
@@ -49,29 +49,6 @@ export default {
       } catch (error) {
         console.log(error)
       }
-    },
-    /**
-     * @description 加载一个字典
-     * @description 从专门的字典接口加载
-     * @param {String} name 字典 dict_type
-     * @param {String} valueType  字典 dict_value_type [n|number] [s|string]
-     */
-    async loadDictOneFromApi (name, valueType = 'n') {
-      const result = await this.$api.DICTDATA_ALL({
-        page_size: 9999,
-        dict_type: name
-      })
-      const valueKeyNameOptions = {
-        n: 'dict_number',
-        s: 'dict_value'
-      }
-      this.dictSet({
-        name,
-        value: result.list.map(e => ({
-          label: e.dict_label,
-          value: e[valueKeyNameOptions[valueType]]
-        }))
-      })
     },
     /**
      * @description 请求字典数据
