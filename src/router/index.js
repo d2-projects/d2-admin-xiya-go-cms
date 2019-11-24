@@ -52,12 +52,14 @@ router.beforeEach(async (to, from, next) => {
   //   back: true
   // })
   if (to.matched.some(r => r.meta.auth)) {
-    // 可以在这里加上登录状态的验证
-    // try { await api.USER_CHECK_TOKEN() } catch (error) {}
-    next()
+    try {
+      await api.USER_CHECK_TOKEN()
+      next()
+    } catch (error) {
+      next(false)
+    }
     NProgress.done()
   } else {
-    // 不需要身份校验 直接通过
     next()
   }
 })
