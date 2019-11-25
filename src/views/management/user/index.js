@@ -59,13 +59,13 @@ export default {
         { prop: 'user_name', label: '登录账号', minWidth: '100px', fixed: 'left' },
         { prop: 'nickname', label: '昵称', minWidth: '100px' },
         { prop: 'id', label: 'ID', minWidth: '100px', show: false },
-        { prop: 'sex', label: '性别', minWidth: '100px', render: ({ row }) => <d2-dict name="sex" value={ row.sex } all-label="未知" all/> },
+        { prop: 'sex', label: '性别', minWidth: '100px', render: ({ row }) => <d2-dict name="sex" value={ row.sex } all-label="未知"/> },
         {
           prop: 'avatar',
           label: '头像',
           minWidth: '100px',
           render: ({ row }) =>
-            <el-image src={ row.avatar } style="height: 28px; width: 28px;">
+            <el-image src={ row.avatar } fit="cover" preview-src-list={ [ row.avatar ] } style="height: 28px; width: 28px;" lazy>
               <div slot="error" style="height: 100%; width: 100%;" flex="main:center cross:center">
                 <i class="el-icon-picture-outline"/>
               </div>
@@ -74,7 +74,7 @@ export default {
         { prop: 'email', label: '邮箱', minWidth: '150px' },
         { prop: 'phone', label: '手机', minWidth: '100px' },
         { prop: 'phonenumber', label: '座机', minWidth: '100px', show: false },
-        { prop: 'dept_id', label: '归属部门', width: '100px', render: ({ row }) => <d2-dict name="dept" value={ row.dept_id } custom/> },
+        { prop: 'dept_id', label: '归属部门', width: '100px', render: ({ row }) => <d2-dict name="dept_id" value={ row.dept_id } custom/> },
         { prop: 'user_post', label: '岗位', width: '100px', show: false },
         { prop: 'user_role', label: '角色', width: '100px', show: false },
         { prop: 'login_date', label: '上次登录时间', width: '200px', formatter: row => utils.time.format(row.login_date, 'YYYY/M/D HH:mm:ss'), show: false },
@@ -162,7 +162,7 @@ export default {
     loadDict () {
       // 归属部门
       this.loadDictOne({
-        name: 'dept',
+        name: 'dept_id',
         method: async () => utils.helper.flatTree({ data: await this.$api.DEPT_ALL() }),
         label: 'dept_name'
       })

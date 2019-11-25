@@ -43,9 +43,9 @@ export default {
         ] : [],
         {
           prop: 'sex',
-          default: 0,
+          default: 3,
           label: '性别',
-          render: () => <d2-dict-radio name="sex" vModel={ this.form.model.sex } all-label="未知" button all/>
+          render: () => <d2-dict-radio name="sex" vModel={ this.form.model.sex } all-label="未知" button/>
         },
         {
           prop: 'phone',
@@ -72,13 +72,13 @@ export default {
           prop: 'user_post',
           default: '',
           label: '岗位',
-          render: () => <d2-dict-select name="user_post" vModel={ this.form.model.user_post } style="width: 100%;" multiple stringify/>
+          render: () => <d2-dict-select name="user_post" vModel={ this.form.model.user_post } style="width: 100%;" custom multiple stringify/>
         },
         {
           prop: 'user_role',
           default: '',
           label: '角色',
-          render: () => <d2-dict-select name="user_role" vModel={ this.form.model.user_role } style="width: 100%;" multiple stringify/>
+          render: () => <d2-dict-select name="user_role" vModel={ this.form.model.user_role } style="width: 100%;" custom multiple stringify/>
         },
         {
           prop: 'status',

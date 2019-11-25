@@ -41,7 +41,7 @@ export default {
           default: this._.get(this.search, 'form.model.dict_id', ''),
           label: '字典',
           rule: { required: true, message: '必填', trigger: 'change' },
-          render: () => <d2-dict value={ this.form.model.dict_id } name="dict_id" disabled/>
+          render: () => <d2-dict value={ this.form.model.dict_id } name="dict_id" custom disabled/>
         },
         {
           prop: 'dict_label',

@@ -115,7 +115,7 @@ export default {
           prop: 'dict_id',
           label: '字典名称',
           default: this.dictId,
-          render: () => <d2-dict-select vModel={ this.search.form.model.dict_id } name="dict_id" all/>
+          render: () => <d2-dict-select vModel={ this.search.form.model.dict_id } name="dict_id" custom all/>
         },
         {
           prop: 'dict_label',
