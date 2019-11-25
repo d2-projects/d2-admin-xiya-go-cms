@@ -6,7 +6,7 @@
     "start": "npm run serve",
     "dev": "npm run serve",
     "build": "vue-cli-service build",
-    "build:travis": "vue-cli-service build --mode travis",
+    "build:preview": "vue-cli-service build --mode preview",
     "snippets": "node ./tools/snippets.js",
     "lint": "vue-cli-service lint --fix",
     "test:unit": "vue-cli-service test:unit"

@@ -14,19 +14,12 @@ let time = require('dayjs')()
 time = time.subtract(time.utcOffset(), 'minute').add(480, 'minute')
 process.env.VUE_APP_BUILD_TIME = time.valueOf()
 
-// 基础路径 注意发布之前要先修改这里
-let publicPath = process.env.VUE_APP_PUBLIC_PATH || '/'
-
 module.exports = {
   // 根据你的实际情况更改这里
-  publicPath,
+  publicPath: process.env.VUE_APP_PUBLIC_PATH || '/',
   lintOnSave: true,
-  devServer: {
-    publicPath // 和 publicPath 保持一致
-  },
   css: {
     loaderOptions: {
-      // 设置 scss 公用变量文件
       sass: {
         data: `@import '~@/assets/style/public.scss';`
       }
