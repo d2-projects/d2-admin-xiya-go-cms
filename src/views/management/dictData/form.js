@@ -94,9 +94,9 @@ export default {
     /**
      * @description 加载需要的字典数据
      */
-    async loadDict () {
+    loadDict () {
       // 字典
-      await this.loadDictOne({
+      this.loadDictOne({
         name: 'dict_id',
         method: this.$api.DICT_ALL,
         fields: 'dict_name,id',

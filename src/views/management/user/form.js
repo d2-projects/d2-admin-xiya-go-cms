@@ -99,9 +99,9 @@ export default {
     /**
      * @description 加载需要的字典数据
      */
-    async loadDict () {
+    loadDict () {
       // 岗位
-      await this.loadDictOne({
+      this.loadDictOne({
         name: 'user_post',
         method: this.$api.POST_ALL,
         fields: 'id,post_name',
@@ -109,7 +109,7 @@ export default {
         label: 'post_name'
       })
       // 角色
-      await this.loadDictOne({
+      this.loadDictOne({
         name: 'user_role',
         method: this.$api.ROLE_ALL,
         fields: 'id,role_name',

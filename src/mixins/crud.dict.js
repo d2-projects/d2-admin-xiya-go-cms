@@ -15,8 +15,12 @@ export default {
     /**
      * @description 加载需要的字典数据
      * @description 这个方法一般在页面上需要再次实现
+     * @description 在此方法内使用 loadDictOne
+     * @description loadDict 会自动以 doLoadDict(loadDict) 的形式被调用
+     * @description doLoadDict -> loadDict -> loadDictOne
+     * @description 在 d2-dict-x 类组件上使用的普通的字典会自动加载 无需再次使用此方法
      */
-    async loadDict () {},
+    loadDict () {},
     /**
      * @description 加载一个字典
      * @param {Object} config {String} name 字典名称

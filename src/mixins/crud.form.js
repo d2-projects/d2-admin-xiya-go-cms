@@ -101,8 +101,11 @@ export default {
       this.setMode('edit')
       this.open()
       try {
-        await this.doLoadDict(this.loadDict)
-        this.detail = await this.doLoadData(() => (this.$api[this.api.detail] || function () {})(id))
+        const result = await Promise.all([
+          this.doLoadData(() => (this.$api[this.api.detail] || function () {})(id)),
+          this.doLoadDict(this.loadDict)
+        ])
+        this.detail = result[0]
         this.reloadModel()
       } catch (error) {
         console.log(error)

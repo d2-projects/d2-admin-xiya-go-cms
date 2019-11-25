@@ -148,9 +148,9 @@ export default {
     /**
      * @description 加载需要的字典数据
      */
-    async loadDict () {
+    loadDict () {
       // 归属部门
-      await this.loadDictOne({
+      this.loadDictOne({
         name: 'dept',
         method: async () => utils.helper.flatTree({ data: await this.$api.DEPT_ALL() }),
         label: 'dept_name'
