@@ -17,6 +17,6 @@ before_install:
   - export PATH=$HOME/.yarn/bin:$PATH
 
 after_success:
-  - ./deploy/qshell account $AK $SK
+  - ./deploy/qshell account $AK $SK liyang
   - ./deploy/qshell qupload ./deploy/upload.conf
   - ./deploy/qshell cdnrefresh --dirs -i ./deploy/cdnrefresh.txt
