@@ -1,5 +1,3 @@
-import utils from '@/utils'
-
 export default {
   data () {
     return {

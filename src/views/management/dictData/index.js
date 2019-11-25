@@ -98,7 +98,7 @@ export default {
           fixed: 'right',
           render: ({ row }) => {
             const actions = [
-              ...showEdit ? [ { icon: 'el-icon-edit-outline', action: () => this.edit(row.id) } ]: [],
+              ...showEdit ? [ { icon: 'el-icon-edit-outline', action: () => this.edit(row.id) } ] : [],
               { icon: 'el-icon-delete', type: 'danger', confirm: `确定删除 [ ${row.dict_label} ] 吗`, action: () => this.delete(row.id) }
             ]
             return <d2-table-actions actions={ actions }/>

@@ -60,7 +60,17 @@ export default {
         { prop: 'nickname', label: '昵称', minWidth: '100px' },
         { prop: 'id', label: 'ID', minWidth: '100px', show: false },
         { prop: 'sex', label: '性别', minWidth: '100px', render: ({ row }) => <d2-dict name="sex" value={ row.sex } all-label="未知" all/> },
-        { prop: 'avatar', label: '头像', minWidth: '100px' },
+        {
+          prop: 'avatar',
+          label: '头像',
+          minWidth: '100px',
+          render: ({ row }) =>
+            <el-image src={ row.avatar } style="height: 28px; width: 28px;">
+              <div slot="error" style="height: 100%; width: 100%;" flex="main:center cross:center">
+                <i class="el-icon-picture-outline"/>
+              </div>
+            </el-image>
+        },
         { prop: 'email', label: '邮箱', minWidth: '150px' },
         { prop: 'phone', label: '手机', minWidth: '100px' },
         { prop: 'phonenumber', label: '座机', minWidth: '100px', show: false },

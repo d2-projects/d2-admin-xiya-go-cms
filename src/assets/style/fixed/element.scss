@@ -154,3 +154,12 @@
     }
   }
 }
+
+
+
+// 表格内的 el-image 垂直居中
+.el-table {
+  .el-image {
+    vertical-align: middle;
+  }
+}
