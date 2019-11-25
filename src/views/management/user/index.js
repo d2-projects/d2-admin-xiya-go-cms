@@ -1,11 +1,12 @@
 import utils from '@/utils'
 import table from '@/mixins/crud.table.js'
-import componentForm from './form'
 import './style.scss'
 
 export default {
   mixins: [ table ],
-  components: { componentForm },
+  components: {
+    componentForm: () => import('./form')
+  },
   render () {
     const page =
       <d2-container spacious class="page-management-user">

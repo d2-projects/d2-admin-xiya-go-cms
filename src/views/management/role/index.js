@@ -1,13 +1,11 @@
 import utils from '@/utils'
 import table from '@/mixins/crud.table.js'
-import componentForm from './form'
-import componentForm2 from './form2'
 
 export default {
   mixins: [ table ],
   components: {
-    componentForm,
-    componentForm2
+    componentForm: () => import('./form'),
+    componentForm2: () => import('./form2')
   },
   render () {
     const page =
