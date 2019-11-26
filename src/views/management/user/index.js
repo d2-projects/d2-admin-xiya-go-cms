@@ -65,7 +65,7 @@ export default {
           label: '头像',
           minWidth: '80px',
           render: ({ row }) =>
-            <el-image src={ row.avatar } fit="cover" preview-src-list={ [ row.avatar ] } style="height: 28px; width: 28px;" lazy>
+            <el-image src={ row.avatar } fit="cover" preview-src-list={ [ row.avatar ] } style="height: 28px; width: 28px; border-radius: 2px;" lazy>
               <div slot="error" style="height: 100%; width: 100%;" flex="main:center cross:center">
                 <i class="el-icon-picture-outline"/>
               </div>
