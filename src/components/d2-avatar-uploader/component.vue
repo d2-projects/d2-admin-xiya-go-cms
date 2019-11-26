@@ -1,13 +1,18 @@
 <style lang="scss">
 .d2-avatar-uploader {
   .el-upload {
-    border: 1px dashed #d9d9d9;
+    border-color: $color-border-1;
+    border-width: 1px;
+    border-style: solid;
     border-radius: 4px;
     cursor: pointer;
     position: relative;
     overflow: hidden;
     &:hover {
       border-color: #409EFF;
+    }
+    &.empty {
+      border-style: dashed;
     }
   }
   .icon {
