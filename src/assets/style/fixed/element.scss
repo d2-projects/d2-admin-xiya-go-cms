@@ -163,3 +163,13 @@
     vertical-align: middle;
   }
 }
+
+
+
+// 美化表格中图片预览
+.el-table {
+  .el-image-viewer__btn {
+    color: #FFF;
+    opacity: 1;
+  }
+}

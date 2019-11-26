@@ -31,9 +31,9 @@
 <template>
   <el-upload
     class="d2-avatar-uploader"
+    action="https://jsonplaceholder.typicode.com/posts/"
     :class="{ 'is-empty': isEmpty }"
     :style="styleUploader"
-    action="https://jsonplaceholder.typicode.com/posts/"
     :show-file-list="false"
     :before-upload="beforeUpload">
     <img
@@ -59,6 +59,11 @@ export default {
     width: { type: Number, default: 100, required: false },
     height: { type: Number, default: 100, required: false },
     limit: { type: Number, default: 1, required: false }
+  },
+  data () {
+    status: {
+      loading: false
+    }
   },
   computed: {
     isEmpty () {
@@ -95,9 +100,13 @@ export default {
     },
     async beforeUpload(file) {
       if (!this.checkLimit(file)) return
-      const path = await this.$api.UPLOAD_IMAGE_OOS(file)
-      this.currentValue = path
-      this.vModelMixinEmit()
+      this.status.loading = true
+      try {
+        const path = await this.$api.UPLOAD_IMAGE_OOS(file)
+        this.currentValue = path
+        this.vModelMixinEmit()
+      } catch (error) {}
+      this.status.loading = false
       return false
     }
   }

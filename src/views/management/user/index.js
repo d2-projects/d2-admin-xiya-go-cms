@@ -79,9 +79,9 @@ export default {
         { prop: 'login_ip', label: '上次登录地址', width: '120px' },
         { prop: 'remark', label: '备注', width: '100px' },
         { prop: 'status', label: '状态', width: '100px', render: ({ row }) => <d2-dict name="status" value={ row.status }/> },
-        { prop: 'create_by', label: '创建人员', width: '100px' },
+        { prop: 'create_by', label: '创建人员', width: '100px', show: false },
         { prop: 'created_at', label: '创建时间', width: '160px', formatter: row => utils.time.format(row.created_at, 'YYYY/M/D HH:mm:ss') },
-        { prop: 'update_by', label: '更新人员', width: '100px' },
+        { prop: 'update_by', label: '更新人员', width: '100px', show: false },
         { prop: 'updated_at', label: '更新时间', width: '160px', formatter: row => utils.time.format(row.updated_at, 'YYYY/M/D HH:mm:ss') }
       ].map(setting => {
         setting.sortable = 'custom'
