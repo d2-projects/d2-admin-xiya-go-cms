@@ -9,13 +9,16 @@ export default {
   ],
   data () {
     return {
-      currentValue: null,
+      currentValue: '',
       options: []
     }
   },
   props: {
     // 绑定的值
-    value: { type: [ Number, String, Array ], default: null, required: false },
+    // 注意 这里不能默认值是 null
+    // https://github.com/ElemeFE/element/issues/8615
+    // 字典是数字类型的请在外部设置默认 0 字符设置默认空字符串
+    value: { type: [ Number, String, Array ], default: '', required: false },
     // 字典名
     name: { type: String, default: '', required: false },
     // [自动加载字典] 自定义字典数据 设置为 false 时会自动加载对应名称的字典
