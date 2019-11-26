@@ -25,7 +25,7 @@
   <el-upload
     class="d2-avatar-uploader"
     :style="styleUploader"
-    action=""
+    action="https://jsonplaceholder.typicode.com/posts/"
     :show-file-list="false"
     :before-upload="beforeUpload">
     <img
@@ -84,9 +84,8 @@ export default {
     },
     async beforeUpload(file) {
       if (!this.checkLimit(file)) return
-      console.log(1)
-      const result = await this.$api.UPLOAD_IMAGE_OOS(file)
-      this.currentValue = result.path
+      const path = await this.$api.UPLOAD_IMAGE_OOS(file)
+      this.currentValue = path
       this.vModelMixinEmit()
       return false
     }
