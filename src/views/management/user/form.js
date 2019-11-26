@@ -76,9 +76,9 @@ export default {
         },
         {
           prop: 'user_post',
-          default: '',
+          default: 0,
           label: '岗位',
-          render: () => <d2-dict-select name="user_post" vModel={ this.form.model.user_post } style="width: 100%;" custom multiple stringify/>
+          render: () => <d2-dict-select name="user_post" vModel={ this.form.model.user_post } style="width: 100%;" custom/>
         },
         {
           prop: 'user_role',
