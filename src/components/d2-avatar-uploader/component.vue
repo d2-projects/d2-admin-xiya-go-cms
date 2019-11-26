@@ -29,23 +29,24 @@
 </style>
 
 <template>
-  <el-upload
-    class="d2-avatar-uploader"
-    action="https://jsonplaceholder.typicode.com/posts/"
-    :class="{ 'is-empty': isEmpty }"
-    :style="styleUploader"
-    :show-file-list="false"
-    :before-upload="beforeUpload">
-    <img
-      v-if="currentValue"
-      :src="currentValue"
-      class="avatar"
-      :style="styleAvatar">
-    <i
-      v-else
-      class="el-icon-plus icon"
-      :style="styleIcon"/>
-  </el-upload>
+  <div class="d2-avatar-uploader">
+    <el-upload
+      action="https://jsonplaceholder.typicode.com/posts/"
+      :class="{ 'is-empty': isEmpty }"
+      :style="styleUploader"
+      :show-file-list="false"
+      :before-upload="beforeUpload">
+      <img
+        v-if="currentValue"
+        :src="currentValue"
+        class="avatar"
+        :style="styleAvatar">
+      <i
+        v-else
+        class="el-icon-plus icon"
+        :style="styleIcon"/>
+    </el-upload>
+  </div>
 </template>
 
 <script>
@@ -53,7 +54,7 @@ import { vModelString } from '@/mixins/component.vmodel.js'
 export default {
   name: 'd2-avatar-uploader',
   mixins: [
-    vModelString()
+    vModelString
   ],
   props: {
     width: { type: Number, default: 100, required: false },
@@ -61,8 +62,10 @@ export default {
     limit: { type: Number, default: 1, required: false }
   },
   data () {
-    status: {
-      loading: false
+    return {
+      status: {
+        loading: false
+      }
     }
   },
   computed: {
@@ -98,7 +101,7 @@ export default {
       }
       return result
     },
-    async beforeUpload(file) {
+    async beforeUpload (file) {
       if (!this.checkLimit(file)) return
       this.status.loading = true
       try {
