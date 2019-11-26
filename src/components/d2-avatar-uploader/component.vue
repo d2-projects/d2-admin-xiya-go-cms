@@ -1,5 +1,10 @@
 <style lang="scss">
 .d2-avatar-uploader {
+  &.is-empty {
+    .el-upload {
+      border-style: dashed;
+    }
+  }
   .el-upload {
     border-color: $color-border-1;
     border-width: 1px;
@@ -9,10 +14,7 @@
     position: relative;
     overflow: hidden;
     &:hover {
-      border-color: #409EFF;
-    }
-    &.empty {
-      border-style: dashed;
+      border-color: #C0C4CC;
     }
   }
   .icon {
@@ -29,6 +31,7 @@
 <template>
   <el-upload
     class="d2-avatar-uploader"
+    :class="{ 'is-empty': isEmpty }"
     :style="styleUploader"
     action="https://jsonplaceholder.typicode.com/posts/"
     :show-file-list="false"
@@ -58,6 +61,9 @@ export default {
     limit: { type: Number, default: 1, required: false }
   },
   computed: {
+    isEmpty () {
+      return !this.currentValue
+    },
     styleUploader () {
       return {
         height: this.height + 'px',
