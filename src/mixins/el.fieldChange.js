@@ -1,9 +1,7 @@
 export default {
   inject: {
     elFormItem: {
-      default: {
-        onFieldChange () {}
-      }
+      default: () => ({ onFieldChange () {} })
     }
   },
   methods: {

@@ -1,5 +1,6 @@
 import store from '@/store'
 import axios from 'axios'
+import { get } from 'lodash'
 import { Message, MessageBox } from 'element-ui'
 import utils from '@/utils'
 
@@ -84,7 +85,7 @@ export function request (config) {
   let configDefault = {
     headers: {
       'Authorization': token,
-      'Content-Type': 'application/json'
+      'Content-Type': get(config, 'headers.Content-Type', 'application/json')
     },
     timeout: 5000,
     baseURL: store.state.d2admin.api.base,

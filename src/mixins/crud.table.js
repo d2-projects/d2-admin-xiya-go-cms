@@ -165,19 +165,19 @@ export default {
     },
     // 配置项
     // 表格列
-    // [prop] -> [label] -> [align] -> [minWidth][width] -> [fixed] -> [other] -> [render][formatter] -> [if][show]
+    // 建议的书写顺序 [prop] -> [label] -> [align] -> [minWidth][width] -> [fixed] -> [other] -> [render][formatter] -> [if][show]
     settingColumns () {
       return []
     },
     // 配置项
     // 表格操作列
-    // [prop] -> [label] -> [align] -> [minWidth][width] -> [fixed] -> [other] -> [render][formatter] -> [if][show]
+    // 建议的书写顺序 [prop] -> [label] -> [align] -> [minWidth][width] -> [fixed] -> [other] -> [render][formatter] -> [if][show]
     settingActions () {
       return []
     },
     // 配置项
     // 搜索
-    // [prop] -> [label] -> [default] -> [render] -> [if][show]
+    // 建议的书写顺序 [prop] -> [label] -> [default] -> [render] -> [if][show]
     settingSearch () {
       return []
     },

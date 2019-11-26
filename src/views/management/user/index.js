@@ -53,17 +53,17 @@ export default {
   computed: {
     // 配置项
     // 表格列
-    // [prop] -> [label] -> [align] -> [minWidth][width] -> [fixed] -> [other] -> [render][formatter] -> [if][show]
+    // 建议的书写顺序 [prop] -> [label] -> [align] -> [minWidth][width] -> [fixed] -> [other] -> [render][formatter] -> [if][show]
     settingColumns () {
       return [
         { prop: 'user_name', label: '登录账号', minWidth: '100px', fixed: 'left' },
         { prop: 'nickname', label: '昵称', minWidth: '100px' },
-        { prop: 'id', label: 'ID', minWidth: '100px', show: false },
-        { prop: 'sex', label: '性别', minWidth: '100px', render: ({ row }) => <d2-dict name="sex" value={ row.sex } all-label="未知"/> },
+        { prop: 'id', label: 'ID', minWidth: '80px' },
+        { prop: 'sex', label: '性别', minWidth: '80px', render: ({ row }) => <d2-dict name="sex" value={ row.sex } all-label="未知"/> },
         {
           prop: 'avatar',
           label: '头像',
-          minWidth: '100px',
+          minWidth: '80px',
           render: ({ row }) =>
             <el-image src={ row.avatar } fit="cover" preview-src-list={ [ row.avatar ] } style="height: 28px; width: 28px;" lazy>
               <div slot="error" style="height: 100%; width: 100%;" flex="main:center cross:center">
@@ -71,20 +71,18 @@ export default {
               </div>
             </el-image>
         },
-        { prop: 'email', label: '邮箱', minWidth: '150px' },
+        { prop: 'email', label: '邮箱', minWidth: '160px' },
         { prop: 'phone', label: '手机', minWidth: '100px' },
-        { prop: 'phonenumber', label: '座机', minWidth: '100px', show: false },
+        { prop: 'phonenumber', label: '座机', minWidth: '100px' },
         { prop: 'dept_id', label: '归属部门', width: '100px', render: ({ row }) => <d2-dict name="dept_id" value={ row.dept_id } custom/> },
-        { prop: 'user_post', label: '岗位', width: '100px', show: false },
-        { prop: 'user_role', label: '角色', width: '100px', show: false },
-        { prop: 'login_date', label: '上次登录时间', width: '200px', formatter: row => utils.time.format(row.login_date, 'YYYY/M/D HH:mm:ss'), show: false },
-        { prop: 'login_ip', label: '上次登录地址', width: '100px', show: false },
-        { prop: 'remark', label: '备注', width: '100px', show: false },
-        { prop: 'status', label: '状态', width: '100px', show: false },
-        { prop: 'create_by', label: '创建人员', width: '100px', show: false },
-        { prop: 'created_at', label: '创建时间', width: '200px', formatter: row => utils.time.format(row.created_at, 'YYYY/M/D HH:mm:ss'), show: false },
-        { prop: 'update_by', label: '更新人员', width: '100px', show: false },
-        { prop: 'updated_at', label: '更新时间', width: '200px', formatter: row => utils.time.format(row.updated_at, 'YYYY/M/D HH:mm:ss'), show: false }
+        { prop: 'login_date', label: '上次登录时间', width: '160px', formatter: row => utils.time.format(row.login_date, 'YYYY/M/D HH:mm:ss') },
+        { prop: 'login_ip', label: '上次登录地址', width: '120px' },
+        { prop: 'remark', label: '备注', width: '100px' },
+        { prop: 'status', label: '状态', width: '100px', render: ({ row }) => <d2-dict name="status" value={ row.status }/> },
+        { prop: 'create_by', label: '创建人员', width: '100px' },
+        { prop: 'created_at', label: '创建时间', width: '160px', formatter: row => utils.time.format(row.created_at, 'YYYY/M/D HH:mm:ss') },
+        { prop: 'update_by', label: '更新人员', width: '100px' },
+        { prop: 'updated_at', label: '更新时间', width: '160px', formatter: row => utils.time.format(row.updated_at, 'YYYY/M/D HH:mm:ss') }
       ].map(setting => {
         setting.sortable = 'custom'
         return setting
@@ -92,7 +90,7 @@ export default {
     },
     // 配置项
     // 表格操作列
-    // [prop] -> [label] -> [align] -> [minWidth][width] -> [fixed] -> [other] -> [render][formatter] -> [if][show]
+    // 建议的书写顺序 [prop] -> [label] -> [align] -> [minWidth][width] -> [fixed] -> [other] -> [render][formatter] -> [if][show]
     settingActions () {
       return [
         {
@@ -112,7 +110,7 @@ export default {
     },
     // 配置项
     // 搜索
-    // [prop] -> [label] -> [default] -> [render] -> [if][show]
+    // 建议的书写顺序 [prop] -> [label] -> [default] -> [render] -> [if][show]
     settingSearch () {
       return [
         {

@@ -46,13 +46,13 @@ export default {
   computed: {
     // 配置项
     // 表格列
-    // [prop] -> [label] -> [align] -> [minWidth][width] -> [fixed] -> [other] -> [render][formatter] -> [if][show]
+    // 建议的书写顺序 [prop] -> [label] -> [align] -> [minWidth][width] -> [fixed] -> [other] -> [render][formatter] -> [if][show]
     settingColumns () {
       return [
         { prop: 'dict_name', label: '名称', minWidth: '100px', fixed: 'left', render: ({ row }) => <d2-button type="text" label={ row.dict_name } on-click={ () => this.goDictData(row.id) }/> },
         { prop: 'dict_type', label: '标识', minWidth: '100px', render: ({ row }) => <d2-button type="text" label={ row.dict_type } on-click={ () => this.goDictData(row.id) }/> },
         { prop: 'dict_value_type', label: '标识', minWidth: '100px', render: ({ row }) => <d2-dict name="dict_value_type" value={ row.dict_value_type }/> },
-        { prop: 'status', label: '状态', width: '100px', show: false },
+        { prop: 'status', label: '状态', width: '100px', render: ({ row }) => <d2-dict name="status" value={ row.status }/>, show: false },
         { prop: 'remark', label: '备注', width: '100px', show: false },
         { prop: 'create_by', label: '创建人员', width: '100px', show: false },
         { prop: 'created_at', label: '创建时间', width: '200px', formatter: row => utils.time.format(row.created_at, 'YYYY/M/D HH:mm:ss'), show: false },
@@ -65,7 +65,7 @@ export default {
     },
     // 配置项
     // 表格操作列
-    // [prop] -> [label] -> [align] -> [minWidth][width] -> [fixed] -> [other] -> [render][formatter] -> [if][show]
+    // 建议的书写顺序 [prop] -> [label] -> [align] -> [minWidth][width] -> [fixed] -> [other] -> [render][formatter] -> [if][show]
     settingActions () {
       return [
         {
@@ -86,7 +86,7 @@ export default {
     },
     // 配置项
     // 搜索
-    // [prop] -> [label] -> [default] -> [render] -> [if][show]
+    // 建议的书写顺序 [prop] -> [label] -> [default] -> [render] -> [if][show]
     settingSearch () {
       return [
         {

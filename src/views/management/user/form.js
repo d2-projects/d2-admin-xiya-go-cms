@@ -16,6 +16,12 @@ export default {
     setting () {
       return [
         {
+          prop: 'avatar',
+          default: '',
+          label: '头像',
+          render: () => <d2-avatar-uploader vModel={ this.form.model.avatar }/>
+        },
+        {
           prop: 'user_name',
           default: '',
           label: '用户名',
