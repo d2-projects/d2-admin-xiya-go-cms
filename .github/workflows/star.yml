@@ -11,4 +11,7 @@ jobs:
 
     steps:
     - name: send bark message
-      run: curl https://api.day.app/EweNWLE36rvVR8EFfWGq7k/Github%20Star/$GITHUB_REPOSITORY
+      run: |
+        repo=${$GITHUB_REPOSITORY//\//:}
+        actor=$GITHUB_ACTOR
+        curl https://api.day.app/EweNWLE36rvVR8EFfWGq7k/$actor%20started%20you/$repo
