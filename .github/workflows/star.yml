@@ -1,0 +1,14 @@
+name: Send message on star
+
+on:
+  watch
+    types: [started]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: send bark message
+      run: curl https://api.day.app/EweNWLE36rvVR8EFfWGq7k/Github Star/$GITHUB_REPOSITORY
