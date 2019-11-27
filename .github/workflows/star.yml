@@ -2,8 +2,7 @@ name: Send message on star
 
 on:
   watch
-    types:
-      - started
+    types: [started]
 
 jobs:
   build:
