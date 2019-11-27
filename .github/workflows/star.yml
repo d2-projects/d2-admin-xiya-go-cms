@@ -1,7 +1,8 @@
 name: Send message on star
 
-on: watch
-  types: [started]
+on:
+  watch:
+    types: [started]
 
 jobs:
   build:
