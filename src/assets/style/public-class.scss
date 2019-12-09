@@ -55,3 +55,9 @@ $sizes: (0, 5, 10, 15, 20);
 .#{$prefix}-pr { padding-right: 20px !important; }
 .#{$prefix}-pb { padding-bottom: 20px !important; }
 .#{$prefix}-pl { padding-left: 20px !important; }
+
+@for $index from 1 to 9 {
+  .#{$prefix}-opacity-#{$index} {
+    opacity: $index / 10;
+  }
+}
