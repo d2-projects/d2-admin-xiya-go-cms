@@ -43,6 +43,7 @@ export default {
         update: ''
       },
       form: {
+        initialized: false,
         model: {},
         labelWidth: '100px'
       },
@@ -86,12 +87,20 @@ export default {
       pick = [],
       data = {}
     } = {}) {
-      this.$set(this.form, 'model', Object.assign(
+      // this.form.model 没有赋值过的时候 要先根据 formFromSetting 初始化
+      // 因为 setting 中会有根据 this.form.model.xxx 动态生成的数据
+      if (!this.form.initialized) {
+        this.$set(this.form, 'model', this.formFromSetting)
+        this.form.initialized = true
+      }
+      // 这时候才保证 formFromSettingAndDetail 是正确的
+      const model = Object.assign(
         {},
         this.formFromSettingAndDetail,
         this._.pick(this.form.model, pick),
         data
-      ))
+      )
+      this.$set(this.form, 'model', model)
     },
     /**
      * @description 初始化表单为编辑模式

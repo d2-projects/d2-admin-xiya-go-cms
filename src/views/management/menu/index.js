@@ -47,6 +47,7 @@ export default {
         { prop: 'url', label: '地址', minWidth: '200px' },
         { prop: 'perms', label: '权限标识', width: '200px' },
         { prop: 'id', label: 'ID', width: '100px', show: false },
+        { prop: 'order_num', label: '显示排序', minWidth: '100px' },
         { prop: 'menu_type', label: '类型', render: ({ row }) => <d2-dict name="menu_type" value={ row.menu_type }/>, width: '60px' },
         { prop: 'is_frame', label: '外链', render: ({ row }) => <d2-dict name="is" value={ row.is_frame }/>, width: '60px' },
         { prop: 'visible', label: '可见性', render: ({ row }) => <d2-dict name="visible" value={ row.visible }/>, width: '60px' },

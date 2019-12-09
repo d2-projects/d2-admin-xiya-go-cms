@@ -28,7 +28,7 @@ export default {
       }
       const menuType = {
         prop: 'menu_type',
-        default: 1,
+        default: 2,
         label: '菜单类型',
         render: () => <d2-dict-radio name="menu_type" vModel={ this.form.model.menu_type } on-change={ this.onMenuTypeChange } button/>
       }
@@ -70,7 +70,7 @@ export default {
       }
       const isFrame = {
         prop: 'is_frame',
-        default: 1,
+        default: 2,
         label: '外链',
         render: () => <d2-dict-radio name="is" vModel={ this.form.model.is_frame } button/>
       }
@@ -96,7 +96,7 @@ export default {
     }
   },
   methods: {
-    onMenuTypeChange (menuType) {
+    onMenuTypeChange () {
       this.reloadModel({
         pick: [
           'menu_name',
