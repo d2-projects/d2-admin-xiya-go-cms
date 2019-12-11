@@ -78,7 +78,7 @@ export default {
       ]
     },
     // 配置项
-    // 搜索
+    // 表格搜索条件
     // 建议的书写顺序 [prop] -> [label] -> [default] -> [render] -> [if][show]
     settingSearch () {
       return [
