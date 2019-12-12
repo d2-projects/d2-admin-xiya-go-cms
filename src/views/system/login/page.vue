@@ -56,7 +56,7 @@
             </template>
           </p>
           <p>
-            <a href="https://www.travis-ci.org/d2-projects/d2-admin-cms-go" target="_blank">
+            <a href="https://github.com/d2-projects/d2-admin-cms-go/actions" target="_blank">
               构建于 {{ $buildTime | timeFormat('YYYY年M月D日 dddd Ah点mm分') }}
               <d2-time-relative :value="$buildTime"/>
             </a>

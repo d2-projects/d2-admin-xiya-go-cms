@@ -8,7 +8,7 @@ const resolve = dir => require('path').join(__dirname, dir)
 
 // 增加环境变量
 process.env.VUE_APP_VERSION = require('./package.json').version
-// 构建时间 | https://www.travis-ci.org 服务器时间转为中国时间
+// 构建时间 | 服务器时间转为中国时间
 // Unix 时间戳 (毫秒)
 let time = require('dayjs')()
 time = time.subtract(time.utcOffset(), 'minute').add(480, 'minute')
@@ -55,7 +55,7 @@ module.exports = {
         // sourcemap不包含列信息
         config => config.devtool('cheap-source-map')
       )
-      // TRAVIS 构建 vue-loader 添加 filename
+      // 预览环境构建 vue-loader 添加 filename
       .when(process.env.VUE_APP_SCOURCE_LINK === 'TRUE',
         VueFilenameInjector(config)
       )
