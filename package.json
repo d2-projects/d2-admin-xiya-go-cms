@@ -6,10 +6,14 @@
     "start": "npm run serve",
     "dev": "npm run serve",
     "build": "vue-cli-service build",
+    "build:nomock": "vue-cli-service build --mode nomock",
     "build:preview": "NODE_OPTIONS=--max_old_space_size=4096 vue-cli-service build --mode preview",
-    "snippets": "node ./tools/snippets.js",
+    "build:github": "NODE_OPTIONS=--max_old_space_size=4096 vue-cli-service build --mode github",
+    "build:netlify": "NODE_OPTIONS=--max_old_space_size=4096 vue-cli-service build --mode netlify",
     "lint": "vue-cli-service lint --fix",
-    "test:unit": "vue-cli-service test:unit"
+    "test:unit": "vue-cli-service test:unit",
+    "i18n:report": "vue-cli-service i18n:report --src './src/**/*.?(js|vue)' --locales './src/locales/**/*.json'",
+    "analyz": "npm_config_report=true npm run build"
   },
   "dependencies": {
     "axios": "^0.19.0",
