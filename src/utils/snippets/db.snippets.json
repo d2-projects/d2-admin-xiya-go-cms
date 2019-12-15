@@ -10,7 +10,7 @@
       "  user: ${4:true}",
       "})"
 		],
-		"description": "# D2Admin 内置工具包 | utils.db\n# 持久化数据\n# 文档 https://fairyever.com/d2-admin/doc/zh/sys-db/"
+		"description": "# D2Admin 内置工具包 | utils.db\n# 持久化数据\n# 文档 https://d2.pub/zh/doc/d2-admin/db"
 	},
 	"utils db dbGet": {
 		"scope": "javascript,typescript,vue,vue-html",
@@ -23,7 +23,7 @@
       "  user: ${4:true}",
       "})"
 		],
-		"description": "# D2Admin 内置工具包 | utils.db\n# 获得持久化数据\n# 文档 https://fairyever.com/d2-admin/doc/zh/sys-db/"
+		"description": "# D2Admin 内置工具包 | utils.db\n# 获得持久化数据\n# 文档 https://d2.pub/zh/doc/d2-admin/db"
 	},
 	"utils db database": {
 		"scope": "javascript,typescript,vue,vue-html",
@@ -37,6 +37,6 @@
       "  defaultValue: ${5:'any data'},",
       "})"
 		],
-		"description": "# D2Admin 内置工具包 | utils.db\n# 获得指定位置的存储实例\n# 文档 https://fairyever.com/d2-admin/doc/zh/sys-db/"
+		"description": "# D2Admin 内置工具包 | utils.db\n# 获得指定位置的存储实例\n# 文档 https://d2.pub/zh/doc/d2-admin/db"
 	}
 }

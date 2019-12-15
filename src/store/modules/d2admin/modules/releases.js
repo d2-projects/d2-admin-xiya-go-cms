@@ -10,7 +10,7 @@ export default context => ({
     versionShow () {
       utils.log.capsule('D2Admin', `v${process.env.VUE_APP_VERSION}`)
       console.log('D2 Admin  https://github.com/d2-projects/d2-admin')
-      console.log('Document  https://fairyever.com/d2-admin/doc/zh/')
+      console.log('Document  https://d2.pub/zh/doc/d2-admin')
       console.log('请不要吝啬您的 star，谢谢 ~')
     }
   }

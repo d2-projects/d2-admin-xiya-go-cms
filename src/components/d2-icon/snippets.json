@@ -5,6 +5,6 @@
 		"body": [
 			"<d2-icon name=\"${1:github}\"/>"
 		],
-		"description": "# D2Admin 内置组件\n# 图标 <d2-icon>\n# 文档 https://fairyever.com/d2-admin/doc/zh/sys-components/icon.html\n# 参考 http://www.fontawesome.com.cn/faicons/"
+		"description": "# D2Admin 内置组件\n# 图标 <d2-icon>\n# 文档 https://d2.pub/zh/doc/d2-admin/component/icon.html"
 	}
 }

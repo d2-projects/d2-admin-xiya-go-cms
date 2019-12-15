@@ -5,6 +5,6 @@
 		"body": [
 			"<d2-icon-svg name=\"${1:d2-admin}\"/>"
 		],
-		"description": "# D2Admin 内置组件\n# SVG 图标 <d2-icon-svg>\n# 文档 https://fairyever.com/d2-admin/doc/zh/sys-components/icon-svg.html"
+		"description": "# D2Admin 内置组件\n# SVG 图标 <d2-icon-svg>\n# 文档 https://d2.pub/zh/doc/d2-admin/component/icon-svg.html"
 	}
 }
