@@ -1,16 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-
-// 进度条
-import NProgress from 'nprogress'
-import 'nprogress/nprogress.css'
-
-import store from '@/store/index'
 import utils from '@/utils'
-import api from '@/api'
-
-// 路由数据
-import routes from './routes'
+import layoutHeaderAside from '@/layout/header-aside'
 
 // fix vue-router NavigationDuplicated
 const VueRouterPush = VueRouter.prototype.push
@@ -24,53 +15,48 @@ VueRouter.prototype.replace = function replace (location) {
 
 Vue.use(VueRouter)
 
-// 导出路由 在 main.js 里使用
-const router = new VueRouter({
-  routes
+export const constantRoutesInLayout = [
+  {
+    path: '/',
+    redirect: { name: 'index' },
+    component: layoutHeaderAside,
+    children: [
+      { path: 'index', name: 'index', meta: { auth: true }, component: utils.import('system/index') },
+      { path: 'log', name: 'log', meta: { title: '前端日志', auth: true }, component: utils.import('system/log') },
+      // 系统管理 暂时当做静态设置
+      { path: 'management/user', name: 'management-user', meta: { title: '用户管理', auth: true }, component: utils.import('management/user') },
+      { path: 'management/role', name: 'management-role', meta: { title: '角色管理', auth: true }, component: utils.import('management/role') },
+      { path: 'management/menu', name: 'management-menu', meta: { title: '菜单管理', auth: true }, component: utils.import('management/menu') },
+      { path: 'management/dept', name: 'management-dept', meta: { title: '部门管理', auth: true }, component: utils.import('management/dept') },
+      { path: 'management/post', name: 'management-post', meta: { title: '岗位管理', auth: true }, component: utils.import('management/post') },
+      { path: 'management/dict', name: 'management-dict', meta: { title: '字典管理', auth: true }, component: utils.import('management/dict') },
+      { path: 'management/dict-data', name: 'management-dict-data', meta: { title: '字典数据', auth: true }, component: utils.import('management/dictData') },
+      { path: 'management/config', name: 'management-config', meta: { title: '参数设置', auth: true }, component: utils.import('management/config') }
+    ]
+  }
+]
+
+export const constantRoutes = [
+  ...constantRoutesInLayout,
+  { path: 'refresh', name: 'refresh', hidden: true, component: utils.import('system/function/refresh') },
+  { path: 'redirect/:route*', name: 'redirect', hidden: true, component: utils.import('system/function/redirect') },
+  { path: '/login', name: 'login', component: utils.import('system/login') },
+  { path: '*', name: '404', component: utils.import('system/error/404') }
+]
+
+const createRouter = () => new VueRouter({
+  scrollBehavior: () => ({ y: 0 }),
+  routes: constantRoutes
 })
+
+// 导出路由 在 main.js 里使用
+const router = createRouter()
 
 /**
- * 路由拦截
- * 权限验证
+ * 重新设置路由
  */
-router.beforeEach(async (to, from, next) => {
-  // 确认已经加载多标签页数据 https://github.com/d2-projects/d2-admin/issues/201
-  await store.dispatch('d2admin/page/isLoaded')
-  // 确认已经加载组件尺寸设置 https://github.com/d2-projects/d2-admin/issues/198
-  await store.dispatch('d2admin/size/isLoaded')
-  // 进度条
-  NProgress.start()
-  // 关闭搜索面板
-  store.commit('d2admin/search/set', false)
-  // 验证当前路由所有的匹配中是否需要有登录验证的
-  // 由于在网络请求的钩子里有对 token 异常的判断，所以在这里不处理异常重定向
-  // 如果网络请求中没有处理登录异常，请在 catch 中添加注销逻辑
-  // 例如在 catch 中：
-  // store.dispatch('d2admin/user/logout', {
-  //   focus: true,
-  //   remote: false,
-  //   back: true
-  // })
-  if (to.matched.some(r => r.meta.auth)) {
-    try {
-      await api.USER_CHECK_TOKEN()
-      next()
-    } catch (error) {
-      next(false)
-    }
-    NProgress.done()
-  } else {
-    next()
-  }
-})
-
-router.afterEach(to => {
-  // 进度条
-  NProgress.done()
-  // 多页控制 打开新的页面
-  store.dispatch('d2admin/page/open', to)
-  // 更改标题
-  utils.title(to.meta.title)
-})
+export function resetRouter() {
+  router.matcher = createRouter().matcher
+}
 
 export default router
