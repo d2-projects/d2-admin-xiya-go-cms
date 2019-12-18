@@ -103,8 +103,8 @@ export default {
       time: dayjs().format('HH:mm:ss'),
       // 表单
       formLogin: {
-        username: '',
-        password: ''
+        username: process.env.VUE_APP_USER || '',
+        password: process.env.VUE_APP_PASSWORD || ''
       },
       // 表单校验
       rules: {
