@@ -26,6 +26,17 @@ export default ({ request }) => ({
     })
   },
   /**
+   * @description 菜单列表
+   * @description 当前用的的菜单列表
+   * @description http://yapi.xiya.vip/project/11/interface/api/560
+   */
+  MENU_USER () {
+    return request({
+      url: '/api/menu/find_all_menu',
+      method: 'post'
+    })
+  },
+  /**
    * @description 菜单创建
    * @description http://yapi.xiya.vip/project/11/interface/api/100
    */
