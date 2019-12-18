@@ -67,7 +67,7 @@ export default context => ({
         }, { root: true })
       }
       // 注销当前登录
-      dispatch('d2admin/account/logout', {
+      dispatch('d2admin/user/logout', {
         focus: true,
         remote: false,
         back: true

@@ -46,7 +46,7 @@ router.beforeEach(async (to, from, next) => {
   // 由于在网络请求的钩子里有对 token 异常的判断，所以在这里不处理异常重定向
   // 如果网络请求中没有处理登录异常，请在 catch 中添加注销逻辑
   // 例如在 catch 中：
-  // store.dispatch('d2admin/account/logout', {
+  // store.dispatch('d2admin/user/logout', {
   //   focus: true,
   //   remote: false,
   //   back: true

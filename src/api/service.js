@@ -47,7 +47,7 @@ service.interceptors.response.use(
           showClose: false,
           closeOnPressEscape: false
         })
-        store.dispatch('d2admin/account/logout', {
+        store.dispatch('d2admin/user/logout', {
           focus: true,
           remote: false,
           back: true
