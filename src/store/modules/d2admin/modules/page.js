@@ -397,10 +397,9 @@ export default context => ({
           if (route.children) {
             push(route.children)
           } else {
-            if (!route.hidden) {
-              const { meta, name, path } = route
-              pool.push({ meta, name, path })
-            }
+            if (route.hidden) return
+            const { meta, name, path } = route
+            pool.push({ meta, name, path })
           }
         })
       }

@@ -8,7 +8,7 @@ import store from '@/store/index'
 import d2Admin from '@/plugin/d2admin'
 
 // 菜单和路由设置
-import router, { constantRoutesInLayout } from './router'
+import router, { constantRoutes } from './router'
 import menu from '@/menu'
 import menuHeader from '@/menu/header'
 
@@ -24,7 +24,7 @@ new Vue({
   render: h => h(App),
   created () {
     // 处理路由 得到每一级的路由设置
-    this.$store.commit('d2admin/page/init', constantRoutesInLayout)
+    this.$store.commit('d2admin/page/init', constantRoutes)
     // 设置顶栏菜单
     this.$store.commit('d2admin/menu/headerSet', menuHeader)
     // 设置侧边栏菜单
