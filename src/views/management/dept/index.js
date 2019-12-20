@@ -49,9 +49,9 @@ export default {
         { prop: 'parent_id', label: '上级部门', minWidth: '200px', show: false },
         { prop: 'order_num', label: '显示排序', minWidth: '200px', show: false },
         { prop: 'leader', label: '负责人', minWidth: '200px', show: false },
-        { prop: 'created_by', label: '创建人员', width: '100px', show: false },
+        { prop: 'create_by', label: '创建人员', width: '100px', show: false },
         { prop: 'created_at', label: '创建时间', formatter: row => utils.time.format(row.created_at, 'YYYY/M/D HH:mm:ss'), width: '140px', show: false },
-        { prop: 'updated_by', label: '更新人员', width: '100px', show: false },
+        { prop: 'update_by', label: '更新人员', width: '100px', show: false },
         { prop: 'updated_at', label: '更新时间', formatter: row => utils.time.format(row.updated_at, 'YYYY/M/D HH:mm:ss'), width: '140px', show: false },
         { prop: 'remark', label: '备注', width: '200px', show: false }
       ]
