@@ -1,7 +1,7 @@
 import store from '@/store'
 import axios from 'axios'
 import { get } from 'lodash'
-import { Message, MessageBox } from 'element-ui'
+import { Message, Notification } from 'element-ui'
 import utils from '@/utils'
 
 // 记录和显示错误
@@ -43,11 +43,11 @@ service.interceptors.response.use(
         50012,
         50014
       ].indexOf(dataAxios.code) >= 0) {
-        await MessageBox.alert('请重新登录', '身份验证失败', {
-          showClose: false,
-          closeOnPressEscape: false
+        Notification.error({
+          title: '身份验证失败',
+          message: '请重新登录'
         })
-        store.dispatch('d2admin/user/logout', {
+        await store.dispatch('d2admin/user/logout', {
           focus: true,
           remote: false,
           back: true

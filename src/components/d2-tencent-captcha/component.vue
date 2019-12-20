@@ -1,5 +1,5 @@
 <template>
-  <span>
+  <span @click="onClick">
     <slot/>
   </span>
 </template>
@@ -7,18 +7,10 @@
 <script>
 export default {
   name: 'd2-tencent-captcha',
-  data () {
-    return {
-      TencentCaptcha: null
-    }
-  },
-  mounted () {
-    this.init()
-  },
   methods: {
-    init () {
+    onClick () {
       const TencentCaptcha = window.TencentCaptcha
-      this.TencentCaptcha = new TencentCaptcha(this.$el, String(process.env.VUE_APP_TENCENT_CAPTCHA_APP_ID), async result => {
+      const captcha = new TencentCaptcha(String(process.env.VUE_APP_TENCENT_CAPTCHA_APP_ID), async result => {
         if (result.ret === 0) {
           const { randstr, ticket } = result
           try {
@@ -30,6 +22,7 @@ export default {
           } catch (error) {}
         }
       }, {})
+      captcha.show()
     }
   }
 }

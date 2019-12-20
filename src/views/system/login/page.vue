@@ -30,10 +30,10 @@
                     <i slot="prepend" class="fa fa-keyboard-o"></i>
                   </el-input>
                 </el-form-item>
-                <d2-tencent-captcha @success="submit">
-                  <d2-button size="default" type="primary" label="登录" class="button-login"/>
-                </d2-tencent-captcha>
               </el-form>
+              <d2-tencent-captcha @success="submit">
+                <d2-button size="default" type="primary" label="登录" class="button-login"/>
+              </d2-tencent-captcha>
             </el-card>
             <p class="page-login--options" flex="main:justify cross:center">
               <span><d2-icon name="question-circle"/> 忘记密码</span>

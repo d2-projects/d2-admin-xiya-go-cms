@@ -25,9 +25,7 @@ export default context => ({
     // 侧栏菜单
     aside: [],
     // 侧边栏收缩
-    asideCollapse: setting.menu.asideCollapse,
-    // 是否已经设置过菜单 用于判断是否需要加载用户菜单数据
-    isMenuLoaded: false
+    asideCollapse: setting.menu.asideCollapse
   },
   actions: {
     /**
@@ -76,14 +74,6 @@ export default context => ({
     }
   },
   mutations: {
-    /**
-     * @description 设置是否已经设置过菜单
-     * @param {Object} state state
-     * @param {Boolean} value setting
-     */
-    isMenuLoadedSet (state, value) {
-      state.isMenuLoaded = value
-    },
     /**
      * @description 设置顶栏菜单
      * @param {Object} state state

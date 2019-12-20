@@ -5,6 +5,8 @@ import router from '@/router'
 export default context => ({
   namespaced: true,
   state: {
+    // 用户登录状态
+    isLogged: !!utils.cookies.get('token'),
     // 用户信息
     info: {}
   },
@@ -24,17 +26,9 @@ export default context => ({
      * @param {Object} payload password {String} 密码
      * @param {Object} payload route {Object} 登录成功后定向的路由对象 任何 vue-router 支持的格式
      */
-    async login ({ dispatch }, {
-      username = '',
-      password = ''
-    } = {}) {
+    async login ({ commit, dispatch }, { username = '', password = '' } = {}) {
       try {
         // 获取登录结果
-        // data
-        // "nickname": "...",
-        // "token": "...",
-        // "userId": 1,
-        // "userName": "..."
         const data = await context.api.USER_LOGIN({
           username,
           password
@@ -46,10 +40,14 @@ export default context => ({
         // 如有必要 token 需要定时更新，默认保存一天
         utils.cookies.set('uuid', data.userId)
         utils.cookies.set('token', data.token)
+        // 设置用户已经登陆
+        commit('isLoggedSet', true)
         // 设置 vuex 用户信息
         await dispatch('d2admin/user/set', data, { root: true })
         // 从持久化数据加载一系列的设置
         await dispatch('d2admin/sys/load', null, { root: true })
+        // 加载用户路由
+        await dispatch('d2admin/router/load', null, { root: true })
         // 显示提示信息
         Message({
           message: '登录成功',
@@ -70,24 +68,17 @@ export default context => ({
      * @param {Object} payload local {Boolean} 需要本地登出
      * @param {Object} payload back {Boolean} 返回当前页面
      */
-    logout ({
-      commit,
-      dispatch
-    }, {
-      focus = false,
-      remote = true,
-      local = true,
-      back = false
-    } = {}) {
+    logout ({ state, commit, dispatch }, { focus = false, remote = true, local = true, back = false } = {}) {
       /**
        * @description 注销
        */
       async function logout () {
+        // 设置用户登陆状态
+        commit('isLoggedSet', false)
         // 请求登出接口
         // 不管成功与否都要进行下一步，所以不用 await 了
-        if (remote) {
-          context.api.USER_LOGOUT()
-        }
+        if (remote) context.api.USER_LOGOUT()
+        // 本地清空登陆信息
         if (local) {
           // 删除 cookie
           utils.cookies.remove('token')
@@ -98,11 +89,8 @@ export default context => ({
         // 跳转路由
         let redirect = ''
         if (back) {
-          if (['login'].indexOf(router.app.$route.name) < 0) {
-            redirect = router.app.$route.fullPath
-          } else {
-            redirect = router.app.$route.query.redirect
-          }
+          if (['login'].indexOf(router.app.$route.name) < 0) redirect = router.app.$route.fullPath
+          else redirect = router.app.$route.query.redirect
         }
         router.push({
           name: 'login',
@@ -159,6 +147,16 @@ export default context => ({
         defaultValue: {},
         user: true
       }, { root: true })
+    }
+  },
+  mutations: {
+    /**
+     * @description 设置用户登陆状态
+     * @param {Object} state state
+     * @param {Boolean} value 是否登录
+     */
+    isLoggedSet (state, value) {
+      state.isLogged = value
     }
   }
 })
