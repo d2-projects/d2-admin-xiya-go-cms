@@ -40,15 +40,33 @@ export default {
       }
       const url = {
         prop: 'url',
-        default: '/',
-        label: '请求地址',
-        render: () => <el-input vModel={ this.form.model.url } clearable/>
-      }
-      const component = {
-        prop: 'component',
         default: '',
-        label: '页面组件',
-        render: () => <el-input vModel={ this.form.model.component } placeholder="utils.import('The path here')" clearable/>
+        label: '菜单链接',
+        render: () => <el-input vModel={ this.form.model.url } placeholder="/foo/path?key=value" clearable on-input={ this.onUrlChange }/>
+      }
+      const routeName = {
+        prop: 'route_name',
+        default: '',
+        label: '路由名称',
+        render: () => <el-input vModel={ this.form.model.route_name } placeholder="foo-path" clearable/>
+      }
+      const routePath = {
+        prop: 'route_path',
+        default: '',
+        label: '路由地址',
+        render: () => <el-input vModel={ this.form.model.route_path } placeholder="foo/path" clearable/>
+      }
+      const routeComponent = {
+        prop: 'route_component',
+        default: '',
+        label: '路由组件',
+        render: () => <el-input vModel={ this.form.model.route_component } placeholder="foo/path" clearable/>
+      }
+      const routeCache = {
+        prop: 'route_cache',
+        default: 2,
+        label: '路由缓存',
+        render: () => <d2-dict-radio vModel={ this.form.model.route_cache } name="is" button/>
       }
       const perms = {
         prop: 'perms',
@@ -84,10 +102,10 @@ export default {
         parentId,
         menuName,
         menuType,
-        // 菜单类型 menu_type === 目录 1：[菜单图标] [是否外链] [路由地址] [可见性]
+        // 菜单类型 menu_type === 目录 1：[菜单图标] [是否外链] [菜单链接] [可见性]
         ...this.form.model.menu_type === 1 ? [ icon, isFrame, url, visible ] : [],
-        // 菜单类型 menu_type === 菜单 2：[菜单图标] [是否外链] [路由地址] [组件路径?] [权限标识] [可见性]
-        ...this.form.model.menu_type === 2 ? [ icon, isFrame, url, component, perms, visible ] : [],
+        // 菜单类型 menu_type === 菜单 2：[菜单图标] [是否外链] [菜单链接] [路由名称] [路由地址] [路由组件] [路由缓存] [权限标识] [可见性]
+        ...this.form.model.menu_type === 2 ? [ icon, isFrame, url, routeName, routePath, routeComponent, routeCache, perms, visible ] : [],
         // 菜单类型 menu_type === 按钮 3：[权限标识]
         ...this.form.model.menu_type === 3 ? [ perms ] : [],
         orderNum,
@@ -96,16 +114,23 @@ export default {
     }
   },
   methods: {
+    /**
+     * @description 菜单类型改变时重新计算表单
+     */
     onMenuTypeChange () {
-      this.reloadModel({
-        pick: [
-          'menu_name',
-          'parent_id',
-          'menu_type',
-          'order_num',
-          'remark'
-        ]
+      this.modelReload({
+        pick: ['parent_id', 'menu_name', 'menu_type', 'order_num', 'remark']
       })
+    },
+    /**
+     * @description 菜单链接改变触发
+     * @param {String} url url
+     */
+    onUrlChange (url) {
+      const data = (url.indexOf('?') ? url.split('?')[0] : url).split('/').filter(s => s)
+      this.modelSet('route_name', data.join('-'))
+      this.modelSet('route_path', data.join('/'))
+      this.modelSet('route_component', data.join('/'))
     }
   }
 }

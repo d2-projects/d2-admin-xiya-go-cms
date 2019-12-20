@@ -65,38 +65,33 @@ export default context => ({
      * @param {Object} vuex context
      * @param {Object} payload focus {Boolean} 强制登出 没有任何提示
      * @param {Object} payload remote {Boolean} 需要服务端登出
-     * @param {Object} payload local {Boolean} 需要本地登出
      * @param {Object} payload back {Boolean} 返回当前页面
      */
-    logout ({ state, commit, dispatch }, { focus = false, remote = true, local = true, back = false } = {}) {
+    logout ({ state, commit, dispatch }, { focus = false, remote = true, back = false } = {}) {
       /**
        * @description 注销
        */
       async function logout () {
         // 设置用户登陆状态
         commit('isLoggedSet', false)
-        // 请求登出接口
-        // 不管成功与否都要进行下一步，所以不用 await 了
+        // 请求登出接口 不管成功与否都要进行下一步，所以不用 await 了
         if (remote) context.api.USER_LOGOUT()
-        // 本地清空登陆信息
-        if (local) {
-          // 删除 cookie
-          utils.cookies.remove('token')
-          utils.cookies.remove('uuid')
-          // 清空 vuex 用户信息
-          await dispatch('d2admin/user/set', {}, { root: true })
-        }
-        // 跳转路由
+        // 本地清空登陆信息 删除 cookie
+        utils.cookies.remove('token')
+        utils.cookies.remove('uuid')
+        // 本地清空登陆信息 清空 vuex 用户信息
+        await dispatch('d2admin/user/set', {}, { root: true })
+        // 本地清空动态路由设置
+        // TODO 重置路由 重置状态
+        // 跳转到登录页 通过 back 参数指定在登陆之后是否需要跳转回原来的页面
         let redirect = ''
         if (back) {
           if (['login'].indexOf(router.app.$route.name) < 0) redirect = router.app.$route.fullPath
           else redirect = router.app.$route.query.redirect
         }
-        router.push({
+        router.replace({
           name: 'login',
-          query: {
-            ...redirect ? { redirect } : {}
-          }
+          query: redirect ? { redirect } : {}
         })
       }
       // 判断是否需要确认

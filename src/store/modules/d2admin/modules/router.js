@@ -55,6 +55,7 @@ function getMenusFromSource (menuSource) {
  * @param {Array} menuSource 接口返回的原始菜单数据
  */
 function getRoutesFromSource (menuSource) {
+  console.log(menuSource)
   let routes = []
   function pick (sourceItem) {
     if (isRoute(sourceItem)) {
@@ -90,17 +91,26 @@ export default context => ({
       // 获取接口原始数据
       const result = await context.api.MENU_USER()
       // 计算菜单
-      const menuSource = result.menu
-      console.group('menuSource')
-      console.log(JSON.stringify(menuSource, null, 2))
-      console.groupEnd()
-      const menus = getMenusFromSource(menuSource)
+      const menus = getMenusFromSource(result.menu)
       // 设置顶栏菜单
       commit('d2admin/menu/headerSet', menus, { root: true })
       // 设置侧边栏菜单
       commit('d2admin/menu/asideSet', menus, { root: true })
+      // 计算路由
+      const routes = getRoutesFromSource(result.menu)
+      console.log(routes)
       // 标记已经加载过动态路由
-      state.isLoaded = true
+      commit('isLoadedSet', true)
+    }
+  },
+  mutations: {
+    /**
+     * @description 设置动态路由加载状态
+     * @param {Object} state state
+     * @param {Boolean} value 是否已经加载动态路由
+     */
+    isLoadedSet (state, value) {
+      state.isLoaded = value
     }
   }
 })

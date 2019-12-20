@@ -44,7 +44,7 @@ export default {
       return [
         { prop: 'menu_name', label: '名称', minWidth: '200px', fixed: 'left' },
         { prop: 'icon', label: '图标', render: ({ row }) => row.icon ? <d2-icon name={ row.icon }></d2-icon> : <span class="d2-opacity-3">无</span>, width: '60px' },
-        { prop: 'url', label: '地址', minWidth: '200px' },
+        { prop: 'url', label: '菜单链接', minWidth: '200px' },
         { prop: 'perms', label: '权限标识', width: '200px' },
         { prop: 'id', label: 'ID', width: '100px', show: false },
         { prop: 'order_num', label: '显示排序', minWidth: '100px' },

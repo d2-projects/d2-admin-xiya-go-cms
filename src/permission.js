@@ -6,8 +6,7 @@ import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 
 /**
- * 路由拦截
- * 权限验证
+ * 路由拦截器
  */
 router.beforeEach(async (to, from, next) => {
   NProgress.start()
@@ -18,17 +17,9 @@ router.beforeEach(async (to, from, next) => {
     await store.dispatch('d2admin/page/isLoaded')
     // 确认已经加载组件尺寸设置 https://github.com/d2-projects/d2-admin/issues/198
     await store.dispatch('d2admin/size/isLoaded')
-    // 加载用户路由
+    // 加载动态路由 内部已经做了对登录状态的判断
     await store.dispatch('d2admin/router/load')
-    // 验证当前路由所有的匹配中是否需要有登录验证的
-    // 由于在网络请求的钩子里有对 token 异常的判断，所以在这里不处理异常重定向
-    // 如果网络请求中没有处理登录异常，请在 catch 中添加注销逻辑
-    // 例如在 catch 中：
-    // store.dispatch('d2admin/user/logout', {
-    //   focus: true,
-    //   remote: false,
-    //   back: true
-    // })
+    // 验证当前路由所有的匹配中是否需要有登录验证的 由于在网络请求的钩子里有对 token 异常的判断，所以在这里不处理异常重定向
     if (to.matched.some(r => r.meta.auth)) {
       await api.USER_CHECK_TOKEN()
       next()

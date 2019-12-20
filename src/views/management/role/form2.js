@@ -37,7 +37,7 @@ export default {
   },
   methods: {
     onMenuTypeChange (menuType) {
-      this.reloadModel({
+      this.modelReload({
         pick: [
           'role_name',
           'role_key',

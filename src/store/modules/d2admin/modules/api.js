@@ -67,11 +67,7 @@ export default context => ({
         }, { root: true })
       }
       // 注销当前登录
-      dispatch('d2admin/user/logout', {
-        focus: true,
-        remote: false,
-        back: true
-      }, { root: true })
+      dispatch('d2admin/user/logout', { focus: true, remote: false, back: true }, { root: true })
       // 应用变更
       state.base = value
       // 持久化接口地址设置

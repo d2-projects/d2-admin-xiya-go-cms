@@ -83,7 +83,7 @@ export default {
      * @param {Object} config {Array} pick 需要从旧的表单数据中保留的字段
      * @param {Object} config {Object} data 需要特殊设置的数据
      */
-    reloadModel ({
+    modelReload ({
       pick = [],
       data = {}
     } = {}) {
@@ -103,6 +103,14 @@ export default {
       this.$set(this.form, 'model', model)
     },
     /**
+     * @description 设置 model 的某个属性值
+     * @param {String} keyname 属性名称
+     * @param {String} value 值
+     */
+    modelSet (keyname = '', value = '') {
+      this.$set(this.form.model, keyname, value)
+    },
+    /**
      * @description 初始化表单为编辑模式
      * @param {Number} id 编辑表单的唯一 id
      */
@@ -115,7 +123,7 @@ export default {
           this.doLoadDict(this.loadDict)
         ])
         this.detail = result[0]
-        this.reloadModel()
+        this.modelReload()
       } catch (error) {
         console.log(error)
         this.cancle()
@@ -127,7 +135,7 @@ export default {
     async create (data = {}) {
       this.setMode('create')
       this.detail = data
-      this.reloadModel()
+      this.modelReload()
       this.open()
       await this.doLoadDict(this.loadDict)
     },

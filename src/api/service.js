@@ -47,11 +47,7 @@ service.interceptors.response.use(
           title: '身份验证失败',
           message: '请重新登录'
         })
-        await store.dispatch('d2admin/user/logout', {
-          focus: true,
-          remote: false,
-          back: true
-        })
+        await store.dispatch('d2admin/user/logout', { focus: true, remote: false, back: true })
       } else {
         errorLog(error)
       }
