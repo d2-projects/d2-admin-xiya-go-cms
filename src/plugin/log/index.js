@@ -2,7 +2,7 @@ import store from '@/store'
 import utils from '@/utils'
 
 export default {
-  install (Vue, options) {
+  install (Vue) {
     // 快速打印 log
     Vue.prototype.$log = {
       ...utils.log,

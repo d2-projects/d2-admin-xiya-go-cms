@@ -1,7 +1,7 @@
 import api from '@/api'
 
 export default {
-  install (Vue, options) {
+  install (Vue) {
     Vue.prototype.$api = api
   }
 }

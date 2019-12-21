@@ -14,13 +14,14 @@ import i18n from '@/i18n.js'
 
 // 功能插件
 import pluginApi from '@/plugin/api'
+import pluginEnv from '@/plugin/env'
 import pluginError from '@/plugin/error'
 import pluginLodash from '@/plugin/lodash'
 import pluginLog from '@/plugin/log'
 import pluginOpen from '@/plugin/open'
 
 export default {
-  install (Vue, options) {
+  install (Vue) {
     // 设置为 false 以阻止 vue 在启动时生成生产提示
     // https://cn.vuejs.org/v2/api/#productionTip
     Vue.config.productionTip = false
@@ -38,6 +39,7 @@ export default {
     })
     // 插件
     Vue.use(pluginApi)
+    Vue.use(pluginEnv)
     Vue.use(pluginError)
     Vue.use(pluginLodash)
     Vue.use(pluginLog)

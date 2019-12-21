@@ -40,11 +40,8 @@ function getMenusFromSource (menuSource) {
     let menu = {}
     menu.title = sourceItem.menu_name
     menu.icon = sourceItem.icon
-    if (hasChildren(sourceItem)) {
-      menu.children = sourceItem.children_list.map(maker)
-    } else {
-      menu.path = sourceItem.url
-    }
+    if (hasChildren(sourceItem)) menu.children = sourceItem.children_list.map(maker)
+    else menu.path = sourceItem.url
     return menu
   }
   return menuSource.map(maker)

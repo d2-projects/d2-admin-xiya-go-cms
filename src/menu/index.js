@@ -2,6 +2,7 @@ export default [
   {
     title: '系统管理',
     icon: 'folder-o',
+    path: '/management/user',
     children: [
       { path: '/management/user', title: '用户管理' },
       { path: '/management/role', title: '角色管理' },
