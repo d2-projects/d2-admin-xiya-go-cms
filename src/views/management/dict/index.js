@@ -116,7 +116,7 @@ export default {
         {
           prop: 'status',
           label: '状态',
-          default: 0,
+          default: this.$env.VUE_APP_DICT_STATUS_ACTIVE,
           render: () => <d2-dict-radio vModel={ this.search.form.model.status } name="status" button all/>
         }
       ]

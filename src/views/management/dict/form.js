@@ -30,14 +30,14 @@ export default {
         },
         {
           prop: 'dict_value_type',
-          default: 1,
+          default: this.$env.VUE_APP_DICT_DICT_VALUE_TYPE_NUMBER,
           label: '数据类型',
           rule: { required: true, message: '必填', trigger: 'change' },
           render: () => <d2-dict-radio vModel={ this.form.model.dict_value_type } name="dict_value_type" disabled={ this.mode !== 'create' } button/>
         },
         {
           prop: 'status',
-          default: 1,
+          default: this.$env.VUE_APP_DICT_STATUS_ACTIVE,
           label: '状态',
           render: () => <d2-dict-radio vModel={ this.form.model.status } name="status" button/>
         },

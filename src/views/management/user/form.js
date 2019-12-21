@@ -49,7 +49,7 @@ export default {
         ] : [],
         {
           prop: 'sex',
-          default: 0,
+          default: this.$env.VUE_APP_DICT_EMPTY_NUMBER,
           label: '性别',
           render: () => <d2-dict-radio name="sex" vModel={ this.form.model.sex } all all-label="未知" button/>
         },
@@ -88,7 +88,7 @@ export default {
         },
         {
           prop: 'status',
-          default: 1,
+          default: this.$env.VUE_APP_DICT_STATUS_ACTIVE,
           label: '状态',
           render: () => <d2-dict-radio vModel={ this.form.model.status } name="status" button/>
         },

@@ -71,13 +71,13 @@ export default {
         },
         {
           prop: 'dict_sort',
-          default: 1,
+          default: 0,
           label: '显示顺序',
-          render: () => <el-input-number min={ 1 } vModel={ this.form.model.dict_sort }/>
+          render: () => <el-input-number min={ 0 } vModel={ this.form.model.dict_sort }/>
         },
         {
           prop: 'status',
-          default: 1,
+          default: this.$env.VUE_APP_DICT_STATUS_ACTIVE,
           label: '状态',
           render: () => <d2-dict-radio vModel={ this.form.model.status } name="status" button/>
         },
