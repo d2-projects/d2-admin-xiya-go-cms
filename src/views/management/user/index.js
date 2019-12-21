@@ -59,7 +59,7 @@ export default {
         { prop: 'user_name', label: '登录账号', minWidth: '100px', fixed: 'left' },
         { prop: 'nickname', label: '昵称', minWidth: '100px' },
         { prop: 'id', label: 'ID', minWidth: '80px' },
-        { prop: 'sex', label: '性别', minWidth: '80px', render: ({ row }) => <d2-dict name="sex" value={ row.sex } all-label="未知"/> },
+        { prop: 'sex', label: '性别', minWidth: '80px', render: ({ row }) => <d2-dict name="sex" value={ row.sex } all all-label="未知"/> },
         {
           prop: 'avatar',
           label: '头像',

@@ -49,9 +49,9 @@ export default {
         ] : [],
         {
           prop: 'sex',
-          default: 3,
+          default: 0,
           label: '性别',
-          render: () => <d2-dict-radio name="sex" vModel={ this.form.model.sex } all-label="未知" button/>
+          render: () => <d2-dict-radio name="sex" vModel={ this.form.model.sex } all all-label="未知" button/>
         },
         {
           prop: 'phone',
