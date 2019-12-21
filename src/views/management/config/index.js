@@ -108,7 +108,7 @@ export default {
         {
           prop: 'config_type',
           label: '系统内置',
-          default: this.$env.VUE_APP_DICT_IS_TRUE,
+          default: this.$env.VUE_APP_DICT_EMPTY_NUMBER,
           render: () => <d2-dict-radio vModel={ this.search.form.model.config_type } name="is" button all/>
         }
       ]
