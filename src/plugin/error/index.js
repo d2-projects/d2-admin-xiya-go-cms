@@ -1,5 +1,6 @@
 import store from '@/store'
 import utils from '@/utils'
+import env from '@/env'
 
 export default {
   install (Vue) {
@@ -15,7 +16,7 @@ export default {
           }
         })
         // 只在开发模式下打印 log
-        if (process.env.NODE_ENV === 'development') {
+        if (env.NODE_ENV === 'development') {
           utils.log.capsule('D2Admin', 'ErrorHandler', 'danger')
           utils.log.danger('>>>>>> 错误信息 >>>>>>')
           console.log(info)

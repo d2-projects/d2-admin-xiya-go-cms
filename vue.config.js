@@ -13,7 +13,7 @@ process.env.VUE_APP_VERSION = require('./package.json').version
 // Unix 时间戳 (毫秒)
 let time = require('dayjs')()
 time = time.subtract(time.utcOffset(), 'minute').add(480, 'minute')
-process.env.VUE_APP_BUILD_TIME = time.valueOf()
+process.env.VUE_APP_BUILD_TIME = `${time.valueOf()}|number`
 
 // 设置不参与构建的库
 let externals = {}

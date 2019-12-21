@@ -3,6 +3,7 @@ import axios from 'axios'
 import { get } from 'lodash'
 import { Message, Notification } from 'element-ui'
 import utils from '@/utils'
+import env from '@/env'
 
 // 记录和显示错误
 function errorLog (error) {
@@ -13,7 +14,7 @@ function errorLog (error) {
       error
     }
   })
-  if (process.env.NODE_ENV === 'development') {
+  if (env.NODE_ENV === 'development') {
     utils.log.danger('>>>>>> Error >>>>>>')
     console.error(error)
   }

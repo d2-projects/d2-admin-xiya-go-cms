@@ -1,4 +1,5 @@
 import Cookies from 'js-cookie'
+import env from '@/env'
 
 /**
  * @description 存储 cookie 值
@@ -11,7 +12,7 @@ export function set (name = 'default', value = '', cookieSetting = {}) {
     expires: 1
   }
   Object.assign(currentCookieSetting, cookieSetting)
-  Cookies.set(`d2admin-${process.env.VUE_APP_VERSION}-${name}`, value, currentCookieSetting)
+  Cookies.set(`d2admin-${env.VUE_APP_VERSION}-${name}`, value, currentCookieSetting)
 }
 
 /**
@@ -19,7 +20,7 @@ export function set (name = 'default', value = '', cookieSetting = {}) {
  * @param {String} name cookie name
  */
 export function get (name = 'default') {
-  return Cookies.get(`d2admin-${process.env.VUE_APP_VERSION}-${name}`)
+  return Cookies.get(`d2admin-${env.VUE_APP_VERSION}-${name}`)
 }
 
 /**
@@ -34,5 +35,5 @@ export function getAll () {
  * @param {String} name cookie name
  */
 export function remove (name = 'default') {
-  return Cookies.remove(`d2admin-${process.env.VUE_APP_VERSION}-${name}`)
+  return Cookies.remove(`d2admin-${env.VUE_APP_VERSION}-${name}`)
 }

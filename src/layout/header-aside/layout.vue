@@ -10,8 +10,8 @@
       <!-- 顶栏 -->
       <div class="d2-theme-header" :style="{ opacity: this.searchActive ? 0.5 : 1 }" flex-box="0" flex>
         <router-link to="/index" class="logo-group" :style="{width: asideCollapse ? asideWidthCollapse : asideWidth}" flex-box="0">
-          <img v-if="asideCollapse" :src="`${$baseUrl}image/theme/${themeActiveSetting.name}/logo/icon-only.png`">
-          <img v-else :src="`${$baseUrl}image/theme/${themeActiveSetting.name}/logo/all.png`">
+          <img v-if="asideCollapse" :src="`${$env.BASE_URL}image/theme/${themeActiveSetting.name}/logo/icon-only.png`">
+          <img v-else :src="`${$env.BASE_URL}image/theme/${themeActiveSetting.name}/logo/all.png`">
         </router-link>
         <div class="toggle-aside-btn" @click="handleToggleAside" flex-box="0">
           <d2-icon name="bars"/>
@@ -132,7 +132,7 @@ export default {
     styleLayoutMainGroup () {
       return {
         ...this.themeActiveSetting.backgroundImage ? {
-          backgroundImage: `url('${this.$baseUrl}${this.themeActiveSetting.backgroundImage}')`
+          backgroundImage: `url('${this.$env.BASE_URL}${this.themeActiveSetting.backgroundImage}')`
         } : {}
       }
     }

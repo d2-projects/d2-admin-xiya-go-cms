@@ -10,7 +10,7 @@ export default {
   methods: {
     onClick () {
       const TencentCaptcha = window.TencentCaptcha
-      const captcha = new TencentCaptcha(String(process.env.VUE_APP_TENCENT_CAPTCHA_APP_ID), async result => {
+      const captcha = new TencentCaptcha(this.$env.VUE_APP_TENCENT_CAPTCHA_APP_ID, async result => {
         if (result.ret === 0) {
           const { randstr, ticket } = result
           try {

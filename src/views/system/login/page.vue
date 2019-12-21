@@ -57,8 +57,8 @@
           </p>
           <p>
             <a href="https://github.com/d2-projects/d2-admin-cms-go/actions" target="_blank">
-              构建于 {{ $buildTime | timeFormat('YYYY年M月D日 dddd Ah点mm分') }}
-              <d2-time-relative :value="$buildTime"/>
+              构建于 {{ $env.VUE_APP_BUILD_TIME | timeFormat('YYYY年M月D日 dddd Ah点mm分') }}
+              <d2-time-relative :value="$env.VUE_APP_BUILD_TIME"/>
             </a>
             <el-divider direction="vertical"/>
             <d2-api-base-url-controller>
@@ -98,13 +98,13 @@ export default {
     localeMixin
   ],
   data () {
-    return {
+    let data = {
       timeInterval: null,
       time: dayjs().format('HH:mm:ss'),
       // 表单
       formLogin: {
-        username: process.env.VUE_APP_USER || '',
-        password: process.env.VUE_APP_PASSWORD || ''
+        username: '',
+        password: ''
       },
       // 表单校验
       rules: {
@@ -124,6 +124,9 @@ export default {
         ]
       }
     }
+    data.formLogin.username = this.$env.VUE_APP_USER || ''
+    data.formLogin.password = this.$env.VUE_APP_PASSWORD || ''
+    return data
   },
   mounted () {
     this.timeInterval = setInterval(() => {

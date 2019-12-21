@@ -1,13 +1,14 @@
 import { Notification, Message } from 'element-ui'
+import env from '@/env'
 
-const optionsEnv = Object.keys(process.env)
+const optionsEnv = Object.keys(env)
   .filter(keyName => /^VUE_APP_API_\d+_\w+$/.test(keyName))
   .map(keyName => {
     const [index, ...name] = keyName.replace('VUE_APP_API_', '').split('_')
     return {
       index: Number(index),
       name: name.join('_'),
-      value: process.env[keyName]
+      value: env[keyName]
     }
   })
   .sort((a, b) => a.index - b.index)
@@ -17,7 +18,7 @@ const optionsEnv = Object.keys(process.env)
     type: 'env'
   }))
 
-const base = process.env.VUE_APP_API || optionsEnv.length > 0 ? optionsEnv[0].value : ''
+const base = env.VUE_APP_API || optionsEnv.length > 0 ? optionsEnv[0].value : ''
 
 export default context => ({
   namespaced: true,

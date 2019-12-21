@@ -13,7 +13,7 @@
         slot-scope="scope"
         class="theme-preview"
         :style="{
-          backgroundImage: `url(${$baseUrl}${scope.row.preview})`
+          backgroundImage: `url(${$env.BASE_URL}${scope.row.preview})`
         }">
       </div>
     </el-table-column>

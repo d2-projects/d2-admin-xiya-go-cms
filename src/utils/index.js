@@ -1,3 +1,4 @@
+import env from '@/env'
 import * as cookies from './modules/cookies'
 import * as db from './modules/db'
 import * as fn from './modules/fn'
@@ -12,7 +13,7 @@ const utils = {
   fn,
   helper,
   log,
-  import: require('./modules/import.' + process.env.NODE_ENV)
+  import: require('./modules/import.' + env.NODE_ENV)
 }
 
 /**
@@ -20,7 +21,7 @@ const utils = {
  * @param {String} title 标题
  */
 utils.title = function (titleText) {
-  const processTitle = process.env.VUE_APP_TITLE || 'D2Admin'
+  const processTitle = env.VUE_APP_TITLE || 'D2Admin'
   window.document.title = `${processTitle}${titleText ? ` | ${titleText}` : ''}`
 }
 

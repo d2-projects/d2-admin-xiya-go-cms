@@ -2,8 +2,9 @@ import low from 'lowdb'
 import LocalStorage from 'lowdb/adapters/LocalStorage'
 import * as cookies from './cookies'
 import { cloneDeep } from 'lodash'
+import env from '@/env'
 
-const adapter = new LocalStorage(`d2admin-${process.env.VUE_APP_VERSION}`)
+const adapter = new LocalStorage(`d2admin-${env.VUE_APP_VERSION}`)
 const db = low(adapter)
 
 db
