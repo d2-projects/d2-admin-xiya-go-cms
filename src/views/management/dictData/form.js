@@ -65,7 +65,7 @@ export default {
         },
         {
           prop: 'is_default',
-          default: 1,
+          default: this.$env.VUE_APP_DICT_IS_FALSE,
           label: '系统默认',
           render: () => <d2-dict-radio vModel={ this.form.model.is_default } name="is" button/>
         },

@@ -28,7 +28,7 @@ export default {
       }
       const menuType = {
         prop: 'menu_type',
-        default: 2,
+        default: this.$env.VUE_APP_DICT_MENU_TYPE_MENU,
         label: '菜单类型',
         render: () => <d2-dict-radio name="menu_type" vModel={ this.form.model.menu_type } on-change={ this.onMenuTypeChange } button/>
       }
@@ -64,7 +64,7 @@ export default {
       }
       const routeCache = {
         prop: 'route_cache',
-        default: 2,
+        default: this.$env.VUE_APP_DICT_IS_FALSE,
         label: '路由缓存',
         render: () => <d2-dict-radio vModel={ this.form.model.route_cache } name="is" button/>
       }
@@ -88,7 +88,7 @@ export default {
       }
       const isFrame = {
         prop: 'is_frame',
-        default: 2,
+        default: this.$env.VUE_APP_DICT_IS_FALSE,
         label: '外链',
         render: () => <d2-dict-radio name="is" vModel={ this.form.model.is_frame } button/>
       }
@@ -102,12 +102,10 @@ export default {
         parentId,
         menuName,
         menuType,
-        // 菜单类型 menu_type === 目录 1：[菜单图标] [是否外链] [菜单链接] [可见性]
-        ...this.form.model.menu_type === 1 ? [ icon, isFrame, url, visible ] : [],
-        // 菜单类型 menu_type === 菜单 2：[菜单图标] [是否外链] [菜单链接] [路由名称] [路由地址] [路由组件] [路由缓存] [权限标识] [可见性]
-        ...this.form.model.menu_type === 2 ? [ icon, isFrame, url, routeName, routePath, routeComponent, routeCache, perms, visible ] : [],
-        // 菜单类型 menu_type === 按钮 3：[权限标识]
-        ...this.form.model.menu_type === 3 ? [ perms ] : [],
+        // 菜单类型 menu_type === 菜单 [菜单图标] [是否外链] [菜单链接] [路由名称] [路由地址] [路由组件] [路由缓存] [权限标识] [可见性]
+        ...this.form.model.menu_type === this.$env.VUE_APP_DICT_MENU_TYPE_MENU ? [ icon, isFrame, url, routeName, routePath, routeComponent, routeCache, perms, visible ] : [],
+        // 菜单类型 menu_type === 按钮 [权限标识]
+        ...this.form.model.menu_type === this.$env.VUE_APP_DICT_MENU_TYPE_BUTTON ? [ perms ] : [],
         orderNum,
         remark
       ]
