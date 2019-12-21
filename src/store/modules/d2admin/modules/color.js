@@ -1,12 +1,11 @@
 import client from 'webpack-theme-color-replacer/client'
 import forElementUI from 'webpack-theme-color-replacer/forElementUI'
-import env from '@/env'
 
 export default context => ({
   namespaced: true,
   state: {
     // 颜色
-    value: env.VUE_APP_ELEMENT_COLOR
+    value: context.env.VUE_APP_ELEMENT_COLOR
   },
   actions: {
     /**
@@ -18,7 +17,7 @@ export default context => ({
       // 记录上个值
       const old = state.value
       // store 赋值
-      state.value = color || env.VUE_APP_ELEMENT_COLOR
+      state.value = color || context.env.VUE_APP_ELEMENT_COLOR
       // 持久化
       await dispatch('d2admin/db/set', {
         dbName: 'sys',
@@ -43,7 +42,7 @@ export default context => ({
       state.value = await dispatch('d2admin/db/get', {
         dbName: 'sys',
         path: 'color.value',
-        defaultValue: env.VUE_APP_ELEMENT_COLOR,
+        defaultValue: context.env.VUE_APP_ELEMENT_COLOR,
         user: true
       }, { root: true })
       // 应用

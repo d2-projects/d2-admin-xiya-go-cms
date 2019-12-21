@@ -1,5 +1,4 @@
 import utils from '@/utils'
-import env from '@/env'
 
 export default context => ({
   namespaced: true,
@@ -9,7 +8,7 @@ export default context => ({
      * @param {Object} state state
      */
     versionShow () {
-      utils.log.capsule('D2Admin', `v${env.VUE_APP_VERSION}`)
+      utils.log.capsule('D2Admin', `v${context.env.VUE_APP_VERSION}`)
       console.log('D2 Admin  https://github.com/d2-projects/d2-admin')
       console.log('Document  https://d2.pub/zh/doc/d2-admin')
       console.log('请不要吝啬您的 star，谢谢 ~')
