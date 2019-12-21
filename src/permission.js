@@ -18,7 +18,7 @@ router.beforeEach(async (to, from, next) => {
     // 确认已经加载组件尺寸设置 https://github.com/d2-projects/d2-admin/issues/198
     await store.dispatch('d2admin/size/isLoaded')
     // 加载动态路由 内部已经做了对登录状态的判断
-    await store.dispatch('d2admin/router/load')
+    await store.dispatch('d2admin/router/load', { to: to.fullPath })
     // 验证当前路由所有的匹配中是否需要有登录验证的 由于在网络请求的钩子里有对 token 异常的判断，所以在这里不处理异常重定向
     if (to.matched.some(r => r.meta.auth)) {
       await api.USER_CHECK_TOKEN()
@@ -27,6 +27,7 @@ router.beforeEach(async (to, from, next) => {
       next()
     }
   } catch (error) {
+    console.log(error)
     next(false)
   }
   NProgress.done()

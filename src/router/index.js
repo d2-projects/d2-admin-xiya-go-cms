@@ -34,27 +34,16 @@ export function createRoutesInLayout (routes = []) {
   ]
 }
 
-// 在 layout 中显示的路由
-const routesInLayout = createRoutesInLayout([
-  { path: 'management/user', name: 'management-user', meta: { title: '用户管理', auth: true }, component: utils.import('management/user') },
-  { path: 'management/role', name: 'management-role', meta: { title: '角色管理', auth: true }, component: utils.import('management/role') },
-  { path: 'management/menu', name: 'management-menu', meta: { title: '菜单管理', auth: true }, component: utils.import('management/menu') },
-  { path: 'management/dept', name: 'management-dept', meta: { title: '部门管理', auth: true }, component: utils.import('management/dept') },
-  { path: 'management/post', name: 'management-post', meta: { title: '岗位管理', auth: true }, component: utils.import('management/post') },
-  { path: 'management/dict', name: 'management-dict', meta: { title: '字典管理', auth: true }, component: utils.import('management/dict') },
-  { path: 'management/dict-data', name: 'management-dict-data', meta: { title: '字典数据', auth: true }, component: utils.import('management/dictData') },
-  { path: 'management/config', name: 'management-config', meta: { title: '参数设置', auth: true }, component: utils.import('management/config') }
-])
-
 // 在 layout 之外显示的路由
-const routesOutLayout = [
+export const routesOutLayout = [
   { path: '/refresh', name: 'refresh', component: utils.import('system/function/refresh'), hidden: true },
   { path: '/redirect/:route*', name: 'redirect', component: utils.import('system/function/redirect'), hidden: true },
   { path: '/login', name: 'login', component: utils.import('system/login'), hidden: true },
   { path: '*', name: '404', component: utils.import('system/error/404'), hidden: true }
 ]
 
-export const constantRoutes = routesInLayout.concat(routesOutLayout)
+// 默认的路由
+export const constantRoutes = createRoutesInLayout().concat(routesOutLayout)
 
 /**
  * @description 创建路由
@@ -72,7 +61,7 @@ const router = createRouter(constantRoutes)
  * @description 重新设置路由
  * @param {Array} routes 额外追加的路由
  */
-export function resetRouter(routes) {
+export function resetRouter(routes = []) {
   router.matcher = createRouter(routes).matcher
 }
 

@@ -22,7 +22,7 @@ const doFetch = throttle(async function ({ state, commit }) {
       value: dictData
     })
   })
-}, 30, {
+}, 1000, {
   leading: false
 })
 

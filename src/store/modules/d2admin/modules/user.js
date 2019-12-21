@@ -26,7 +26,7 @@ export default context => ({
      * @param {Object} payload password {String} 密码
      * @param {Object} payload route {Object} 登录成功后定向的路由对象 任何 vue-router 支持的格式
      */
-    async login ({ commit, dispatch }, { username = '', password = '' } = {}) {
+    async login ({ commit, dispatch }, { username = '', password = '', to = '/' } = {}) {
       try {
         // 获取登录结果
         const data = await context.api.USER_LOGIN({
@@ -47,7 +47,7 @@ export default context => ({
         // 从持久化数据加载一系列的设置
         await dispatch('d2admin/sys/load', null, { root: true })
         // 加载用户路由
-        await dispatch('d2admin/router/load', null, { root: true })
+        await dispatch('d2admin/router/load', { focus: true, to }, { root: true })
         // 显示提示信息
         Message({
           message: '登录成功',
