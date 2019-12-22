@@ -44,10 +44,10 @@ export default context => ({
         commit('isLoggedSet', true)
         // 设置 vuex 用户信息
         await dispatch('d2admin/user/set', data, { root: true })
-        // 从持久化数据加载一系列的设置
-        await dispatch('d2admin/sys/load', null, { root: true })
         // 加载用户路由
         await dispatch('d2admin/router/load', { focus: true, to }, { root: true })
+        // 从持久化数据加载一系列的设置
+        await dispatch('d2admin/sys/load', undefined, { root: true })
         // 显示提示信息
         Message({
           message: '登录成功',

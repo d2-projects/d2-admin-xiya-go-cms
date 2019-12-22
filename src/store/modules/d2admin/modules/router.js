@@ -101,7 +101,7 @@ export default context => {
        * @param {Object} payload focus {Boolean} 强制重新加载动态路由
        * @param {Object} payload to {String} 动态路由加载完成后跳转的页面
        */
-      async load ({ state, rootState, commit }, { focus = false, to = '/' }) {
+      async load ({ state, rootState, commit, dispatch }, { focus = false, to = '/' }) {
         // 取消请求 - 没有登录
         if (!rootState.d2admin.user.isLogged) return
         // 取消请求 - 已经加载过动态路由
@@ -120,6 +120,8 @@ export default context => {
         resetRouter(routes)
         // [ 路由 ] 重新设置多标签页池
         commit('d2admin/page/init', routes, { root: true })
+        // [ 标签页 ] 重新计算多标签页数据
+        dispatch('d2admin/page/openedLoad', { filter: true }, { root: true })
         // [ 路由 ] 重新访问
         router.replace(to)
         // 标记已经加载过动态路由

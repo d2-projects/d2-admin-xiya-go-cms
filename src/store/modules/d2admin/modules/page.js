@@ -39,7 +39,7 @@ export default context => ({
      * @description 从持久化数据载入标签页列表
      * @param {Object} vuex context
      */
-    async openedLoad ({ state, commit, dispatch }) {
+    async openedLoad ({ state, commit, dispatch }, { filter = false } = {}) {
       // store 赋值
       const value = await dispatch('d2admin/db/get', {
         dbName: 'sys',
@@ -47,26 +47,30 @@ export default context => ({
         defaultValue: setting.page.opened,
         user: true
       }, { root: true })
-      // 在处理函数中进行数据优化 过滤掉现在已经失效的页签或者已经改变了信息的页签
-      // 以 fullPath 字段为准
-      // 如果页面过多的话可能需要优化算法
-      // valid 有效列表 1, 1, 0, 1 => 有效, 有效, 失效, 有效
-      const valid = []
-      // 处理数据
-      state.opened = value.map(opened => {
-        // 忽略首页
-        if (opened.fullPath === '/index') {
-          valid.push(1)
-          return opened
-        }
-        // 尝试在所有的支持多标签页的页面里找到 name 匹配的页面
-        const find = state.pool.find(item => item.name === opened.name)
-        // 记录有效或无效信息
-        valid.push(find ? 1 : 0)
-        // 返回合并后的数据 新的覆盖旧的
-        // 新的数据中一般不会携带 params 和 query, 所以旧的参数会留存
-        return Object.assign({}, opened, find)
-      }).filter((opened, index) => valid[index] === 1)
+      if (filter) {
+        // 在处理函数中进行数据优化 过滤掉现在已经失效的页签或者已经改变了信息的页签
+        // 以 fullPath 字段为准
+        // 如果页面过多的话可能需要优化算法
+        // valid 有效列表 1, 1, 0, 1 => 有效, 有效, 失效, 有效
+        const valid = []
+        // 处理数据
+        state.opened = value.map(opened => {
+          // 忽略首页
+          if (opened.fullPath === '/index') {
+            valid.push(1)
+            return opened
+          }
+          // 尝试在所有的支持多标签页的页面里找到 name 匹配的页面
+          const find = state.pool.find(item => item.name === opened.name)
+          // 记录有效或无效信息
+          valid.push(find ? 1 : 0)
+          // 返回合并后的数据 新的覆盖旧的
+          // 新的数据中一般不会携带 params 和 query, 所以旧的参数会留存
+          return Object.assign({}, opened, find)
+        }).filter((opened, index) => valid[index] === 1)
+      } else {
+        state.opened = value
+      }
       // 标记已经加载多标签页数据 https://github.com/d2-projects/d2-admin/issues/201
       state.openedLoaded = true
       // 根据 opened 数据生成缓存设置

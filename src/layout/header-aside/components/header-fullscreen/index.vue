@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapMutations } from 'vuex'
 export default {
   computed: {
     ...mapState('d2admin/fullscreen', [
@@ -19,7 +19,7 @@ export default {
     ])
   },
   methods: {
-    ...mapActions('d2admin/fullscreen', [
+    ...mapMutations('d2admin/fullscreen', [
       'toggle'
     ])
   }

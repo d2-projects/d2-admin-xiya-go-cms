@@ -26,8 +26,8 @@ export function createRoutesInLayout (routes = []) {
       redirect: { name: 'index' },
       component: layoutHeaderAside,
       children: [
-        { path: 'index', name: 'index', meta: { title: '首页',auth: true }, component: utils.import('system/index'), hidden: true },
-        { path: 'log', name: 'log', meta: { title: '前端日志', auth: true }, component: utils.import('system/log'), hidden: true },
+        { path: 'index', name: 'index', meta: { title: '首页',auth: true }, component: utils.import('system/index') },
+        { path: 'log', name: 'log', meta: { title: '前端日志', auth: true }, component: utils.import('system/log') },
         ...routes
       ]
     }

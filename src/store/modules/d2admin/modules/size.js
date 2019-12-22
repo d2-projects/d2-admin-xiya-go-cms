@@ -16,7 +16,7 @@ export default context => ({
     apply ({ state, commit }, refresh) {
       Vue.prototype.$ELEMENT.size = state.value
       if (refresh) {
-        commit('d2admin/page/keepAliveClean', null, { root: true })
+        commit('d2admin/page/keepAliveClean', undefined, { root: true })
         router.replace('/refresh')
       }
     },

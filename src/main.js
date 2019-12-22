@@ -22,7 +22,7 @@ new Vue({
   store,
   i18n,
   render: h => h(App),
-  created () {
+  async created () {
     // 处理路由 得到每一级的路由设置
     this.$store.commit('d2admin/page/init', constantRoutes)
     // 设置顶栏菜单
@@ -32,16 +32,16 @@ new Vue({
     // 初始化菜单搜索功能
     this.$store.commit('d2admin/search/init', menu)
     // 加载接口配置
-    this.$store.dispatch('d2admin/api/load')
+    await this.$store.dispatch('d2admin/api/load')
   },
-  mounted () {
+  async mounted () {
     // 展示系统信息
     this.$store.commit('d2admin/releases/versionShow')
     // 用户登录后从数据库加载一系列的设置
-    this.$store.dispatch('d2admin/sys/load')
+    await this.$store.dispatch('d2admin/sys/load')
     // 获取并记录用户 UA
     this.$store.commit('d2admin/ua/get')
     // 初始化全屏监听
-    this.$store.dispatch('d2admin/fullscreen/listen')
+    this.$store.commit('d2admin/fullscreen/listen')
   }
 }).$mount('#app')
