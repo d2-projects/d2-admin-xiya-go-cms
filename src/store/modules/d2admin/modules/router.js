@@ -16,7 +16,7 @@ export default context => {
    * @description 从接口返回的数据中计算出菜单
    * @param {Array} menuSource 接口返回的原始菜单数据
    */
-  function getMenusFromSource (menuSource) {
+  function getMenus (menuSource) {
     /**
      * @description 检验是否为合法菜单
      * @param {Object} sourceItem 原始数据的一项
@@ -49,7 +49,7 @@ export default context => {
    * @description 从接口返回的数据中计算出路由
    * @param {Array} menuSource 接口返回的原始菜单数据
    */
-  function getRoutesFromSource (menuSource) {
+  function getRoutes (menuSource) {
     /**
      * @description 检验是否为合法路由
      * @param {Object} sourceItem 原始数据的一项
@@ -109,13 +109,13 @@ export default context => {
         // 获取接口原始数据
         const result = await context.api.MENU_USER()
         // [ 菜单 ] 计算菜单
-        const menus = getMenusFromSource(result.menu)
+        const menus = getMenus(result)
         // [ 菜单 ] 设置顶栏菜单
         commit('d2admin/menu/headerSet', menus, { root: true })
         // [ 菜单 ] 设置侧边栏菜单
         commit('d2admin/menu/asideSet', menus, { root: true })
         // [ 路由 ] 计算路由
-        const routes = createRoutesInLayout(getRoutesFromSource(result.menu)).concat(routesOutLayout)
+        const routes = createRoutesInLayout(getRoutes(result)).concat(routesOutLayout)
         // [ 路由 ] 重新设置路由
         resetRouter(routes)
         // [ 路由 ] 重新设置多标签页池
