@@ -3,15 +3,16 @@ import utils from '@/utils'
 import router, { createRoutesInLayout, routesOutLayout, resetRouter } from '@/router'
 
 export default context => {
-
   /**
    * @description 检查一个菜单是否有子菜单
    * @param {Object} item 接口返回菜单中的一项原始数据
    */
-  function hasChildren (item) {
-    return item.children_list && isArray(item.children_list) && item.children_list.length > 0
+  function hasChildren (item, keyname = 'children_list') {
+    return item[keyname]
+      && isArray(item[keyname])
+      && item[keyname].length > 0
+      && item[keyname].reduce((count, menu) => menu.menu_type === context.env.VUE_APP_DICT_MENU_TYPE_MENU ? ++count : count, 0) > 0
   }
-
   /**
    * @description 从接口返回的数据中计算出菜单
    * @param {Array} menuSource 接口返回的原始菜单数据
@@ -44,7 +45,6 @@ export default context => {
     }
     return menuSource.reduce(maker, [])
   }
-
   /**
    * @description 从接口返回的数据中计算出路由
    * @param {Array} menuSource 接口返回的原始菜单数据
@@ -88,7 +88,6 @@ export default context => {
     }
     return menuSource.reduce(maker, [])
   }
-
   return {
     namespaced: true,
     state: {
