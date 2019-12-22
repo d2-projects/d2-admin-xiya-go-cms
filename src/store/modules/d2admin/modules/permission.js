@@ -4,14 +4,19 @@ import router, { createRoutesInLayout, routesOutLayout, resetRouter } from '@/ro
 
 export default context => {
   /**
+   * @description 检查一个对象是否有子元素
+   * @param {Object} item 接口返回菜单中的一项原始数据
+   * @param {String} keyname 子元素的 keyname
+   */
+  function hasChildren (item = {}, keyname = 'children_list') {
+    return item[keyname] && isArray(item[keyname]) && item[keyname].length > 0
+  }
+  /**
    * @description 检查一个菜单是否有子菜单
    * @param {Object} item 接口返回菜单中的一项原始数据
    */
-  function hasChildren (item, keyname = 'children_list') {
-    return item[keyname]
-      && isArray(item[keyname])
-      && item[keyname].length > 0
-      && item[keyname].reduce((count, menu) => menu.menu_type === context.env.VUE_APP_DICT_MENU_TYPE_MENU ? ++count : count, 0) > 0
+  function hasRouteChildren (item = {}, keyname = 'children_list') {
+    return hasChildren(item, keyname) && item[keyname].reduce((count, menu) => menu.menu_type === context.env.VUE_APP_DICT_MENU_TYPE_MENU ? ++count : count, 0) > 0
   }
   /**
    * @description 从接口返回的数据中计算出菜单
@@ -29,7 +34,7 @@ export default context => {
       return true
     }
     /**
-     * @description 依次处理原始数据，返回处理后的菜单，过滤掉无效的菜单
+     * @description 依次处理原始数据，返回处理后的菜单
      * @param {Array} menus 上次处理返回的结果
      * @param {Object} sourceItem 原始数据的一项
      */
@@ -38,7 +43,7 @@ export default context => {
       let menu = {}
       menu.title = sourceItem.menu_name
       menu.icon = sourceItem.icon
-      if (hasChildren(sourceItem)) menu.children = sourceItem.children_list.reduce(maker, [])
+      if (hasRouteChildren(sourceItem)) menu.children = sourceItem.children_list.reduce(maker, [])
       else menu.path = sourceItem.url
       menus.push(menu)
       return menus
@@ -66,12 +71,12 @@ export default context => {
       return true
     }
     /**
-     * @description 依次处理原始数据，返回处理后的路由，过滤掉无效的路由
+     * @description 依次处理原始数据，返回处理后的路由
      * @param {Array} routes 上次处理返回的结果
      * @param {Object} sourceItem 原始数据的一项
      */
     function maker (routes, sourceItem) {
-      if (hasChildren(sourceItem)) {
+      if (hasRouteChildren(sourceItem)) {
         routes = routes.concat(sourceItem.children_list.reduce(maker, []))
       } else if (isEffectiveRoute(sourceItem)) {
         routes.push({
@@ -88,10 +93,39 @@ export default context => {
     }
     return menuSource.reduce(maker, [])
   }
+  /**
+   * @description 从接口返回的数据中计算出权限列表
+   * @param {Array} menuSource 接口返回的原始菜单数据
+   */
+  function getPermissions (menuSource) {
+    /**
+     * @description 检验是否为合法权限
+     * @param {Object} sourceItem 原始数据的一项
+     */
+    function isEffectivePermission (sourceItem) {
+      if (sourceItem.menu_type !== context.env.VUE_APP_DICT_MENU_TYPE_BUTTON) return
+      if (sourceItem.perms === '') return
+      return true
+    }
+    /**
+     * @description 依次处理原始数据，返回处理后的权限列表
+     * @param {Array} permissions 上次处理返回的结果
+     * @param {Object} sourceItem 原始数据的一项
+     */
+    function maker (permissions, sourceItem) {
+      if (isEffectivePermission(sourceItem)) permissions.push(sourceItem.perms)
+      if (hasChildren(sourceItem)) permissions = permissions.concat(sourceItem.children_list.reduce(maker, []))
+      return permissions
+    }
+    return menuSource.reduce(maker, [])
+  }
   return {
     namespaced: true,
     state: {
-      isLoaded: false
+      // 是否已经加载
+      isLoaded: false,
+      // 用户权限
+      permissions: []
     },
     actions: {
       /**
@@ -107,6 +141,8 @@ export default context => {
         if (!focus && state.isLoaded) return
         // 获取接口原始数据
         const result = await context.api.MENU_USER()
+        // [ 权限 ] 计算权限列表
+        state.permissions = getPermissions(result)
         // [ 菜单 ] 计算菜单
         const menus = getMenus(result)
         // [ 菜单 ] 设置顶栏菜单
