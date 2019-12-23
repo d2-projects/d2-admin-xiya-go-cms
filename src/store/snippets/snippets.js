@@ -15,7 +15,7 @@ exports.default = function () {
     scope,
     prefix: 'store import',
     body: [
-      `import store from '@/store/index'`
+      `import store from '@/store'`
     ],
     description: `# D2Admin 状态管理 | store\n# 在 js 文件中导入 store`
   }

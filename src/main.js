@@ -1,20 +1,15 @@
-// Vue
 import Vue from 'vue'
 import i18n from './i18n'
 import App from './App'
-// store must be imported before d2Admin
-import store from '@/store/index'
-// core
+import store from '@/store'
 import d2Admin from '@/plugin/d2admin'
 
-// 菜单和路由设置
 import router, { constantRoutes } from './router'
 import menu from '@/menu'
 import menuHeader from '@/menu/header'
 
 import './permission'
 
-// 核心插件
 Vue.use(d2Admin)
 
 new Vue({

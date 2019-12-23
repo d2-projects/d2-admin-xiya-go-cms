@@ -67,7 +67,7 @@ export default context => ({
      * @param {Object} payload remote {Boolean} 需要服务端登出
      * @param {Object} payload back {Boolean} 返回当前页面
      */
-    logout ({ state, commit, dispatch }, { focus = false, remote = true, back = false } = {}) {
+    logout ({ commit, dispatch }, { focus = false, remote = true, back = false } = {}) {
       /**
        * @description 注销
        */

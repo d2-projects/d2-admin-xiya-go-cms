@@ -11,7 +11,6 @@ import '@/filters'
 import '@/assets/svg-icons'
 // 国际化
 import i18n from '@/i18n'
-import env from '@/env'
 
 // 功能插件
 import pluginApi from '@/plugin/api'
@@ -20,6 +19,7 @@ import pluginError from '@/plugin/error'
 import pluginLodash from '@/plugin/lodash'
 import pluginLog from '@/plugin/log'
 import pluginOpen from '@/plugin/open'
+import pluginPermission from '@/plugin/permission'
 
 export default {
   install (Vue) {
@@ -37,5 +37,6 @@ export default {
     Vue.use(pluginLodash)
     Vue.use(pluginLog)
     Vue.use(pluginOpen)
+    Vue.use(pluginPermission)
   }
 }

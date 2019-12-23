@@ -1,4 +1,33 @@
-import { omit, keys, toNumber, isNaN } from 'lodash'
+import { omit, keys, toNumber, isNaN, isArray } from 'lodash'
+
+/**
+ * @description 在 source 中是否至少有一个 need 中的项目
+ * @param {Array} source 数据源
+ * @param {Array} need 需要存在的项目
+ */
+export function oneOf (source, need) {
+  if (isArray(need)) return need.reduce((result, item) => (result || source.indexOf(item) >= 0) ? true : false, false)
+  return source.indexOf(need) >= 0
+}
+
+/**
+ * @description 在 source 包括 need
+ * @param {Array} source 数据源
+ * @param {Array} need 需要存在的项目
+ */
+export function allIn (source, need) {
+  if (isArray(need)) return need.reduce((result, item) => (result === false || source.indexOf(item) < 0) ? false : true, true)
+  return source.indexOf(need) >= 0
+}
+
+/**
+ * @description 检查一个对象是否有子元素
+ * @param {Object} item 检查的对象
+ * @param {String} keyname 子元素的 keyname
+ */
+export function hasChildren (item = {}, keyname = 'children_list') {
+  return item[keyname] && isArray(item[keyname]) && item[keyname].length > 0
+}
 
 /**
  * 比较两个数组是否值一样 忽略顺序
