@@ -44,7 +44,7 @@ export default context => ({
         commit('isLoggedSet', true)
         // 设置 vuex 用户信息
         await dispatch('d2admin/user/set', data, { root: true })
-        // 加载用户路由
+        // 加载权限
         await dispatch('d2admin/permission/load', { focus: true, to }, { root: true })
         // 从持久化数据加载一系列的设置
         await dispatch('d2admin/sys/load', undefined, { root: true })
@@ -76,23 +76,26 @@ export default context => ({
         commit('isLoggedSet', false)
         // 请求登出接口 不管成功与否都要进行下一步，所以不用 await 了
         if (remote) context.api.USER_LOGOUT()
-        // 本地清空登陆信息 删除 cookie
+        // 删除 cookie
         utils.cookies.remove('token')
         utils.cookies.remove('uuid')
-        // 本地清空登陆信息 清空 vuex 用户信息
+        // 本地清空用户信息
         await dispatch('d2admin/user/set', {}, { root: true })
-        // 本地清空动态路由设置
-        // TODO 重置路由 重置状态
-        // 跳转到登录页 通过 back 参数指定在登陆之后是否需要跳转回原来的页面
+        // 计算跳转的路由
         let redirect = ''
         if (back) {
           if (['login'].indexOf(router.app.$route.name) < 0) redirect = router.app.$route.fullPath
           else redirect = router.app.$route.query.redirect
         }
-        router.replace({
-          name: 'login',
-          query: redirect ? { redirect } : {}
-        })
+        // 重置权限并且跳转到登录页 通过 back 参数指定在登陆之后是否需要跳转回原来的页面
+        await dispatch('d2admin/permission/load', {
+          focus: true,
+          to: {
+            name: 'login',
+            query: redirect ? { redirect } : {}
+          },
+          data: []
+        }, { root: true })
       }
       // 判断是否需要确认
       if (!focus) {

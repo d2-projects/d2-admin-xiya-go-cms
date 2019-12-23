@@ -133,24 +133,25 @@ export default context => {
        * @param {Object} vuex context
        * @param {Object} payload focus {Boolean} 强制重新加载动态路由
        * @param {Object} payload to {String} 动态路由加载完成后跳转的页面
+       * @param {Object} payload data {Array} 手动设置数据源 用来人工模拟权限数据或者重置权限设置
        */
-      async load ({ state, rootState, commit, dispatch }, { focus = false, to = '/' }) {
+      async load ({ state, rootState, commit, dispatch }, { focus = false, to = '/', data }) {
         // 取消请求 - 没有登录
-        if (!rootState.d2admin.user.isLogged) return
+        if (!data && !rootState.d2admin.user.isLogged) return
         // 取消请求 - 已经加载过动态路由
         if (!focus && state.isLoaded) return
         // 获取接口原始数据
-        const result = await context.api.MENU_USER()
+        const source = data || await context.api.MENU_USER()
         // [ 权限 ] 计算权限列表
-        state.permissions = getPermissions(result)
+        state.permissions = getPermissions(source)
         // [ 菜单 ] 计算菜单
-        const menus = getMenus(result)
+        const menus = getMenus(source)
         // [ 菜单 ] 设置顶栏菜单
         commit('d2admin/menu/headerSet', menus, { root: true })
         // [ 菜单 ] 设置侧边栏菜单
         commit('d2admin/menu/asideSet', menus, { root: true })
         // [ 路由 ] 计算路由
-        const routes = createRoutesInLayout(getRoutes(result)).concat(routesOutLayout)
+        const routes = createRoutesInLayout(getRoutes(source)).concat(routesOutLayout)
         // [ 路由 ] 重新设置路由
         resetRouter(routes)
         // [ 路由 ] 重新设置多标签页池
