@@ -1,11 +1,13 @@
 import utils from '@/utils'
 import dict from './crud.dict'
 import pagination from './crud.pagination'
+import permission from './crud.permission'
 
 export default {
   mixins: [
     dict,
-    pagination
+    pagination,
+    permission
   ],
   provide () {
     return {
@@ -234,6 +236,7 @@ export default {
      */
     async research () {
       try {
+        if (!this.hasPermission('query')) return
         // 表格显示无需等待字典加载完成 所以这里不需要 await
         this.doLoadDict(this.loadDict)
         const result = await this.doLoadData(this.searchMethod)

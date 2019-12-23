@@ -47,6 +47,12 @@ export default {
       api: {
         index: 'USER_ALL',
         delete: 'USER_DELETE'
+      },
+      permission: {
+        query: 'system:user:query',
+        add: 'system:user:add',
+        edit: 'system:user:edit',
+        remove: 'system:user:remove'
       }
     }
   },
