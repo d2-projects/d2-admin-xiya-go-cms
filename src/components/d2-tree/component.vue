@@ -75,7 +75,6 @@ export default {
      * @description 删除 half 状态的数据
      */
     removeHalf (sourceArray) {
-      if (!this.halfMix) return sourceArray
       /**
        * 找到这个值在 tree 中的对应并且判断是否子集都选中
        * 如果没有找到 返回 false
@@ -124,7 +123,8 @@ export default {
     updateDefaultValue () {
       // 根据是否多选 分别设置 tree 的属性
       if (this.multiple) {
-        this.defaultCheckedKeys = this.removeHalf(this.tryParseMultipleString(this.value))
+        const value = this.tryParseMultipleString(this.value)
+        this.defaultCheckedKeys = this.halfMix ? this.removeHalf(value) : value
       } else {
         this.currentNodeKey = this.value
       }
