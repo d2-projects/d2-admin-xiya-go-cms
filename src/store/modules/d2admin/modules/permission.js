@@ -34,8 +34,8 @@ export default context => {
       let menu = {}
       menu.title = sourceItem.menu_name
       menu.icon = sourceItem.icon
+      menu.path = sourceItem.url
       if (hasRouteChildren(sourceItem)) menu.children = sourceItem.children_list.reduce(maker, [])
-      else menu.path = sourceItem.url
       menus.push(menu)
       return menus
     }

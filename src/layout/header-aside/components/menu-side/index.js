@@ -11,17 +11,9 @@ export default {
   render (createElement) {
     return createElement('div', { attrs: { class: 'd2-layout-header-aside-menu-side' } }, [
       createElement('el-menu', {
-        props: {
-          collapse: this.asideCollapse,
-          uniqueOpened: true,
-          defaultActive: this.active
-        },
+        props: { collapse: this.asideCollapse, uniqueOpened: true },
         ref: 'menu',
-        on: {
-          select: this.handleMenuSelect,
-          open: this.reloadOpeneds,
-          close: this.reloadOpeneds
-        }
+        on: { select: this.handleMenuSelect }
       }, this.aside.map(menu => (menu.children === undefined ? elMenuItem : elSubmenu).call(this, createElement, menu))),
       ...this.aside.length === 0 && !this.asideCollapse ? [
         createElement('div', { attrs: { class: 'd2-layout-header-aside-menu-empty', flex: 'dir:top main:center cross:center' } }, [
@@ -33,9 +25,7 @@ export default {
   },
   data () {
     return {
-      active: '',
       asideHeight: 300,
-      openeds: [],
       BS: null
     }
   },
@@ -53,14 +43,14 @@ export default {
         this.scrollInit()
       }, 500)
     },
-    aside () {
-      this.setOpeneds()
-    },
-    // 监听路由 控制侧边栏激活状态
+    // 侧边栏数据发生变化时重新计算侧边栏展开状态
+    aside: 'initOpenedMenu',
+    // 路由变化时控制侧边栏激活状态
     '$route.fullPath': {
-      handler (value) {
-        this.active = value
-        this.reloadOpeneds()
+      handler () {
+        this.$nextTick(() => {
+          if (this.$refs.menu) this.$refs.menu.updateActiveIndex(this.$route.fullPath)
+        })
       },
       immediate: true
     }
@@ -73,19 +63,11 @@ export default {
   },
   methods: {
     /**
-     * @description 重新获取侧边栏展开的数据
-     */
-    reloadOpeneds () {
-      this.$nextTick(() => {
-        if (this.$refs.menu) this.openeds = this.$refs.menu.openedMenus
-      })
-    },
-    /**
      * @description 将之前保存的展开状态恢复到侧边栏上
      */
-    setOpeneds () {
+    initOpenedMenu () {
       this.$nextTick(() => {
-        if (this.$refs.menu) this.openeds.forEach(this.$refs.menu.open)
+        if (this.$refs.menu) this.$refs.menu.initOpenedMenu()
       })
     },
     /**
