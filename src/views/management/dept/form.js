@@ -50,9 +50,9 @@ export default {
         },
         {
           prop: 'order_num',
-          default: 0,
+          default: this.$env.VUE_APP_FORM_SORT_MIN,
           label: '显示排序',
-          render: () => <el-input-number min={ 0 } vModel={ this.form.model.order_num }/>
+          render: () => <el-input-number min={ this.$env.VUE_APP_FORM_SORT_MIN } vModel={ this.form.model.order_num }/>
         },
         {
           prop: 'status',

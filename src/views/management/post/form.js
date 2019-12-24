@@ -30,9 +30,9 @@ export default {
         },
         {
           prop: 'post_sort',
-          default: 0,
+          default: this.$env.VUE_APP_FORM_SORT_MIN,
           label: '显示顺序',
-          render: () => <el-input-number min={ 0 } vModel={ this.form.model.post_sort }/>
+          render: () => <el-input-number min={ this.$env.VUE_APP_FORM_SORT_MIN } vModel={ this.form.model.post_sort }/>
         },
         {
           prop: 'status',
