@@ -260,6 +260,7 @@ export default {
      * @param {String} ref 表单组件的 ref
      */
     create (data = {}, ref = 'form') {
+      if (!this.hasPermission('add')) return
       this.$refs[ref].create(data)
     },
     /**
@@ -268,6 +269,7 @@ export default {
      * @param {String} ref 表单组件的 ref
      */
     edit (id, ref = 'form') {
+      if (!this.hasPermission('edit')) return
       this.$refs[ref].edit(id)
     },
     /**
@@ -275,6 +277,7 @@ export default {
      * @param {Number} id 删除行的 id
      */
     delete (id) {
+      if (!this.hasPermission('remove')) return
       const deleteFunction = this.$api[this.api.delete]
       if (!this._.isFunction(deleteFunction)) {
         this.$message.error('未找到 API')

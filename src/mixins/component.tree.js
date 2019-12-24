@@ -47,19 +47,21 @@ export default {
   methods: {
     /**
      * @description 计算树数据的扁平化结构 => 数组
+     * @param {Array} source 原始数据
      */
-    refreshFlattenedArray (sourceArray) {
+    refreshFlattenedArray (source) {
       this.flattenedArray = utils.helper.flatTreeToArray({
-        data: sourceArray,
+        data: source,
         keyChildren: this.keyChildren
       })
     },
     /**
      * @description 计算树数据的扁平化结构 => 对象
+     * @param {Array} source 原始数据
      */
-    refreshFlattenedObject (sourceArray) {
+    refreshFlattenedObject (source) {
       this.flattenedObject = utils.helper.flatTreeToObject({
-        data: sourceArray,
+        data: source,
         keyChildren: this.keyChildren,
         keyId: this.keyId,
         includeChildren: true
@@ -68,6 +70,7 @@ export default {
     /**
      * @description 计算 label 或者 label 数组
      * @description 这里接收的就是原始的 value，需要做多种情况的判断
+     * @param {String|Array|Number} value 需要获取 label 的值
      */
     getLabel (value) {
       if (this.multiple) this.getValueLabels(this.tryParseMultipleString(value))
@@ -76,6 +79,7 @@ export default {
     /**
      * @description 计算 label
      * @description d2-tree 不使用这个方法
+     * @param {String|Number} value 需要获取 label 的值
      */
     getValueLabel (value) {
       this.valueLabel = this._.get(this.flattenedObject, [ value, this.keyLabel ].join('.'), '')
@@ -83,10 +87,10 @@ export default {
     /**
      * @description 计算 label 数组
      * @description d2-tree 不使用这个方法
+     * @param {Array} value 需要获取 label 的值
      */
     getValueLabels (value) {
-      let result = []
-      this.valueLabels = result
+      this.valueLabels = value.map(this.getValueLabel)
     },
     /**
      * @description 根据 source 字段获得真实的数据值
