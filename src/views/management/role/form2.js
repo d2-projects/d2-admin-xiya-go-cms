@@ -19,7 +19,7 @@ export default {
           default: '',
           label: '数据范围',
           rule: { required: true, message: '必填', trigger: 'change' },
-          render: () => <d2-dict-select vModel={ this.form.model.data_scope } name="data_scope" on-change={ this.onMenuTypeChange }/>
+          render: () => <d2-dict-select vModel={ this.form.model.data_scope } name="data_scope" on-change={ this.onDataScopeChange }/>
         },
         // data_scope
         // 1 全部
@@ -36,17 +36,15 @@ export default {
     }
   },
   methods: {
-    onMenuTypeChange (menuType) {
+    onDataScopeChange (dataScope) {
       this.modelReload({
         pick: [
           'role_name',
           'role_key',
           'data_scope'
         ],
-        data: {
-          // 全部数据权限时 清空部门权限
-          ...menuType === 1 ? { role_dept: '' } : {}
-        }
+        // 全部数据权限时 清空部门权限
+        data: dataScope === 1 ? { role_dept: '' } : {}
       })
     }
   }
