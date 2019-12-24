@@ -25,7 +25,6 @@ export default {
   },
   data () {
     return {
-      asideHeight: 300,
       BS: null
     }
   },
