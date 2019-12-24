@@ -149,21 +149,18 @@ export function isLegalEmailValidator (rule, value, callback) {
  * @param {Object} config {Array} data 树形数据
  * @param {Object} config {String} keyChildren 子节点字段名
  * @param {Object} config {Boolean} includeChildren 输出的数据中是否包含子节点数据
- * @param {Object} config {Boolean} freeze 输出结果前冻结数据
  */
 export function flatTreeToArray ({
   data = [],
   keyChildren = 'children_list',
-  includeChildren = false,
-  freeze = true
+  includeChildren = false
 } = {}) {
   function maker (result, item) {
     result.push(includeChildren ? item : omit(item, [ keyChildren ]))
     if (hasChildren(item, keyChildren)) result = result.concat(item[keyChildren].reduce(maker, []))
     return result
   }
-  const result = data.reduce(maker, [])
-  return freeze ? Object.freeze(result) : result
+  return data.reduce(maker, [])
 }
 
 /**
@@ -172,22 +169,19 @@ export function flatTreeToArray ({
  * @param {Object} config {String} keyChildren 子节点字段名
  * @param {Object} config {String} keyId 唯一 id 字段名
  * @param {Object} config {Boolean} includeChildren 输出的数据中是否包含子节点数据
- * @param {Object} config {Boolean} freeze 输出结果前冻结数据
  */
 export function flatTreeToObject ({
   data = [],
   keyChildren = 'children_list',
   keyId = 'id',
-  includeChildren = false,
-  freeze = true
+  includeChildren = false
 } = {}) {
   function maker (result, item) {
     result[item[keyId]] = includeChildren ? item : omit(item, [ keyChildren ])
     if (hasChildren(item, keyChildren)) Object.assign(result, item[keyChildren].reduce(maker, {}))
     return result
   }
-  const result = data.reduce(maker, {})
-  return freeze ? Object.freeze(result) : result
+  return data.reduce(maker, {})
 }
 
 /**

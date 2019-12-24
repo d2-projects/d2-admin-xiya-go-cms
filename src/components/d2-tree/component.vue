@@ -11,6 +11,7 @@
 </style>
 
 <script>
+import utils from '@/utils'
 import tree from '@/mixins/component.tree'
 import fieldChange from '@/mixins/el.fieldChange'
 
@@ -75,57 +76,16 @@ export default {
      * @description 删除 half 状态的数据
      */
     removeHalf (sourceArray) {
-      /**
-       * 找到这个值在 tree 中的对应并且判断是否子集都选中
-       * 如果没有找到 返回 false
-       * 如果找到了 并且子集都选中 返回 false
-       * 如果找到了 子集没有都选中 返回 true
-       */
-      // const isHalf = item => {
-      //   let node = {}
-      //   let half = false
-      //   const find = treeArray => {
-      //     for (let index = 0; index < treeArray.length; index++) {
-      //       const element = treeArray[index]
-      //       if (element[this.keyId] === item) {
-      //         node = element
-      //         break
-      //       } else {
-      //         find(element[this.keyChildren])
-      //       }
-      //     }
-      //   }
-      //   find(this.currentData)
-      //   const children = node[this.keyChildren] || []
-      //   for (let index = 0; index < children.length; index++) {
-      //     const element = children[index]
-      //     if (sourceArray.findIndex(e => e === element[this.keyId]) < 0) {
-      //       half = true
-      //       break
-      //     }
-      //   }
-      //   return half
-      // }
-      // return sourceArray.filter(e => !isHalf(e))
-
-      /**
-       * @description 在数据源中找到这一项
-       */
-      function findInSource (item) {
-
+      const allCheck = (result, item) => {
+        if (!result || sourceArray.indexOf(item[this.keyId]) < 0) return false
+        if (utils.helper.hasChildren(item, this.keyChildren)) return item[this.keyChildren].reduce(allCheck, true)
+        return true
       }
-      /**
-       * @description 检查一个项目是否子集全部选中
-       */
-      function isAllChecked (item) {
+      const filter = item => {
+        const obj = this.flattenedObject[item]
+        return obj ? [obj].reduce(allCheck, true) : false
       }
-      console.log(sourceArray)
-      return sourceArray.reduce((result, item) => {
-        if (isAllChecked(item)) {
-          result.push(item)
-        }
-        return result
-      }, [])
+      return sourceArray.filter(filter)
     },
     /**
      * @description 初始化 根据 source 的数据类型设置数据
