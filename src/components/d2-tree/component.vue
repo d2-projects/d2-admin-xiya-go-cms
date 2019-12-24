@@ -81,32 +81,51 @@ export default {
        * 如果找到了 并且子集都选中 返回 false
        * 如果找到了 子集没有都选中 返回 true
        */
-      const isHalf = value => {
-        let node = {}
-        let half = false
-        const find = treeArray => {
-          for (let index = 0; index < treeArray.length; index++) {
-            const element = treeArray[index]
-            if (element[this.keyId] === value) {
-              node = element
-              break
-            } else {
-              find(element[this.keyChildren])
-            }
-          }
-        }
-        find(this.currentData)
-        const children = node[this.keyChildren] || []
-        for (let index = 0; index < children.length; index++) {
-          const element = children[index]
-          if (sourceArray.findIndex(e => e === element[this.keyId]) < 0) {
-            half = true
-            break
-          }
-        }
-        return half
+      // const isHalf = item => {
+      //   let node = {}
+      //   let half = false
+      //   const find = treeArray => {
+      //     for (let index = 0; index < treeArray.length; index++) {
+      //       const element = treeArray[index]
+      //       if (element[this.keyId] === item) {
+      //         node = element
+      //         break
+      //       } else {
+      //         find(element[this.keyChildren])
+      //       }
+      //     }
+      //   }
+      //   find(this.currentData)
+      //   const children = node[this.keyChildren] || []
+      //   for (let index = 0; index < children.length; index++) {
+      //     const element = children[index]
+      //     if (sourceArray.findIndex(e => e === element[this.keyId]) < 0) {
+      //       half = true
+      //       break
+      //     }
+      //   }
+      //   return half
+      // }
+      // return sourceArray.filter(e => !isHalf(e))
+
+      /**
+       * @description 在数据源中找到这一项
+       */
+      function findInSource (item) {
+
       }
-      return sourceArray.filter(e => !isHalf(e))
+      /**
+       * @description 检查一个项目是否子集全部选中
+       */
+      function isAllChecked (item) {
+      }
+      console.log(sourceArray)
+      return sourceArray.reduce((result, item) => {
+        if (isAllChecked(item)) {
+          result.push(item)
+        }
+        return result
+      }, [])
     },
     /**
      * @description 初始化 根据 source 的数据类型设置数据
@@ -114,7 +133,8 @@ export default {
     async init () {
       const data = await this.getDataFromSource(this.source)
       this.currentData = data
-      this.getSourceFlat(data)
+      this.refreshFlattenedArray(data)
+      this.refreshFlattenedObject(data)
       this.updateDefaultValue()
     },
     /**
@@ -130,12 +150,8 @@ export default {
       }
       if (!this.$refs.tree) return
       this.$nextTick(() => {
-        if (this.multiple) {
-          this.$refs.tree.setCheckedKeys(this.defaultCheckedKeys)
-        } else {
-          const isKeyInData = this.sourceFlat.find(item => item[this.keyId] === this.currentNodeKey)
-          this.$refs.tree.setCurrentKey(isKeyInData ? this.currentNodeKey : null)
-        }
+        if (this.multiple) this.$refs.tree.setCheckedKeys(this.defaultCheckedKeys)
+        else this.$refs.tree.setCurrentKey(this.flattenedObject[this.currentNodeKey] ? this.currentNodeKey : null)
       })
     },
     /**

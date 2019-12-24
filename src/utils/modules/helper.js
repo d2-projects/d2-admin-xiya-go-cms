@@ -82,11 +82,7 @@ export function isLegalUsername (value) {
  * @description 适用于表单校验
  */
 export function isLegalUsernameValidator (rule, value, callback) {
-  callback(
-    value === '' || isLegalUsername(value)
-      ? undefined
-      : new Error('3~10个字符 只能是字母 数字 下划线')
-  )
+  callback(value === '' || isLegalUsername(value) ? undefined : new Error('3~10个字符 只能是字母 数字 下划线'))
 }
 
 /**
@@ -113,11 +109,7 @@ export function isLegalPassword (value) {
  * @description 适用于表单校验
  */
 export function isLegalPasswordValidator (rule, value, callback) {
-  callback(
-    value === '' || isLegalPassword(value)
-      ? undefined
-      : new Error('6-15个字符，至少包括大写、小写、下划线、数字两种')
-  )
+  callback(value === '' || isLegalPassword(value) ? undefined : new Error('6-15个字符，至少包括大写、小写、下划线、数字两种'))
 }
 
 /**
@@ -132,11 +124,7 @@ export function isLegalMobilePhone (value) {
  * @description 适用于表单校验
  */
 export function isLegalMobilePhoneValidator (rule, value, callback) {
-  callback(
-    value === '' || isLegalMobilePhone(value)
-      ? undefined
-      : new Error('手机号码格式不正确')
-  )
+  callback(value === '' || isLegalMobilePhone(value) ? undefined : new Error('手机号码格式不正确'))
 }
 
 /**
@@ -153,35 +141,58 @@ export function isLegalEmail (value) {
  * @description 适用于表单校验
  */
 export function isLegalEmailValidator (rule, value, callback) {
-  callback(
-    value === '' || isLegalEmail(value)
-      ? undefined
-      : new Error('邮箱格式不正确')
-  )
+  callback(value === '' || isLegalEmail(value) ? undefined : new Error('邮箱格式不正确'))
 }
 
 /**
- * @description 将树形数据扁平化
+ * @description 将树形数据扁平化 输出数组格式
  * @param {Object} config {Array} data 树形数据
  * @param {Object} config {String} keyChildren 子节点字段名
+ * @param {Object} config {Boolean} includeChildren 输出的数据中是否包含子节点数据
+ * @param {Object} config {Boolean} freeze 输出结果前冻结数据
  */
-export function flatTree ({
+export function flatTreeToArray ({
   data = [],
-  keyChildren = 'children_list'
+  keyChildren = 'children_list',
+  includeChildren = false,
+  freeze = true
 } = {}) {
-  let flat = []
-  const push = tempArray => {
-    tempArray.forEach(item => {
-      if (item[keyChildren].length > 0) push(item[keyChildren])
-      flat.push(omit(item, [ keyChildren ]))
-    })
+  function maker (result, item) {
+    result.push(includeChildren ? item : omit(item, [ keyChildren ]))
+    if (hasChildren(item, keyChildren)) result = result.concat(item[keyChildren].reduce(maker, []))
+    return result
   }
-  push(data)
-  return flat
+  const result = data.reduce(maker, [])
+  return freeze ? Object.freeze(result) : result
+}
+
+/**
+ * @description 将树形数据扁平化 输出对象格式
+ * @param {Object} config {Array} data 树形数据
+ * @param {Object} config {String} keyChildren 子节点字段名
+ * @param {Object} config {String} keyId 唯一 id 字段名
+ * @param {Object} config {Boolean} includeChildren 输出的数据中是否包含子节点数据
+ * @param {Object} config {Boolean} freeze 输出结果前冻结数据
+ */
+export function flatTreeToObject ({
+  data = [],
+  keyChildren = 'children_list',
+  keyId = 'id',
+  includeChildren = false,
+  freeze = true
+} = {}) {
+  function maker (result, item) {
+    result[item[keyId]] = includeChildren ? item : omit(item, [ keyChildren ])
+    if (hasChildren(item, keyChildren)) Object.assign(result, item[keyChildren].reduce(maker, {}))
+    return result
+  }
+  const result = data.reduce(maker, {})
+  return freeze ? Object.freeze(result) : result
 }
 
 /**
  * @description 传入一个值 返回处理成数字的结果
+ * @param {Any} value 需要处理的值
  */
 export function getNumberOrZero (value) {
   const result = toNumber(value)

@@ -167,7 +167,7 @@ export default {
       // 归属部门
       this.loadDictOne({
         name: 'dept_id',
-        method: async () => utils.helper.flatTree({ data: await this.$api.DEPT_ALL() }),
+        method: async () => utils.helper.flatTreeToArray({ data: await this.$api.DEPT_ALL() }),
         label: 'dept_name'
       })
     }

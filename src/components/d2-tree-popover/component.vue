@@ -109,7 +109,8 @@ export default {
     async getTreeData () {
       this.status.isLoadingSource = true
       this.currentSource = await this.getDataFromSource(this.source)
-      this.getSourceFlat(this.currentSource)
+      this.refreshFlattenedArray(this.currentSource)
+      this.refreshFlattenedObject(this.currentSource)
       this.getLabel(this.value)
       this.status.isLoadingSource = false
     },

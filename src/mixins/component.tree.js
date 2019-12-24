@@ -34,8 +34,10 @@ export default {
   },
   data () {
     return {
-      // 树数据的扁平化结构
-      sourceFlat: [],
+      // 树数据的扁平化结构 数组形式 为了方便其他计算使用
+      flattenedArray: [],
+      // 树数据的扁平化结构 对象形式 为了方便其他计算使用
+      flattenedObject: {},
       // value 对应的 label 或者 label 数组
       // d2-tree 不使用这个数据
       valueLabel: '',
@@ -44,12 +46,23 @@ export default {
   },
   methods: {
     /**
-     * @description 计算树数据的扁平化结构
+     * @description 计算树数据的扁平化结构 => 数组
      */
-    getSourceFlat (sourceArray) {
-      this.sourceFlat = utils.helper.flatTree({
+    refreshFlattenedArray (sourceArray) {
+      this.flattenedArray = utils.helper.flatTreeToArray({
         data: sourceArray,
         keyChildren: this.keyChildren
+      })
+    },
+    /**
+     * @description 计算树数据的扁平化结构 => 对象
+     */
+    refreshFlattenedObject (sourceArray) {
+      this.flattenedObject = utils.helper.flatTreeToObject({
+        data: sourceArray,
+        keyChildren: this.keyChildren,
+        keyId: this.keyId,
+        includeChildren: true
       })
     },
     /**
@@ -57,21 +70,15 @@ export default {
      * @description 这里接收的就是原始的 value，需要做多种情况的判断
      */
     getLabel (value) {
-      if (this.multiple) {
-        this.getValueLabels(this.tryParseMultipleString(value))
-      } else {
-        this.getValueLabel(value)
-      }
+      if (this.multiple) this.getValueLabels(this.tryParseMultipleString(value))
+      else this.getValueLabel(value)
     },
     /**
      * @description 计算 label
      * @description d2-tree 不使用这个方法
      */
     getValueLabel (value) {
-      let result = ''
-      const find = this.sourceFlat.find(item => item[this.keyId] === value)
-      result = find ? find[this.keyLabel] : result
-      this.valueLabel = result
+      this.valueLabel = this._.get(this.flattenedObject, [ value, this.keyLabel ].join('.'), '')
     },
     /**
      * @description 计算 label 数组
