@@ -33,6 +33,12 @@ export default {
       api: {
         index: 'DEPT_ALL',
         delete: 'DEPT_DELETE'
+      },
+      permission: {
+        query: 'system:dept:query',
+        add: 'system:dept:add',
+        edit: 'system:dept:edit',
+        remove: 'system:dept:remove'
       }
     }
   },

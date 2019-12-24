@@ -39,6 +39,12 @@ export default {
       api: {
         index: 'CONFIG_ALL',
         delete: 'CONFIG_DELETE'
+      },
+      permission: {
+        query: 'system:config:query',
+        add: 'system:config:add',
+        edit: 'system:config:edit',
+        remove: 'system:config:remove'
       }
     }
   },

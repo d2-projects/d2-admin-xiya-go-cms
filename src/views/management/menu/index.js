@@ -33,6 +33,12 @@ export default {
       api: {
         index: 'MENU_ALL',
         delete: 'MENU_DELETE'
+      },
+      permission: {
+        query: 'system:menu:query',
+        add: 'system:menu:add',
+        edit: 'system:menu:edit',
+        remove: 'system:menu:remove'
       }
     }
   },

@@ -41,6 +41,12 @@ export default {
       api: {
         index: 'ROLE_ALL',
         delete: 'ROLE_DELETE'
+      },
+      permission: {
+        query: 'system:role:query',
+        add: 'system:role:add',
+        edit: 'system:role:edit',
+        remove: 'system:role:remove'
       }
     }
   },

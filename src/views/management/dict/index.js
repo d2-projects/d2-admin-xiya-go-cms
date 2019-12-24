@@ -40,6 +40,12 @@ export default {
       api: {
         index: 'DICT_ALL',
         delete: 'DICT_DELETE'
+      },
+      permission: {
+        query: 'system:dict:query',
+        add: 'system:dict:add',
+        edit: 'system:dict:edit',
+        remove: 'system:dict:remove'
       }
     }
   },

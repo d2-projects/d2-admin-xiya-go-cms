@@ -49,6 +49,12 @@ export default {
         index: 'DICTDATA_ALL',
         delete: 'DICTDATA_DELETE'
       },
+      permission: {
+        query: 'system:dict-data:query',
+        add: 'system:dict-data:add',
+        edit: 'system:dict-data:edit',
+        remove: 'system:dict-data:remove'
+      },
       // [本页面特有] 当前选择的字典的值类型 1 数字 2 字符
       dictValueType: 0
     }

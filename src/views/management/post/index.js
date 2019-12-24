@@ -39,6 +39,12 @@ export default {
       api: {
         index: 'POST_ALL',
         delete: 'POST_DELETE'
+      },
+      permission: {
+        query: 'system:post:query',
+        add: 'system:post:add',
+        edit: 'system:post:edit',
+        remove: 'system:post:remove'
       }
     }
   },
