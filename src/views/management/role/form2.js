@@ -16,15 +16,12 @@ export default {
       return [
         {
           prop: 'data_scope',
-          default: '',
+          default: this.$env.VUE_APP_DICT_EMPTY_NUMBER,
           label: '数据范围',
           rule: { required: true, message: '必填', trigger: 'change' },
           render: () => <d2-dict-select vModel={ this.form.model.data_scope } name="data_scope" on-change={ this.onDataScopeChange }/>
         },
-        // data_scope
-        // 1 全部
-        // 2 自定义
-        ...this.form.model.data_scope === 2 ? [
+        ...this.form.model.data_scope === this.$env.VUE_APP_DICT_DATA_SCOPE_CUSTOM ? [
           {
             prop: 'role_dept',
             default: '',
@@ -44,7 +41,7 @@ export default {
           'data_scope'
         ],
         // 全部数据权限时 清空部门权限
-        data: dataScope === 1 ? { role_dept: '' } : {}
+        data: dataScope === this.$env.VUE_APP_DICT_DATA_SCOPE_ALL ? { role_dept: '' } : {}
       })
     }
   }
