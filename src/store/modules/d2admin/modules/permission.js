@@ -126,7 +126,7 @@ export default context => {
        * @param {Object} payload to {String} 动态路由加载完成后跳转的页面
        * @param {Object} payload data {Array} 手动设置数据源 用来人工模拟权限数据或者重置权限设置 此项有值的时候登陆状态校验跳过
        */
-      async load ({ state, rootState, commit, dispatch }, { focus = false, to = '/', data }) {
+      async load ({ state, rootState, commit, dispatch }, { focus = false, to = '', data }) {
         // 取消请求 - 没有登录
         if (!data && !rootState.d2admin.user.isLogged) return
         // 取消请求 - 已经加载过动态路由
@@ -150,7 +150,7 @@ export default context => {
         // [ 标签页 ] 重新计算多标签页数据
         dispatch('d2admin/page/openedLoad', { filter: true }, { root: true })
         // [ 路由 ] 重新访问
-        router.replace(to)
+        if (to) router.replace(to)
         // 标记已经加载过动态路由
         commit('isLoadedSet', true)
       },

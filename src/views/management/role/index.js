@@ -30,8 +30,8 @@ export default {
           <d2-bar-cell>{ this.vNodePaginationFull }</d2-bar-cell>
           <d2-bar-space/>
         </d2-bar>
-        <component-form ref="form" on-success={ this.research }/>
-        <component-form-2 ref="form2" on-success={ this.research }/>
+        <component-form ref="form" on-success={ this.onFormSuccess }/>
+        <component-form-2 ref="form2" on-success={ this.onFormSuccess }/>
         { this.vNodeTableColumnsFilter }
       </d2-container>
     return page
@@ -128,6 +128,12 @@ export default {
           render: () => <el-date-picker vModel={ this.search.form.model.end_time } value-format="yyyy-MM-dd" type="date" placeholder="结束时间" style="width:130px;"/>
         }
       ]
+    }
+  },
+  methods: {
+    onFormSuccess () {
+      this.$store.dispatch('d2admin/permission/load', { focus: true })
+      this.research()
     }
   }
 }

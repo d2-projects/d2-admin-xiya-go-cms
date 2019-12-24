@@ -23,7 +23,7 @@ export default {
           { this.vNodeSearchForm }
         </d2-search-panel>
         { this.vNodeTable }
-        <component-form ref="form" on-success={ this.research }/>
+        <component-form ref="form" on-success={ this.onFormSuccess }/>
         { this.vNodeTableColumnsFilter }
       </d2-container>
     return page
@@ -107,6 +107,12 @@ export default {
           render: () => <d2-dict-radio vModel={ this.search.form.model.visible } name="visible" button all/>
         }
       ]
+    }
+  },
+  methods: {
+    onFormSuccess () {
+      this.$store.dispatch('d2admin/permission/load', { focus: true })
+      this.research()
     }
   }
 }
