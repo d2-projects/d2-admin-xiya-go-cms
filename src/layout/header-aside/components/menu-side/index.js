@@ -11,9 +11,17 @@ export default {
   render (createElement) {
     return createElement('div', { attrs: { class: 'd2-layout-header-aside-menu-side' } }, [
       createElement('el-menu', {
-        props: { collapse: this.asideCollapse, uniqueOpened: true, defaultActive: this.active },
+        props: {
+          collapse: this.asideCollapse,
+          uniqueOpened: true,
+          defaultActive: this.active
+        },
         ref: 'menu',
-        on: { select: this.handleMenuSelect }
+        on: {
+          select: this.handleMenuSelect,
+          open: this.reloadOpeneds,
+          close: this.reloadOpeneds
+        }
       }, this.aside.map(menu => (menu.children === undefined ? elMenuItem : elSubmenu).call(this, createElement, menu))),
       ...this.aside.length === 0 && !this.asideCollapse ? [
         createElement('div', { attrs: { class: 'd2-layout-header-aside-menu-empty', flex: 'dir:top main:center cross:center' } }, [
@@ -27,6 +35,7 @@ export default {
     return {
       active: '',
       asideHeight: 300,
+      openeds: [],
       BS: null
     }
   },
@@ -44,10 +53,14 @@ export default {
         this.scrollInit()
       }, 500)
     },
+    aside () {
+      this.setOpeneds()
+    },
     // 监听路由 控制侧边栏激活状态
     '$route.fullPath': {
       handler (value) {
         this.active = value
+        this.reloadOpeneds()
       },
       immediate: true
     }
@@ -59,6 +72,25 @@ export default {
     this.scrollDestroy()
   },
   methods: {
+    /**
+     * @description 重新获取侧边栏展开的数据
+     */
+    reloadOpeneds () {
+      this.$nextTick(() => {
+        if (this.$refs.menu) this.openeds = this.$refs.menu.openedMenus
+      })
+    },
+    /**
+     * @description 将之前保存的展开状态恢复到侧边栏上
+     */
+    setOpeneds () {
+      this.$nextTick(() => {
+        if (this.$refs.menu) this.openeds.forEach(this.$refs.menu.open)
+      })
+    },
+    /**
+     * @description 初始化 betterscroll
+     */
     scrollInit () {
       this.BS = new BScroll(this.$el, {
         mouseWheel: true,
@@ -70,6 +102,9 @@ export default {
         // }
       })
     },
+    /**
+     * @description 销毁 betterscroll
+     */
     scrollDestroy () {
       // https://github.com/d2-projects/d2-admin/issues/75
       try {
