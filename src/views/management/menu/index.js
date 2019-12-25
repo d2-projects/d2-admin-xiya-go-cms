@@ -69,24 +69,12 @@ export default {
       ]
     },
     // 配置项
-    // 表格操作列
-    // 建议的书写顺序 [prop] -> [label] -> [align] -> [minWidth][width] -> [fixed] -> [other] -> [render][formatter] -> [if][show]
-    settingActions () {
-      return [
-        {
-          label: '操作',
-          align: 'center',
-          width: '120px',
-          fixed: 'right',
-          render: ({ row }) => {
-            const actions = [
-              { icon: 'el-icon-edit-outline', action: () => this.edit(row.id) },
-              { icon: 'el-icon-plus', type: 'primary', action: () => this.create({ parent_id: row.id }) },
-              { icon: 'el-icon-delete', type: 'danger', confirm: `确定删除 [ ${row.menu_name} ] 吗`, action: () => this.delete(row.id) }
-            ]
-            return <d2-table-actions actions={ actions }/>
-          }
-        }
+    // 表格操作列配置
+    settingActionsConfig () {
+      return ({row}) => [
+        { icon: 'el-icon-edit-outline', action: () => this.edit(row.id) },
+        { icon: 'el-icon-plus', type: 'primary', action: () => this.create({ parent_id: row.id }) },
+        { icon: 'el-icon-delete', type: 'danger', confirm: `确定删除 [ ${row.menu_name} ] 吗`, action: () => this.delete(row.id) }
       ]
     },
     // 配置项

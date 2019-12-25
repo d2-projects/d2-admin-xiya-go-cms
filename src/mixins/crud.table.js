@@ -172,10 +172,32 @@ export default {
       return []
     },
     // 配置项
+    // 表格操作列配置
+    settingActionsConfig () {
+      return () => []
+    },
+    // 配置项
     // 表格操作列
     // 建议的书写顺序 [prop] -> [label] -> [align] -> [minWidth][width] -> [fixed] -> [other] -> [render][formatter] -> [if][show]
     settingActions () {
-      return []
+      const config = this.settingActionsConfig
+      const configStatic = config({ row: {}, column: {}, $index: 0 })
+      const extra = 0
+      const width = configStatic.length > 0 ? configStatic.reduce((result, item) => {
+        if (item.icon) result += 12
+        if (item.label) result += item.label.length * 12
+        if (item.icon && item.label) result += 5
+        return result += 18
+      }, extra + 20 + 4 * (configStatic.length - 1)) : 0
+      return [
+        {
+          label: '操作',
+          align: 'center',
+          width: width + 'px',
+          fixed: 'right',
+          render: scope => <d2-table-actions actions={ config(scope) }/>
+        }
+      ]
     },
     // 配置项
     // 表格搜索条件
