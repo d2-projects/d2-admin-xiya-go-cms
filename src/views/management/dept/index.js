@@ -12,15 +12,17 @@ export default {
         <d2-search-panel slot="header" vModel={ this.search.panel.active }>
           <d2-bar slot="title">
             <d2-bar-space/>
+            { this.hasPermission('query') ? null : <d2-bar-cell>{ this.vNodeSearchPanelAlertNoPermissionQuery }</d2-bar-cell> }
+            <d2-bar-space/>
             <d2-bar-cell>
               <el-button-group>
-                { this.vNodeButtonSearch }
+                { this.hasPermission('query') ? this.vNodeButtonSearch : null }
                 { this.vNodeButtonTableColumnsFilterTrigger }
               </el-button-group>
             </d2-bar-cell>
             { this.hasPermission('add') ? <d2-bar-cell>{ this.vNodeButtonCreateWithParentId0 }</d2-bar-cell> : null }
           </d2-bar>
-          { this.vNodeSearchForm }
+          { this.hasPermission('query') ? this.vNodeSearchForm : null }
         </d2-search-panel>
         { this.vNodeTable }
         <component-form ref="form" on-success={ this.research }/>

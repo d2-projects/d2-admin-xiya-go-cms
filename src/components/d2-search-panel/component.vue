@@ -30,6 +30,7 @@
           <slot name="prefix"/>
         </div>
         <d2-button
+          v-if="hasContentSlot"
           :icon="buttonIcon"
           :label="buttonLabel"
           :class="{
@@ -44,7 +45,7 @@
           <slot name="title"/>
         </div>
       </div>
-      <div class="d2-search-panel--content">
+      <div v-if="hasContentSlot" class="d2-search-panel--content">
         <slot/>
       </div>
     </el-collapse-item>
@@ -81,13 +82,16 @@ export default {
       return this.active === this.name ? 'el-icon-caret-top' : 'el-icon-caret-bottom'
     },
     buttonLabel () {
-      return this.active === this.name ? '隐藏搜索' : '展开搜索'
+      return this.active === this.name ? '隐藏' : '展开'
     },
     hasPrefixSlot () {
       return !!this.$slots.prefix
     },
     hasTitleSlot () {
       return !!this.$slots.title
+    },
+    hasContentSlot () {
+      return !!this.$slots.default
     }
   },
   methods: {

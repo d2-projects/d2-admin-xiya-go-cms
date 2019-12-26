@@ -17,17 +17,17 @@ export default {
           </d2-bar>
           <d2-bar slot="title">
             <d2-bar-space/>
-            <d2-bar-cell>{ this.vNodePaginationMini }</d2-bar-cell>
+            { this.hasPermission('query') ? <d2-bar-cell>{ this.vNodePaginationMini }</d2-bar-cell> : <d2-bar-cell>{ this.vNodeSearchPanelAlertNoPermissionQuery }</d2-bar-cell> }
             <d2-bar-space/>
             <d2-bar-cell>
               <el-button-group>
-                { this.vNodeButtonSearch }
+                { this.hasPermission('query') ? this.vNodeButtonSearch : null }
                 { this.vNodeButtonTableColumnsFilterTrigger }
               </el-button-group>
             </d2-bar-cell>
             { this.dictValueType !== 0 && this.hasPermission('add') ? <d2-bar-cell>{ this.vNodeButtonCreate }</d2-bar-cell> : undefined }
           </d2-bar>
-          { this.vNodeSearchForm }
+          { this.hasPermission('query') ? this.vNodeSearchForm : null }
         </d2-search-panel>
         { this.vNodeTable }
         <d2-bar slot="footer">

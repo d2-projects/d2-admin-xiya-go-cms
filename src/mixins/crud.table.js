@@ -165,6 +165,22 @@ export default {
           on-click={ () => this.create({ parent_id: 0 }) }/>
       return node
     },
+    // vNode
+    // 新建按钮
+    vNodeSearchPanelAlertNoPermissionQuery () {
+      const node =
+        <el-alert
+          title="无查询权限 请联系管理员"
+          type="error"
+          closable={ false }
+          style={
+            {
+              padding: '5px 20px'
+            }
+          }
+          center/>
+      return node
+    },
     // 配置项
     // 表格列
     // 建议的书写顺序 [prop] -> [label] -> [align] -> [minWidth][width] -> [fixed] -> [other] -> [render][formatter] -> [if][show]
@@ -258,7 +274,7 @@ export default {
      */
     async research () {
       try {
-        if (!this.hasPermission('query', true)) return
+        if (!this.hasPermission('query')) return
         // 表格显示无需等待字典加载完成 所以这里不需要 await
         this.doLoadDict(this.loadDict)
         const result = await this.doLoadData(this.searchMethod)
