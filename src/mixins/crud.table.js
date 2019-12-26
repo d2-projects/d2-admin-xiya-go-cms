@@ -198,7 +198,7 @@ export default {
     settingActions () {
       const config = this.settingActionsConfig
       const configStatic = config({ row: {}, column: {}, $index: 0 })
-      const extra = 0
+      const extra = 10
       const width = configStatic.length > 0 ? configStatic.reduce((result, item) => {
         if (item.icon) result += 12
         if (item.label) result += item.label.length * 12
