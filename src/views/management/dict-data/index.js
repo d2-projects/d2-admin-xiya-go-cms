@@ -91,7 +91,7 @@ export default {
     // 表格操作列配置
     settingActionsConfig () {
       return ({row}) => [
-        ...showEdit ? [ { icon: 'el-icon-edit-outline', action: () => this.edit(row.id) } ] : [],
+        { icon: 'el-icon-edit-outline', action: () => this.edit(row.id) },
         { icon: 'el-icon-delete', type: 'danger', confirm: `确定删除 [ ${row.dict_label} ] 吗`, action: () => this.delete(row.id) }
       ]
     },
