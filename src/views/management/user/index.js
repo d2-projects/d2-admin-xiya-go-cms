@@ -21,17 +21,15 @@ export default {
                 { this.vNodeButtonTableColumnsFilterTrigger }
               </el-button-group>
             </d2-bar-cell>
-            <d2-bar-cell>{ this.vNodeButtonCreate }</d2-bar-cell>
+            { this.hasPermission('add') ? <d2-bar-cell>{ this.vNodeButtonCreate }</d2-bar-cell> : null }
           </d2-bar>
           { this.vNodeSearchForm }
         </d2-search-panel>
         <el-container class="container">
-          <el-aside width="240px">
+          <el-aside v-permission={ 'system:dept:query' } width="240px">
             <d2-tree vModel={ this.search.form.model.dept_id } source="DEPT_ALL" key-label="dept_name" expand-on-click-node={ false } default-expand-all on-change={ this.research }/>
           </el-aside>
-          <el-main>
-            { this.vNodeTable }
-          </el-main>
+          <el-main>{ this.vNodeTable }</el-main>
         </el-container>
         <d2-bar slot="footer">
           <d2-bar-cell>{ this.vNodePaginationFull }</d2-bar-cell>
@@ -80,7 +78,7 @@ export default {
         { prop: 'email', label: '邮箱', minWidth: '160px' },
         { prop: 'phone', label: '手机', minWidth: '100px' },
         { prop: 'phonenumber', label: '座机', minWidth: '100px' },
-        { prop: 'dept_id', label: '归属部门', width: '100px', render: ({ row }) => <d2-dict name="dept_id" value={ row.dept_id } custom/> },
+        { prop: 'dept_id', label: '归属部门', width: '100px', render: ({ row }) => <d2-dict name="dept_id" value={ row.dept_id } custom/>, if: this.$permission('system:dept:query') },
         { prop: 'login_date', label: '上次登录时间', width: '160px', formatter: row => utils.time.format(row.login_date, 'YYYY/M/D HH:mm:ss') },
         { prop: 'login_ip', label: '上次登录地址', width: '120px' },
         { prop: 'remark', label: '备注', width: '100px' },
@@ -141,7 +139,6 @@ export default {
           prop: 'dept_id',
           label: '部门',
           default: 0,
-          render: () => <el-input vModel={ this.search.form.model.dept_id } style="width:100px;" clearable/>,
           show: false
         }
       ]
@@ -153,11 +150,13 @@ export default {
      */
     loadDict () {
       // 归属部门
-      this.loadDictOne({
-        name: 'dept_id',
-        method: async () => utils.helper.flatTreeToArray({ data: await this.$api.DEPT_ALL() }),
-        label: 'dept_name'
-      })
+      if (this.$permission('system:dept:query')) {
+        this.loadDictOne({
+          name: 'dept_id',
+          method: async () => utils.helper.flatTreeToArray({ data: await this.$api.DEPT_ALL() }),
+          label: 'dept_name'
+        })
+      }
     }
   }
 }

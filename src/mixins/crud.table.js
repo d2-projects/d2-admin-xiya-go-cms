@@ -258,7 +258,7 @@ export default {
      */
     async research () {
       try {
-        if (!this.hasPermission('query')) return
+        if (!this.hasPermission('query', true)) return
         // 表格显示无需等待字典加载完成 所以这里不需要 await
         this.doLoadDict(this.loadDict)
         const result = await this.doLoadData(this.searchMethod)
@@ -282,7 +282,7 @@ export default {
      * @param {String} ref 表单组件的 ref
      */
     create (data = {}, ref = 'form') {
-      if (!this.hasPermission('add')) return
+      if (!this.hasPermission('add', true)) return
       this.$refs[ref].create(data)
     },
     /**
@@ -291,7 +291,7 @@ export default {
      * @param {String} ref 表单组件的 ref
      */
     edit (id, ref = 'form') {
-      if (!this.hasPermission('edit')) return
+      if (!this.hasPermission('edit', true)) return
       this.$refs[ref].edit(id)
     },
     /**
@@ -299,7 +299,7 @@ export default {
      * @param {Number} id 删除行的 id
      */
     delete (id) {
-      if (!this.hasPermission('remove')) return
+      if (!this.hasPermission('remove', true)) return
       const deleteFunction = this.$api[this.api.delete]
       if (!this._.isFunction(deleteFunction)) {
         this.$message.error('未找到 API')
@@ -364,8 +364,8 @@ export default {
         ...this.settingColumns,
         ...this.settingActions
       ])
-      this.table.columns = this._.cloneDeep(columns.filter(e => e.show !== false))
-      this.columnsFilter.options = this._.cloneDeep(columns)
+      this.table.columns = this._.cloneDeep(columns.filter(e => e.show !== false && e.if !== false))
+      this.columnsFilter.options = this._.cloneDeep(columns.filter(e => e.if !== false))
     },
     /**
      * @description 请求表格数据

@@ -16,9 +16,9 @@ export default {
      * @description 设置了权限但是没有权限 返回 false
      * @param {String} name 权限名称
      */
-    hasPermission (name) {
+    hasPermission (name, notify = false) {
       if (this.permission[name] && !this.$permission(this.permission[name])) {
-        this.$notify.error({ title: '缺少权限', message: this.permission[name] })
+        if (notify) this.$notify.error({ title: '缺少权限', message: this.permission[name] })
         return false
       }
       return true

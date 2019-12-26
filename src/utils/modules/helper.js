@@ -1,6 +1,14 @@
 import { omit, keys, toNumber, isNaN, isArray } from 'lodash'
 
 /**
+ * @description 将单词转换为首字母大写
+ * @param {String} word 需要转化的单词
+ */
+export function wordUpper (word) {
+  return word.replace(word[0], word[0].toUpperCase())
+}
+
+/**
  * @description 在 source 中是否至少有一个 need 中的项目
  * @param {Array} source 数据源
  * @param {Array} need 需要存在的项目

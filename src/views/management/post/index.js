@@ -20,7 +20,7 @@ export default {
                 { this.vNodeButtonTableColumnsFilterTrigger }
               </el-button-group>
             </d2-bar-cell>
-            <d2-bar-cell>{ this.vNodeButtonCreate }</d2-bar-cell>
+            { this.hasPermission('add') ? <d2-bar-cell>{ this.vNodeButtonCreate }</d2-bar-cell> : null }
           </d2-bar>
           { this.vNodeSearchForm }
         </d2-search-panel>

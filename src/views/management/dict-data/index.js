@@ -25,11 +25,7 @@ export default {
                 { this.vNodeButtonTableColumnsFilterTrigger }
               </el-button-group>
             </d2-bar-cell>
-            {
-              this.dictValueType !== 0
-                ? <d2-bar-cell>{ this.vNodeButtonCreate }</d2-bar-cell>
-                : undefined
-            }
+            { this.dictValueType !== 0 && this.hasPermission('add') ? <d2-bar-cell>{ this.vNodeButtonCreate }</d2-bar-cell> : undefined }
           </d2-bar>
           { this.vNodeSearchForm }
         </d2-search-panel>
