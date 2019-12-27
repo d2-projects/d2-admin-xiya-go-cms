@@ -1,6 +1,6 @@
 import { mapState, mapActions } from 'vuex'
-import fieldChange from '@/mixins/el.fieldChange'
-import multiple from '@/mixins/component.multiple'
+import fieldChange from '@/mixins/el-field-change'
+import multiple from '@/mixins/component-multiple'
 
 export default {
   mixins: [

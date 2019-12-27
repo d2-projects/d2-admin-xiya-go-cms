@@ -1,6 +1,6 @@
 import { mapActions } from 'vuex'
 import utils from '@/utils'
-import table from '@/mixins/crud.table.js'
+import table from '@/mixins/crud-table.js'
 
 export default {
   mixins: [ table ],

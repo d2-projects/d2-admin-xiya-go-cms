@@ -1,4 +1,4 @@
-import dict from '@/mixins/component.dict'
+import dict from '@/mixins/component-dict'
 
 export default {
   name: 'd2-dict-radio',

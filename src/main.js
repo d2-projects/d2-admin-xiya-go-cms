@@ -5,8 +5,6 @@ import store from '@/store'
 import d2Admin from '@/plugin/d2admin'
 
 import router, { constantRoutes } from './router'
-import menu from '@/menu'
-import menuHeader from '@/menu/header'
 
 import './permission'
 
@@ -20,12 +18,6 @@ new Vue({
   async created () {
     // 处理路由 得到每一级的路由设置
     this.$store.commit('d2admin/page/init', constantRoutes)
-    // 设置顶栏菜单
-    this.$store.commit('d2admin/menu/headerSet', menuHeader)
-    // 设置侧边栏菜单
-    this.$store.commit('d2admin/menu/asideSet', menu)
-    // 初始化菜单搜索功能
-    this.$store.commit('d2admin/search/init', menu)
     // 加载接口配置
     await this.$store.dispatch('d2admin/api/load')
   },

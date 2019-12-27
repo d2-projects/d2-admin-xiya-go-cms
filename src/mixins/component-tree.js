@@ -1,4 +1,4 @@
-import multiple from '@/mixins/component.multiple'
+import multiple from '@/mixins/component-multiple'
 import utils from '@/utils'
 
 export default {

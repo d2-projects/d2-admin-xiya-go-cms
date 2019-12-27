@@ -1,7 +1,7 @@
 import utils from '@/utils'
-import dict from './crud.dict'
-import pagination from './crud.pagination'
-import permission from './crud.permission'
+import dict from './crud-dict'
+import pagination from './crud-pagination'
+import permission from './crud-permission'
 
 export default {
   mixins: [

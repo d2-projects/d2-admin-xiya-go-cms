@@ -12,8 +12,8 @@
 
 <script>
 import utils from '@/utils'
-import tree from '@/mixins/component.tree'
-import fieldChange from '@/mixins/el.fieldChange'
+import tree from '@/mixins/component-tree'
+import fieldChange from '@/mixins/el-field-change'
 
 export default {
   name: 'd2-tree',

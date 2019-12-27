@@ -18,8 +18,6 @@ export default context => ({
       await dispatch('d2admin/menu/asideCollapseLoad', undefined, { root: true })
       // 加载全局尺寸
       await dispatch('d2admin/size/load', undefined, { root: true })
-      // 加载颜色设置
-      await dispatch('d2admin/color/load', undefined, { root: true })
     }
   }
 })

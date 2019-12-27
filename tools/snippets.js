@@ -74,7 +74,7 @@
         }
       }
     })
-    const dirExists = require('./dirExists')    
+    const dirExists = require('./dir-exists')    
     await dirExists(resolve('../.vscode'))
     await fs.writeFileSync(path.join(resolve('../.vscode'), 'd2.code-snippets'), JSON.stringify(data, null, 2))
     let count = Object.keys(data).length

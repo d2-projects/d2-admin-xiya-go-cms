@@ -50,7 +50,7 @@
 </template>
 
 <script>
-import { vModelString } from '@/mixins/component.vmodel.js'
+import { vModelString } from '@/mixins/component-vmodel.js'
 export default {
   name: 'd2-avatar-uploader',
   mixins: [

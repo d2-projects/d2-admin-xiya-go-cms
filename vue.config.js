@@ -1,7 +1,5 @@
 const CompressionWebpackPlugin = require('compression-webpack-plugin')
 const VueFilenameInjector = require('@d2-projects/vue-filename-injector')
-const ThemeColorReplacer = require('webpack-theme-color-replacer')
-const forElementUI = require('webpack-theme-color-replacer/forElementUI')
 const cdnDependencies = require('./dependencies-cdn')
 
 // 拼接路径
@@ -85,16 +83,6 @@ module.exports = {
     // 解决 cli3 热更新失效 https://github.com/vuejs/vue-cli/issues/1559
     config.resolve
       .symlinks(true)
-    config
-      .plugin('theme-color-replacer')
-      .use(ThemeColorReplacer, [{
-        fileName: 'css/theme-colors.[contenthash:8].css',
-        matchColors: [
-          ...forElementUI.getElementUISeries(process.env.VUE_APP_ELEMENT_COLOR) // Element-ui主色系列
-        ],
-        externalCssFiles: [ './node_modules/element-ui/lib/theme-chalk/index.css' ], // optional, String or string array. Set external css files (such as cdn css) to extract colors.
-        changeSelector: forElementUI.changeSelector
-      }])
     config
       // 开发环境
       .when(process.env.NODE_ENV === 'development',

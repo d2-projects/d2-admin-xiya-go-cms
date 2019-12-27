@@ -1,4 +1,4 @@
-import form from '@/mixins/crud.form'
+import form from '@/mixins/crud-form'
 
 export default {
   mixins: [ form ],

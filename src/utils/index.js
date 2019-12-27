@@ -13,7 +13,7 @@ const utils = {
   fn,
   helper,
   log,
-  import: require('./modules/import.' + env.NODE_ENV)
+  import: require('./modules/import-' + env.NODE_ENV)
 }
 
 /**

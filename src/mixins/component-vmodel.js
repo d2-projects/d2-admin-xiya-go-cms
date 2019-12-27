@@ -1,4 +1,4 @@
-import fieldChange from './el.fieldChange'
+import fieldChange from './el-field-change'
 
 export const vModelString = {
   mixins: [

@@ -1,8 +1,8 @@
 import utils from '@/utils'
-import helper from './crud.form.helper'
-import status from './crud.status'
-import dict from './crud.dict'
-import dialog from './crud.form.dialog'
+import helper from './crud-form-helper'
+import status from './crud-status'
+import dict from './crud-dict'
+import dialog from './crud-form-dialog'
 
 export default {
   mixins: [

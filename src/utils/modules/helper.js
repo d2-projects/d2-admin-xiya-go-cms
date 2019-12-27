@@ -14,7 +14,7 @@ export function wordUpper (word) {
  * @param {Array} need 需要存在的项目
  */
 export function oneOf (source, need) {
-  if (isArray(need)) return need.reduce((result, item) => (result || source.indexOf(item) >= 0) ? true : false, false)
+  if (isArray(need)) return need.reduce((result, item) => result || source.indexOf(item) >= 0, false)
   return source.indexOf(need) >= 0
 }
 
@@ -24,7 +24,7 @@ export function oneOf (source, need) {
  * @param {Array} need 需要存在的项目
  */
 export function allIn (source, need) {
-  if (isArray(need)) return need.reduce((result, item) => (result === false || source.indexOf(item) < 0) ? false : true, true)
+  if (isArray(need)) return need.reduce((result, item) => !(result === false || source.indexOf(item) < 0), true)
   return source.indexOf(need) >= 0
 }
 
