@@ -13,17 +13,17 @@ export default {
         <d2-search-panel slot="header" vModel={ this.search.panel.active }>
           <d2-bar slot="title">
             <d2-bar-space/>
-            { this.hasPermission('query') ? <d2-bar-cell>{ this.vNodePaginationMini }</d2-bar-cell> : <d2-bar-cell>{ this.vNodeSearchPanelAlertNoPermissionQuery }</d2-bar-cell> }
+            { this.p('query') ? <d2-bar-cell>{ this.vNodePaginationMini }</d2-bar-cell> : <d2-bar-cell>{ this.vNodeSearchPanelAlertNoPermissionQuery }</d2-bar-cell> }
             <d2-bar-space/>
             <d2-bar-cell>
               <el-button-group>
-                { this.hasPermission('query') ? this.vNodeButtonSearch : null }
+                { this.p('query') ? this.vNodeButtonSearch : null }
                 { this.vNodeButtonTableColumnsFilterTrigger }
               </el-button-group>
             </d2-bar-cell>
-            { this.hasPermission('add') ? <d2-bar-cell>{ this.vNodeButtonCreate }</d2-bar-cell> : null }
+            { this.p('add') ? <d2-bar-cell>{ this.vNodeButtonCreate }</d2-bar-cell> : null }
           </d2-bar>
-          { this.hasPermission('query') ? this.vNodeSearchForm : null }
+          { this.p('query') ? this.vNodeSearchForm : null }
         </d2-search-panel>
         { this.vNodeTable }
         <d2-bar slot="footer">
@@ -45,6 +45,7 @@ export default {
         query: 'system:dict:query',
         add: 'system:dict:add',
         edit: 'system:dict:edit',
+        detail: 'system:dict:detail',
         remove: 'system:dict:remove'
       }
     }
@@ -55,8 +56,8 @@ export default {
     // 建议的书写顺序 [prop] -> [label] -> [align] -> [minWidth][width] -> [fixed] -> [other] -> [render][formatter] -> [if][show]
     settingColumns () {
       return [
-        { prop: 'dict_name', label: '名称', minWidth: '100px', fixed: 'left', render: ({ row }) => <d2-button type="text" label={ row.dict_name } on-click={ () => this.goDictData(row.id) }/> },
-        { prop: 'dict_type', label: '标识', minWidth: '100px', render: ({ row }) => <d2-button type="text" label={ row.dict_type } on-click={ () => this.goDictData(row.id) }/> },
+        { prop: 'dict_name', label: '名称', minWidth: '100px', fixed: 'left', render: ({ row }) => <d2-button type="text" label={ row.dict_name } on-click={ () => { if (this.p('detail')) { this.goDictData(row.id) } } }/> },
+        { prop: 'dict_type', label: '标识', minWidth: '100px', render: ({ row }) => <d2-button type="text" label={ row.dict_type } on-click={ () => { if (this.p('detail')) { this.goDictData(row.id) } } }/> },
         { prop: 'dict_value_type', label: '标识', minWidth: '100px', render: ({ row }) => <d2-dict name="dict_value_type" value={ row.dict_value_type }/> },
         { prop: 'status', label: '状态', width: '100px', render: ({ row }) => <d2-dict name="status" value={ row.status }/>, show: false },
         { prop: 'remark', label: '备注', width: '100px', show: false },
@@ -73,9 +74,9 @@ export default {
     // 表格操作列配置
     settingActionsConfig () {
       return ({row}) => [
-        { icon: 'el-icon-edit-outline', action: () => this.edit(row.id) },
-        { icon: 'el-icon-collection', action: () => this.goDictData(row.id) },
-        { icon: 'el-icon-delete', type: 'danger', confirm: `确定删除 [ ${row.dict_name} ] 吗`, action: () => this.delete(row.id) }
+        ...this.p('edit', [{ icon: 'el-icon-edit-outline', action: () => this.edit(row.id) }], []),
+        ...this.p('detail', [{ icon: 'el-icon-collection', action: () => this.goDictData(row.id) }], []),
+        ...this.p('remove', [{ icon: 'el-icon-delete', type: 'danger', confirm: `确定删除 [ ${row.dict_name} ] 吗`, action: () => this.delete(row.id) }], [])
       ]
     },
     // 配置项

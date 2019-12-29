@@ -13,17 +13,17 @@ export default {
         <d2-search-panel slot="header" vModel={ this.search.panel.active }>
           <d2-bar slot="title">
             <d2-bar-space/>
-            { this.hasPermission('query') ? <d2-bar-cell>{ this.vNodePaginationMini }</d2-bar-cell> : <d2-bar-cell>{ this.vNodeSearchPanelAlertNoPermissionQuery }</d2-bar-cell> }
+            { this.p('query') ? <d2-bar-cell>{ this.vNodePaginationMini }</d2-bar-cell> : <d2-bar-cell>{ this.vNodeSearchPanelAlertNoPermissionQuery }</d2-bar-cell> }
             <d2-bar-space/>
             <d2-bar-cell>
               <el-button-group>
-                { this.hasPermission('query') ? this.vNodeButtonSearch : null }
+                { this.p('query') ? this.vNodeButtonSearch : null }
                 { this.vNodeButtonTableColumnsFilterTrigger }
               </el-button-group>
             </d2-bar-cell>
-            { this.hasPermission('add') ? <d2-bar-cell>{ this.vNodeButtonCreate }</d2-bar-cell> : null }
+            { this.p('add') ? <d2-bar-cell>{ this.vNodeButtonCreate }</d2-bar-cell> : null }
           </d2-bar>
-          { this.hasPermission('query') ? this.vNodeSearchForm : null }
+          { this.p('query') ? this.vNodeSearchForm : null }
         </d2-search-panel>
         { this.vNodeTable }
         <d2-bar slot="footer">
@@ -46,6 +46,7 @@ export default {
         query: 'system:role:query',
         add: 'system:role:add',
         edit: 'system:role:edit',
+        editData: 'system:role:editData',
         remove: 'system:role:remove'
       }
     }
@@ -75,9 +76,9 @@ export default {
     // 表格操作列配置
     settingActionsConfig () {
       return ({row}) => [
-        { icon: 'el-icon-edit-outline', label: '修改', action: () => this.edit(row.id) },
-        { icon: 'el-icon-edit-outline', label: '数据权限', action: () => this.edit(row.id, 'form2') },
-        { icon: 'el-icon-delete', label: '删除', type: 'danger', confirm: `确定删除 [ ${row.role_name} ] 吗`, action: () => this.delete(row.id) }
+        ...this.p('edit', [{ icon: 'el-icon-edit-outline', label: '修改', action: () => this.edit(row.id) }], []),
+        ...this.p('editData', [{ icon: 'el-icon-edit-outline', label: '数据权限', action: () => this.edit(row.id, 'form2') }], []),
+        ...this.p('remove', [{ icon: 'el-icon-delete', label: '删除', type: 'danger', confirm: `确定删除 [ ${row.role_name} ] 吗`, action: () => this.delete(row.id) }], [])
       ]
     },
     // 配置项

@@ -12,17 +12,17 @@ export default {
         <d2-search-panel slot="header" vModel={ this.search.panel.active }>
           <d2-bar slot="title">
             <d2-bar-space/>
-            { this.hasPermission('query') ? null : <d2-bar-cell>{ this.vNodeSearchPanelAlertNoPermissionQuery }</d2-bar-cell> }
+            { this.p('query') ? null : <d2-bar-cell>{ this.vNodeSearchPanelAlertNoPermissionQuery }</d2-bar-cell> }
             <d2-bar-space/>
             <d2-bar-cell>
               <el-button-group>
-                { this.hasPermission('query') ? this.vNodeButtonSearch : null }
+                { this.p('query') ? this.vNodeButtonSearch : null }
                 { this.vNodeButtonTableColumnsFilterTrigger }
               </el-button-group>
             </d2-bar-cell>
-            { this.hasPermission('add') ? <d2-bar-cell>{ this.vNodeButtonCreateWithParentId0 }</d2-bar-cell> : null }
+            { this.p('add') ? <d2-bar-cell>{ this.vNodeButtonCreateWithParentId0 }</d2-bar-cell> : null }
           </d2-bar>
-          { this.hasPermission('query') ? this.vNodeSearchForm : null }
+          { this.p('query') ? this.vNodeSearchForm : null }
         </d2-search-panel>
         { this.vNodeTable }
         <component-form ref="form" on-success={ this.research }/>
@@ -68,9 +68,9 @@ export default {
     // 表格操作列配置
     settingActionsConfig () {
       return ({row}) => [
-        { icon: 'el-icon-edit-outline', action: () => this.edit(row.id) },
-        { icon: 'el-icon-plus', type: 'primary', action: () => this.create({ parent_id: row.id }) },
-        { icon: 'el-icon-delete', type: 'danger', confirm: `确定删除 [ ${row.dept_name} ] 吗`, action: () => this.delete(row.id) }
+        ...this.p('edit', [{ icon: 'el-icon-edit-outline', action: () => this.edit(row.id) }], []),
+        ...this.p('create', [{ icon: 'el-icon-plus', type: 'primary', action: () => this.create({ parent_id: row.id }) }], []),
+        ...this.p('remove', [{ icon: 'el-icon-delete', type: 'danger', confirm: `确定删除 [ ${row.dept_name} ] 吗`, action: () => this.delete(row.id) }], [])
       ]
     },
     // 配置项

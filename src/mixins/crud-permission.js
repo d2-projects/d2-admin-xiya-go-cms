@@ -15,13 +15,12 @@ export default {
      * @description 没有设置权限或者具有权限 返回 true
      * @description 设置了权限但是没有权限 返回 false
      * @param {String} name 权限名称
+     * @param {Boolean} trueReturn 有权限时返回的值
+     * @param {Boolean} falseReturn 没有权限时返回的值
      */
-    hasPermission (name, notify = false) {
-      if (this.permission[name] && !this.$permission(this.permission[name])) {
-        if (notify) this.$notify.error({ title: '缺少权限', message: this.permission[name] })
-        return false
-      }
-      return true
+    p (name, trueReturn = true, falseReturn = false) {
+      if (this.permission[name] && !this.$permission(this.permission[name])) return falseReturn
+      return trueReturn
     }
   }
 }

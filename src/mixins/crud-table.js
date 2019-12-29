@@ -197,7 +197,11 @@ export default {
     // 建议的书写顺序 [prop] -> [label] -> [align] -> [minWidth][width] -> [fixed] -> [other] -> [render][formatter] -> [if][show]
     settingActions () {
       const config = this.settingActionsConfig
+      // 赋值假数据 获得基本的设置信息
       const configStatic = config({ row: {}, column: {}, $index: 0 })
+      // 如果设置项数量是 0 就不显示操作列
+      if (configStatic.length === 0) return []
+      // 宽度额外余量
       const extra = 10
       const width = configStatic.length > 0 ? configStatic.reduce((result, item) => {
         if (item.icon) result += 12
@@ -205,6 +209,7 @@ export default {
         if (item.icon && item.label) result += 5
         return result += 18
       }, extra + 20 + 4 * (configStatic.length - 1)) : 0
+      // 返回计算完成的操作列
       return [
         {
           label: '操作',
@@ -274,7 +279,7 @@ export default {
      */
     async research () {
       try {
-        if (!this.hasPermission('query')) return
+        if (!this.p('query')) return
         // 表格显示无需等待字典加载完成 所以这里不需要 await
         this.doLoadDict(this.loadDict)
         const result = await this.doLoadData(this.searchMethod)
@@ -298,7 +303,6 @@ export default {
      * @param {String} ref 表单组件的 ref
      */
     create (data = {}, ref = 'form') {
-      if (!this.hasPermission('add', true)) return
       this.$refs[ref].create(data)
     },
     /**
@@ -307,7 +311,6 @@ export default {
      * @param {String} ref 表单组件的 ref
      */
     edit (id, ref = 'form') {
-      if (!this.hasPermission('edit', true)) return
       this.$refs[ref].edit(id)
     },
     /**
@@ -315,7 +318,6 @@ export default {
      * @param {Number} id 删除行的 id
      */
     delete (id) {
-      if (!this.hasPermission('remove', true)) return
       const deleteFunction = this.$api[this.api.delete]
       if (!this._.isFunction(deleteFunction)) {
         this.$message.error('未找到 API')

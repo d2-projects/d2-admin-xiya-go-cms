@@ -17,17 +17,17 @@ export default {
           </d2-bar>
           <d2-bar slot="title">
             <d2-bar-space/>
-            { this.hasPermission('query') ? <d2-bar-cell>{ this.vNodePaginationMini }</d2-bar-cell> : <d2-bar-cell>{ this.vNodeSearchPanelAlertNoPermissionQuery }</d2-bar-cell> }
+            { this.p('query') ? <d2-bar-cell>{ this.vNodePaginationMini }</d2-bar-cell> : <d2-bar-cell>{ this.vNodeSearchPanelAlertNoPermissionQuery }</d2-bar-cell> }
             <d2-bar-space/>
             <d2-bar-cell>
               <el-button-group>
-                { this.hasPermission('query') ? this.vNodeButtonSearch : null }
+                { this.p('query') ? this.vNodeButtonSearch : null }
                 { this.vNodeButtonTableColumnsFilterTrigger }
               </el-button-group>
             </d2-bar-cell>
-            { this.dictValueType !== 0 && this.hasPermission('add') ? <d2-bar-cell>{ this.vNodeButtonCreate }</d2-bar-cell> : undefined }
+            { this.dictValueType !== 0 && this.p('add') ? <d2-bar-cell>{ this.vNodeButtonCreate }</d2-bar-cell> : undefined }
           </d2-bar>
-          { this.hasPermission('query') ? this.vNodeSearchForm : null }
+          { this.p('query') ? this.vNodeSearchForm : null }
         </d2-search-panel>
         { this.vNodeTable }
         <d2-bar slot="footer">
@@ -91,8 +91,8 @@ export default {
     // 表格操作列配置
     settingActionsConfig () {
       return ({row}) => [
-        { icon: 'el-icon-edit-outline', action: () => this.edit(row.id) },
-        { icon: 'el-icon-delete', type: 'danger', confirm: `确定删除 [ ${row.dict_label} ] 吗`, action: () => this.delete(row.id) }
+        ...this.p('edit', [{ icon: 'el-icon-edit-outline', action: () => this.edit(row.id) }], []),
+        ...this.p('remove', [{ icon: 'el-icon-delete', type: 'danger', confirm: `确定删除 [ ${row.dict_label} ] 吗`, action: () => this.delete(row.id) }], [])
       ]
     },
     // 配置项
