@@ -6,7 +6,7 @@ import utils from '@/utils'
 import env from '@/env'
 
 // 记录和显示错误
-function errorLog (error) {
+function log (error) {
   store.dispatch('d2admin/log/push', {
     message: '数据请求异常',
     type: 'danger',
@@ -50,7 +50,7 @@ service.interceptors.response.use(
         })
         await store.dispatch('d2admin/user/logout', { focus: true, remote: false, back: true })
       } else {
-        errorLog(error)
+        log(error)
       }
       return Promise.reject(error)
     }
@@ -72,7 +72,7 @@ service.interceptors.response.use(
         default: break
       }
     }
-    errorLog(error)
+    log(error)
     return Promise.reject(error)
   }
 )

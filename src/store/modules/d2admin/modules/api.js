@@ -19,7 +19,7 @@ export default context => {
       type: 'env'
     }))
 
-  const base = context.env.VUE_APP_API || optionsEnv.length > 0 ? optionsEnv[0].value : ''
+  const base = context.env.VUE_APP_API || (optionsEnv.length > 0 ? optionsEnv[0].value : '')
 
   return {
     namespaced: true,
