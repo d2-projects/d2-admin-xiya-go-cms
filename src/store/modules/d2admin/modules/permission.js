@@ -149,6 +149,8 @@ export default context => {
         commit('d2admin/page/init', routes, { root: true })
         // [ 标签页 ] 重新计算多标签页数据
         dispatch('d2admin/page/openedLoad', { filter: true }, { root: true })
+        // [ 搜索 ] 初始化搜索数据
+        commit('d2admin/search/init', menus, { root: true })
         // [ 路由 ] 重新访问
         if (to) router.replace(to)
         // 标记已经加载过动态路由
