@@ -57,7 +57,7 @@ export default context => {
         'route_name',
         'route_path',
         'route_component'
-      ].reduce((res, keyname) => (!res || sourceItem[keyname] === '') ? false : true, true)
+      ].reduce((res, keyname) => !((!res || sourceItem[keyname] === '')), true)
       if (!hasAllRequiredProperties) return
       return true
     }

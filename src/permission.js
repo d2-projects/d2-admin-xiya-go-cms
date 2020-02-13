@@ -11,7 +11,7 @@ import store from '@/store'
 export default function permission (value = '', { all = false, not = false } = {}) {
   if (isArray(value) || isString(value)) {
     const permissions = store.state.d2admin.permission.permissions
-    let has = utils.helper[ all ? 'allIn' : 'oneOf'](permissions, value)
+    let has = utils.helper[all ? 'allIn' : 'oneOf'](permissions, value)
     if (not) has = !has
     return has
   } else {

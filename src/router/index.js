@@ -30,7 +30,7 @@ export function createRoutesInLayout (routes = []) {
       redirect: { name: 'index' },
       component: layoutHeaderAside,
       children: [
-        { path: 'index', name: 'index', meta: { title: '首页',auth: true }, component: utils.import('system/index') },
+        { path: 'index', name: 'index', meta: { title: '首页', auth: true }, component: utils.import('system/index') },
         { path: 'log', name: 'log', meta: { title: '前端日志', auth: true }, component: utils.import('system/log') },
         ...routes
       ]
@@ -65,7 +65,7 @@ const router = createRouter(constantRoutes)
  * @description 重新设置路由
  * @param {Array} routes 额外追加的路由
  */
-export function resetRouter(routes = []) {
+export function resetRouter (routes = []) {
   router.matcher = createRouter(routes).matcher
 }
 

@@ -207,7 +207,8 @@ export default {
         if (item.icon) result += 12
         if (item.label) result += item.label.length * 12
         if (item.icon && item.label) result += 5
-        return result += 18
+        result += 18
+        return result
       }, extra + 20 + 4 * (configStatic.length - 1)) : 0
       // 返回计算完成的操作列
       return [

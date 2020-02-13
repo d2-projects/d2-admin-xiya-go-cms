@@ -1,7 +1,6 @@
 import { Notification, Message } from 'element-ui'
 
 export default context => {
-
   const optionsEnv = Object.keys(context.env)
     .filter(keyName => /^VUE_APP_API_\d+_\w+$/.test(keyName))
     .map(keyName => {

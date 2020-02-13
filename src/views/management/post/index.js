@@ -71,7 +71,7 @@ export default {
     // 配置项
     // 表格操作列配置
     settingActionsConfig () {
-      return ({row}) => [
+      return ({ row }) => [
         ...this.p('edit', [{ icon: 'el-icon-edit-outline', action: () => this.edit(row.id) }], []),
         ...this.p('remove', [{ icon: 'el-icon-delete', type: 'danger', confirm: `确定删除 [ ${row.post_name} ] 吗`, action: () => this.delete(row.id) }], [])
       ]

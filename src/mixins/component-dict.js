@@ -102,7 +102,7 @@ export default {
               let type = allow[0]
               if (options.length > 0) {
                 // 第一个选项值的数据类型
-                const type0 = typeof(options[0].value)
+                const type0 = typeof (options[0].value)
                 // 如果数据类型在允许的范围内 更新外层的字典数据类型
                 if (allow.indexOf(type0) >= 0) type = type0
               }
