@@ -1,6 +1,16 @@
 # D2Admin cms go
 
-基于 [D2Admin (1.7.2)](https://github.com/d2-projects/d2-admin) 开发的 golang cms 管理后台。服务端 [xiya-team/go-cms](https://github.com/xiya-team/go-cms)
+基于 [D2Admin (1.7.2)](https://github.com/d2-projects/d2-admin) 开发的 golang cms 管理后台。
+
+请配合服务端 [xiya-team/go-cms](https://github.com/xiya-team/go-cms) 使用。
+
+> 追加升级了一些 [D2Admin v1.8.0](https://github.com/d2-projects/d2-admin/releases/tag/1.8.0) 的新特性，例如优化生产环境的构建，可以达到 2s 以内的首屏加载速度；多标签页拖拽排序等功能。
+
+## 其它同步仓库
+
+| 位置 | 链接 |
+| --- | --- |
+| 码云 | [https://gitee.com/fairyever/d2-admin-xiya-go-cms](https://gitee.com/fairyever/d2-admin-xiya-go-cms) |
 
 ## 预览
 
@@ -13,7 +23,7 @@
 
 ## 屏幕截图
 
-> 由于后端接口没有做演示环境禁止修改，故不公开登录账号（公开游客账号也不能体验全部功能）功能预览请参考以下图片，您可以将前端和[后端代码](https://github.com/xiya-team/go-cms)克隆到本地亲自运行体验
+> 由于后端接口没有做演示环境禁止修改，故不公开登录账号（公开游客账号也不能体验全部功能）功能预览请参考以下图片，您可以将前端和 [后端代码](https://github.com/xiya-team/go-cms) 克隆到本地亲自运行体验，如 GitHub 仓库中图片加载缓慢，可移步 [码云同步仓库](https://gitee.com/fairyever/d2-admin-xiya-go-cms) 查看
 
 登录
 
