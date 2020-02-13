@@ -1,5 +1,5 @@
 {
-  "name": "d2-admin-cms-go",
+  "name": "d2-admin-xiya-go-cms",
   "version": "0.0.2",
   "scripts": {
     "serve": "vue-cli-service serve --open",

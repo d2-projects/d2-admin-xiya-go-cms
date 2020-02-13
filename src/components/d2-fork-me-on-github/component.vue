@@ -1,5 +1,5 @@
 <template>
-  <a target="blank" href="https://github.com/d2-projects/d2-admin-cms-go">
+  <a target="blank" href="https://github.com/d2-projects/d2-admin-xiya-go-cms">
     <!-- image from https://github.com/d2-projects/d2-ribbons -->
     <img
       style="position: absolute; top: 0; right: 0; border: 0; width: 150px;"

@@ -56,7 +56,7 @@
             </template>
           </p>
           <p>
-            <a href="https://github.com/d2-projects/d2-admin-cms-go/actions" target="_blank">
+            <a href="https://github.com/d2-projects/d2-admin-xiya-go-cms/actions" target="_blank">
               构建于 {{ $env.VUE_APP_BUILD_TIME | timeFormat('YYYY年M月D日 dddd Ah点mm分') }}
               <d2-time-relative :value="$env.VUE_APP_BUILD_TIME"/>
             </a>
@@ -66,7 +66,7 @@
             </d2-api-base-url-controller>
           </p>
           <p>
-            <a href="https://github.com/d2-projects/d2-admin-cms-go/blob/master/LICENSE" target="_blank">
+            <a href="https://github.com/d2-projects/d2-admin-xiya-go-cms/blob/master/LICENSE" target="_blank">
               Copyright
               <d2-icon name="copyright"/>
               2018

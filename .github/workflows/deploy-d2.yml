@@ -26,5 +26,5 @@ jobs:
         METHOD: sftp
         PORT: ${{ secrets.FTP_PORT }}
         LOCAL_DIR: dist
-        REMOTE_DIR: /www/d2-admin-cms-go/preview
+        REMOTE_DIR: /www/d2-admin-xiya-go-cms/preview
         ARGS: --delete --verbose --parallel=100
