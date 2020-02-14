@@ -33,80 +33,80 @@
 
 登录
 
-![](https://qiniucdn.fairyever.com/20200213103203.png)
+![](https://cdn.d2.pub/files/image-hosting/20200213103203.png)
 
 图片验证码
 
-![](https://qiniucdn.fairyever.com/20200213103225.png)
+![](https://cdn.d2.pub/files/image-hosting/20200213103225.png)
 
 首页 - 权限指令使用示例
 
-![](https://qiniucdn.fairyever.com/20200213103241.png)
+![](https://cdn.d2.pub/files/image-hosting/20200213103241.png)
 
 用户管理
 
-![](https://qiniucdn.fairyever.com/20200213103304.png)
+![](https://cdn.d2.pub/files/image-hosting/20200213103304.png)
 
 用户管理编辑
 
-![](https://qiniucdn.fairyever.com/20200213103315.png)
+![](https://cdn.d2.pub/files/image-hosting/20200213103315.png)
 
 表格列自定义
 
-![](https://qiniucdn.fairyever.com/20200213103325.png)
+![](https://cdn.d2.pub/files/image-hosting/20200213103325.png)
 
 角色管理
 
-![](https://qiniucdn.fairyever.com/20200213103338.png)
+![](https://cdn.d2.pub/files/image-hosting/20200213103338.png)
 
 角色管理编辑
 
-![](https://qiniucdn.fairyever.com/20200213103346.png)
+![](https://cdn.d2.pub/files/image-hosting/20200213103346.png)
 
 角色管理编辑数据权限
 
-![](https://qiniucdn.fairyever.com/20200213103436.png)
+![](https://cdn.d2.pub/files/image-hosting/20200213103436.png)
 
 菜单管理
 
-![](https://qiniucdn.fairyever.com/20200213103509.png)
+![](https://cdn.d2.pub/files/image-hosting/20200213103509.png)
 
 菜单管理编辑
 
-![](https://qiniucdn.fairyever.com/20200213103525.png)
+![](https://cdn.d2.pub/files/image-hosting/20200213103525.png)
 
 部门管理
 
-![](https://qiniucdn.fairyever.com/20200213103542.png)
+![](https://cdn.d2.pub/files/image-hosting/20200213103542.png)
 
 部门管理编辑
 
-![](https://qiniucdn.fairyever.com/20200213103556.png)
+![](https://cdn.d2.pub/files/image-hosting/20200213103556.png)
 
 岗位管理
 
-![](https://qiniucdn.fairyever.com/20200213103607.png)
+![](https://cdn.d2.pub/files/image-hosting/20200213103607.png)
 
 岗位新建
 
-![](https://qiniucdn.fairyever.com/20200213103616.png)
+![](https://cdn.d2.pub/files/image-hosting/20200213103616.png)
 
 字典管理
 
-![](https://qiniucdn.fairyever.com/20200213103626.png)
+![](https://cdn.d2.pub/files/image-hosting/20200213103626.png)
 
 字典编辑
 
-![](https://qiniucdn.fairyever.com/20200213103635.png)
+![](https://cdn.d2.pub/files/image-hosting/20200213103635.png)
 
 字典项目编辑
 
-![](https://qiniucdn.fairyever.com/20200213103710.png)
+![](https://cdn.d2.pub/files/image-hosting/20200213103710.png)
 
 参数管理
 
-![](https://qiniucdn.fairyever.com/20200213103723.png)
+![](https://cdn.d2.pub/files/image-hosting/20200213103723.png)
 
 参数设置
 
-![](https://qiniucdn.fairyever.com/20200213103732.png)
+![](https://cdn.d2.pub/files/image-hosting/20200213103732.png)
