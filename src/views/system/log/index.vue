@@ -8,14 +8,14 @@
       <!-- 触发页面 -->
       <el-table-column label="Url" align="center" min-width="200">
         <template slot-scope="scope">
-          {{ $_.get(scope.row, 'meta.url') }}
+          {{ _.get(scope.row, 'meta.url') }}
         </template>
       </el-table-column>
       <!-- 触发组件 -->
       <el-table-column label="Tag" align="center" min-width="120">
         <template slot-scope="scope">
-          <el-tag v-if="$_.get(scope.row, 'meta.instance.$vnode.componentOptions.tag')" type="info">
-            &#60;{{$_.get(scope.row, 'meta.instance.$vnode.componentOptions.tag')}}&gt;
+          <el-tag v-if="_.get(scope.row, 'meta.instance.$vnode.componentOptions.tag')" type="info">
+            &#60;{{ _.get(scope.row, 'meta.instance.$vnode.componentOptions.tag') }}&gt;
           </el-tag>
         </template>
       </el-table-column>
