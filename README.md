@@ -1,4 +1,4 @@
-# D2Admin cms go
+# D2Admin CMS GO
 
 基于 [D2Admin v1.7.2](https://github.com/d2-projects/d2-admin) 开发的 golang cms 管理后台，您可以将此看做目前基于 D2Admin 实现 **动态菜单**、**动态路由**、**权限控制**、**多环境切换**、**数据表格和表单设计** 的最佳实践。
 
