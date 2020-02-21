@@ -1,10 +1,12 @@
 # D2Admin cms go
 
-基于 [D2Admin (1.7.2)](https://github.com/d2-projects/d2-admin) 开发的 golang cms 管理后台。
+基于 [D2Admin v1.7.2](https://github.com/d2-projects/d2-admin) 开发的 golang cms 管理后台，您可以将此看做目前基于 D2Admin 实现 **动态菜单**、**动态路由**、**权限控制**、**多环境切换**、**数据表格和表单设计** 的最佳实践。
 
 请配合服务端 [xiya-team/go-cms](https://github.com/xiya-team/go-cms) 使用。
 
-> 追加升级了一些 [D2Admin v1.8.0](https://github.com/d2-projects/d2-admin/releases/tag/1.8.0) 的新特性，例如优化生产环境的构建，可以达到 2s 以内的首屏加载速度；多标签页拖拽排序等功能。
+> 只包含系统设置功能，未实现 cms 常见的内容管理，因对应的服务端仓库为 `xiya-team/go-cms` 遂本仓库取名 `d2-admin-xiya-go-cms`
+
+> 已经追加升级了一些 [D2Admin v1.8.0](https://github.com/d2-projects/d2-admin/releases/tag/1.8.0) 的新特性，例如优化生产环境的构建，可以达到 2s 以内的首屏加载速度；多标签页拖拽排序等功能。
 
 ## 账号
 
