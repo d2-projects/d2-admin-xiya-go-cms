@@ -80,6 +80,7 @@ export default context => {
           component: utils.import(sourceItem.route_component)
         }
         // 为动态注册的路由可以正常在演示环境上显示源码链接而设置，如果不需要显示源码的功能，请移除此属性
+        // https://github.com/d2-projects/vue-filename-injector 只处理 .vue 类型的文件 所以需要在路由上设置源码路径信息
         if (context.env.VUE_APP_SCOURCE_LINK === 'TRUE') {
           route.meta.source = 'src/views/' + sourceItem.route_component + (/(.js|.vue)$/.test(sourceItem.route_component) ? '' : '/index.js')
         }
