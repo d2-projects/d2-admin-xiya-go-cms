@@ -62,14 +62,25 @@ export default context => {
       return true
     }
     /**
+     * @description 检验是否已经注册过此路由
+     * @description 在 vue-router 中路由的 name 不允许重复
+     * @param {Array} registered 已经注册的路由
+     * @param {Object} sourceItem 原始数据的一项
+     */
+    function isUnregistered (registered, sourceItem) {
+      return !registered.find(item => item.name === sourceItem.route_name)
+    }
+    /**
      * @description 依次处理原始数据，返回处理后的路由
      * @param {Array} routes 上次处理返回的结果
      * @param {Object} sourceItem 原始数据的一项
      */
     function maker (routes, sourceItem) {
       if (hasRouteChildren(sourceItem)) {
+        // 有子菜单 递归获取所有子菜单的路由
         routes = routes.concat(sourceItem.children_list.reduce(maker, []))
-      } else if (isEffectiveRoute(sourceItem)) {
+      } else if (isEffectiveRoute(sourceItem) && isUnregistered(routes, sourceItem)) {
+        // 没有子菜单 并且这个路由没有被加入到动态路由列表 处理当前路由
         let route = {
           path: sourceItem.route_path,
           name: sourceItem.route_name,
