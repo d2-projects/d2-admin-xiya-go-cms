@@ -23,7 +23,12 @@ export default {
       const node =
         <el-pagination
           layout="prev, pager, next"
-          on-current-change={ this.research }
+          on-current-change={
+            current => {
+              this.pagination.current = current
+              this.research()
+            }
+          }
           current-page={ this.pagination.current }
           page-size={ this.pagination.size }
           total={ this.pagination.total }
@@ -39,8 +44,18 @@ export default {
         <el-pagination
           layout="total, sizes, prev, pager, next, jumper"
           page-sizes={ [ 10, 20, 30, 40 ] }
-          on-size-change={ this.research }
-          on-current-change={ this.research }
+          on-size-change={
+            size => {
+              this.pagination.size = size
+              this.research()
+            }
+          }
+          on-current-change={
+            current => {
+              this.pagination.current = current
+              this.research()
+            }
+          }
           current-page={ this.pagination.current }
           page-size={ this.pagination.size }
           total={ this.pagination.total }>
