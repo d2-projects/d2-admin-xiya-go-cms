@@ -24,7 +24,9 @@ export default {
   watch: {
     $route: {
       handler (to) {
-        this.path = this._.get(this._.last(to.matched), 'components.default.__source')
+        const pathFromMeta = this._.get(this._.last(to.matched), 'meta.source')
+        const pathFromComponent = this._.get(this._.last(to.matched), 'components.default.__source')
+        this.path = pathFromComponent || pathFromMeta
       },
       immediate: true
     }

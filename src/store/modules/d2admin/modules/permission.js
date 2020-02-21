@@ -70,7 +70,7 @@ export default context => {
       if (hasRouteChildren(sourceItem)) {
         routes = routes.concat(sourceItem.children_list.reduce(maker, []))
       } else if (isEffectiveRoute(sourceItem)) {
-        routes.push({
+        let route = {
           path: sourceItem.route_path,
           name: sourceItem.route_name,
           meta: {
@@ -78,7 +78,12 @@ export default context => {
             auth: true
           },
           component: utils.import(sourceItem.route_component)
-        })
+        }
+        // 为动态注册的路由可以正常在演示环境上显示源码链接而设置，如果不需要显示源码的功能，请移除此属性
+        if (context.env.VUE_APP_SCOURCE_LINK === 'TRUE') {
+          route.meta.source = 'src/views/' + sourceItem.route_component + (/(.js|.vue)$/.test(sourceItem.route_component) ? '' : '/index.js')
+        }
+        routes.push(route)
       }
       return routes
     }
