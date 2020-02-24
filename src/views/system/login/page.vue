@@ -86,6 +86,7 @@
         </div>
       </div>
     </div>
+    <d2-fork-me-on-github/>
   </div>
 </template>
 
