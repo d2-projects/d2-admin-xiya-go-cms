@@ -93,10 +93,7 @@ export default {
       this.Quill.pasteHTML(this.currentValue)
       // 绑定事件
       this.Quill.on('text-change', (delta, oldDelta, source) => {
-        let html = this.$refs.editor.children[0].innerHTML
-        const text = this.Quill.getText()
-        // 不 trim 处理的话 为空时是 ASCII 10 LF
-        if (!text.trim()) html = ''
+        const html = this.$refs.editor.children[0].innerHTML
         // 更新内部的值
         this.currentValue = html
         // 更新外部值
