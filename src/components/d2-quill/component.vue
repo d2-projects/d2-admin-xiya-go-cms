@@ -23,8 +23,12 @@ import Quill from 'quill'
 import 'quill/dist/quill.core.css'
 import 'quill/dist/quill.snow.css'
 import 'quill/dist/quill.bubble.css'
+import fieldChange from '@/mixins/el-field-change'
 export default {
   name: 'd2-quill',
+  mixins: [
+    fieldChange
+  ],
   props: {
     value: {
       type: String,
@@ -89,15 +93,16 @@ export default {
       this.Quill.pasteHTML(this.currentValue)
       // 绑定事件
       this.Quill.on('text-change', (delta, oldDelta, source) => {
-        const html = this.$refs.editor.children[0].innerHTML
+        let html = this.$refs.editor.children[0].innerHTML
         const text = this.Quill.getText()
-        const quill = this.Quill
+        // 不 trim 处理的话 为空时是 ASCII 10 LF
+        if (!text.trim()) html = ''
         // 更新内部的值
         this.currentValue = html
-        // 发出事件 v-model
+        // 更新外部值
         this.$emit('input', html)
-        // 发出事件
-        this.$emit('change', { html, text, quill })
+        this.$emit('change', html)
+        this.fieldChange()
       })
       // 将一些 quill 自带的事件传递出去
       this.Quill.on('text-change', (delta, oldDelta, source) => {
