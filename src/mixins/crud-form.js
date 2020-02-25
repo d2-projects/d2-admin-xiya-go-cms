@@ -19,13 +19,7 @@ export default {
   render () {
     const component =
       <el-dialog { ...{ attrs: this.dialog } } title={ this.title } on-close={ this.cancle }>
-        <el-form ref="form" { ...{ attrs: this.form } } rules={ this.rulesFromSetting } disabled={ this.isFormDisabled } v-loading={ this.isFormLoading }>
-          {
-            this.setting
-              .filter(item => item.show !== false)
-              .map(item => <el-form-item label={ item.label } prop={ item.prop }>{ item.render() }</el-form-item>)
-          }
-        </el-form>
+        { this.vNodeForm }
         <el-form label-width={ this.form.labelWidth }>
           <el-form-item>
             <d2-button { ...{ attrs: this.buttons.cancle } } on-click={ this.cancle }/>
@@ -72,7 +66,53 @@ export default {
     // 根据表单设置和详情计算出表单值
     formFromSettingAndDetail () { return Object.assign({}, this.formFromSetting, this.detail) },
     // 表单是否发生变化
-    isFormChanged () { return !utils.helper.isIdenticalObject(this.formFromSettingAndDetail, this.form.model) }
+    isFormChanged () { return !utils.helper.isIdenticalObject(this.formFromSettingAndDetail, this.form.model) },
+    // vNode 表单
+    vNodeForm () {
+      /**
+       * @description 列控制组件
+       * @param {Object} item 本表单项目的设置数据
+       * @param {VNode}} content 子组件
+       */
+      const col = (item, content) => {
+        const node =
+          <el-col span={ 24 }>
+            { content }
+          </el-col>
+        return node
+      }
+      /**
+       * @description 表单组件
+       * @param {VNode}} content 子组件
+       */
+      const form = content => {
+        const node =
+          <el-form
+            ref="form" { ...{ attrs: this.form } }
+            rules={ this.rulesFromSetting }
+            disabled={ this.isFormDisabled }
+            v-loading={ this.isFormLoading }>
+            { content }
+          </el-form>
+        return node
+      }
+      /**
+       * @description 表单组件
+       * @param {Object} item 本表单项目的设置数据
+       */
+      const formItem = item => {
+        const node =
+          <el-form-item
+            label={ item.label }
+            prop={ item.prop }>
+            { item.render() }
+          </el-form-item>
+        return node
+      }
+      // 需要显示的表单项目数组
+      const items = this.setting.filter(item => item.show !== false)
+      return form(items.map(item => col(item, formItem(item))))
+    }
   },
   watch: {
     rulesFromSetting: 'clearValidate'
