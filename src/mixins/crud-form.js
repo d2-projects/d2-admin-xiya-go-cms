@@ -70,48 +70,31 @@ export default {
     // vNode 表单
     vNodeForm () {
       /**
-       * @description 列控制组件
-       * @param {Object} item 本表单项目的设置数据
-       * @param {VNode}} content 子组件
-       */
-      const col = (item, content) => {
-        const node =
-          <el-col span={ 24 }>
-            { content }
-          </el-col>
-        return node
-      }
-      /**
-       * @description 表单组件
-       * @param {VNode}} content 子组件
-       */
-      const form = content => {
-        const node =
-          <el-form
-            ref="form" { ...{ attrs: this.form } }
-            rules={ this.rulesFromSetting }
-            disabled={ this.isFormDisabled }
-            v-loading={ this.isFormLoading }>
-            { content }
-          </el-form>
-        return node
-      }
-      /**
        * @description 表单组件
        * @param {Object} item 本表单项目的设置数据
        */
       const formItem = item => {
         const node =
-          <el-form-item
-            label={ item.label }
-            prop={ item.prop }>
-            { item.render() }
-          </el-form-item>
+          <el-col span={ 24 }>
+            <el-form-item
+              label={ item.label }
+              prop={ item.prop }>
+              { item.render() }
+            </el-form-item>
+          </el-col>
         return node
       }
-      // 需要显示的表单项目数组
-      const items = this.setting.filter(item => item.show !== false)
-      return form(items.map(item => col(item, formItem(item))))
+      const node =
+        <el-form
+          ref="form" { ...{ attrs: this.form } }
+          rules={ this.rulesFromSetting }
+          disabled={ this.isFormDisabled }
+          v-loading={ this.isFormLoading }>
+          <el-row>
+            { this.setting.filter(item => item.show !== false).map(formItem) }
+          </el-row>
+        </el-form>
+      return node
     }
   },
   watch: {
