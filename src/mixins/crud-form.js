@@ -86,7 +86,8 @@ export default {
       }
       const node =
         <el-form
-          ref="form" { ...{ attrs: this.form } }
+          ref="form"
+          { ...{ attrs: this.form } }
           rules={ this.rulesFromSetting }
           disabled={ this.isFormDisabled }
           v-loading={ this.isFormLoading }>
