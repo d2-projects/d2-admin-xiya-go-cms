@@ -17,17 +17,10 @@ export default {
     }
   },
   render () {
-    const component =
-      <el-dialog { ...{ attrs: this.dialog } } title={ this.title } on-close={ this.cancle }>
-        { this.vNodeForm }
-        <el-form label-width={ this.form.labelWidth }>
-          <el-form-item>
-            <d2-button { ...{ attrs: this.buttons.cancle } } on-click={ this.cancle }/>
-            <d2-button { ...{ attrs: this.buttons.submit } } loading={ this.isSubmitButtonLoading } disabled={ this.isSubmitButtonDisabled } on-click={ this.submit }/>
-          </el-form-item>
-        </el-form>
-      </el-dialog>
-    return component
+    return this.vNodeDialog([
+      this.vNodeForm,
+      this.vNodeFormSubmit
+    ])
   },
   data () {
     return {
@@ -39,7 +32,10 @@ export default {
       form: {
         initialized: false,
         model: {},
-        labelWidth: '100px'
+        labelWidth: '100px',
+        row: {
+          getter: 10
+        }
       },
       buttons: {
         cancle: {
@@ -75,7 +71,7 @@ export default {
        */
       const formItem = item => {
         const node =
-          <el-col span={ 24 }>
+          <el-col { ...{ attrs: item.col } }>
             <el-form-item
               label={ item.label }
               prop={ item.prop }>
@@ -91,9 +87,24 @@ export default {
           rules={ this.rulesFromSetting }
           disabled={ this.isFormDisabled }
           v-loading={ this.isFormLoading }>
-          <el-row>
-            { this.setting.filter(item => item.show !== false).map(formItem) }
+          <el-row { ...{ attrs: this.form.row } }>
+            {
+              this.setting
+                .filter(item => item.show !== false)
+                .map(formItem)
+            }
           </el-row>
+        </el-form>
+      return node
+    },
+    // 提交按钮
+    vNodeFormSubmit () {
+      const node =
+        <el-form label-width={ this.form.labelWidth }>
+          <el-form-item>
+            <d2-button { ...{ attrs: this.buttons.cancle } } on-click={ this.cancle }/>
+            <d2-button { ...{ attrs: this.buttons.submit } } loading={ this.isSubmitButtonLoading } disabled={ this.isSubmitButtonDisabled } on-click={ this.submit }/>
+          </el-form-item>
         </el-form>
       return node
     }

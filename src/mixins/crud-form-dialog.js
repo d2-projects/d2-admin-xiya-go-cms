@@ -19,6 +19,20 @@ export default {
   },
   methods: {
     /**
+     * @description vNode 模态框
+     * @param {VNode} content 内容
+     */
+    vNodeDialog (content) {
+      const node =
+        <el-dialog
+          { ...{ attrs: this.dialog } }
+          title={ this.title }
+          on-close={ this.cancle }>
+          { content }
+        </el-dialog>
+      return node
+    },
+    /**
      * @description 打开面板
      */
     open () {
