@@ -16,12 +16,12 @@
 
 ## 预览
 
-| 位置 | 链接 | 部署位置 | 状态 |
+| 位置 | 链接 | 部署位置 | 构建状态 |
 | --- | --- | --- | --- |
-| d2.pub | [d2.pub/d2-admin-xiya-go-cms/preview](https://d2.pub/d2-admin-xiya-go-cms/preview) | 中国服务器 | [![](https://github.com/d2-projects/d2-admin-xiya-go-cms/workflows/Deploy%20https%3A%2F%2Fd2.pub/badge.svg)](https://github.com/d2-projects/d2-admin-xiya-go-cms/actions?query=workflow%3A%22Deploy+https%3A%2F%2Fd2.pub%22) |
-| cdn.d2.pub | [cdn.d2.pub/d2-admin-xiya-go-cms/preview](https://cdn.d2.pub/d2-admin-xiya-go-cms/preview) | 七牛云 CDN | [![](https://github.com/d2-projects/d2-admin-xiya-go-cms/workflows/Deploy%20https%3A%2F%2Fcdn.d2.pub/badge.svg)](https://github.com/d2-projects/d2-admin-xiya-go-cms/actions?query=workflow%3A%22Deploy+https%3A%2F%2Fcdn.d2.pub%22) |
-| github | [d2-projects.github.io/d2-admin-xiya-go-cms](https://d2-projects.github.io/d2-admin-xiya-go-cms) | GitHub pages | [![](https://github.com/d2-projects/d2-admin-xiya-go-cms/workflows/Deploy%20Github/badge.svg)](https://github.com/d2-projects/d2-admin-xiya-go-cms/actions?query=workflow%3A%22Deploy+Github%22) |
-| netlify | [d2-admin-xiya-go-cms.netlify.com](https://d2-admin-xiya-go-cms.netlify.com) | Netlify CDN | [![Netlify Status](https://api.netlify.com/api/v1/badges/8fea8718-2196-45de-bbb8-436c3f4da408/deploy-status)](https://app.netlify.com/sites/d2-admin-xiya-go-cms/deploys) |
+| d2.pub | [preview](https://d2.pub/d2-admin-xiya-go-cms/preview) | 中国服务器 | [![](https://github.com/d2-projects/d2-admin-xiya-go-cms/workflows/Deploy%20https%3A%2F%2Fd2.pub/badge.svg)](https://github.com/d2-projects/d2-admin-xiya-go-cms/actions?query=workflow%3A%22Deploy+https%3A%2F%2Fd2.pub%22) |
+| cdn.d2.pub | [preview](https://cdn.d2.pub/d2-admin-xiya-go-cms/preview) | 七牛云 CDN | [![](https://github.com/d2-projects/d2-admin-xiya-go-cms/workflows/Deploy%20https%3A%2F%2Fcdn.d2.pub/badge.svg)](https://github.com/d2-projects/d2-admin-xiya-go-cms/actions?query=workflow%3A%22Deploy+https%3A%2F%2Fcdn.d2.pub%22) |
+| github | [preview](https://d2-projects.github.io/d2-admin-xiya-go-cms) | GitHub pages | [![](https://github.com/d2-projects/d2-admin-xiya-go-cms/workflows/Deploy%20Github/badge.svg)](https://github.com/d2-projects/d2-admin-xiya-go-cms/actions?query=workflow%3A%22Deploy+Github%22) |
+| netlify | [preview](https://d2-admin-xiya-go-cms.netlify.com) | Netlify CDN | [![Netlify Status](https://api.netlify.com/api/v1/badges/8fea8718-2196-45de-bbb8-436c3f4da408/deploy-status)](https://app.netlify.com/sites/d2-admin-xiya-go-cms/deploys) |
 
 ## 其它同步仓库
 
