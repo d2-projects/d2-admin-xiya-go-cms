@@ -11,7 +11,7 @@ export default {
   render (createElement) {
     return createElement('div', { attrs: { class: 'd2-layout-header-aside-menu-side' } }, [
       createElement('el-menu', {
-        props: { collapse: this.asideCollapse, uniqueOpened: true },
+        props: { collapse: this.asideCollapse, uniqueOpened: true, defaultActive: this.$route.fullPath },
         ref: 'menu',
         on: { select: this.handleMenuSelect }
       }, this.aside.map(menu => (menu.children === undefined ? elMenuItem : elSubmenu).call(this, createElement, menu))),
@@ -41,17 +41,6 @@ export default {
       setTimeout(() => {
         this.scrollInit()
       }, 500)
-    },
-    // 侧边栏数据发生变化时重新计算侧边栏展开状态
-    aside: 'initOpenedMenu',
-    // 路由变化时控制侧边栏激活状态
-    '$route.fullPath': {
-      handler () {
-        this.$nextTick(() => {
-          if (this.$refs.menu) this.$refs.menu.updateActiveIndex(this.$route.fullPath)
-        })
-      },
-      immediate: true
     }
   },
   mounted () {
@@ -61,14 +50,6 @@ export default {
     this.scrollDestroy()
   },
   methods: {
-    /**
-     * @description 将之前保存的展开状态恢复到侧边栏上
-     */
-    initOpenedMenu () {
-      this.$nextTick(() => {
-        if (this.$refs.menu) this.$refs.menu.initOpenedMenu()
-      })
-    },
     /**
      * @description 初始化 betterscroll
      */

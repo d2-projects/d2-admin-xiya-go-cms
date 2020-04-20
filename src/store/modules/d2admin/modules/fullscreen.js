@@ -6,32 +6,44 @@ export default context => ({
     // 全屏激活
     active: false
   },
-  mutations: {
+  actions: {
     /**
      * @description 初始化监听
-     * @param {Object} vuex context
+     * @param {Object} context
      */
-    listen (state) {
-      if (screenfull.enabled) {
+    listen ({ commit }) {
+      if (screenfull.isEnabled) {
         screenfull.on('change', () => {
-          if (!screenfull.isFullscreen) {
-            state.active = false
-          }
+          if (!screenfull.isFullscreen) commit('set', false)
         })
       }
     },
     /**
      * @description 切换全屏
-     * @param {Object} vuex context
+     * @param {Object} context
      */
-    toggle (state) {
-      if (screenfull.isFullscreen) {
-        screenfull.exit()
-        state.active = false
-      } else {
-        screenfull.request()
-        state.active = true
-      }
+    toggle ({ commit }) {
+      return new Promise(resolve => {
+        if (screenfull.isFullscreen) {
+          screenfull.exit()
+          commit('set', false)
+        } else {
+          screenfull.request()
+          commit('set', true)
+        }
+        // end
+        resolve()
+      })
+    }
+  },
+  mutations: {
+    /**
+     * @description 设置 store 里的全屏状态
+     * @param {Object} state state
+     * @param {Boolean} active active
+     */
+    set (state, active) {
+      state.active = active
     }
   }
 })

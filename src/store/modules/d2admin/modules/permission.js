@@ -1,7 +1,22 @@
+import { uniqueId } from 'lodash'
 import utils from '@/utils'
 import router, { createRoutesInLayout, routesOutLayout, resetRouter } from '@/router'
 
 export default context => {
+  /**
+   * 给菜单数据补充上 path 字段
+   * https://github.com/d2-projects/d2-admin/issues/209
+   * @param {Array} menu 原始的菜单数据
+   */
+  function supplementPath (menu) {
+    return menu.map(e => ({
+      ...e,
+      path: e.path || uniqueId('d2-menu-empty-'),
+      ...e.children ? {
+        children: supplementPath(e.children)
+      } : {}
+    }))
+  }
   /**
    * @description 检查一个菜单是否有子菜单
    * @param {Object} item 接口返回菜单中的一项原始数据
@@ -153,7 +168,7 @@ export default context => {
         // [ 权限 ] 计算权限列表
         state.permissions = getPermissions(source)
         // [ 菜单 ] 计算菜单
-        const menus = getMenus(source)
+        const menus = supplementPath(getMenus(source))
         // [ 菜单 ] 设置顶栏菜单
         commit('d2admin/menu/headerSet', menus, { root: true })
         // [ 菜单 ] 设置侧边栏菜单
