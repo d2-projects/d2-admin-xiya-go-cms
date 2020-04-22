@@ -1,4 +1,4 @@
-import { get } from 'lodash'
+import { cloneDeep, uniq, get } from 'lodash'
 import router from '@/router'
 import setting from '@/setting.js'
 
@@ -134,9 +134,7 @@ export default context => ({
       // 添加进当前显示的页面数组
       state.opened.push(newTag)
       // 如果这个页面需要缓存 将其添加到缓存设置
-      if (isKeepAlive(newTag)) {
-        commit('keepAlivePush', tag.name)
-      }
+      if (isKeepAlive(newTag)) commit('keepAlivePush', tag.name)
       // 持久化
       await dispatch('opened2db')
     },
@@ -144,9 +142,9 @@ export default context => ({
      * @class current
      * @description 打开一个新的页面
      * @param {Object} vuex context
-     * @param {Object} payload 从路由钩子的 to 对象上获取 { name, params, query, fullPath } 路由信息
+     * @param {Object} payload 从路由钩子的 to 对象上获取 { name, params, query, fullPath, meta } 路由信息
      */
-    async open ({ state, commit, dispatch }, { name, params, query, fullPath }) {
+    async open ({ state, commit, dispatch }, { name, params, query, fullPath, meta }) {
       // 已经打开的页面
       let opened = state.opened
       // 判断此页面是否已经打开 并且记录位置
@@ -177,6 +175,8 @@ export default context => ({
           })
         }
       }
+      // 如果这个页面需要缓存 将其添加到缓存设置
+      if (isKeepAlive({ meta })) commit('keepAlivePush', name)
       commit('currentSet', fullPath)
     },
     /**
@@ -356,7 +356,6 @@ export default context => ({
     keepAliveRemove (state, name) {
       const list = [ ...state.keepAlive ]
       const index = list.findIndex(item => item === name)
-
       if (index !== -1) {
         list.splice(index, 1)
         state.keepAlive = list
@@ -368,9 +367,9 @@ export default context => ({
      * @param {String} name name
      */
     keepAlivePush (state, name) {
-      const keep = [ ...state.keepAlive ]
+      const keep = cloneDeep(state.keepAlive)
       keep.push(name)
-      state.keepAlive = keep
+      state.keepAlive = uniq(keep)
     },
     /**
      * @description 清空页面缓存设置

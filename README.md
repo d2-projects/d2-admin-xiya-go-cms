@@ -4,7 +4,7 @@
 
 > 只包含系统设置功能，未实现 cms 常见的内容管理，因对应的服务端仓库为 `xiya-team/go-cms` 遂本仓库取名 `d2-admin-xiya-go-cms`
 
-> 已经追加升级了一些 [D2Admin v1.8.0](https://github.com/d2-projects/d2-admin/releases/tag/1.8.0) 的新特性，例如优化生产环境的构建，可以达到 2s 以内的首屏加载速度；多标签页拖拽排序等功能。
+> 已追加完整版 [v1.8.0](https://github.com/d2-projects/d2-admin/releases/tag/1.8.0) | [v1.8.2](https://github.com/d2-projects/d2-admin/releases/tag/v1.8.2) | [v1.8.3](https://github.com/d2-projects/d2-admin/releases/tag/v1.8.3) | [v1.8.4](https://github.com/d2-projects/d2-admin/releases/tag/v1.8.4) | [v1.8.5](https://github.com/d2-projects/d2-admin/releases/tag/v1.8.5) | [v1.9.0](https://github.com/d2-projects/d2-admin/releases/tag/v1.9.0) 更新内容
 
 ## 文档
 
