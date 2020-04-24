@@ -10,21 +10,27 @@
   }
 }
 
-
-
 // 菜单
 .el-menu--horizontal {
   border-bottom: none !important;
 }
-
-
 
 // tab
 .el-tabs__item:focus.is-active.is-focus:not(:active) {
   box-shadow: none !important;
 }
 
+// 修复IE宽度不能撑满
+.el-table__body,
+.el-table__header {
+  width: 100% !important;
+}
 
+// Chrome下表格头部错位修复
+.el-table th.gutter,
+.el-table colgroup.gutter {
+  display: table-cell !important;
+}
 
 // 更窄的按钮
 .el-button--mini {
@@ -36,6 +42,7 @@
     padding-right: 8px;
   }
 }
+
 // 在 d2-bar 上默认使用更窄的按钮
 .d2-bar {
   .el-button--mini {
@@ -54,16 +61,12 @@
   }
 }
 
-
-
 // 边距更小的分割线
 .el-divider {
   &.el-divider--mini {
     margin: 12px 0;
   }
 }
-
-
 
 // 表格在占满 spacious 模式的 d2-container 时特殊样式
 .is-spacious {
@@ -94,8 +97,6 @@
   }
 }
 
-
-
 // dialog 贴屏幕顶部
 .el-dialog {
   &.el-dialog__no-top-border {
@@ -104,14 +105,10 @@
   }
 }
 
-
-
 // drawer 容器设置定位方式
 .el-drawer__body {
   position: relative;
 }
-
-
 
 // d2-search-panel 中的 el-form.is-thin
 .d2-search-panel {
@@ -128,8 +125,6 @@
   }
 }
 
-
-
 // 表格排序符号缩小
 .el-table.el-table--mini {
   .caret-wrapper {
@@ -144,8 +139,6 @@
   }
 }
 
-
-
 // el-select 多选模式下 tag 样式调整
 .el-select.el-select--mini {
   .el-tag.el-tag--mini {
@@ -155,16 +148,12 @@
   }
 }
 
-
-
 // 表格内的 el-image 垂直居中
 .el-table {
   .el-image {
     vertical-align: middle;
   }
 }
-
-
 
 // 美化表格中图片预览
 .el-table {
