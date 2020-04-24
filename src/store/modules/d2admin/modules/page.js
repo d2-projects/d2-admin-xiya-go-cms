@@ -11,7 +11,7 @@ export default context => ({
     // 可以在多页 tab 模式下显示的页面
     pool: [],
     // 当前显示的多页面列表
-    opened: setting.page.opened,
+    opened: get(setting, 'page.opened', []),
     // 已经加载多标签页数据 https://github.com/d2-projects/d2-admin/issues/201
     openedLoaded: false,
     // 当前页面
@@ -28,9 +28,7 @@ export default context => ({
       if (state.openedLoaded) return Promise.resolve()
       return new Promise(resolve => {
         const timer = setInterval(() => {
-          if (state.openedLoaded) {
-            resolve(clearInterval(timer))
-          }
+          if (state.openedLoaded) resolve(clearInterval(timer))
         }, 10)
       })
     },
@@ -39,7 +37,7 @@ export default context => ({
      * @description 从持久化数据载入标签页列表
      * @param {Object} vuex context
      */
-    async openedLoad ({ state, commit, dispatch }, { filter = false } = {}) {
+    async openedLoad ({ state, commit, dispatch }) {
       // store 赋值
       const value = await dispatch('d2admin/db/get', {
         dbName: 'sys',
@@ -47,14 +45,14 @@ export default context => ({
         defaultValue: setting.page.opened,
         user: true
       }, { root: true })
-      if (filter) {
-        // 在处理函数中进行数据优化 过滤掉现在已经失效的页签或者已经改变了信息的页签
-        // 以 fullPath 字段为准
-        // 如果页面过多的话可能需要优化算法
-        // valid 有效列表 1, 1, 0, 1 => 有效, 有效, 失效, 有效
-        const valid = []
-        // 处理数据
-        state.opened = value.map(opened => {
+      // 在处理函数中进行数据优化 过滤掉现在已经失效的页签或者已经改变了信息的页签
+      // 以 fullPath 字段为准
+      // 如果页面过多的话可能需要优化算法
+      // valid 有效列表 1, 1, 0, 1 => 有效, 有效, 失效, 有效
+      const valid = []
+      // 处理数据
+      state.opened = value
+        .map(opened => {
           // 忽略首页
           if (opened.fullPath === '/index') {
             valid.push(1)
@@ -67,10 +65,8 @@ export default context => ({
           // 返回合并后的数据 新的覆盖旧的
           // 新的数据中一般不会携带 params 和 query, 所以旧的参数会留存
           return Object.assign({}, opened, find)
-        }).filter((opened, index) => valid[index] === 1)
-      } else {
-        state.opened = value
-      }
+        })
+        .filter((opened, index) => valid[index] === 1)
       // 标记已经加载多标签页数据 https://github.com/d2-projects/d2-admin/issues/201
       state.openedLoaded = true
       // 根据 opened 数据生成缓存设置
@@ -108,10 +104,10 @@ export default context => ({
     /**
      * @class opened
      * @description 重排页面列表上的某一项
-     * @param {Object} context
+     * @param {Object} vuex context
      * @param {Object} payload { oldIndex, newIndex } 位置信息
      */
-    async openedSort ({ state, dispatch }, { oldIndex, newIndex }) {
+    async openedSort ({ state, commit, dispatch }, { oldIndex, newIndex }) {
       // 重排页面列表某一项
       let page = state.opened[oldIndex]
       state.opened.splice(oldIndex, 1)
@@ -177,6 +173,7 @@ export default context => ({
       }
       // 如果这个页面需要缓存 将其添加到缓存设置
       if (isKeepAlive({ meta })) commit('keepAlivePush', name)
+      // 设置当前的页面
       commit('currentSet', fullPath)
     },
     /**
@@ -186,20 +183,16 @@ export default context => ({
      * @param {Object} payload { tagName: 要关闭的标签名字 }
      */
     async close ({ state, commit, dispatch }, { tagName }) {
-      // 下个新的页面
-      let newPage = state.opened[0]
+      // 预定下个新页面
+      let newPage = {}
       const isCurrent = state.current === tagName
       // 如果关闭的页面就是当前显示的页面
       if (isCurrent) {
         // 去找一个新的页面
         let len = state.opened.length
-        for (let i = 1; i < len; i++) {
+        for (let i = 0; i < len; i++) {
           if (state.opened[i].fullPath === tagName) {
-            if (i < len - 1) {
-              newPage = state.opened[i + 1]
-            } else {
-              newPage = state.opened[i - 1]
-            }
+            newPage = i < len - 1 ? state.opened[i + 1] : state.opened[i - 1]
             break
           }
         }
@@ -214,15 +207,11 @@ export default context => ({
       }
       // 持久化
       await dispatch('opened2db')
-      // 最后需要判断是否需要跳到首页
+      // 决定最后停留的页面
       if (isCurrent) {
-        const { name = '', params = {}, query = {} } = newPage
-        let routerObj = {
-          name,
-          params,
-          query
-        }
-        router.push(routerObj)
+        const { name = 'index', params = {}, query = {} } = newPage
+        let routerObj = { name, params, query }
+        await router.push(routerObj)
       }
     },
     /**
@@ -253,20 +242,24 @@ export default context => ({
       const pageAim = pageSelect || state.current
       let currentIndex = 0
       state.opened.forEach((page, index) => {
-        if (page.fullPath === pageAim) {
-          currentIndex = index
-        }
+        if (page.fullPath === pageAim) currentIndex = index
       })
       if (currentIndex > 0) {
         // 删除打开的页面 并在缓存设置中删除
-        state.opened.splice(1, currentIndex - 1).forEach(({ name }) => commit('keepAliveRemove', name))
-      }
-      state.current = pageAim
-      if (router.app.$route.fullPath !== pageAim) {
-        router.push(pageAim)
+        for (let i = state.opened.length - 1; i >= 0; i--) {
+          if (state.opened[i].name === 'index' || i >= currentIndex) {
+            continue
+          }
+
+          commit('keepAliveRemove', state.opened[i].name)
+          state.opened.splice(i, 1)
+        }
       }
       // 持久化
       await dispatch('opened2db')
+      // 设置当前的页面
+      state.current = pageAim
+      if (router.app.$route.fullPath !== pageAim) await router.push(pageAim)
     },
     /**
      * @class opened
@@ -278,19 +271,22 @@ export default context => ({
       const pageAim = pageSelect || state.current
       let currentIndex = 0
       state.opened.forEach((page, index) => {
-        if (page.fullPath === pageAim) {
-          currentIndex = index
-        }
+        if (page.fullPath === pageAim) currentIndex = index
       })
       // 删除打开的页面 并在缓存设置中删除
-      state.opened.splice(currentIndex + 1).forEach(({ name }) => commit('keepAliveRemove', name))
-      // 设置当前的页面
-      state.current = pageAim
-      if (router.app.$route.fullPath !== pageAim) {
-        router.push(pageAim)
+      for (let i = state.opened.length - 1; i >= 0; i--) {
+        if (state.opened[i].name === 'index' || currentIndex >= i) {
+          continue
+        }
+
+        commit('keepAliveRemove', state.opened[i].name)
+        state.opened.splice(i, 1)
       }
       // 持久化
       await dispatch('opened2db')
+      // 设置当前的页面
+      state.current = pageAim
+      if (router.app.$route.fullPath !== pageAim) await router.push(pageAim)
     },
     /**
      * @class opened
@@ -302,24 +298,22 @@ export default context => ({
       const pageAim = pageSelect || state.current
       let currentIndex = 0
       state.opened.forEach((page, index) => {
-        if (page.fullPath === pageAim) {
-          currentIndex = index
-        }
+        if (page.fullPath === pageAim) currentIndex = index
       })
       // 删除打开的页面数据 并更新缓存设置
-      if (currentIndex === 0) {
-        state.opened.splice(1).forEach(({ name }) => commit('keepAliveRemove', name))
-      } else {
-        state.opened.splice(currentIndex + 1).forEach(({ name }) => commit('keepAliveRemove', name))
-        state.opened.splice(1, currentIndex - 1).forEach(({ name }) => commit('keepAliveRemove', name))
-      }
-      // 设置新的页面
-      state.current = pageAim
-      if (router.app.$route.fullPath !== pageAim) {
-        router.push(pageAim)
+      for (let i = state.opened.length - 1; i >= 0; i--) {
+        if (state.opened[i].name === 'index' || currentIndex === i) {
+          continue
+        }
+
+        commit('keepAliveRemove', state.opened[i].name)
+        state.opened.splice(i, 1)
       }
       // 持久化
       await dispatch('opened2db')
+      // 设置新的页面
+      state.current = pageAim
+      if (router.app.$route.fullPath !== pageAim) await router.push(pageAim)
     },
     /**
      * @class opened
@@ -328,14 +322,19 @@ export default context => ({
      */
     async closeAll ({ state, commit, dispatch }) {
       // 删除打开的页面 并在缓存设置中删除
-      state.opened.splice(1).forEach(({ name }) => commit('keepAliveRemove', name))
+      for (let i = state.opened.length - 1; i >= 0; i--) {
+        if (state.opened[i].name === 'index') {
+          continue
+        }
+
+        commit('keepAliveRemove', state.opened[i].name)
+        state.opened.splice(i, 1)
+      }
       // 持久化
       await dispatch('opened2db')
       // 关闭所有的标签页后需要判断一次现在是不是在首页
       if (router.app.$route.name !== 'index') {
-        router.push({
-          name: 'index'
-        })
+        await router.push({ name: 'index' })
       }
     }
   },
@@ -354,7 +353,7 @@ export default context => ({
      * @param {String} name name
      */
     keepAliveRemove (state, name) {
-      const list = [ ...state.keepAlive ]
+      const list = cloneDeep(state.keepAlive)
       const index = list.findIndex(item => item === name)
       if (index !== -1) {
         list.splice(index, 1)
@@ -397,12 +396,13 @@ export default context => ({
       const pool = []
       const push = function (routes) {
         routes.forEach(route => {
-          if (route.children) {
+          if (route.children && route.children.length > 0) {
             push(route.children)
           } else {
-            if (route.hidden) return
-            const { meta, name, path } = route
-            pool.push({ meta, name, path })
+            if (!route.hidden) {
+              const { meta, name, path } = route
+              pool.push({ meta, name, path })
+            }
           }
         })
       }
