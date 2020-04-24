@@ -14,8 +14,8 @@ export default context => ({
       await dispatch('d2admin/transition/load', undefined, { root: true })
       // 加载上次退出时的多页列表
       await dispatch('d2admin/page/openedLoad', undefined, { root: true })
-      // 加载侧边栏折叠状态
-      await dispatch('d2admin/menu/asideCollapseLoad', undefined, { root: true })
+      // 持久化数据加载侧边栏配置
+      await dispatch('d2admin/menu/asideLoad', null, { root: true })
       // 加载全局尺寸
       await dispatch('d2admin/size/load', undefined, { root: true })
     }

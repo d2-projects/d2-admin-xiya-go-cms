@@ -74,12 +74,14 @@
     }
     .d2-theme-container {
       .d2-theme-container-aside {
-        transition: width .3s;
         position: relative;
         .d2-layout-header-aside-menu-side {
           @extend %full;
           overflow: hidden;
         }
+      }
+      .d2-theme-container-transition {
+        transition: width .3s;
       }
       .d2-theme-container-main {
         padding: 0px;
@@ -116,12 +118,14 @@
     .d2-theme-header {
       // logo区域
       .logo-group {
-        transition: width .3s;
         float: left;
         text-align: center;
         img {
           height: 60px;
         }
+      }
+      .logo-transition {
+        transition: width .3s;
       }
       // 折叠侧边栏切换按钮
       .toggle-aside-btn {
@@ -170,8 +174,8 @@
           padding: 14px 12px;
           border-radius: 4px;
           margin: 0px !important;
-          &.el-color-picker.el-color-picker--mini {
-            padding: 9px 6px;
+          &.btn-text__is-color-picker {
+            padding: 9px 8px;
           }
         }
         .el-dropdown {
@@ -288,7 +292,7 @@
               flex-direction: column;
               overflow: hidden;
               .d2-container-full__header {
-                padding: 20px;
+                padding: 10px;
               }
               .d2-container-full__body {
                 flex-grow: 1;
@@ -296,9 +300,12 @@
                 padding: 20px 20px;
                 overflow: auto;
                 position: relative;
+                &.is-spacious {
+                  padding: 0px;
+                }
               }
               .d2-container-full__footer {
-                padding: 20px;
+                padding: 10px;
               }
             }
             // 填充式布局组件 - 滚动优化
@@ -312,7 +319,7 @@
               flex-direction: column;
               overflow: hidden;
               .d2-container-full-bs__header {
-                padding: 20px;
+                padding: 10px;
               }
               .d2-container-full-bs__body {
                 flex-grow: 1;
@@ -321,10 +328,13 @@
                 .d2-container-full-bs__body-wrapper-inner {
                   padding: 20px;
                   position: relative;
+                  &.is-spacious {
+                    padding: 0px;
+                  }
                 }
               }
               .d2-container-full-bs__footer {
-                padding: 20px;
+                padding: 10px;
               }
             }
             // 隐形布局组件
@@ -338,7 +348,7 @@
               flex-direction: column;
               overflow: hidden;
               .d2-container-ghost__header {
-                padding: 20px;
+                padding: 10px;
                 border-bottom-left-radius: 4px;
                 border-bottom-right-radius: 4px;
               }
@@ -348,7 +358,7 @@
                 position: relative;
               }
               .d2-container-ghost__footer {
-                padding: 20px;
+                padding: 10px;
                 border-top-left-radius: 4px;
                 border-top-right-radius: 4px;
               }
@@ -364,7 +374,7 @@
               flex-direction: column;
               overflow: hidden;
               .d2-container-ghost-bs__header {
-                padding: 20px;
+                padding: 10px;
                 border-bottom-left-radius: 4px;
                 border-bottom-right-radius: 4px;
               }
@@ -374,7 +384,7 @@
                 position: relative;
               }
               .d2-container-ghost-bs__footer {
-                padding: 20px;
+                padding: 10px;
                 border-top-left-radius: 4px;
                 border-top-right-radius: 4px;
               }
@@ -390,7 +400,7 @@
               flex-direction: column;
               overflow: hidden;
               .d2-container-card__header {
-                padding: 20px;
+                padding: 10px;
               }
               .d2-container-card__body {
                 flex-grow: 1;
@@ -401,10 +411,13 @@
                   padding: 20px;
                   border-bottom-left-radius: 4px;
                   border-bottom-right-radius: 4px;
+                  &.is-spacious {
+                    padding: 0px;
+                  }
                 }
               }
               .d2-container-card__footer {
-                padding: 20px;
+                padding: 10px;
                 border-top-left-radius: 4px;
                 border-top-right-radius: 4px;
               }
@@ -420,7 +433,7 @@
               flex-direction: column;
               overflow: hidden;
               .d2-container-card-bs__header {
-                padding: 20px;
+                padding: 10px;
               }
               .d2-container-card-bs__body {
                 position: relative;
@@ -434,10 +447,13 @@
                   padding: 20px;
                   border-bottom-left-radius: 4px;
                   border-bottom-right-radius: 4px;
+                  &.is-spacious {
+                    padding: 0px;
+                  }
                 }
               }
               .d2-container-card-bs__footer {
-                padding: 20px;
+                padding: 10px;
                 border-top-left-radius: 4px;
                 border-top-right-radius: 4px;
               }

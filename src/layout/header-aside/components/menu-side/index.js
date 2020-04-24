@@ -8,30 +8,32 @@ export default {
   mixins: [
     menuMixin
   ],
-  render (createElement) {
-    return createElement('div', { attrs: { class: 'd2-layout-header-aside-menu-side' } }, [
-      createElement('el-menu', {
-        props: { collapse: this.asideCollapse, uniqueOpened: true, defaultActive: this.$route.fullPath },
+  render (h) {
+    return h('div', { attrs: { class: 'd2-layout-header-aside-menu-side' } }, [
+      h('el-menu', {
+        props: { collapse: this.asideCollapse, collapseTransition: this.asideTransition, uniqueOpened: true, defaultActive: this.$route.fullPath },
         ref: 'menu',
         on: { select: this.handleMenuSelect }
-      }, this.aside.map(menu => (menu.children === undefined ? elMenuItem : elSubmenu).call(this, createElement, menu))),
+      }, this.aside.map(menu => (menu.children === undefined ? elMenuItem : elSubmenu).call(this, h, menu))),
       ...this.aside.length === 0 && !this.asideCollapse ? [
-        createElement('div', { attrs: { class: 'd2-layout-header-aside-menu-empty', flex: 'dir:top main:center cross:center' } }, [
-          createElement('d2-icon', { props: { name: 'inbox' } }),
-          createElement('span', {}, '没有侧栏菜单')
+        h('div', { attrs: { class: 'd2-layout-header-aside-menu-empty', flex: 'dir:top main:center cross:center' } }, [
+          h('d2-icon', { props: { name: 'inbox' } }),
+          h('span', {}, '没有侧栏菜单')
         ])
       ] : []
     ])
   },
   data () {
     return {
+      asideHeight: 300,
       BS: null
     }
   },
   computed: {
     ...mapState('d2admin/menu', [
       'aside',
-      'asideCollapse'
+      'asideCollapse',
+      'asideTransition'
     ])
   },
   watch: {
@@ -50,9 +52,6 @@ export default {
     this.scrollDestroy()
   },
   methods: {
-    /**
-     * @description 初始化 betterscroll
-     */
     scrollInit () {
       this.BS = new BScroll(this.$el, {
         mouseWheel: true,
@@ -64,9 +63,6 @@ export default {
         // }
       })
     },
-    /**
-     * @description 销毁 betterscroll
-     */
     scrollDestroy () {
       // https://github.com/d2-projects/d2-admin/issues/75
       try {
