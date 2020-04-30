@@ -101,7 +101,8 @@ export default context => {
           name: sourceItem.route_name,
           meta: {
             title: sourceItem.menu_name,
-            auth: true
+            auth: true,
+            cache: sourceItem.route_cache === context.env.VUE_APP_DICT_IS_TRUE
           },
           component: utils.import(sourceItem.route_component)
         }
