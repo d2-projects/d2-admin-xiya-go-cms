@@ -1,4 +1,4 @@
-import { uniqueId } from 'lodash'
+import { uniqueId, keys } from 'lodash'
 import utils from '@/utils'
 import router, { createRoutesInLayout, routesOutLayout, resetRouter } from '@/router'
 
@@ -67,12 +67,13 @@ export default context => {
      */
     function isEffectiveRoute (sourceItem) {
       if (sourceItem.menu_type !== context.env.VUE_APP_DICT_MENU_TYPE_MENU) return
+      const sourceItemKeys = keys(sourceItem)
       const hasAllRequiredProperties = [
         'menu_name',
         'route_name',
         'route_path',
         'route_component'
-      ].reduce((res, keyname) => !((!res || sourceItem[keyname] === '')), true)
+      ].reduce((res, keyname) => res && sourceItemKeys.includes(keyname), true)
       if (!hasAllRequiredProperties) return
       return true
     }
