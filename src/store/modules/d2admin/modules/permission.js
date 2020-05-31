@@ -73,7 +73,7 @@ export default context => {
         'route_name',
         'route_path',
         'route_component'
-      ].reduce((res, keyname) => res && sourceItemKeys.includes(keyname), true)
+      ].reduce((res, keyname) => res && sourceItemKeys.includes(keyname) && sourceItem[keyname], true)
       if (!hasAllRequiredProperties) return
       return true
     }
