@@ -96,23 +96,29 @@ export default context => {
         // 有子菜单 递归获取所有子菜单的路由
         routes = routes.concat(sourceItem.children_list.reduce(maker, []))
       } else if (isEffectiveRoute(sourceItem) && isUnregistered(routes, sourceItem)) {
-        // 没有子菜单 并且这个路由没有被加入到动态路由列表 处理当前路由
-        let route = {
-          path: sourceItem.route_path,
-          name: sourceItem.route_name,
-          meta: {
-            title: sourceItem.menu_name,
-            auth: true,
-            cache: sourceItem.route_cache === context.env.VUE_APP_DICT_IS_TRUE
-          },
-          component: utils.import(sourceItem.route_component)
+        // https://github.com/d2-projects/d2-admin-xiya-go-cms/issues/25
+        try {
+          // 没有子菜单 并且这个路由没有被加入到动态路由列表 处理当前路由
+          let route = {
+            path: sourceItem.route_path,
+            name: sourceItem.route_name,
+            meta: {
+              title: sourceItem.menu_name,
+              auth: true,
+              cache: sourceItem.route_cache === context.env.VUE_APP_DICT_IS_TRUE
+            },
+            component: utils.import(sourceItem.route_component)
+          }
+          // 为动态注册的路由可以正常在演示环境上显示源码链接而设置，如果不需要显示源码的功能，请移除此属性
+          // https://github.com/d2-projects/vue-filename-injector 只处理 .vue 类型的文件 所以需要在路由上设置源码路径信息
+          if (context.env.VUE_APP_SCOURCE_LINK === 'TRUE') {
+            route.meta.source = 'src/views/' + sourceItem.route_component + (/(.js|.vue)$/.test(sourceItem.route_component) ? '' : '/index.js')
+          }
+          routes.push(route)
+        } catch (error) {
+          utils.log.capsule('菜单', '文件不存在', 'danger')
+          utils.log.danger(err.message)
         }
-        // 为动态注册的路由可以正常在演示环境上显示源码链接而设置，如果不需要显示源码的功能，请移除此属性
-        // https://github.com/d2-projects/vue-filename-injector 只处理 .vue 类型的文件 所以需要在路由上设置源码路径信息
-        if (context.env.VUE_APP_SCOURCE_LINK === 'TRUE') {
-          route.meta.source = 'src/views/' + sourceItem.route_component + (/(.js|.vue)$/.test(sourceItem.route_component) ? '' : '/index.js')
-        }
-        routes.push(route)
       }
       return routes
     }
