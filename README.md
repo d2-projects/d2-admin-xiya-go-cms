@@ -33,4 +33,4 @@
 
 | 位置 | 链接 |
 | --- | --- |
-| 码云 | [https://gitee.com/fairyever/d2-admin-xiya-go-cms](https://gitee.com/fairyever/d2-admin-xiya-go-cms) |
+| 码云 | [https://gitee.com/d2-projects/d2-admin-xiya-go-cms](https://gitee.com/d2-projects/d2-admin-xiya-go-cms) |
