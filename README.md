@@ -6,6 +6,8 @@
 
 > 已追加完整版 [v1.8.0](https://github.com/d2-projects/d2-admin/releases/tag/1.8.0) | [v1.8.2](https://github.com/d2-projects/d2-admin/releases/tag/v1.8.2) | [v1.8.3](https://github.com/d2-projects/d2-admin/releases/tag/v1.8.3) | [v1.8.4](https://github.com/d2-projects/d2-admin/releases/tag/v1.8.4) | [v1.8.5](https://github.com/d2-projects/d2-admin/releases/tag/v1.8.5) | [v1.9.0](https://github.com/d2-projects/d2-admin/releases/tag/v1.9.0) | [v1.9.1](https://github.com/d2-projects/d2-admin/releases/tag/v1.9.1) | [v1.9.2](https://github.com/d2-projects/d2-admin/releases/tag/v1.9.2) | [v1.10.0](https://github.com/d2-projects/d2-admin/releases/tag/v1.10.0)更新内容
 
+> 本工程的增删改查型页面使用了大量的 jsx 语法糖，非传统 template 写法，如果你（项目同事、领导）无法接受 jsx in vue，请直接关闭
+
 ## 文档
 
 [在 https://d2.pub 上的本项目文档](https://d2.pub/zh/doc/d2-admin-xiya-go-cms/)
